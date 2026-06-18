@@ -220,13 +220,11 @@ button.cpill { cursor: pointer; font-family: inherit; }
 .cpill-dl:hover { background: rgba(99,102,241,.25); }
 
 /* terminal card */
-.hero-left     { transition: transform .4s ease-out; }
 .hero-terminal {
   background: var(--bg-sec);
   border: 1px solid var(--border);
   border-radius: 14px; overflow: hidden;
   font-size: .8rem;
-  transition: transform .4s ease-out;
 }
 .terminal-bar {
   background: var(--bg-card); border-bottom: 1px solid var(--border);

@@ -165,26 +165,6 @@ function startTypewriter() {
 }
 startTypewriter();
 
-// ── Mouse parallax on hero ──
-if (window.matchMedia('(pointer: fine)').matches) {
-  const heroEl     = document.getElementById('hero');
-  const heroLeftEl = document.querySelector('.hero-left');
-  const heroTermEl = document.querySelector('.hero-terminal');
-  if (heroEl && heroLeftEl) {
-    heroEl.addEventListener('mousemove', e => {
-      const r = heroEl.getBoundingClientRect();
-      const x = ((e.clientX - r.left) / r.width  - 0.5) * 2;
-      const y = ((e.clientY - r.top)  / r.height - 0.5) * 2;
-      heroLeftEl.style.transform = `translate(${x * 10}px, ${y * 6}px)`;
-      if (heroTermEl) heroTermEl.style.transform = `translate(${x * -6}px, ${y * -4}px)`;
-    });
-    heroEl.addEventListener('mouseleave', () => {
-      heroLeftEl.style.transform = '';
-      if (heroTermEl) heroTermEl.style.transform = '';
-    });
-  }
-}
-
 // ── Console Easter Egg ──
 try {
   const _cs = [
