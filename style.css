@@ -109,11 +109,11 @@ section + section {
   text-shadow: 0 0 35px rgba(129,140,248,.22);
 }
 .sec-title::before {
-  content: '//';
-  font-family: 'JetBrains Mono', monospace;
-  font-size: .9em; font-weight: 400;
-  color: var(--accent); opacity: .75;
-  flex-shrink: 0;
+  content: '';
+  width: 4px; height: 22px;
+  background: linear-gradient(180deg, var(--accent), var(--purple));
+  border-radius: 2px; flex-shrink: 0;
+  box-shadow: 0 0 10px rgba(99,102,241,.55);
 }
 .sec-title .sub {
   font-size: .74rem; font-weight: 400;
@@ -258,20 +258,15 @@ button.cpill { cursor: pointer; font-family: inherit; }
 .stat::before {
   content: ''; position: absolute;
   top: 0; left: 0; right: 0; height: 2px;
-  opacity: 0; transition: opacity .25s;
+  opacity: .25; transition: opacity .25s;
 }
-.stat:hover { transform: translateY(-3px); }
+.stat:hover { transform: translateY(-3px); border-color: var(--sc) !important; }
 .stat:hover::before { opacity: 1; }
 
 .stat-i { --sc: var(--accent-lt); }
 .stat-p { --sc: var(--purple); }
 .stat-c { --sc: var(--cyan); }
 .stat-g { --sc: var(--green); }
-
-.stat-i:hover { border-color: var(--accent-lt); }
-.stat-p:hover { border-color: var(--purple); }
-.stat-c:hover { border-color: var(--cyan); }
-.stat-g:hover { border-color: var(--green); }
 
 .stat-i::before { background: linear-gradient(90deg, var(--accent), var(--accent-lt)); }
 .stat-p::before { background: linear-gradient(90deg, var(--purple), #c084fc); }
@@ -496,7 +491,7 @@ button.cpill { cursor: pointer; font-family: inherit; }
 }
 .ach {
   background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: 14px; padding: 1.35rem;
+  border-radius: 14px; padding: 1.35rem 1.35rem 3rem;
   position: relative; overflow: hidden;
   transition: border-color .2s, transform .2s;
 }
