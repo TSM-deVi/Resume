@@ -186,6 +186,29 @@ try {
   console.log('%cLooking for a DevOps engineer? Let\'s talk!', _cs[2]);
 } catch(e) {}
 
+// ── Skill category filter ──
+let _activeFilter = null;
+
+document.querySelectorAll('.sg-label').forEach(lbl => {
+  lbl.addEventListener('click', () => {
+    const row = lbl.closest('.skill-row');
+    const cat = row.dataset.cat;
+    const rows = document.querySelectorAll('.skill-row');
+
+    if (_activeFilter === cat) {
+      _activeFilter = null;
+      rows.forEach(r => r.classList.remove('sf-dim', 'sf-on'));
+    } else {
+      _activeFilter = cat;
+      rows.forEach(r => {
+        const active = r.dataset.cat === cat;
+        r.classList.toggle('sf-dim', !active);
+        r.classList.toggle('sf-on', active);
+      });
+    }
+  });
+});
+
 // ── Copy helper ──
 function setupCopyCard(btnId, labelId, iconId, text) {
   const btn   = document.getElementById(btnId);
