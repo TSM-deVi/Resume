@@ -110,9 +110,10 @@ langBtn.addEventListener('click', () => {
 // ── Typewriter + Living Terminal ──
 const _liveCmds = [
   null,
-  'kubectl get nodes → 12+ ready',
-  'cat cicd.stat → coverage: 100%',
-  'uptime --years → 4+ years in IT',
+  'terraform plan       → 0 errors, 0 warnings',
+  'argocd app sync      → synced · healthy',
+  'ping on-call         → reply: always',
+  'systemctl status me  → active (running)',
 ];
 let _liveCmdIdx = 0;
 
@@ -220,7 +221,7 @@ function setupCopyCard(btnId, labelId, iconId, text) {
   if (!btn) return;
   btn.addEventListener('click', () => {
     navigator.clipboard.writeText(text).then(() => {
-      label.textContent = '✓ Скопировано!';
+      label.textContent = document.body.classList.contains('lang-en') ? '✓ Copied!' : '✓ Скопировано!';
       icon.innerHTML = checkSvg;
       btn.classList.add('copied');
       setTimeout(() => {
