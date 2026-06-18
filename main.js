@@ -222,9 +222,9 @@ const _termInput = document.getElementById('term-input');
 const _termOut   = document.getElementById('term-output');
 
 const _termCmds = {
-  help:       'contact · stack · location · ls\nclear · git log · sudo su',
+  help:       'contact · skills · location · ls\nclear · git log · sudo su',
   contact:    'TG:    @ktylhus\nemail: timir-ivaniv@yandex.ru',
-  stack:      'K8s · Helm · ArgoCD · Vault\nTerraform · Ansible · GitLab CI\nPrometheus · Grafana · Loki',
+  skills:     'K8s · Helm · ArgoCD · Vault\nTerraform · Ansible · GitLab CI\nPrometheus · Grafana · Loki',
   location:   'Saint Petersburg · UTC+3\nremote / hybrid ✓',
   ls:         'experience/  skills/  certs/\nachievements/ education/',
   'git log':  '* feat: HA clusters · 99.9% uptime\n* feat: MTTD hours → 5 min\n* feat: server setup 2h → 15 min',
@@ -245,7 +245,7 @@ if (_termInput) {
 
     if (cmd === 'clear') { _termOut.textContent = ''; _termOut.className = 'term-output'; return; }
 
-    const resp = _termCmds[cmd];
+    const resp = _termCmds[cmd] ?? _termCmds[cmd.replace(/\/$/, '')];
     if (resp !== undefined) {
       _termOut.textContent = resp;
       _termOut.className = 'term-output';
