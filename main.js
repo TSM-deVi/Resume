@@ -97,10 +97,6 @@ function applyLang(l) {
     langBtn.textContent = 'EN';
   }
   localStorage.setItem('lang', l);
-  const _to = document.getElementById('term-output');
-  const _ti = document.getElementById('term-input');
-  if (_to) { _to.textContent = ''; _to.className = 'term-output'; }
-  if (_ti) { _ti.value = ''; }
 }
 
 applyLang(lang);
@@ -226,10 +222,7 @@ const _termInput = document.getElementById('term-input');
 const _termOut   = document.getElementById('term-output');
 
 const _termCmds = {
-  help: {
-    ru: 'contact · skills · location · ls\ngit log · sudo su\n\n── хоткеи ──\n[Tab]  автодополнение\n[↑]    предыдущая команда\n[↓]    следующая команда',
-    en: 'contact · skills · location · ls\ngit log · sudo su\n\n── hotkeys ──\n[Tab]  autocomplete\n[↑]    previous command\n[↓]    next command',
-  },
+  help:       'contact · skills · location · ls\ngit log · sudo su\n\n── hotkeys ──\n[Tab]  autocomplete\n[↑]    previous command\n[↓]    next command',
   contact:    'TG:    @ktylhus\nemail: timir-ivaniv@yandex.ru',
   skills:     'K8s · Helm · ArgoCD · Vault\nTerraform · Ansible · GitLab CI\nPrometheus · Grafana · Loki',
   location:   'Saint Petersburg · UTC+3\nremote / hybrid ✓',
@@ -288,9 +281,7 @@ if (_termInput) {
 
     if (cmd === 'clear') { _termOut.textContent = ''; _termOut.className = 'term-output'; return; }
 
-    const raw = _termCmds[cmd] ?? _termCmds[cmd.replace(/\/$/, '')];
-    const isEn = document.body.classList.contains('lang-en');
-    const resp = raw && typeof raw === 'object' ? (isEn ? raw.en : raw.ru) : raw;
+    const resp = _termCmds[cmd] ?? _termCmds[cmd.replace(/\/$/, '')];
     if (resp !== undefined) {
       _termOut.textContent = resp;
       _termOut.className = 'term-output';
@@ -356,3 +347,51 @@ function setupCopyCard(btnId, labelId, iconId, text) {
 
 setupCopyCard('btn-copy-tg',    'btn-tg-label',   'copy-icon-tg', '@ktylhus');
 setupCopyCard('btn-copy-email', 'btn-copy-label', 'copy-icon',    'timir-ivaniv@yandex.ru');
+
+// ── Pipeline animation ──
+(function () {
+  const stages  = Array.from(document.querySelectorAll('.pl-stage'));
+  const lines   = Array.from(document.querySelectorAll('.pl-line'));
+  if (!stages.length) return;
+
+  let running = false;
+
+  function runPipeline() {
+    if (running) return;
+    running = true;
+    stages.forEach(s => s.classList.remove('pl-run', 'pl-done'));
+    lines.forEach(l => l.classList.remove('pl-done'));
+
+    let i = 0;
+    function step() {
+      if (i >= stages.length) { running = false; return; }
+      stages[i].classList.add('pl-run');
+      setTimeout(() => {
+        stages[i].classList.remove('pl-run');
+        stages[i].classList.add('pl-done');
+        if (lines[i]) {
+          setTimeout(() => {
+            lines[i].classList.add('pl-done');
+            i++;
+            setTimeout(step, 120);
+          }, 280);
+        } else {
+          i++;
+          running = false;
+        }
+      }, 520);
+    }
+    step();
+  }
+
+  setTimeout(runPipeline, 1600);
+
+  document.querySelector('.pl-rerun')?.addEventListener('click', () => {
+    if (!running) runPipeline();
+  });
+
+  stages.forEach(s => {
+    s.addEventListener('mouseenter', () => document.body.classList.add('cur-hover'));
+    s.addEventListener('mouseleave', () => document.body.classList.remove('cur-hover'));
+  });
+})();
