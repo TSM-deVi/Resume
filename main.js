@@ -107,22 +107,104 @@ langBtn.addEventListener('click', () => {
   startTypewriter();
 });
 
-// ── Typewriter ──
-function startTypewriter() {
-  const el       = document.getElementById('typewriter-text');
-  const heroRole = document.getElementById('hero-role');
-  if (!el || !heroRole) return;
-  const isEn = document.body.classList.contains('lang-en');
-  const text = isEn ? heroRole.dataset.textEn : heroRole.dataset.textRu;
+// ── Typewriter + Living Terminal ──
+const _liveCmds = [
+  null,
+  'kubectl get nodes → 12+ ready',
+  'cat cicd.stat → coverage: 100%',
+  'uptime --years → 4+ years in IT',
+];
+let _liveCmdIdx = 0;
+
+function _typeTW(text, speed, cb) {
+  const el = document.getElementById('typewriter-text');
+  if (!el) return;
   el.textContent = '';
-  clearInterval(window._twTimer);
   let i = 0;
+  clearInterval(window._twTimer);
   window._twTimer = setInterval(() => {
     el.textContent += text[i++];
-    if (i >= text.length) clearInterval(window._twTimer);
-  }, 40);
+    if (i >= text.length) { clearInterval(window._twTimer); if (cb) cb(); }
+  }, speed);
+}
+
+function _eraseTW(cb) {
+  const el = document.getElementById('typewriter-text');
+  if (!el) return;
+  clearInterval(window._twTimer);
+  window._twTimer = setInterval(() => {
+    if (!el.textContent.length) { clearInterval(window._twTimer); if (cb) cb(); return; }
+    el.textContent = el.textContent.slice(0, -1);
+  }, 22);
+}
+
+function _scheduleLive() {
+  clearTimeout(window._liveTimer);
+  window._liveTimer = setTimeout(() => {
+    _liveCmdIdx = (_liveCmdIdx + 1) % _liveCmds.length;
+    _eraseTW(() => {
+      const heroRole = document.getElementById('hero-role');
+      const isEn    = document.body.classList.contains('lang-en');
+      const isRole  = _liveCmdIdx === 0;
+      const text    = isRole
+        ? (isEn ? heroRole.dataset.textEn : heroRole.dataset.textRu)
+        : _liveCmds[_liveCmdIdx];
+      _typeTW(text, isRole ? 45 : 35, _scheduleLive);
+    });
+  }, 3200);
+}
+
+function startTypewriter() {
+  clearTimeout(window._liveTimer);
+  clearInterval(window._twTimer);
+  _liveCmdIdx = 0;
+  const heroRole = document.getElementById('hero-role');
+  if (!heroRole) return;
+  const isEn = document.body.classList.contains('lang-en');
+  _typeTW(isEn ? heroRole.dataset.textEn : heroRole.dataset.textRu, 45, _scheduleLive);
 }
 startTypewriter();
+
+// ── Mouse parallax on hero ──
+if (window.matchMedia('(pointer: fine)').matches) {
+  const heroEl     = document.getElementById('hero');
+  const heroLeftEl = document.querySelector('.hero-left');
+  const heroTermEl = document.querySelector('.hero-terminal');
+  if (heroEl && heroLeftEl) {
+    heroEl.addEventListener('mousemove', e => {
+      const r = heroEl.getBoundingClientRect();
+      const x = ((e.clientX - r.left) / r.width  - 0.5) * 2;
+      const y = ((e.clientY - r.top)  / r.height - 0.5) * 2;
+      heroLeftEl.style.transform = `translate(${x * 10}px, ${y * 6}px)`;
+      if (heroTermEl) heroTermEl.style.transform = `translate(${x * -6}px, ${y * -4}px)`;
+    });
+    heroEl.addEventListener('mouseleave', () => {
+      heroLeftEl.style.transform = '';
+      if (heroTermEl) heroTermEl.style.transform = '';
+    });
+  }
+}
+
+// ── Console Easter Egg ──
+try {
+  const _cs = [
+    'color:#818cf8;font-family:monospace;font-size:12px;line-height:1.6;',
+    'color:#22c55e;font-family:monospace;font-size:11px;',
+    'color:#94a3b8;font-family:monospace;font-size:11px;',
+  ];
+  console.log(
+    '%c╔══════════════════════════════════════════════╗\n' +
+    '║  $ whoami                                    ║\n' +
+    '║  > Ivanov Temir · Middle DevOps Engineer     ║\n' +
+    '║                                              ║\n' +
+    '║  $ kubectl get contact                       ║\n' +
+    '║  > TG:    @ktylhus                           ║\n' +
+    '║  > email: timir-ivaniv@yandex.ru             ║\n' +
+    '╚══════════════════════════════════════════════╝', _cs[0]
+  );
+  console.log('%c● open to work · remote / hybrid', _cs[1]);
+  console.log('%cLooking for a DevOps engineer? Let\'s talk!', _cs[2]);
+} catch(e) {}
 
 // ── Copy helper ──
 function setupCopyCard(btnId, labelId, iconId, text) {

@@ -170,14 +170,13 @@ h1 {
 @keyframes blink-cur { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
 @keyframes glitch-name {
-  0%, 100% { filter: hue-rotate(0deg);   transform: none; }
-  8%        { filter: hue-rotate(90deg);  transform: skewX(-2deg); }
-  10%       { filter: hue-rotate(0deg);   transform: none; }
-  55%       { filter: hue-rotate(0deg);   transform: none; }
-  58%       { filter: hue-rotate(180deg); transform: skewX(1.5deg) translateX(3px); }
-  60%       { filter: hue-rotate(0deg);   transform: none; }
+  0%, 88%, 100% { filter: hue-rotate(0deg);   transform: none; clip-path: none; }
+  89%           { filter: hue-rotate(80deg);   transform: skewX(-2.5deg); }
+  90%           { filter: hue-rotate(0deg);    transform: none; }
+  93%           { filter: hue-rotate(160deg);  transform: skewX(1.5deg) translateX(3px); }
+  94%           { filter: hue-rotate(0deg);    transform: none; }
 }
-h1:hover { animation: glitch-name .65s ease-in-out; cursor: default; }
+h1 { animation: glitch-name 7s ease-in-out infinite; }
 
 .hero-desc {
   color: var(--muted); font-size: .9rem;
@@ -221,11 +220,13 @@ button.cpill { cursor: pointer; font-family: inherit; }
 .cpill-dl:hover { background: rgba(99,102,241,.25); }
 
 /* terminal card */
+.hero-left     { transition: transform .4s ease-out; }
 .hero-terminal {
   background: var(--bg-sec);
   border: 1px solid var(--border);
   border-radius: 14px; overflow: hidden;
   font-size: .8rem;
+  transition: transform .4s ease-out;
 }
 .terminal-bar {
   background: var(--bg-card); border-bottom: 1px solid var(--border);
