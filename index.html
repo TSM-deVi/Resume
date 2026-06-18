@@ -113,6 +113,12 @@
             <div class="tl-cmd"><span class="tl-prompt">❯</span> cat status.txt</div>
             <div class="tl-out"><span class="tl-ok">● open to work</span></div>
           </div>
+          <div class="tl-sep term-sep-int"></div>
+          <div class="term-int">
+            <span class="tl-prompt">❯</span>
+            <input class="term-input" id="term-input" placeholder="help" autocomplete="off" spellcheck="false" maxlength="32">
+          </div>
+          <div class="term-output" id="term-output"></div>
         </div>
       </div>
     </div>
@@ -682,6 +688,9 @@
 <button id="back-to-top" aria-label="Наверх">
   <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="18,15 12,9 6,15"/></svg>
 </button>
+
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
 
 <script src="main.js"></script>
 

@@ -187,6 +187,63 @@ try {
   console.log('%cLooking for a DevOps engineer? Let\'s talk!', _cs[2]);
 } catch(e) {}
 
+// ── Custom cursor ──
+if (window.matchMedia('(pointer: fine)').matches) {
+  const dot  = document.getElementById('cursor-dot');
+  const ring = document.getElementById('cursor-ring');
+
+  document.addEventListener('mousemove', e => {
+    dot.style.left  = ring.style.left = e.clientX + 'px';
+    dot.style.top   = ring.style.top  = e.clientY + 'px';
+  });
+  document.addEventListener('mouseenter', () => document.body.classList.add('cur-active'));
+  document.addEventListener('mouseleave', () => document.body.classList.remove('cur-active'));
+
+  document.querySelectorAll('a, button, .sg-label, .chip-cat, .stack-tag, .stat, .ach, .cert-card, .edu-card, .job-company-block').forEach(el => {
+    el.addEventListener('mouseenter', () => document.body.classList.add('cur-hover'));
+    el.addEventListener('mouseleave', () => document.body.classList.remove('cur-hover'));
+  });
+}
+
+// ── Interactive terminal ──
+const _termInput = document.getElementById('term-input');
+const _termOut   = document.getElementById('term-output');
+
+const _termCmds = {
+  help:       'whoami · skills · contact · ls\nclear · sudo su · git log',
+  whoami:     'Ivanov Temir · Middle DevOps Engineer\nSaint Petersburg · open to work',
+  skills:     'K8s · GitLab CI/CD · Terraform\nAnsible · Prometheus · Docker',
+  contact:    'TG: @ktylhus\nemail: timir-ivaniv@yandex.ru',
+  ls:         'experience/  skills/  achievements/\neducation/   contact/',
+  'git log':  '* f230f16 add certs, cursor, terminal\n* 19fbfbb typewriter + living cmds\n* 3c06678 initial resume build',
+  'sudo su':  'Permission denied (insufficient coffee ☕)',
+  sudo:       'Permission denied (insufficient coffee ☕)',
+  exit:       'Nice try. The terminal stays open.',
+  'rm -rf /': '🔥 ...just kidding. Not today.',
+  pwd:        '/home/temiriv/devops',
+  uname:      'Linux devops-node 5.15.0-k8s #1 SMP',
+};
+
+if (_termInput) {
+  _termInput.addEventListener('keydown', e => {
+    if (e.key !== 'Enter') return;
+    const cmd = _termInput.value.trim().toLowerCase();
+    _termInput.value = '';
+    if (!cmd) return;
+
+    if (cmd === 'clear') { _termOut.textContent = ''; _termOut.className = 'term-output'; return; }
+
+    const resp = _termCmds[cmd];
+    if (resp !== undefined) {
+      _termOut.textContent = resp;
+      _termOut.className = 'term-output';
+    } else {
+      _termOut.textContent = `command not found: ${cmd}\ntry 'help'`;
+      _termOut.className = 'term-output err';
+    }
+  });
+}
+
 // ── Skill category filter ──
 let _activeFilter = null;
 
