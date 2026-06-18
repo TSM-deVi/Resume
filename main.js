@@ -222,7 +222,10 @@ const _termInput = document.getElementById('term-input');
 const _termOut   = document.getElementById('term-output');
 
 const _termCmds = {
-  help:       'contact · skills · location · ls\ngit log · sudo su\n\n── hotkeys ──\n[Tab]  autocomplete\n[↑]    предыдущая команда\n[↓]    следующая команда',
+  help: {
+    ru: 'contact · skills · location · ls\ngit log · sudo su\n\n── хоткеи ──\n[Tab]  автодополнение\n[↑]    предыдущая команда\n[↓]    следующая команда',
+    en: 'contact · skills · location · ls\ngit log · sudo su\n\n── hotkeys ──\n[Tab]  autocomplete\n[↑]    previous command\n[↓]    next command',
+  },
   contact:    'TG:    @ktylhus\nemail: timir-ivaniv@yandex.ru',
   skills:     'K8s · Helm · ArgoCD · Vault\nTerraform · Ansible · GitLab CI\nPrometheus · Grafana · Loki',
   location:   'Saint Petersburg · UTC+3\nremote / hybrid ✓',
@@ -281,7 +284,9 @@ if (_termInput) {
 
     if (cmd === 'clear') { _termOut.textContent = ''; _termOut.className = 'term-output'; return; }
 
-    const resp = _termCmds[cmd] ?? _termCmds[cmd.replace(/\/$/, '')];
+    const raw = _termCmds[cmd] ?? _termCmds[cmd.replace(/\/$/, '')];
+    const isEn = document.body.classList.contains('lang-en');
+    const resp = raw && typeof raw === 'object' ? (isEn ? raw.en : raw.ru) : raw;
     if (resp !== undefined) {
       _termOut.textContent = resp;
       _termOut.className = 'term-output';
