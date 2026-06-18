@@ -222,18 +222,18 @@ const _termInput = document.getElementById('term-input');
 const _termOut   = document.getElementById('term-output');
 
 const _termCmds = {
-  help:       'whoami · skills · contact · ls\nclear · sudo su · git log',
-  whoami:     'Ivanov Temir · Middle DevOps Engineer\nSaint Petersburg · open to work',
-  skills:     'K8s · GitLab CI/CD · Terraform\nAnsible · Prometheus · Docker',
-  contact:    'TG: @ktylhus\nemail: timir-ivaniv@yandex.ru',
-  ls:         'experience/  skills/  achievements/\neducation/   contact/',
-  'git log':  '* feat: interactive terminal + cursor\n* feat: K8s migration 12+ services\n* feat: HA clusters · 99.9% uptime',
+  help:       'contact · stack · location · ls\nclear · git log · sudo su',
+  contact:    'TG:    @ktylhus\nemail: timir-ivaniv@yandex.ru',
+  stack:      'K8s · Helm · ArgoCD · Vault\nTerraform · Ansible · GitLab CI\nPrometheus · Grafana · Loki',
+  location:   'Saint Petersburg · UTC+3\nremote / hybrid ✓',
+  ls:         'experience/  skills/  certs/\nachievements/ education/',
+  'git log':  '* feat: HA clusters · 99.9% uptime\n* feat: MTTD hours → 5 min\n* feat: server setup 2h → 15 min',
   'sudo su':  'Permission denied (insufficient coffee ☕)',
   sudo:       'Permission denied (insufficient coffee ☕)',
   exit:       'Nice try. The terminal stays open.',
   'rm -rf /': '🔥 ...just kidding. Not today.',
   pwd:        '/home/temiriv/devops',
-  uname:      'Linux devops-node 5.15.0-k8s #1 SMP',
+  uname:      'Linux devops-node 5.15.0-k8s #1 SMP x86_64',
 };
 
 if (_termInput) {
