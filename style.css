@@ -475,6 +475,43 @@ h1 { animation: glitch-name 7s ease-in-out infinite; }
 }
 
 
+/* ── CERTS ── */
+.certs-sep {
+  margin-top: 2rem; padding-top: 1.75rem;
+  border-top: 1px solid var(--border);
+  font-size: .68rem; text-transform: uppercase;
+  letter-spacing: .08em; color: var(--dim);
+  margin-bottom: 1rem;
+}
+.cert-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px,1fr));
+  gap: .85rem;
+}
+.cert-card {
+  display: flex; align-items: center; gap: .9rem;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 12px; padding: .9rem 1.1rem;
+  text-decoration: none; color: inherit;
+  transition: border-color .2s, transform .2s;
+}
+.cert-card:hover { transform: translateY(-2px); text-decoration: none; }
+.cert-card-b:hover { border-color: rgba(34,197,94,.5); }
+.cert-card-p:hover { border-color: rgba(99,102,241,.5); }
+.cert-card-e:hover { border-color: rgba(245,158,11,.5); }
+.cert-badge {
+  width: 40px; height: 40px; border-radius: 9px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Unbounded', sans-serif; font-size: .6rem; font-weight: 800;
+  letter-spacing: .03em;
+}
+.cert-badge-b { background: rgba(34,197,94,.1);  border: 1px solid rgba(34,197,94,.3);  color: var(--green); }
+.cert-badge-p { background: rgba(99,102,241,.1); border: 1px solid rgba(99,102,241,.3); color: var(--accent-lt); }
+.cert-badge-e { background: rgba(245,158,11,.1); border: 1px solid rgba(245,158,11,.3); color: var(--yellow); }
+.cert-body { flex: 1; min-width: 0; }
+.cert-name { font-size: .82rem; color: var(--text); font-weight: 500; line-height: 1.35; }
+.cert-issuer { font-size: .7rem; color: var(--dim); margin-top: 3px; }
+
 /* ── ACHIEVEMENTS ── */
 .ach-grid {
   display: grid;
