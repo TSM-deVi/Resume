@@ -97,6 +97,10 @@ function applyLang(l) {
     langBtn.textContent = 'EN';
   }
   localStorage.setItem('lang', l);
+  const _to = document.getElementById('term-output');
+  const _ti = document.getElementById('term-input');
+  if (_to) { _to.textContent = ''; _to.className = 'term-output'; }
+  if (_ti) { _ti.value = ''; }
 }
 
 applyLang(lang);
