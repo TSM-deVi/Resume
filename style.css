@@ -745,8 +745,8 @@ footer {
 #back-to-top:hover { border-color: var(--accent); color: var(--accent-lt); transform: translateY(-3px); }
 
 /* ── LANG TOGGLE ── */
-body:not(.lang-en) [data-lang="en"] { display: none; }
-body.lang-en       [data-lang="ru"] { display: none; }
+body:not(.lang-en) [data-lang="en"] { display: none !important; }
+body.lang-en       [data-lang="ru"] { display: none !important; }
 
 /* ── SCROLL PROGRESS ── */
 #scroll-progress {
