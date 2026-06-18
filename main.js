@@ -222,7 +222,7 @@ const _termInput = document.getElementById('term-input');
 const _termOut   = document.getElementById('term-output');
 
 const _termCmds = {
-  help:       'contact · skills · location · ls\ngit log · sudo su · [Tab] autocomplete',
+  help:       'contact · skills · location · ls\ngit log · sudo su\n\n── hotkeys ──\n[Tab]  autocomplete\n[↑]    предыдущая команда\n[↓]    следующая команда',
   contact:    'TG:    @ktylhus\nemail: timir-ivaniv@yandex.ru',
   skills:     'K8s · Helm · ArgoCD · Vault\nTerraform · Ansible · GitLab CI\nPrometheus · Grafana · Loki',
   location:   'Saint Petersburg · UTC+3\nremote / hybrid ✓',
@@ -237,7 +237,25 @@ const _termCmds = {
 };
 
 if (_termInput) {
+  const _history = [];
+  let _histIdx = -1;
+
   _termInput.addEventListener('keydown', e => {
+    // ── History navigation ──
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (_history.length === 0) return;
+      _histIdx = Math.min(_histIdx + 1, _history.length - 1);
+      _termInput.value = _history[_histIdx];
+      return;
+    }
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      _histIdx = Math.max(_histIdx - 1, -1);
+      _termInput.value = _histIdx === -1 ? '' : _history[_histIdx];
+      return;
+    }
+
     // ── Tab autocomplete ──
     if (e.key === 'Tab') {
       e.preventDefault();
@@ -258,6 +276,8 @@ if (_termInput) {
     const cmd = _termInput.value.trim().toLowerCase();
     _termInput.value = '';
     if (!cmd) return;
+    _history.unshift(cmd);
+    _histIdx = -1;
 
     if (cmd === 'clear') { _termOut.textContent = ''; _termOut.className = 'term-output'; return; }
 
