@@ -215,7 +215,7 @@ const _termCmds = {
   skills:     'K8s · GitLab CI/CD · Terraform\nAnsible · Prometheus · Docker',
   contact:    'TG: @ktylhus\nemail: timir-ivaniv@yandex.ru',
   ls:         'experience/  skills/  achievements/\neducation/   contact/',
-  'git log':  '* f230f16 add certs, cursor, terminal\n* 19fbfbb typewriter + living cmds\n* 3c06678 initial resume build',
+  'git log':  '* feat: interactive terminal + cursor\n* feat: K8s migration 12+ services\n* feat: HA clusters · 99.9% uptime',
   'sudo su':  'Permission denied (insufficient coffee ☕)',
   sudo:       'Permission denied (insufficient coffee ☕)',
   exit:       'Nice try. The terminal stays open.',

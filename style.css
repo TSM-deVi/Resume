@@ -240,8 +240,8 @@ h1:hover { animation-duration: .5s; animation-iteration-count: 3; }
 .term-output {
   font-size: .74rem; color: var(--accent-lt);
   padding-left: 14px; margin-top: 5px;
-  white-space: pre; line-height: 1.5;
-  min-height: 0;
+  white-space: pre-wrap; line-height: 1.5;
+  min-height: 0; word-break: break-word;
 }
 .term-output.err { color: var(--red); }
 
