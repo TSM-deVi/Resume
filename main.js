@@ -192,10 +192,22 @@ if (window.matchMedia('(pointer: fine)').matches) {
   const dot  = document.getElementById('cursor-dot');
   const ring = document.getElementById('cursor-ring');
 
+  let mx = -200, my = -200, rx = -200, ry = -200;
+
   document.addEventListener('mousemove', e => {
-    dot.style.left  = ring.style.left = e.clientX + 'px';
-    dot.style.top   = ring.style.top  = e.clientY + 'px';
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx + 'px';
+    dot.style.top  = my + 'px';
   });
+
+  (function rafLoop() {
+    rx += (mx - rx) * 0.16;
+    ry += (my - ry) * 0.16;
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+    requestAnimationFrame(rafLoop);
+  })();
+
   document.addEventListener('mouseenter', () => document.body.classList.add('cur-active'));
   document.addEventListener('mouseleave', () => document.body.classList.remove('cur-active'));
 
