@@ -729,13 +729,6 @@ h1:hover { animation-duration: .5s; animation-iteration-count: 3; }
 }
 .contact-card:hover .contact-card-arrow { color: var(--text); }
 
-.cta-dl-link {
-  display: inline-flex; align-items: center; gap: 6px;
-  color: var(--dim); font-size: .8rem;
-  transition: color .2s;
-  position: relative;
-}
-.cta-dl-link:hover { color: var(--text); text-decoration: none; }
 
 @media (max-width: 500px) {
   .contact-cards { grid-template-columns: 1fr; }
@@ -903,8 +896,8 @@ body::after {
 
 /* ── CUSTOM CURSOR ── */
 @media (pointer: fine) {
-  * { cursor: none; }
-  input, textarea { cursor: text; }
+  * { cursor: none !important; }
+  input, textarea { cursor: text !important; }
 }
 #cursor-dot {
   position: fixed; pointer-events: none; z-index: 9999;
@@ -937,7 +930,7 @@ body.cur-hover #cursor-dot { transform: translate(-50%, -50%) scale(.5); }
 
 /* ── PRINT ── */
 @media print {
-  #scroll-progress, #back-to-top, nav, .hero-terminal, .ach-spark { display: none !important; }
+  #scroll-progress, #back-to-top, nav, .hero-terminal, .ach-spark, body::after { display: none !important; }
   body {
     background: #fff !important; color: #111 !important;
     background-image: none !important; animation: none !important;
