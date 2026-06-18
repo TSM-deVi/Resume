@@ -57,7 +57,7 @@
           <span data-lang="ru">Иванов<br>Темир</span>
           <span data-lang="en">Ivanov<br>Temir</span>
         </h1>
-        <div class="hero-role" id="hero-role" data-text-ru="whoami → Middle DevOps-инженер" data-text-en="whoami → Middle DevOps Engineer">
+        <div class="hero-role" id="hero-role" data-text-ru="whoami → Middle DevOps Engineer" data-text-en="whoami → Middle DevOps Engineer">
           <span class="prompt">$ </span><span id="typewriter-text"></span><span class="cursor"></span>
         </div>
         <p class="hero-desc">
@@ -83,6 +83,15 @@
             <button class="pl-rerun" aria-label="Re-run pipeline">↺ re-run</button>
           </div>
           <div class="pipeline">
+
+            <div class="pl-stage" data-tip="hadolint · yamllint">
+              <div class="pl-circle">
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="16,18 22,12 16,6"/><polyline points="8,6 2,12 8,18"/></svg>
+              </div>
+              <span class="pl-label">lint</span>
+            </div>
+
+            <div class="pl-line"></div>
 
             <div class="pl-stage" data-tip="Docker multi-stage">
               <div class="pl-circle">
