@@ -222,11 +222,11 @@ const _termInput = document.getElementById('term-input');
 const _termOut   = document.getElementById('term-output');
 
 const _termCmds = {
-  help:       'contact · skills · location · ls\nclear · git log · sudo su\ncd <section>  cd ..  [Tab] autocomplete',
+  help:       'contact · skills · location · ls\ngit log · sudo su · [Tab] autocomplete',
   contact:    'TG:    @ktylhus\nemail: timir-ivaniv@yandex.ru',
   skills:     'K8s · Helm · ArgoCD · Vault\nTerraform · Ansible · GitLab CI\nPrometheus · Grafana · Loki',
   location:   'Saint Petersburg · UTC+3\nremote / hybrid ✓',
-  ls:         'experience/  skills/  certs/\nachievements/ education/',
+  ls:         'K8s         ✓ prod\nTerraform   ✓ no drift\nArgoCD      ✓ synced\nVault       ✓ unsealed\nGitLab CI   ✓ 100%',
   'git log':  '* feat: HA clusters · 99.9% uptime\n* feat: MTTD hours → 5 min\n* feat: server setup 2h → 15 min',
   'sudo su':  'Permission denied (insufficient coffee ☕)',
   sudo:       'Permission denied (insufficient coffee ☕)',
@@ -237,28 +237,19 @@ const _termCmds = {
 };
 
 if (_termInput) {
-  const _cdSections = ['experience', 'skills', 'achievements', 'education'];
-
   _termInput.addEventListener('keydown', e => {
     // ── Tab autocomplete ──
     if (e.key === 'Tab') {
       e.preventDefault();
       const partial = _termInput.value.toLowerCase();
       if (!partial) return;
-
-      if (partial.startsWith('cd ')) {
-        const dirPart = partial.slice(3);
-        const match = _cdSections.find(s => s.startsWith(dirPart));
-        if (match) _termInput.value = 'cd ' + match;
-      } else {
-        const keys = Object.keys(_termCmds).filter(k => !k.includes(' '));
-        const matches = keys.filter(k => k.startsWith(partial));
-        if (matches.length === 1) {
-          _termInput.value = matches[0];
-        } else if (matches.length > 1) {
-          _termOut.textContent = matches.join('   ');
-          _termOut.className = 'term-output';
-        }
+      const keys = Object.keys(_termCmds).filter(k => !k.includes(' '));
+      const matches = keys.filter(k => k.startsWith(partial));
+      if (matches.length === 1) {
+        _termInput.value = matches[0];
+      } else if (matches.length > 1) {
+        _termOut.textContent = matches.join('   ');
+        _termOut.className = 'term-output';
       }
       return;
     }
@@ -269,27 +260,6 @@ if (_termInput) {
     if (!cmd) return;
 
     if (cmd === 'clear') { _termOut.textContent = ''; _termOut.className = 'term-output'; return; }
-
-    // ── cd navigation ──
-    if (cmd === 'cd ..' || cmd === 'cd ~' || cmd === 'cd') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      _termOut.textContent = '~ (back to top)';
-      _termOut.className = 'term-output';
-      return;
-    }
-    if (cmd.startsWith('cd ')) {
-      const dir = cmd.slice(3).replace(/\/$/, '');
-      const el = document.getElementById(dir);
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
-        _termOut.textContent = `→ navigated to #${dir}`;
-        _termOut.className = 'term-output';
-      } else {
-        _termOut.textContent = `cd: ${dir}: not found\ntry: ls`;
-        _termOut.className = 'term-output err';
-      }
-      return;
-    }
 
     const resp = _termCmds[cmd] ?? _termCmds[cmd.replace(/\/$/, '')];
     if (resp !== undefined) {
