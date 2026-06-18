@@ -1,7 +1,9 @@
-// ── Back to top ──
+// ── Back to top + Nav shadow ──
 const backBtn = document.getElementById('back-to-top');
+const nav = document.querySelector('nav');
 window.addEventListener('scroll', () => {
   backBtn.classList.toggle('visible', window.scrollY > 400);
+  nav.classList.toggle('scrolled', window.scrollY > 10);
 });
 backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
