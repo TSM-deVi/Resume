@@ -78,13 +78,16 @@ nav.scrolled {
 }
 .nav-links a:hover,
 .nav-links a.active { color: var(--text); text-decoration: none; }
-.nav-links a.active::after {
+.nav-links a::after {
   content: '';
   position: absolute; bottom: -4px; left: 0; right: 0; height: 2px;
   background: linear-gradient(90deg, var(--accent), var(--purple));
   border-radius: 1px;
   box-shadow: 0 0 6px rgba(99,102,241,.5);
+  opacity: 0;
+  transition: opacity .25s;
 }
+.nav-links a.active::after { opacity: 1; }
 
 
 /* ── LAYOUT ── */
@@ -455,7 +458,7 @@ h1 { animation: glitch-name 7s ease-in-out infinite; }
   content: attr(data-tip);
   position: absolute;
   bottom: calc(100% + 7px);
-  left: 50%; transform: translateX(-50%);
+  left: 50%; transform: translateX(max(-50%, -120px));
   background: var(--bg); border: 1px solid var(--border);
   color: var(--muted); font-size: .67rem; line-height: 1.4;
   padding: 4px 10px; border-radius: 6px;

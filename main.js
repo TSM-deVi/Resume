@@ -190,6 +190,11 @@ try {
 // ── Skill category filter ──
 let _activeFilter = null;
 
+function _clearFilter() {
+  _activeFilter = null;
+  document.querySelectorAll('.skill-row').forEach(r => r.classList.remove('sf-dim', 'sf-on'));
+}
+
 document.querySelectorAll('.sg-label').forEach(lbl => {
   lbl.addEventListener('click', () => {
     const row = lbl.closest('.skill-row');
@@ -197,8 +202,7 @@ document.querySelectorAll('.sg-label').forEach(lbl => {
     const rows = document.querySelectorAll('.skill-row');
 
     if (_activeFilter === cat) {
-      _activeFilter = null;
-      rows.forEach(r => r.classList.remove('sf-dim', 'sf-on'));
+      _clearFilter();
     } else {
       _activeFilter = cat;
       rows.forEach(r => {
@@ -209,6 +213,9 @@ document.querySelectorAll('.sg-label').forEach(lbl => {
     }
   });
 });
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') _clearFilter(); });
+document.addEventListener('click', e => { if (_activeFilter && !e.target.closest('#skills')) _clearFilter(); });
 
 // ── Copy helper ──
 function setupCopyCard(btnId, labelId, iconId, text) {
