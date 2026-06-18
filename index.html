@@ -1,9 +1,15 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" id="html-root">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Иванов Темир — DevOps-инженер</title>
+  <meta name="description" content="Middle DevOps Engineer. Kubernetes, GitLab CI/CD, Terraform, observability. Open to opportunities.">
+  <meta property="og:title" content="Иванов Темир — Middle DevOps Engineer">
+  <meta property="og:description" content="Middle DevOps. Kubernetes, GitLab CI/CD, Terraform, observability. Развиваюсь в SRE и Platform Engineering.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ru_RU">
+  <meta name="twitter:card" content="summary">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Unbounded:wght@400;600;700;800&display=swap" rel="stylesheet" />
@@ -16,17 +22,26 @@
 </head>
 <body>
 
+<div id="scroll-progress"></div>
+
 <nav>
   <div class="nav-logo">
     <div class="nav-dot"></div>
-    Иванов Темир
+    <span data-lang="ru">Иванов Темир</span>
+    <span data-lang="en">Ivanov Temir</span>
   </div>
-  <ul class="nav-links">
-    <li><a href="#experience">Опыт</a></li>
-    <li><a href="#skills">Навыки</a></li>
-    <li><a href="#achievements">Результаты</a></li>
-    <li><a href="#education">Образование</a></li>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#experience"><span data-lang="ru">Опыт</span><span data-lang="en">Experience</span></a></li>
+    <li><a href="#skills"><span data-lang="ru">Навыки</span><span data-lang="en">Skills</span></a></li>
+    <li><a href="#achievements"><span data-lang="ru">Результаты</span><span data-lang="en">Results</span></a></li>
+    <li><a href="#education"><span data-lang="ru">Образование</span><span data-lang="en">Education</span></a></li>
   </ul>
+  <div class="nav-controls">
+    <button class="lang-toggle" id="lang-toggle" aria-label="Switch language">EN</button>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 
 <div class="container">
@@ -36,16 +51,21 @@
     <div class="hero-grid">
       <div>
         <div class="hero-badge">open to work · remote / hybrid</div>
-        <h1>Иванов<br>Темир</h1>
-        <div class="hero-role">
-          <span class="prompt">$ </span>whoami → Middle DevOps-инженер<span class="cursor"></span>
+        <h1>
+          <span data-lang="ru">Иванов<br>Темир</span>
+          <span data-lang="en">Ivanov<br>Temir</span>
+        </h1>
+        <div class="hero-role" id="hero-role" data-text-ru="whoami → Middle DevOps-инженер" data-text-en="whoami → Middle DevOps Engineer">
+          <span class="prompt">$ </span><span id="typewriter-text"></span><span class="cursor"></span>
         </div>
         <p class="hero-desc">
-          4 года в IT-инфраструктуре, из них 2 — DevOps.
+          <span data-lang="ru">4 года в IT-инфраструктуре, из них 2 — DevOps.
           Самостоятельно реализую проекты от проектирования до продакшена:
-          Kubernetes, CI/CD, IaC, отказоустойчивая инфраструктура.
+          Kubernetes, CI/CD, IaC, отказоустойчивая инфраструктура.</span>
+          <span data-lang="en">4 years in IT infrastructure, 2 of them as DevOps.
+          I independently deliver projects from design to production:
+          Kubernetes, CI/CD, IaC, fault-tolerant infrastructure.</span>
         </p>
-
       </div>
 
       <!-- Terminal -->
@@ -59,11 +79,11 @@
         <div class="terminal-body">
           <div class="tl">
             <div class="tl-cmd"><span class="tl-prompt">❯</span> whoami</div>
-            <div class="tl-out"><span class="tl-val">Иванов Темир</span></div>
+            <div class="tl-out"><span class="tl-val">Ivanov Temir</span></div>
           </div>
           <div class="tl">
             <div class="tl-cmd"><span class="tl-prompt">❯</span> cat role.txt</div>
-            <div class="tl-out"><span class="tl-val">Middle DevOps-инженер</span></div>
+            <div class="tl-out"><span class="tl-val"><span data-lang="ru">Middle DevOps-инженер</span><span data-lang="en">Middle DevOps Engineer</span></span></div>
           </div>
           <div class="tl-sep"></div>
           <div class="tl">
@@ -91,31 +111,34 @@
     <div class="stats">
       <div class="stat stat-i r">
         <div class="stat-val" data-count="4" data-suffix="+">0</div>
-        <div class="stat-lbl">лет в IT</div>
+        <div class="stat-lbl"><span data-lang="ru">лет в IT</span><span data-lang="en">years in IT</span></div>
       </div>
       <div class="stat stat-p r d1">
         <div class="stat-val" data-count="2" data-suffix="+">0</div>
-        <div class="stat-lbl">лет DevOps</div>
+        <div class="stat-lbl"><span data-lang="ru">лет DevOps</span><span data-lang="en">years DevOps</span></div>
       </div>
       <div class="stat stat-c r d2">
         <div class="stat-val" data-count="12" data-suffix="+">0</div>
-        <div class="stat-lbl">сервисов в K8s</div>
+        <div class="stat-lbl"><span data-lang="ru">сервисов в K8s</span><span data-lang="en">services in K8s</span></div>
       </div>
       <div class="stat stat-g r d3">
         <div class="stat-val" data-text="100%">0</div>
-        <div class="stat-lbl">CI/CD покрытие</div>
+        <div class="stat-lbl"><span data-lang="ru">CI/CD покрытие</span><span data-lang="en">CI/CD coverage</span></div>
       </div>
     </div>
   </section>
 
   <!-- EXPERIENCE -->
   <section id="experience">
-    <h2 class="sec-title">Опыт работы <span class="sub">// 4 года 3 месяца</span></h2>
+    <h2 class="sec-title">
+      <span data-lang="ru">Опыт работы <span class="sub">// 4 года 3 месяца</span></span>
+      <span data-lang="en">Experience <span class="sub">// 4 years 3 months</span></span>
+    </h2>
 
     <div class="timeline">
 
       <!-- DUC Technologies -->
-      <div class="job r">
+      <div class="job job-current r">
         <div class="job-dot active"></div>
         <div class="job-company-block">
           <div class="job-company-hdr">
@@ -123,13 +146,19 @@
               <div class="job-company-name">ООО ДЮК Технологии</div>
               <div class="job-company-sub">duc-technologies.ru</div>
             </div>
-            <div class="job-period">апр 2026 — н.в. · 3 мес</div>
+            <div class="job-period">
+              <span data-lang="ru">апр 2026 — н.в. · 3 мес</span>
+              <span data-lang="en">Apr 2026 — present · 3 mo</span>
+            </div>
           </div>
           <div class="job-role">
             <div class="job-role-hdr">
-              <div class="job-role-title">DevOps-инженер</div>
+              <div class="job-role-title">
+                <span data-lang="ru">DevOps-инженер</span>
+                <span data-lang="en">DevOps Engineer</span>
+              </div>
             </div>
-            <ul class="jlist">
+            <ul class="jlist" data-lang="ru">
               <li>Реализация и поддержка CI/CD-процессов — настройка пайплайнов в <strong>GitLab CI/CD</strong>, автоматизация сборки, тестирования, деплоя и отката приложений, интеграция с артефакториями и системами уведомлений</li>
               <li>Контейнеризация и оркестрация — разработка и оптимизация Docker-образов, Docker Compose-манифестов, <strong>Harbor</strong> (приватный реестр), развёртывание и управление приложениями в <strong>Kubernetes</strong>-кластерах (Deployment, Service, Ingress, ConfigMap и т.п.)</li>
               <li>Инфраструктура как код (IaC) — проектирование и сопровождение инфраструктурных конфигураций с использованием <strong>Terraform</strong> и <strong>Ansible</strong>, обеспечение идемпотентности, воспроизводимости и масштабируемости окружений</li>
@@ -137,6 +166,15 @@
               <li>Обеспечение безопасности инфраструктуры — управление секретами через <strong>HashiCorp Vault</strong>, политики авторизации <strong>OPA/OPAL</strong>, настройка RBAC, сканирование образов через <strong>Trivy</strong>, аудит сетевых политик и доступов</li>
               <li>Развёртывание и сопровождение компонентов системы — подготовка окружений (DEV/TEST/PROD), миграции, резервное копирование, восстановление, поддержка высокой доступности и отказоустойчивости</li>
               <li>Взаимодействие с командами разработки и QA — консультирование по инфраструктурным вопросам, поддержка локальной разработки, участие в релизах, устранение инфраструктурных багов и бутылочных горлышек</li>
+            </ul>
+            <ul class="jlist" data-lang="en">
+              <li>Implementing and maintaining CI/CD pipelines — configuring <strong>GitLab CI/CD</strong>, automating build, test, deploy and rollback workflows, integrating with artifact registries and notification systems</li>
+              <li>Containerization and orchestration — building and optimizing Docker images, Docker Compose manifests, <strong>Harbor</strong> (private registry), deploying and managing applications in <strong>Kubernetes</strong> clusters (Deployment, Service, Ingress, ConfigMap, etc.)</li>
+              <li>Infrastructure as Code (IaC) — designing and maintaining infrastructure configurations with <strong>Terraform</strong> and <strong>Ansible</strong>, ensuring idempotency, reproducibility and scalability of environments</li>
+              <li>Setting up and maintaining monitoring and logging — deploying and configuring <strong>Prometheus, Grafana, Loki</strong>, alerting, building dashboards, performance analysis and incident diagnostics</li>
+              <li>Infrastructure security — secret management via <strong>HashiCorp Vault</strong>, authorization policies with <strong>OPA/OPAL</strong>, RBAC configuration, image scanning with <strong>Trivy</strong>, audit of network policies and access controls</li>
+              <li>Deploying and maintaining system components — environment provisioning (DEV/TEST/PROD), migrations, backup and recovery, maintaining high availability and fault tolerance</li>
+              <li>Collaboration with development and QA teams — infrastructure consulting, supporting local development, participating in releases, resolving infrastructure bugs and bottlenecks</li>
             </ul>
           </div>
         </div>
@@ -151,15 +189,24 @@
               <div class="job-company-name">Слетать.ру</div>
               <div class="job-company-sub">sletat.ru</div>
             </div>
-            <div class="job-period">фев 2024 — апр 2026 · 2 г 2 мес</div>
+            <div class="job-period">
+              <span data-lang="ru">фев 2024 — апр 2026 · 2 г 2 мес</span>
+              <span data-lang="en">Feb 2024 — Apr 2026 · 2 yr 2 mo</span>
+            </div>
           </div>
 
           <div class="job-role">
             <div class="job-role-hdr">
-              <div class="job-role-title">DevOps-инженер</div>
-              <div class="job-role-period">май 2024 — апр 2026 · 2 года</div>
+              <div class="job-role-title">
+                <span data-lang="ru">DevOps-инженер</span>
+                <span data-lang="en">DevOps Engineer</span>
+              </div>
+              <div class="job-role-period">
+                <span data-lang="ru">май 2024 — апр 2026 · 2 года</span>
+                <span data-lang="en">May 2024 — Apr 2026 · 2 years</span>
+              </div>
             </div>
-            <ul class="jlist">
+            <ul class="jlist" data-lang="ru">
               <li>Мигрировал <strong>12+ микросервисов</strong> из Docker Compose в self-hosted Kubernetes — namespace-изоляция, HPA, Ingress</li>
               <li>Спроектировал CI/CD-пайплайны (<strong>GitLab CI/CD, ArgoCD</strong>) — покрыл 100% продакшен-репозиториев</li>
               <li>Интегрировал security-сканирование (<strong>Trivy, Gitleaks</strong>) — уязвимости отлавливаются до попадания в прод</li>
@@ -168,17 +215,37 @@
               <li>Ansible-роли и плейбуки — настройка нового сервера <strong>за 15 мин</strong> вместо 2–3 часов вручную</li>
               <li>Terraform IaC, приватный Docker Registry, SSL/TLS (Let's Encrypt), VMware/Hyper-V, Veeam, Zimbra</li>
             </ul>
+            <ul class="jlist" data-lang="en">
+              <li>Migrated <strong>12+ microservices</strong> from Docker Compose to self-hosted Kubernetes — namespace isolation, HPA, Ingress</li>
+              <li>Designed CI/CD pipelines (<strong>GitLab CI/CD, ArgoCD</strong>) — covered 100% of production repositories</li>
+              <li>Integrated security scanning (<strong>Trivy, Gitleaks</strong>) — vulnerabilities caught before reaching production</li>
+              <li>Deployed HA clusters: <strong>PostgreSQL + Patroni + etcd</strong> (3 nodes, 99.9% uptime), Zabbix HA, Jira + Confluence HA</li>
+              <li>Implemented <strong>Prometheus + Grafana</strong>, ELK + Graylog, Zabbix, Sentry — MTTD reduced from hours to ~5 minutes</li>
+              <li>Ansible roles and playbooks — new server setup in <strong>15 min</strong> instead of 2–3 hours manually</li>
+              <li>Terraform IaC, private Docker Registry, SSL/TLS (Let's Encrypt), VMware/Hyper-V, Veeam, Zimbra</li>
+            </ul>
           </div>
 
           <div class="job-role">
             <div class="job-role-hdr">
-              <div class="job-role-title">Системный администратор</div>
-              <div class="job-role-period">фев 2024 — май 2024 · 4 мес</div>
+              <div class="job-role-title">
+                <span data-lang="ru">Системный администратор</span>
+                <span data-lang="en">System Administrator</span>
+              </div>
+              <div class="job-role-period">
+                <span data-lang="ru">фев 2024 — май 2024 · 4 мес</span>
+                <span data-lang="en">Feb 2024 — May 2024 · 4 mo</span>
+              </div>
             </div>
-            <ul class="jlist">
+            <ul class="jlist" data-lang="ru">
               <li>Настроил и перенёс <strong>30+ рабочих станций</strong> при расширении офиса</li>
               <li>Автоматизировал развёртывание ОС Linux — подготовка рабочего места с 3 часов до 40 минут</li>
               <li>Техподдержка пользователей, диагностика оборудования и ПО, инвентаризация IT-активов</li>
+            </ul>
+            <ul class="jlist" data-lang="en">
+              <li>Configured and migrated <strong>30+ workstations</strong> during office expansion</li>
+              <li>Automated Linux OS deployment — workstation setup reduced from 3 hours to 40 minutes</li>
+              <li>User support, hardware and software diagnostics, IT asset inventory</li>
             </ul>
           </div>
         </div>
@@ -189,14 +256,26 @@
         <div class="job-dot"></div>
         <div class="job-meta">
           <div class="job-company-name">РеалЪ ТД, ООО</div>
-          <div class="job-period">авг 2022 — фев 2024 · 1 г 7 мес</div>
+          <div class="job-period">
+            <span data-lang="ru">авг 2022 — фев 2024 · 1 г 7 мес</span>
+            <span data-lang="en">Aug 2022 — Feb 2024 · 1 yr 7 mo</span>
+          </div>
         </div>
-        <div class="job-title">Системный администратор / Специалист технической поддержки</div>
-        <ul class="jlist">
+        <div class="job-title">
+          <span data-lang="ru">Системный администратор / Специалист технической поддержки</span>
+          <span data-lang="en">System Administrator / IT Support Specialist</span>
+        </div>
+        <ul class="jlist" data-lang="ru">
           <li>Администрирование <strong>Windows Server, Linux</strong>, сетевого оборудования <strong>MikroTik, Cisco</strong> (10+ объектов)</li>
           <li>Виртуализация <strong>VMware, Hyper-V</strong>, VPN-инфраструктура Kerio, маршрутизация, коммутация</li>
           <li>HelpDesk: поддержка парка <strong>100+ компьютеров</strong> и кассовой техники, плановые выезды на объекты</li>
           <li>Мониторинг ИБ, обслуживание СУБД, документирование технических решений в Jira</li>
+        </ul>
+        <ul class="jlist" data-lang="en">
+          <li>Administration of <strong>Windows Server, Linux</strong>, network equipment <strong>MikroTik, Cisco</strong> (10+ sites)</li>
+          <li>Virtualization <strong>VMware, Hyper-V</strong>, Kerio VPN infrastructure, routing, switching</li>
+          <li>HelpDesk: support for <strong>100+ computers</strong> and POS equipment, scheduled on-site visits</li>
+          <li>Information security monitoring, database maintenance, technical documentation in Jira</li>
         </ul>
       </div>
 
@@ -205,12 +284,22 @@
         <div class="job-dot"></div>
         <div class="job-meta">
           <div class="job-company-name">ООО "Форум"</div>
-          <div class="job-period">апр 2022 — июл 2022 · 4 мес</div>
+          <div class="job-period">
+            <span data-lang="ru">апр 2022 — июл 2022 · 4 мес</span>
+            <span data-lang="en">Apr 2022 — Jul 2022 · 4 mo</span>
+          </div>
         </div>
-        <div class="job-title">Системный администратор</div>
-        <ul class="jlist">
+        <div class="job-title">
+          <span data-lang="ru">Системный администратор</span>
+          <span data-lang="en">System Administrator</span>
+        </div>
+        <ul class="jlist" data-lang="ru">
           <li>Обеспечение бесперебойной работы офисной и сетевой инфраструктуры</li>
           <li>Настройка сетевого оборудования, меры информационной безопасности, монтажные работы</li>
+        </ul>
+        <ul class="jlist" data-lang="en">
+          <li>Ensuring uninterrupted operation of office and network infrastructure</li>
+          <li>Network equipment configuration, information security measures, hardware installation</li>
         </ul>
       </div>
 
@@ -219,7 +308,10 @@
 
   <!-- SKILLS -->
   <section id="skills">
-    <h2 class="sec-title">Навыки</h2>
+    <h2 class="sec-title">
+      <span data-lang="ru">Навыки</span>
+      <span data-lang="en">Skills</span>
+    </h2>
     <div class="skill-groups r">
 
       <div class="skill-row" data-cat="os">
@@ -343,54 +435,81 @@
 
   <!-- ACHIEVEMENTS -->
   <section id="achievements">
-    <h2 class="sec-title">Ключевые результаты</h2>
+    <h2 class="sec-title">
+      <span data-lang="ru">Ключевые результаты</span>
+      <span data-lang="en">Key Results</span>
+    </h2>
     <div class="ach-grid">
 
       <div class="ach a-green r">
-        <div class="ach-label">время деплоя</div>
-        <div class="ach-val v-g">40 → 8 мин</div>
-        <div class="ach-text">
+        <svg class="ach-spark" viewBox="0 0 80 24" preserveAspectRatio="none" aria-hidden="true"><polyline points="0,20 8,19 16,17 24,18 32,14 40,12 48,10 56,8 64,9 72,5 80,4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        <div class="ach-label"><span data-lang="ru">время деплоя</span><span data-lang="en">deploy time</span></div>
+        <div class="ach-val v-g"><span data-lang="ru">40 → 8 мин</span><span data-lang="en">40 → 8 min</span></div>
+        <div class="ach-text" data-lang="ru">
           <strong>12+ микросервисов</strong> мигрированы из Docker Compose в self-hosted Kubernetes с настройкой HPA и Ingress
+        </div>
+        <div class="ach-text" data-lang="en">
+          <strong>12+ microservices</strong> migrated from Docker Compose to self-hosted Kubernetes with HPA and Ingress
         </div>
       </div>
 
       <div class="ach r d1">
-        <div class="ach-label">CI/CD покрытие</div>
+        <svg class="ach-spark" viewBox="0 0 80 24" preserveAspectRatio="none" aria-hidden="true"><polyline points="0,22 10,21 20,19 30,15 40,8 50,4 60,3 70,2 80,2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        <div class="ach-label"><span data-lang="ru">CI/CD покрытие</span><span data-lang="en">CI/CD coverage</span></div>
         <div class="ach-val v-i">100%</div>
-        <div class="ach-text">
+        <div class="ach-text" data-lang="ru">
           Все <strong>продакшен-репозитории</strong> покрыты автосборкой и security-сканированием (Trivy, Gitleaks)
+        </div>
+        <div class="ach-text" data-lang="en">
+          All <strong>production repositories</strong> covered with automated builds and security scanning (Trivy, Gitleaks)
         </div>
       </div>
 
       <div class="ach a-cyan r d2">
-        <div class="ach-label">обнаружение инцидентов</div>
-        <div class="ach-val v-c">часы → 5 мин</div>
-        <div class="ach-text">
+        <svg class="ach-spark" viewBox="0 0 80 24" preserveAspectRatio="none" aria-hidden="true"><polyline points="0,4 12,5 24,6 36,9 48,13 60,16 70,18 80,20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        <div class="ach-label"><span data-lang="ru">обнаружение инцидентов</span><span data-lang="en">incident detection</span></div>
+        <div class="ach-val v-c"><span data-lang="ru">часы → 5 мин</span><span data-lang="en">hours → 5 min</span></div>
+        <div class="ach-text" data-lang="ru">
           После внедрения стека <strong>Prometheus + Grafana + ELK + Zabbix</strong> с алертингом
+        </div>
+        <div class="ach-text" data-lang="en">
+          After implementing the <strong>Prometheus + Grafana + ELK + Zabbix</strong> stack with alerting
         </div>
       </div>
 
       <div class="ach r d3">
-        <div class="ach-label">uptime СУБД</div>
+        <svg class="ach-spark" viewBox="0 0 80 24" preserveAspectRatio="none" aria-hidden="true"><polyline points="0,4 10,5 20,4 30,3 40,5 50,4 60,3 70,4 80,4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        <div class="ach-label"><span data-lang="ru">uptime СУБД</span><span data-lang="en">DB uptime</span></div>
         <div class="ach-val v-g">99.9%</div>
-        <div class="ach-text">
+        <div class="ach-text" data-lang="ru">
           <strong>PostgreSQL + Patroni + etcd</strong>, 3 ноды — полностью отказоустойчивый кластер
+        </div>
+        <div class="ach-text" data-lang="en">
+          <strong>PostgreSQL + Patroni + etcd</strong>, 3 nodes — fully fault-tolerant cluster
         </div>
       </div>
 
       <div class="ach a-yel r">
-        <div class="ach-label">настройка сервера</div>
-        <div class="ach-val v-y">2–3 ч → 15 мин</div>
-        <div class="ach-text">
+        <svg class="ach-spark" viewBox="0 0 80 24" preserveAspectRatio="none" aria-hidden="true"><polyline points="0,20 10,19 20,17 30,14 40,11 50,8 60,6 70,5 80,4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        <div class="ach-label"><span data-lang="ru">настройка сервера</span><span data-lang="en">server setup</span></div>
+        <div class="ach-val v-y"><span data-lang="ru">2–3 ч → 15 мин</span><span data-lang="en">2–3 h → 15 min</span></div>
+        <div class="ach-text" data-lang="ru">
           Разработанные <strong>Ansible-роли и плейбуки</strong> вместо ручной конфигурации с нуля
+        </div>
+        <div class="ach-text" data-lang="en">
+          Custom <strong>Ansible roles and playbooks</strong> instead of manual configuration from scratch
         </div>
       </div>
 
       <div class="ach r d1">
-        <div class="ach-label">HA-кластеров развёрнуто</div>
+        <svg class="ach-spark" viewBox="0 0 80 24" preserveAspectRatio="none" aria-hidden="true"><polyline points="0,20 15,20 16,10 30,10 31,6 50,6 51,3 80,3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        <div class="ach-label"><span data-lang="ru">HA-кластеров развёрнуто</span><span data-lang="en">HA clusters deployed</span></div>
         <div class="ach-val v-i">3</div>
-        <div class="ach-text">
+        <div class="ach-text" data-lang="ru">
           <strong>PostgreSQL</strong> (Patroni+etcd), <strong>Zabbix</strong> (2 ноды), <strong>Jira + Confluence</strong> — устранены единые точки отказа
+        </div>
+        <div class="ach-text" data-lang="en">
+          <strong>PostgreSQL</strong> (Patroni+etcd), <strong>Zabbix</strong> (2 nodes), <strong>Jira + Confluence</strong> — single points of failure eliminated
         </div>
       </div>
 
@@ -399,19 +518,34 @@
 
   <!-- EDUCATION -->
   <section id="education">
-    <h2 class="sec-title">Образование</h2>
+    <h2 class="sec-title">
+      <span data-lang="ru">Образование</span>
+      <span data-lang="en">Education</span>
+    </h2>
     <div class="edu-grid">
       <div class="edu-card r">
         <div class="edu-yr">2020</div>
         <div class="edu-place">КГУ им. Б.Б. Городовикова</div>
-        <div class="edu-spec">Информационная безопасность</div>
-        <span class="edu-badge">Неоконченное высшее</span>
+        <div class="edu-spec">
+          <span data-lang="ru">Информационная безопасность</span>
+          <span data-lang="en">Information Security</span>
+        </div>
+        <span class="edu-badge">
+          <span data-lang="ru">Неоконченное высшее</span>
+          <span data-lang="en">Incomplete Higher Education</span>
+        </span>
       </div>
       <div class="edu-card r d1">
         <div class="edu-yr">2019</div>
         <div class="edu-place">КГУ им. Б.Б. Городовикова</div>
-        <div class="edu-spec">Программирование в компьютерных системах — Техник-программист</div>
-        <span class="edu-badge">Среднее специальное</span>
+        <div class="edu-spec">
+          <span data-lang="ru">Программирование в компьютерных системах — Техник-программист</span>
+          <span data-lang="en">Computer Systems Programming — Programmer Technician</span>
+        </div>
+        <span class="edu-badge">
+          <span data-lang="ru">Среднее специальное</span>
+          <span data-lang="en">Vocational Education</span>
+        </span>
       </div>
     </div>
   </section>
@@ -419,18 +553,24 @@
   <!-- CTA -->
   <section id="cta">
     <div class="cta-card r">
-      <div class="cta-title">Открыт к предложениям</div>
+      <div class="cta-title">
+        <span data-lang="ru">Открыт к предложениям</span>
+        <span data-lang="en">Open to Opportunities</span>
+      </div>
       <p class="cta-sub">
-        Middle DevOps, развиваюсь в сторону SRE и Platform Engineering.<br>
-        Kubernetes, GitLab CI/CD, Terraform, observability. Ищу команду, где инфраструктура — это продукт, а не фон.
+        <span data-lang="ru">Middle DevOps, развиваюсь в сторону SRE и Platform Engineering.<br>
+        Kubernetes, GitLab CI/CD, Terraform, observability. Ищу команду, где инфраструктура — это продукт, а не фон.</span>
+        <span data-lang="en">Middle DevOps, moving toward SRE and Platform Engineering.<br>
+        Kubernetes, GitLab CI/CD, Terraform, observability. Looking for a team where infrastructure is a product, not a backdrop.</span>
       </p>
 
       <div class="contact-cards">
 
         <!-- Telegram -->
         <button class="contact-card contact-card-tg" id="btn-copy-tg">
-          <div class="contact-card-icon">
+          <div class="contact-card-icon" style="position:relative">
             <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.941z"/></svg>
+            <span class="online-dot"></span>
           </div>
           <div class="contact-card-body">
             <div class="contact-card-label">Telegram</div>
@@ -465,14 +605,17 @@
 <footer>
   <div class="container">
     <div class="footer-inner">
-<div class="footer-meta">
-        <span class="footer-item">Санкт-Петербург</span>
+      <div class="footer-meta">
+        <span class="footer-item"><span data-lang="ru">Санкт-Петербург</span><span data-lang="en">Saint Petersburg</span></span>
         <span class="footer-dot">·</span>
-        <span class="footer-item footer-role">DevOps-инженер</span>
+        <span class="footer-item footer-role"><span data-lang="ru">DevOps-инженер</span><span data-lang="en">DevOps Engineer</span></span>
         <span class="footer-dot">·</span>
         <span class="footer-item">@ktylhus</span>
         <span class="footer-dot">·</span>
         <span class="footer-item">timir-ivaniv@yandex.ru</span>
+      </div>
+      <div class="footer-terminal">
+        <span class="ft-prompt">❯</span> exit 0<span class="ft-comment"> // thanks for visiting</span>
       </div>
     </div>
   </div>

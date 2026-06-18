@@ -1,10 +1,16 @@
-// ── Back to top + Nav shadow ──
-const backBtn = document.getElementById('back-to-top');
-const nav = document.querySelector('nav');
+// ── Scroll progress + Back to top + Nav shadow ──
+const backBtn      = document.getElementById('back-to-top');
+const nav          = document.querySelector('nav');
+const progressBar  = document.getElementById('scroll-progress');
+
 window.addEventListener('scroll', () => {
-  backBtn.classList.toggle('visible', window.scrollY > 400);
-  nav.classList.toggle('scrolled', window.scrollY > 10);
+  const scrollY   = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  progressBar.style.width = (scrollY / docHeight * 100) + '%';
+  backBtn.classList.toggle('visible', scrollY > 400);
+  nav.classList.toggle('scrolled', scrollY > 10);
 });
+
 backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
 // ── Scroll reveal ──
@@ -59,6 +65,65 @@ const navObs = new IntersectionObserver(entries => {
 
 sections.forEach(s => navObs.observe(s));
 
+// ── Hamburger menu ──
+const hamburger = document.getElementById('nav-hamburger');
+const navMenu   = document.getElementById('nav-links');
+
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  navMenu.classList.toggle('open');
+});
+
+navMenu.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    navMenu.classList.remove('open');
+  });
+});
+
+// ── Language toggle ──
+const langBtn   = document.getElementById('lang-toggle');
+const htmlRoot  = document.getElementById('html-root');
+let lang = localStorage.getItem('lang') || 'ru';
+
+function applyLang(l) {
+  if (l === 'en') {
+    document.body.classList.add('lang-en');
+    htmlRoot.lang    = 'en';
+    langBtn.textContent = 'RU';
+  } else {
+    document.body.classList.remove('lang-en');
+    htmlRoot.lang    = 'ru';
+    langBtn.textContent = 'EN';
+  }
+  localStorage.setItem('lang', l);
+}
+
+applyLang(lang);
+
+langBtn.addEventListener('click', () => {
+  lang = lang === 'ru' ? 'en' : 'ru';
+  applyLang(lang);
+  startTypewriter();
+});
+
+// ── Typewriter ──
+function startTypewriter() {
+  const el       = document.getElementById('typewriter-text');
+  const heroRole = document.getElementById('hero-role');
+  if (!el || !heroRole) return;
+  const isEn = document.body.classList.contains('lang-en');
+  const text = isEn ? heroRole.dataset.textEn : heroRole.dataset.textRu;
+  el.textContent = '';
+  clearInterval(window._twTimer);
+  let i = 0;
+  window._twTimer = setInterval(() => {
+    el.textContent += text[i++];
+    if (i >= text.length) clearInterval(window._twTimer);
+  }, 40);
+}
+startTypewriter();
+
 // ── Copy helper ──
 function setupCopyCard(btnId, labelId, iconId, text) {
   const btn   = document.getElementById(btnId);
@@ -82,21 +147,5 @@ function setupCopyCard(btnId, labelId, iconId, text) {
   });
 }
 
-// ── Copy email card ──
-setupCopyCard('btn-copy-tg',    'btn-tg-label',    'copy-icon-tg', '@ktylhus');
-setupCopyCard('btn-copy-email', 'btn-copy-label',  'copy-icon',    'timir-ivaniv@yandex.ru');
-
-// ── Hero contact pills (copy only, no icon swap) ──
-function setupPillCopy(btnId, text) {
-  const btn = document.getElementById(btnId);
-  if (!btn) return;
-  btn.addEventListener('click', () => {
-    navigator.clipboard.writeText(text).then(() => {
-      btn.classList.add('copied');
-      setTimeout(() => btn.classList.remove('copied'), 2000);
-    });
-  });
-}
-
-setupCopyCard('hero-btn-tg',    'hero-tg-val',    'hero-tg-icon',    '@ktylhus');
-setupCopyCard('hero-btn-email', 'hero-email-val', 'hero-email-icon', 'timir-ivaniv@yandex.ru');
+setupCopyCard('btn-copy-tg',    'btn-tg-label',   'copy-icon-tg', '@ktylhus');
+setupCopyCard('btn-copy-email', 'btn-copy-label', 'copy-icon',    'timir-ivaniv@yandex.ru');
