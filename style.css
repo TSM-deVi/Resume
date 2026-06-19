@@ -955,9 +955,32 @@ body { animation: fadeInBody .45s ease both; }
 /* ── RESPONSIVE ── */
 @media (max-width: 720px) {
   h1 { font-size: 2rem; }
+  section { padding: 3rem 0; }
+  #hero { padding: 3rem 0 2.5rem; }
+
   .hero-grid { grid-template-columns: 1fr; }
   .hero-terminal { display: none; }
+  .hero-desc { max-width: 100%; }
+
   .stats { grid-template-columns: repeat(2,1fr); }
+
+  /* Pipeline */
+  .pipeline-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: .4rem; }
+  .pipeline { min-width: 340px; }
+  .pl-circle { width: 32px; height: 32px; }
+  .pl-label { font-size: .52rem; }
+  .pl-stage[data-tip]::after { display: none; }
+
+  /* Timeline */
+  .job { padding-left: 1.8rem; }
+
+  /* Grids */
+  .edu-grid  { grid-template-columns: 1fr; }
+  .cert-grid { grid-template-columns: 1fr; }
+  .ach-grid  { grid-template-columns: 1fr; }
+  .contact-cards { grid-template-columns: 1fr; }
+
+  /* Nav */
   .nav-hamburger { display: flex; }
   nav { position: relative; }
   .nav-links {
