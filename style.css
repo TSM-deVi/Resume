@@ -766,6 +766,7 @@ h1:hover { animation-duration: .5s; animation-iteration-count: 3; }
 
 .contact-card {
   display: flex; align-items: center; gap: 1rem;
+  width: 100%; min-width: 0;
   background: var(--bg-sec);
   border: 1px solid var(--border);
   border-radius: 14px; padding: 1.1rem 1.25rem;
