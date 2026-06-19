@@ -968,7 +968,8 @@ body { animation: fadeInBody .45s ease both; }
   .pipeline-wrap { padding-bottom: .4rem; }
   .pl-circle { width: 30px; height: 30px; }
   .pl-label { font-size: .5rem; }
-  .pl-stage[data-tip]::after { display: none; }
+  .pl-stage[data-tip]::after,
+  .chip-cat[data-tip]::after { display: none; }
 
   /* Timeline */
   .job { padding-left: 0; padding-bottom: 1.5rem; }
