@@ -17,7 +17,7 @@
   --cyan:      #06b6d4;
 }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 
 body {
   font-family: 'JetBrains Mono', monospace;
@@ -965,14 +965,14 @@ body { animation: fadeInBody .45s ease both; }
   .stats { grid-template-columns: repeat(2,1fr); }
 
   /* Pipeline */
-  .pipeline-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: .4rem; }
-  .pipeline { min-width: 340px; }
-  .pl-circle { width: 32px; height: 32px; }
-  .pl-label { font-size: .52rem; }
+  .pipeline-wrap { padding-bottom: .4rem; }
+  .pl-circle { width: 30px; height: 30px; }
+  .pl-label { font-size: .5rem; }
   .pl-stage[data-tip]::after { display: none; }
 
   /* Timeline */
-  .job { padding-left: 1.8rem; }
+  .job { padding-left: 0; padding-bottom: 1.5rem; }
+  .job-dot, .job::after { display: none; }
 
   /* Grids */
   .edu-grid  { grid-template-columns: 1fr; }
