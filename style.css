@@ -1031,14 +1031,6 @@ footer {
 
 .footer-dot { color: var(--dim); font-size: .7rem; opacity: .5; }
 
-.footer-terminal {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: .76rem; color: var(--dim);
-  margin-top: .4rem; opacity: .8;
-}
-.ft-prompt { color: var(--green); }
-.ft-comment { font-style: italic; opacity: .7; }
-
 /* ── BACK TO TOP ── */
 #back-to-top {
   position: fixed; bottom: 2rem; right: 2rem; z-index: 99;
