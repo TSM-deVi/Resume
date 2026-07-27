@@ -183,6 +183,12 @@ h1 {
   margin-bottom: 1.2rem;
   text-wrap: balance;
 }
+h1 .accent-name {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--accent-lt);
+  letter-spacing: -0.02em;
+}
 
 .hero-role {
   font-size: 1rem; color: var(--accent-lt);
@@ -529,6 +535,65 @@ h1 {
 .chip-g { color: var(--green);     border-color: rgba(63,185,80,.3);  background: rgba(63,185,80,.06);  }
 .chip-i { color: var(--accent-lt); border-color: rgba(56,139,253,.3); background: rgba(56,139,253,.06); }
 
+/* ── ARCHITECTURE DIAGRAM ── */
+.arch-diagram {
+  margin-top: 1.5rem;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1.25rem 1.5rem 1.6rem;
+}
+.arch-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .65rem; color: var(--dim); letter-spacing: .05em;
+  margin-bottom: 1.3rem;
+}
+.arch-scroll { overflow-x: auto; padding-bottom: 2px; }
+.arch-row-main {
+  display: flex; align-items: center; justify-content: center;
+  gap: .6rem; min-width: 420px;
+}
+.arch-node {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .76rem; font-weight: 600;
+  color: var(--text); background: var(--bg-sec);
+  border: 1px solid var(--border-lt);
+  border-radius: 7px; padding: .5rem .9rem;
+  position: relative; white-space: nowrap;
+  transition: border-color .2s;
+}
+.arch-node:hover { border-color: var(--accent); }
+.arch-node[data-tip]::after {
+  content: attr(data-tip);
+  position: absolute; bottom: calc(100% + 8px); left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg); border: 1px solid var(--border);
+  color: var(--muted); font-size: .65rem;
+  padding: 3px 9px; border-radius: 5px;
+  white-space: nowrap; pointer-events: none;
+  opacity: 0; transition: opacity .15s; z-index: 5;
+}
+.arch-node[data-tip]:hover::after { opacity: 1; }
+.arch-node-hub { border-color: rgba(56,139,253,.45); color: var(--accent-lt); }
+.arch-arrow { color: var(--dim); font-size: .85rem; flex-shrink: 0; }
+
+.arch-stem { width: 1px; height: 22px; background: var(--border-lt); margin: 0 auto; }
+
+.arch-branches {
+  display: flex; justify-content: center; gap: 1.6rem;
+  min-width: 420px; position: relative; padding-top: 22px;
+}
+.arch-branches::before {
+  content: ''; position: absolute; top: 0; left: 18%; right: 18%; height: 1px;
+  background: var(--border-lt);
+}
+.arch-node-sm { font-size: .7rem; padding: .4rem .7rem; }
+.arch-node-sm::before {
+  content: ''; position: absolute; top: -22px; left: 50%; width: 1px; height: 22px;
+  background: var(--border-lt);
+}
+@media (max-width: 640px) {
+  .arch-branches { gap: 1rem; }
+}
+
 /* ── SKILLS ── */
 .skill-groups {
   display: grid;
@@ -620,7 +685,12 @@ h1 {
   letter-spacing: .08em; color: var(--dim);
   margin-bottom: 1rem;
 }
-.cert-strip { display: flex; flex-wrap: wrap; gap: .6rem; }
+.cert-strip { display: flex; flex-wrap: wrap; align-items: flex-start; gap: .6rem .8rem; }
+.cert-pill:nth-child(2) { margin-top: 16px; }
+.cert-pill:nth-child(3) { margin-top: -6px; }
+@media (max-width: 560px) {
+  .cert-pill:nth-child(2), .cert-pill:nth-child(3) { margin-top: 0; }
+}
 .cert-pill {
   display: flex; align-items: center; gap: .55rem;
   background: var(--bg-sec); border: 1px solid var(--border);

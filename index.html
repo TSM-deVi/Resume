@@ -14,7 +14,7 @@
   <meta property="og:url" content="https://tsm-devi.github.io/Resume/">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
@@ -55,8 +55,8 @@
       <div class="hero-left">
         <div class="hero-badge">open to work · remote / hybrid</div>
         <h1>
-          <span data-lang="ru">Иванов<br>Темир</span>
-          <span data-lang="en">Ivanov<br>Temir</span>
+          <span data-lang="ru">Иванов<br><span class="accent-name">Темир</span></span>
+          <span data-lang="en">Ivanov<br><span class="accent-name">Temir</span></span>
         </h1>
         <div class="hero-role" id="hero-role" data-text-ru="whoami → Middle DevOps Engineer" data-text-en="whoami → Middle DevOps Engineer">
           <span class="prompt">$ </span><span id="typewriter-text"></span><span class="cursor"></span>
@@ -268,6 +268,26 @@
               <li>Deployed <strong>Istio + Kiali</strong> for traffic control, configured Envoy + <strong>OPA/OPAL</strong> ext_authz for service mesh authorization; integrated <strong>Keycloak/OIDC SSO</strong> across all services</li>
               <li>Participated in DEV/INF/PROD environment preparation for enterprise banking sector client — documentation, acceptance testing, compliance with PMI/KB/SOC requirements</li>
             </ul>
+
+            <div class="arch-diagram r">
+              <div class="arch-title">// infra flow · SmartSearch dev-контур</div>
+              <div class="arch-scroll">
+                <div class="arch-row-main">
+                  <div class="arch-node" data-tip="source · CI/CD">GitLab</div>
+                  <div class="arch-arrow">→</div>
+                  <div class="arch-node" data-tip="private image registry">Harbor</div>
+                  <div class="arch-arrow">→</div>
+                  <div class="arch-node arch-node-hub" data-tip="orchestration · k3s">K8s / k3s</div>
+                </div>
+                <div class="arch-stem"></div>
+                <div class="arch-branches">
+                  <div class="arch-node arch-node-sm" data-tip="secrets management">Vault</div>
+                  <div class="arch-node arch-node-sm" data-tip="SSO · OIDC">Keycloak</div>
+                  <div class="arch-node arch-node-sm" data-tip="Istio + Kiali mesh">Envoy/OPAL</div>
+                  <div class="arch-node arch-node-sm" data-tip="Langflow · LiteLLM · Langfuse · Qdrant · MinIO">AI services</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
