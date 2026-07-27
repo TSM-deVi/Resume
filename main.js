@@ -220,8 +220,8 @@ if (window.matchMedia('(pointer: fine)').matches) {
   document.addEventListener('mouseenter', () => document.body.classList.add('cur-active'));
   document.addEventListener('mouseleave', () => document.body.classList.remove('cur-active'));
 
-  const hoverSelector = 'a, button, .sg-label, .chip-cat, .stack-tag, .status-item, .ach, ' +
-    '.cert-pill, .edu-row, .job-company-block, .arch-node, .pl-stage';
+  const hoverSelector = 'a, button, .skill-filter, .skill-tile, .stack-tag, .status-item, .ach, ' +
+    '.cert-pill, .edu-row, .job-company-block, .pl-stage';
   document.querySelectorAll(hoverSelector).forEach(el => {
     el.addEventListener('mouseenter', () => document.body.classList.add('cur-hover'));
     el.addEventListener('mouseleave', () => document.body.classList.remove('cur-hover'));
@@ -308,24 +308,26 @@ let _activeFilter = null;
 
 function _clearFilter() {
   _activeFilter = null;
-  document.querySelectorAll('.skill-row').forEach(r => r.classList.remove('sf-dim', 'sf-on'));
+  document.querySelectorAll('.skill-tile').forEach(t => t.classList.remove('sf-dim', 'sf-on'));
+  document.querySelectorAll('.skill-filter').forEach(b => b.classList.remove('sf-active'));
 }
 
-document.querySelectorAll('.sg-label').forEach(lbl => {
-  lbl.addEventListener('click', () => {
-    const row = lbl.closest('.skill-row');
-    const cat = row.dataset.cat;
-    const rows = document.querySelectorAll('.skill-row');
+document.querySelectorAll('.skill-filter').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const cat = btn.dataset.cat;
+    const tiles = document.querySelectorAll('.skill-tile');
+    const buttons = document.querySelectorAll('.skill-filter');
 
     if (_activeFilter === cat) {
       _clearFilter();
     } else {
       _activeFilter = cat;
-      rows.forEach(r => {
-        const active = r.dataset.cat === cat;
-        r.classList.toggle('sf-dim', !active);
-        r.classList.toggle('sf-on', active);
+      tiles.forEach(t => {
+        const active = t.dataset.cat === cat;
+        t.classList.toggle('sf-dim', !active);
+        t.classList.toggle('sf-on', active);
       });
+      buttons.forEach(b => b.classList.toggle('sf-active', b.dataset.cat === cat));
     }
   });
 });

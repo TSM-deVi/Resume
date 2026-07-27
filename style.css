@@ -697,76 +697,75 @@ h1 .accent-name {
   .arch-branches { gap: 1rem; }
 }
 
-/* ── SKILLS ── */
-.skill-groups {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: .55rem 0;
+/* ── SKILLS (icon wall) ── */
+.skill-filters {
+  display: flex; flex-wrap: wrap; gap: .5rem;
+  margin-bottom: 1.75rem;
 }
-.skill-row {
-  display: grid;
-  grid-template-columns: 190px 1fr;
-  align-items: start;
-  gap: 0 1.25rem;
-  --cat-c: var(--accent-lt);
-  --cat-bg: rgba(56,139,253,.06);
-  --cat-bd: rgba(56,139,253,.3);
+.skill-filter {
+  background: var(--glass);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-bd);
+  color: var(--dim);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .68rem; font-weight: 600; letter-spacing: .04em;
+  padding: 6px 12px; border-radius: 20px;
+  cursor: pointer;
+  transition: color .2s, border-color .2s, transform .15s, box-shadow .2s;
+}
+.skill-filter:hover { color: var(--text); transform: translateY(-2px); }
+.skill-filter.sf-active {
+  color: var(--accent-lt); border-color: rgba(88,166,255,.5);
+  box-shadow: 0 6px 16px -8px rgba(56,139,253,.6);
 }
 
-.sg-label {
-  background: none; border: none; font: inherit;
-  font-size: .68rem;
-  font-weight: 600;
-  color: var(--cat-c);
-  text-transform: uppercase;
-  letter-spacing: .07em;
-  padding-top: .32rem;
-  text-align: right;
-  white-space: nowrap;
-  cursor: pointer;
-  user-select: none;
+.skill-wall {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: .75rem;
 }
-.skill-row { transition: opacity .25s; }
-.skill-row.sf-dim { opacity: .18; }
-.skill-row.sf-on .chip-cat { border-color: var(--cat-c); box-shadow: 0 0 0 1px var(--cat-c) inset; }
-.skill-row.sf-on .sg-label { filter: brightness(1.3); }
-.skill-row.sf-on .sg-label::after {
-  content: ' ◀';
-  font-size: .55rem;
-  vertical-align: middle;
-  opacity: .7;
+.skill-tile {
+  display: flex; align-items: center; gap: .7rem;
+  background: var(--glass);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-bd);
+  border-radius: 12px;
+  padding: .7rem .8rem;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+  transition: transform .2s, border-color .2s, box-shadow .2s, opacity .2s;
 }
-.chip-cat {
-  display: inline-flex; align-items: center; gap: 6px;
-  color: var(--cat-c);
-  border-color: var(--cat-bd);
-  background: var(--cat-bg);
-  border-radius: 6px;
-  cursor: default;
-  position: relative;
-  transition: transform .15s, border-color .15s, box-shadow .15s;
+.skill-tile:hover {
+  transform: translateY(-3px);
+  border-color: rgba(88,166,255,.4);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 14px 30px -14px rgba(56,139,253,.4);
 }
-.chip-cat[data-tip]::after {
-  content: attr(data-tip);
-  position: absolute;
-  bottom: calc(100% + 7px);
-  left: 50%; transform: translateX(max(-50%, -120px));
-  background: var(--bg-card); border: 1px solid var(--border);
-  color: var(--muted); font-size: .67rem; line-height: 1.4;
-  padding: 4px 10px; border-radius: 6px;
-  white-space: nowrap; pointer-events: none;
-  opacity: 0; transition: opacity .15s; z-index: 20;
+.skill-tile.sf-dim { opacity: .15; }
+.skill-tile.sf-on { border-color: rgba(88,166,255,.55); box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 0 0 1px rgba(88,166,255,.3); }
+
+.skill-tile-icon {
+  width: 30px; height: 30px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
 }
-.chip-cat[data-tip]:hover::after { opacity: 1; }
-.chip-cat:hover {
-  transform: translateY(-2px);
-  border-color: var(--cat-c);
-  box-shadow: 0 8px 18px -8px var(--cat-c);
+.skill-tile-icon img { width: 22px; height: 22px; object-fit: contain; }
+.skill-tile-mono {
+  background: rgba(255,255,255,.05);
+  border: 1px solid var(--border-lt);
+  border-radius: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .62rem; font-weight: 700; color: var(--dim);
+  letter-spacing: .01em;
 }
-.skill-row .chips { margin-top: 0; }
+.skill-tile-body { min-width: 0; }
+.skill-tile-name {
+  font-size: .82rem; font-weight: 600; color: var(--text);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.skill-tile-tip {
+  font-size: .68rem; color: var(--dim);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
 @media (max-width: 540px) {
-  .skill-row { grid-template-columns: 1fr; }
-  .sg-label { text-align: left; margin-bottom: .25rem; }
+  .skill-wall { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
 }
 
 

@@ -516,144 +516,401 @@
       <span data-lang="ru">Навыки <span class="sub">// клик по категории — фильтр</span></span>
       <span data-lang="en">Skills <span class="sub">// click category to filter</span></span>
     </h2>
-    <div class="skill-groups r">
-
-      <div class="skill-row" data-cat="os">
-        <button class="sg-label" type="button">OS</button>
-        <div class="chips">
-          <span class="chip chip-cat" data-tip="primary OS"><img class="chip-icon" src="https://cdn.simpleicons.org/linux" alt="" width="14" height="14" loading="lazy">Linux</span>
-          <span class="chip chip-cat" data-tip="AD · IIS · RDS">Windows Server</span>
+    <div class="skill-filters r" role="group" aria-label="Filter by category">
+      <button class="skill-filter" type="button" data-cat="os">OS</button>
+      <button class="skill-filter" type="button" data-cat="vcs">Version Control</button>
+      <button class="skill-filter" type="button" data-cat="scripting">Scripting</button>
+      <button class="skill-filter" type="button" data-cat="networking">Networking</button>
+      <button class="skill-filter" type="button" data-cat="security">Security</button>
+      <button class="skill-filter" type="button" data-cat="server">Server Management</button>
+      <button class="skill-filter" type="button" data-cat="containers">Containers</button>
+      <button class="skill-filter" type="button" data-cat="orchestration">Container Orchestration</button>
+      <button class="skill-filter" type="button" data-cat="iac">IaC</button>
+      <button class="skill-filter" type="button" data-cat="cloud">Cloud</button>
+      <button class="skill-filter" type="button" data-cat="cicd">CI/CD</button>
+      <button class="skill-filter" type="button" data-cat="monitoring">Monitoring & Observability</button>
+      <button class="skill-filter" type="button" data-cat="management">Management & Tools</button>
+      <button class="skill-filter" type="button" data-cat="databases">Databases & Messaging</button>
+    </div>
+    <div class="skill-wall r">
+      <div class="skill-tile" data-cat="os">
+        <div class="skill-tile-icon"><img src="https://cdn.simpleicons.org/linux" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">Linux</div>
+          <div class="skill-tile-tip">primary OS</div>
         </div>
       </div>
-
-      <div class="skill-row" data-cat="vcs">
-        <button class="sg-label" type="button">Version Control</button>
-        <div class="chips"><span class="chip chip-cat" data-tip="daily use"><img class="chip-icon" src="https://cdn.simpleicons.org/git" alt="" width="14" height="14" loading="lazy">Git</span></div>
-      </div>
-
-      <div class="skill-row" data-cat="scripting">
-        <button class="sg-label" type="button">Scripting</button>
-        <div class="chips">
-          <span class="chip chip-cat" data-tip="automation scripts"><img class="chip-icon" src="https://cdn.simpleicons.org/python" alt="" width="14" height="14" loading="lazy">Python</span>
-          <span class="chip chip-cat" data-tip="daily use"><img class="chip-icon" src="https://cdn.simpleicons.org/gnubash" alt="" width="14" height="14" loading="lazy">Bash</span>
-          <span class="chip chip-cat" data-tip="Windows automation">PowerShell</span>
+      <div class="skill-tile" data-cat="os">
+        <div class="skill-tile-icon skill-tile-mono">WS</div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">Windows Server</div>
+          <div class="skill-tile-tip">AD · IIS · RDS</div>
         </div>
       </div>
-
-      <div class="skill-row" data-cat="networking">
-        <button class="sg-label" type="button">Networking</button>
-        <div class="chips">
-          <span class="chip chip-cat" data-tip="reverse proxy · SSL"><img class="chip-icon" src="https://cdn.simpleicons.org/nginx" alt="" width="14" height="14" loading="lazy">Nginx</span>
-          <span class="chip chip-cat" data-tip="load balancer">HAProxy</span>
-          <span class="chip chip-cat" data-tip="VRRP failover">Keepalived</span>
-          <span class="chip chip-cat" data-tip="service discovery"><img class="chip-icon" src="https://cdn.simpleicons.org/consul" alt="" width="14" height="14" loading="lazy">Consul</span>
+      <div class="skill-tile" data-cat="vcs">
+        <div class="skill-tile-icon"><img src="https://cdn.simpleicons.org/git" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">Git</div>
+          <div class="skill-tile-tip">daily use</div>
         </div>
       </div>
-
-      <div class="skill-row" data-cat="security">
-        <button class="sg-label" type="button">Security</button>
-        <div class="chips">
-          <span class="chip chip-cat" data-tip="secrets management"><img class="chip-icon" src="https://cdn.simpleicons.org/vault" alt="" width="14" height="14" loading="lazy">HashiCorp Vault</span>
-          <span class="chip chip-cat" data-tip="OIDC · SSO · identity provider"><img class="chip-icon" src="https://cdn.simpleicons.org/keycloak" alt="" width="14" height="14" loading="lazy">Keycloak</span>
-          <span class="chip chip-cat" data-tip="authorization policies">OPA / OPAL</span>
-          <span class="chip chip-cat" data-tip="container image scanning">Trivy</span>
-          <span class="chip chip-cat" data-tip="secret leak detection">Gitleaks</span>
+      <div class="skill-tile" data-cat="scripting">
+        <div class="skill-tile-icon"><img src="https://cdn.simpleicons.org/python" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">Python</div>
+          <div class="skill-tile-tip">automation scripts</div>
         </div>
       </div>
-
-      <div class="skill-row" data-cat="server">
-        <button class="sg-label" type="button">Server Management</button>
-        <div class="chips">
-          <span class="chip chip-cat" data-tip="virtualization"><img class="chip-icon" src="https://cdn.simpleicons.org/vmware" alt="" width="14" height="14" loading="lazy">VMware</span>
-          <span class="chip chip-cat" data-tip="virtualization">Hyper-V</span>
-          <span class="chip chip-cat" data-tip="backup & recovery">Veeam</span>
-          <span class="chip chip-cat" data-tip="LDAP · auth · GPO">Active Directory</span>
+      <div class="skill-tile" data-cat="scripting">
+        <div class="skill-tile-icon"><img src="https://cdn.simpleicons.org/gnubash" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">Bash</div>
+          <div class="skill-tile-tip">daily use</div>
         </div>
       </div>
-
-      <div class="skill-row" data-cat="containers">
-        <button class="sg-label" type="button">Containers</button>
-        <div class="chips">
-          <span class="chip chip-cat" data-tip="advanced · daily use"><img class="chip-icon" src="https://cdn.simpleicons.org/docker" alt="" width="14" height="14" loading="lazy">Docker</span>
-          <span class="chip chip-cat" data-tip="dev & staging envs"><img class="chip-icon" src="https://cdn.simpleicons.org/docker" alt="" width="14" height="14" loading="lazy">Docker Compose</span>
-          <span class="chip chip-cat" data-tip="private registry"><img class="chip-icon" src="https://cdn.simpleicons.org/harbor" alt="" width="14" height="14" loading="lazy">Harbor</span>
+      <div class="skill-tile" data-cat="scripting">
+        <div class="skill-tile-icon skill-tile-mono">P</div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">PowerShell</div>
+          <div class="skill-tile-tip">Windows automation</div>
         </div>
       </div>
-
-      <div class="skill-row" data-cat="orchestration">
-        <button class="sg-label" type="button">Container Orchestration</button>
-        <div class="chips">
-          <span class="chip chip-cat" data-tip="advanced · daily use"><img class="chip-icon" src="https://cdn.simpleicons.org/kubernetes" alt="" width="14" height="14" loading="lazy">Kubernetes</span>
-          <span class="chip chip-cat" data-tip="chart packaging"><img class="chip-icon" src="https://cdn.simpleicons.org/helm" alt="" width="14" height="14" loading="lazy">Helm</span>
-          <span class="chip chip-cat" data-tip="GitOps CD"><img class="chip-icon" src="https://cdn.simpleicons.org/argo" alt="" width="14" height="14" loading="lazy">ArgoCD</span>
-          <span class="chip chip-cat" data-tip="service mesh · traffic control"><img class="chip-icon" src="https://cdn.simpleicons.org/istio" alt="" width="14" height="14" loading="lazy">Istio</span>
-          <span class="chip chip-cat" data-tip="service mesh observability">Kiali</span>
+      <div class="skill-tile" data-cat="networking">
+        <div class="skill-tile-icon"><img src="https://cdn.simpleicons.org/nginx" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">Nginx</div>
+          <div class="skill-tile-tip">reverse proxy · SSL</div>
         </div>
       </div>
-
-      <div class="skill-row" data-cat="iac">
-        <button class="sg-label" type="button">IaC</button>
-        <div class="chips">
-          <span class="chip chip-cat" data-tip="advanced · daily use"><img class="chip-icon" src="https://cdn.simpleicons.org/terraform" alt="" width="14" height="14" loading="lazy">Terraform</span>
-          <span class="chip chip-cat" data-tip="advanced · daily use"><img class="chip-icon" src="https://cdn.simpleicons.org/ansible" alt="" width="14" height="14" loading="lazy">Ansible</span>
+      <div class="skill-tile" data-cat="networking">
+        <div class="skill-tile-icon skill-tile-mono">H</div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">HAProxy</div>
+          <div class="skill-tile-tip">load balancer</div>
         </div>
       </div>
-
-      <div class="skill-row" data-cat="cloud">
-        <button class="sg-label" type="button">Cloud</button>
-        <div class="chips">
-          <span class="chip chip-cat" data-tip="K8s · VM · DNS · S3">Yandex Cloud</span>
+      <div class="skill-tile" data-cat="networking">
+        <div class="skill-tile-icon skill-tile-mono">K</div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">Keepalived</div>
+          <div class="skill-tile-tip">VRRP failover</div>
         </div>
       </div>
-
-      <div class="skill-row" data-cat="cicd">
-        <button class="sg-label" type="button">CI/CD</button>
-        <div class="chips">
-          <span class="chip chip-cat" data-tip="advanced · 100% coverage"><img class="chip-icon" src="https://cdn.simpleicons.org/gitlab" alt="" width="14" height="14" loading="lazy">GitLab CI/CD</span>
-          <span class="chip chip-cat" data-tip="legacy pipelines"><img class="chip-icon" src="https://cdn.simpleicons.org/jenkins" alt="" width="14" height="14" loading="lazy">Jenkins</span>
+      <div class="skill-tile" data-cat="networking">
+        <div class="skill-tile-icon"><img src="https://cdn.simpleicons.org/consul" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">Consul</div>
+          <div class="skill-tile-tip">service discovery</div>
         </div>
       </div>
-
-      <div class="skill-row" data-cat="monitoring">
-        <button class="sg-label" type="button">Monitoring & Observability</button>
-        <div class="chips">
-          <span class="chip chip-cat" data-tip="metrics · daily use"><img class="chip-icon" src="https://cdn.simpleicons.org/prometheus" alt="" width="14" height="14" loading="lazy">Prometheus</span>
-          <span class="chip chip-cat" data-tip="alert routing">Alertmanager</span>
-          <span class="chip chip-cat" data-tip="dashboards · daily use"><img class="chip-icon" src="https://cdn.simpleicons.org/grafana" alt="" width="14" height="14" loading="lazy">Grafana</span>
-          <span class="chip chip-cat" data-tip="log aggregation">Loki</span>
-          <span class="chip chip-cat" data-tip="infra monitoring">Zabbix</span>
-          <span class="chip chip-cat" data-tip="centralized logs"><img class="chip-icon" src="https://cdn.simpleicons.org/elastic" alt="" width="14" height="14" loading="lazy">ELK Stack</span>
-          <span class="chip chip-cat" data-tip="log analysis"><img class="chip-icon" src="https://cdn.simpleicons.org/graylog" alt="" width="14" height="14" loading="lazy">Graylog</span>
-          <span class="chip chip-cat" data-tip="error tracking"><img class="chip-icon" src="https://cdn.simpleicons.org/sentry" alt="" width="14" height="14" loading="lazy">Sentry</span>
-          <span class="chip chip-cat" data-tip="uptime checks">Uptime Kuma</span>
-          <span class="chip chip-cat" data-tip="network monitoring · config backup">LibreNMS + Oxidized</span>
-          <span class="chip chip-cat" data-tip="network documentation">NetBox</span>
+      <div class="skill-tile" data-cat="security">
+        <div class="skill-tile-icon"><img src="https://cdn.simpleicons.org/vault" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">HashiCorp Vault</div>
+          <div class="skill-tile-tip">secrets management</div>
         </div>
       </div>
-
-      <div class="skill-row" data-cat="management">
-        <button class="sg-label" type="button">Management & Tools</button>
-        <div class="chips">
-          <span class="chip chip-cat" data-tip="issue tracking"><img class="chip-icon" src="https://cdn.simpleicons.org/jira" alt="" width="14" height="14" loading="lazy">Jira</span>
-          <span class="chip chip-cat" data-tip="docs · wiki"><img class="chip-icon" src="https://cdn.simpleicons.org/confluence" alt="" width="14" height="14" loading="lazy">Confluence</span>
-          <span class="chip chip-cat" data-tip="IT asset inventory">OCS Inventory</span>
+      <div class="skill-tile" data-cat="security">
+        <div class="skill-tile-icon"><img src="https://cdn.simpleicons.org/keycloak" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">Keycloak</div>
+          <div class="skill-tile-tip">OIDC · SSO · identity provider</div>
         </div>
       </div>
-
-      <div class="skill-row" data-cat="databases">
-        <button class="sg-label" type="button">Databases & Messaging</button>
-        <div class="chips">
-          <span class="chip chip-cat" data-tip="HA cluster · Patroni"><img class="chip-icon" src="https://cdn.simpleicons.org/postgresql" alt="" width="14" height="14" loading="lazy">PostgreSQL</span>
-          <span class="chip chip-cat" data-tip="HA failover · etcd">Patroni</span>
-          <span class="chip chip-cat" data-tip="relational DB"><img class="chip-icon" src="https://cdn.simpleicons.org/mysql" alt="" width="14" height="14" loading="lazy">MySQL</span>
-          <span class="chip chip-cat" data-tip="document store"><img class="chip-icon" src="https://cdn.simpleicons.org/mongodb" alt="" width="14" height="14" loading="lazy">MongoDB</span>
-          <span class="chip chip-cat" data-tip="caching · sessions"><img class="chip-icon" src="https://cdn.simpleicons.org/redis" alt="" width="14" height="14" loading="lazy">Redis</span>
-          <span class="chip chip-cat" data-tip="analytics DB"><img class="chip-icon" src="https://cdn.simpleicons.org/clickhouse" alt="" width="14" height="14" loading="lazy">ClickHouse</span>
-          <span class="chip chip-cat" data-tip="event streaming"><img class="chip-icon" src="https://cdn.simpleicons.org/apachekafka" alt="" width="14" height="14" loading="lazy">Kafka</span>
-          <span class="chip chip-cat" data-tip="message broker"><img class="chip-icon" src="https://cdn.simpleicons.org/rabbitmq" alt="" width="14" height="14" loading="lazy">RabbitMQ</span>
+      <div class="skill-tile" data-cat="security">
+        <div class="skill-tile-icon skill-tile-mono">OO</div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">OPA / OPAL</div>
+          <div class="skill-tile-tip">authorization policies</div>
         </div>
       </div>
-
+      <div class="skill-tile" data-cat="security">
+        <div class="skill-tile-icon"><img src="https://cdn.simpleicons.org/trivy" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">Trivy</div>
+          <div class="skill-tile-tip">container image scanning</div>
+        </div>
+      </div>
+      <div class="skill-tile" data-cat="security">
+        <div class="skill-tile-icon skill-tile-mono">G</div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">Gitleaks</div>
+          <div class="skill-tile-tip">secret leak detection</div>
+        </div>
+      </div>
+      <div class="skill-tile" data-cat="server">
+        <div class="skill-tile-icon"><img src="https://cdn.simpleicons.org/vmware" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">VMware</div>
+          <div class="skill-tile-tip">virtualization</div>
+        </div>
+      </div>
+      <div class="skill-tile" data-cat="server">
+        <div class="skill-tile-icon skill-tile-mono">HV</div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">Hyper-V</div>
+          <div class="skill-tile-tip">virtualization</div>
+        </div>
+      </div>
+      <div class="skill-tile" data-cat="server">
+        <div class="skill-tile-icon"><img src="https://cdn.simpleicons.org/veeam" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">Veeam</div>
+          <div class="skill-tile-tip">backup & recovery</div>
+        </div>
+      </div>
+      <div class="skill-tile" data-cat="server">
+        <div class="skill-tile-icon skill-tile-mono">AD</div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">Active Directory</div>
+          <div class="skill-tile-tip">LDAP · auth · GPO</div>
+        </div>
+      </div>
+      <div class="skill-tile" data-cat="containers">
+        <div class="skill-tile-icon"><img src="https://cdn.simpleicons.org/docker" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">Docker</div>
+          <div class="skill-tile-tip">advanced · daily use</div>
+        </div>
+      </div>
+      <div class="skill-tile" data-cat="containers">
+        <div class="skill-tile-icon"><img src="https://cdn.simpleicons.org/docker" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">Docker Compose</div>
+          <div class="skill-tile-tip">dev & staging envs</div>
+        </div>
+      </div>
+      <div class="skill-tile" data-cat="containers">
+        <div class="skill-tile-icon"><img src="https://cdn.simpleicons.org/harbor" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">Harbor</div>
+          <div class="skill-tile-tip">private registry</div>
+        </div>
+      </div>
+      <div class="skill-tile" data-cat="orchestration">
+        <div class="skill-tile-icon"><img src="https://cdn.simpleicons.org/kubernetes" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">Kubernetes</div>
+          <div class="skill-tile-tip">advanced · daily use</div>
+        </div>
+      </div>
+      <div class="skill-tile" data-cat="orchestration">
+        <div class="skill-tile-icon"><img src="https://cdn.simpleicons.org/helm" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">Helm</div>
+          <div class="skill-tile-tip">chart packaging</div>
+        </div>
+      </div>
+      <div class="skill-tile" data-cat="orchestration">
+        <div class="skill-tile-icon"><img src="https://cdn.simpleicons.org/argo" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">ArgoCD</div>
+          <div class="skill-tile-tip">GitOps CD</div>
+        </div>
+      </div>
+      <div class="skill-tile" data-cat="orchestration">
+        <div class="skill-tile-icon"><img src="https://cdn.simpleicons.org/istio" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">Istio</div>
+          <div class="skill-tile-tip">service mesh · traffic control</div>
+        </div>
+      </div>
+      <div class="skill-tile" data-cat="orchestration">
+        <div class="skill-tile-icon skill-tile-mono">K</div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">Kiali</div>
+          <div class="skill-tile-tip">service mesh observability</div>
+        </div>
+      </div>
+      <div class="skill-tile" data-cat="iac">
+        <div class="skill-tile-icon"><img src="https://cdn.simpleicons.org/terraform" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">Terraform</div>
+          <div class="skill-tile-tip">advanced · daily use</div>
+        </div>
+      </div>
+      <div class="skill-tile" data-cat="iac">
+        <div class="skill-tile-icon"><img src="https://cdn.simpleicons.org/ansible" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">Ansible</div>
+          <div class="skill-tile-tip">advanced · daily use</div>
+        </div>
+      </div>
+      <div class="skill-tile" data-cat="cloud">
+        <div class="skill-tile-icon skill-tile-mono">YC</div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">Yandex Cloud</div>
+          <div class="skill-tile-tip">K8s · VM · DNS · S3</div>
+        </div>
+      </div>
+      <div class="skill-tile" data-cat="cicd">
+        <div class="skill-tile-icon"><img src="https://cdn.simpleicons.org/gitlab" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">GitLab CI/CD</div>
+          <div class="skill-tile-tip">advanced · 100% coverage</div>
+        </div>
+      </div>
+      <div class="skill-tile" data-cat="cicd">
+        <div class="skill-tile-icon"><img src="https://cdn.simpleicons.org/jenkins" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">Jenkins</div>
+          <div class="skill-tile-tip">legacy pipelines</div>
+        </div>
+      </div>
+      <div class="skill-tile" data-cat="monitoring">
+        <div class="skill-tile-icon"><img src="https://cdn.simpleicons.org/prometheus" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">Prometheus</div>
+          <div class="skill-tile-tip">metrics · daily use</div>
+        </div>
+      </div>
+      <div class="skill-tile" data-cat="monitoring">
+        <div class="skill-tile-icon skill-tile-mono">A</div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">Alertmanager</div>
+          <div class="skill-tile-tip">alert routing</div>
+        </div>
+      </div>
+      <div class="skill-tile" data-cat="monitoring">
+        <div class="skill-tile-icon"><img src="https://cdn.simpleicons.org/grafana" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">Grafana</div>
+          <div class="skill-tile-tip">dashboards · daily use</div>
+        </div>
+      </div>
+      <div class="skill-tile" data-cat="monitoring">
+        <div class="skill-tile-icon skill-tile-mono">L</div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">Loki</div>
+          <div class="skill-tile-tip">log aggregation</div>
+        </div>
+      </div>
+      <div class="skill-tile" data-cat="monitoring">
+        <div class="skill-tile-icon skill-tile-mono">Z</div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">Zabbix</div>
+          <div class="skill-tile-tip">infra monitoring</div>
+        </div>
+      </div>
+      <div class="skill-tile" data-cat="monitoring">
+        <div class="skill-tile-icon"><img src="https://cdn.simpleicons.org/elastic" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">ELK Stack</div>
+          <div class="skill-tile-tip">centralized logs</div>
+        </div>
+      </div>
+      <div class="skill-tile" data-cat="monitoring">
+        <div class="skill-tile-icon"><img src="https://cdn.simpleicons.org/graylog" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">Graylog</div>
+          <div class="skill-tile-tip">log analysis</div>
+        </div>
+      </div>
+      <div class="skill-tile" data-cat="monitoring">
+        <div class="skill-tile-icon"><img src="https://cdn.simpleicons.org/sentry" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">Sentry</div>
+          <div class="skill-tile-tip">error tracking</div>
+        </div>
+      </div>
+      <div class="skill-tile" data-cat="monitoring">
+        <div class="skill-tile-icon skill-tile-mono">UK</div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">Uptime Kuma</div>
+          <div class="skill-tile-tip">uptime checks</div>
+        </div>
+      </div>
+      <div class="skill-tile" data-cat="monitoring">
+        <div class="skill-tile-icon skill-tile-mono">L+</div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">LibreNMS + Oxidized</div>
+          <div class="skill-tile-tip">network monitoring · config backup</div>
+        </div>
+      </div>
+      <div class="skill-tile" data-cat="monitoring">
+        <div class="skill-tile-icon skill-tile-mono">N</div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">NetBox</div>
+          <div class="skill-tile-tip">network documentation</div>
+        </div>
+      </div>
+      <div class="skill-tile" data-cat="management">
+        <div class="skill-tile-icon"><img src="https://cdn.simpleicons.org/jira" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">Jira</div>
+          <div class="skill-tile-tip">issue tracking</div>
+        </div>
+      </div>
+      <div class="skill-tile" data-cat="management">
+        <div class="skill-tile-icon"><img src="https://cdn.simpleicons.org/confluence" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">Confluence</div>
+          <div class="skill-tile-tip">docs · wiki</div>
+        </div>
+      </div>
+      <div class="skill-tile" data-cat="management">
+        <div class="skill-tile-icon skill-tile-mono">OI</div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">OCS Inventory</div>
+          <div class="skill-tile-tip">IT asset inventory</div>
+        </div>
+      </div>
+      <div class="skill-tile" data-cat="databases">
+        <div class="skill-tile-icon"><img src="https://cdn.simpleicons.org/postgresql" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">PostgreSQL</div>
+          <div class="skill-tile-tip">HA cluster · Patroni</div>
+        </div>
+      </div>
+      <div class="skill-tile" data-cat="databases">
+        <div class="skill-tile-icon skill-tile-mono">P</div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">Patroni</div>
+          <div class="skill-tile-tip">HA failover · etcd</div>
+        </div>
+      </div>
+      <div class="skill-tile" data-cat="databases">
+        <div class="skill-tile-icon"><img src="https://cdn.simpleicons.org/mysql" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">MySQL</div>
+          <div class="skill-tile-tip">relational DB</div>
+        </div>
+      </div>
+      <div class="skill-tile" data-cat="databases">
+        <div class="skill-tile-icon"><img src="https://cdn.simpleicons.org/mongodb" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">MongoDB</div>
+          <div class="skill-tile-tip">document store</div>
+        </div>
+      </div>
+      <div class="skill-tile" data-cat="databases">
+        <div class="skill-tile-icon"><img src="https://cdn.simpleicons.org/redis" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">Redis</div>
+          <div class="skill-tile-tip">caching · sessions</div>
+        </div>
+      </div>
+      <div class="skill-tile" data-cat="databases">
+        <div class="skill-tile-icon"><img src="https://cdn.simpleicons.org/clickhouse" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">ClickHouse</div>
+          <div class="skill-tile-tip">analytics DB</div>
+        </div>
+      </div>
+      <div class="skill-tile" data-cat="databases">
+        <div class="skill-tile-icon"><img src="https://cdn.simpleicons.org/apachekafka" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">Kafka</div>
+          <div class="skill-tile-tip">event streaming</div>
+        </div>
+      </div>
+      <div class="skill-tile" data-cat="databases">
+        <div class="skill-tile-icon"><img src="https://cdn.simpleicons.org/rabbitmq" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-body">
+          <div class="skill-tile-name">RabbitMQ</div>
+          <div class="skill-tile-tip">message broker</div>
+        </div>
+      </div>
     </div>
   </section>
 
