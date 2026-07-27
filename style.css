@@ -1,5 +1,22 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+:root { color-scheme: dark; }
+
+/* ── SKIP LINK ── */
+.skip-link {
+  position: fixed; top: -100px; left: 1rem; z-index: 10000;
+  background: var(--bg-card); color: var(--text);
+  border: 1px solid var(--accent);
+  padding: 10px 16px; border-radius: 8px;
+  font-family: 'JetBrains Mono', monospace; font-size: .8rem;
+  transition: top .2s;
+}
+.skip-link:focus { top: 1rem; }
+
+section[id] { scroll-margin-top: 72px; }
+
+button, a { touch-action: manipulation; -webkit-tap-highlight-color: rgba(56,139,253,.25); }
+
 :root {
   --bg:        #0d1117;
   --bg-card:   #161b22;
@@ -390,11 +407,12 @@ h1 .accent-name {
   margin-top: 8px;
 }
 .term-input {
-  background: none; border: none; outline: none;
+  background: none; border: none;
   color: var(--text); font-family: 'JetBrains Mono', monospace;
   font-size: .78rem; flex: 1; caret-color: var(--green);
   width: 100%;
 }
+.term-input:focus:not(:focus-visible) { outline: none; }
 .term-input::placeholder { color: var(--dim); opacity: .5; }
 .term-output {
   font-size: .74rem; color: var(--accent-lt);
@@ -452,6 +470,7 @@ h1 .accent-name {
   font-family: 'Inter', sans-serif;
   font-size: 1.1rem; font-weight: 800;
   color: var(--accent-lt); line-height: 1;
+  font-variant-numeric: tabular-nums;
 }
 .status-key {
   font-size: .68rem; color: var(--dim);
@@ -671,6 +690,7 @@ h1 .accent-name {
 .skill-row[data-cat="management"]    { --cat-c:#d29922; --cat-bg:rgba(210,153,34,.07);  --cat-bd:rgba(210,153,34,.3);  }
 
 .sg-label {
+  background: none; border: none; font: inherit;
   font-size: .68rem;
   font-weight: 600;
   color: var(--cat-c);
@@ -824,6 +844,7 @@ h1 .accent-name {
   font-family: 'Inter', sans-serif;
   font-size: 1.45rem; font-weight: 800;
   line-height: 1.2; margin-bottom: .5rem;
+  font-variant-numeric: tabular-nums;
 }
 .ach-val.v-g { color: var(--green); }
 .ach-val.v-i { color: var(--accent-lt); }
@@ -915,7 +936,7 @@ h1 .accent-name {
 .tl-contact:active { transform: scale(0.99); }
 .tl-contact .tl-prompt { color: var(--green); }
 .tl-contact-cmd { color: var(--dim); }
-.tl-contact-val { color: var(--accent-lt); flex: 1; }
+.tl-contact-val { color: var(--accent-lt); flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 .tl-contact-icon { color: var(--dim); display: flex; transition: color .2s; }
 .tl-contact:hover .tl-contact-icon { color: var(--text); }
 .tl-contact.copied .tl-contact-val { color: var(--green); }

@@ -3,13 +3,20 @@ const backBtn      = document.getElementById('back-to-top');
 const nav          = document.querySelector('nav');
 const progressBar  = document.getElementById('scroll-progress');
 
-window.addEventListener('scroll', () => {
+let _scrollTicking = false;
+function _onScroll() {
   const scrollY   = window.scrollY;
   const docHeight = document.documentElement.scrollHeight - window.innerHeight;
   progressBar.style.width = (scrollY / docHeight * 100) + '%';
   backBtn.classList.toggle('visible', scrollY > 400);
   nav.classList.toggle('scrolled', scrollY > 10);
-});
+  _scrollTicking = false;
+}
+window.addEventListener('scroll', () => {
+  if (_scrollTicking) return;
+  _scrollTicking = true;
+  requestAnimationFrame(_onScroll);
+}, { passive: true });
 
 backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
@@ -91,10 +98,12 @@ function applyLang(l) {
     document.body.classList.add('lang-en');
     htmlRoot.lang    = 'en';
     langBtn.textContent = 'RU';
+    backBtn.setAttribute('aria-label', 'Back to top');
   } else {
     document.body.classList.remove('lang-en');
     htmlRoot.lang    = 'ru';
     langBtn.textContent = 'EN';
+    backBtn.setAttribute('aria-label', 'Наверх');
   }
   localStorage.setItem('lang', l);
 }
@@ -329,8 +338,8 @@ function setupCopyCard(btnId, labelId, iconId, text) {
   const btn   = document.getElementById(btnId);
   const label = document.getElementById(labelId);
   const icon  = document.getElementById(iconId);
-  const checkSvg = '<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>';
-  const copySvg  = '<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>';
+  const checkSvg = '<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20,6 9,17 4,12"/></svg>';
+  const copySvg  = '<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>';
 
   if (!btn) return;
   btn.addEventListener('click', () => {
