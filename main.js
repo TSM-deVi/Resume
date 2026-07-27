@@ -317,3 +317,46 @@ function setupCopyCard(btnId, labelId, iconId, text) {
 
 setupCopyCard('btn-copy-tg',    'btn-tg-label',   'copy-icon-tg', '@ktylhus');
 setupCopyCard('btn-copy-email', 'btn-copy-label', 'copy-icon',    'timir-ivaniv@yandex.ru');
+
+// ── Pipeline animation ──
+(function () {
+  const stages  = Array.from(document.querySelectorAll('.pl-stage'));
+  const lines   = Array.from(document.querySelectorAll('.pl-line'));
+  if (!stages.length) return;
+
+  let running = false;
+
+  function runPipeline() {
+    if (running) return;
+    running = true;
+    stages.forEach(s => s.classList.remove('pl-run', 'pl-done'));
+    lines.forEach(l => l.classList.remove('pl-done'));
+
+    let i = 0;
+    function step() {
+      if (i >= stages.length) { running = false; return; }
+      stages[i].classList.add('pl-run');
+      setTimeout(() => {
+        stages[i].classList.remove('pl-run');
+        stages[i].classList.add('pl-done');
+        if (lines[i]) {
+          setTimeout(() => {
+            lines[i].classList.add('pl-done');
+            i++;
+            setTimeout(step, 120);
+          }, 280);
+        } else {
+          i++;
+          running = false;
+        }
+      }, 520);
+    }
+    step();
+  }
+
+  setTimeout(runPipeline, 1600);
+
+  document.querySelector('.pl-rerun')?.addEventListener('click', () => {
+    if (!running) runPipeline();
+  });
+})();
