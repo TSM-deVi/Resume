@@ -393,21 +393,20 @@ setupCopyCard('btn-copy-email', 'btn-copy-label', 'copy-icon',    'timir-ivaniv@
   });
 })();
 
-// ── Hero network background ──
+// ── Full-page network background ──
 (function () {
-  const canvas = document.getElementById('hero-net');
-  const hero   = document.getElementById('hero');
-  if (!canvas || !hero) return;
+  const canvas = document.getElementById('bg-net');
+  if (!canvas) return;
   const ctx = canvas.getContext('2d');
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   let w, h, nodes, dpr = Math.min(window.devicePixelRatio || 1, 2);
-  const COUNT = 32;
-  const LINK_DIST = 130;
+  const COUNT = 70;
+  const LINK_DIST = 150;
 
   function resize() {
-    w = canvas.offsetWidth;
-    h = canvas.offsetHeight;
+    w = window.innerWidth;
+    h = window.innerHeight;
     canvas.width  = w * dpr;
     canvas.height = h * dpr;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -456,6 +455,22 @@ setupCopyCard('btn-copy-email', 'btn-copy-label', 'copy-icon',    'timir-ivaniv@
   init();
   window.addEventListener('resize', resize);
   if (reduce) { frame(); } else { requestAnimationFrame(frame); }
+})();
+
+// ── Saint Petersburg live clock ──
+(function () {
+  const el = document.getElementById('spb-clock');
+  if (!el) return;
+  function tick() {
+    const parts = new Intl.DateTimeFormat('en-GB', {
+      timeZone: 'Europe/Moscow',
+      hour: '2-digit', minute: '2-digit', second: '2-digit',
+      hour12: false,
+    }).format(new Date());
+    el.textContent = `${parts} MSK`;
+  }
+  tick();
+  setInterval(tick, 1000);
 })();
 
 // ── Session uptime ticker ──
