@@ -404,6 +404,30 @@ setupCopyCard('btn-copy-email', 'btn-copy-label', 'copy-icon',    'timir-ivaniv@
   });
 })();
 
+// ── Tilt + shine (achievement tiles, hero terminal) ──
+if (window.matchMedia('(pointer: fine)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const tiltEls = document.querySelectorAll('.ach, .hero-terminal');
+  const MAX_TILT = 5;
+
+  tiltEls.forEach(el => {
+    el.addEventListener('mousemove', e => {
+      const rect = el.getBoundingClientRect();
+      const px = (e.clientX - rect.left) / rect.width;
+      const py = (e.clientY - rect.top) / rect.height;
+      const rotY = (px - 0.5) * MAX_TILT * 2;
+      const rotX = (0.5 - py) * MAX_TILT * 2;
+      el.style.transform = `perspective(900px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-4px)`;
+      el.style.setProperty('--mx', `${px * 100}%`);
+      el.style.setProperty('--my', `${py * 100}%`);
+      el.classList.add('tilt-active');
+    });
+    el.addEventListener('mouseleave', () => {
+      el.style.transform = '';
+      el.classList.remove('tilt-active');
+    });
+  });
+}
+
 // ── Full-page network background ──
 (function () {
   const canvas = document.getElementById('bg-net');
