@@ -288,21 +288,25 @@
             </div>
             <ul class="jlist" data-lang="ru">
               <li>Мигрировал <strong>12+ микросервисов</strong> из Docker Compose в self-hosted Kubernetes — namespace-изоляция, HPA, Ingress</li>
-              <li>Спроектировал CI/CD-пайплайны (<strong>GitLab CI/CD, ArgoCD</strong>) — покрыл 100% продакшен-репозиториев</li>
+              <li>Спроектировал CI/CD-пайплайны (<strong>GitLab CI/CD, Jenkins, ArgoCD</strong>) — покрыл 100% продакшен-репозиториев автоматической сборкой и деплоем</li>
               <li>Интегрировал security-сканирование (<strong>Trivy, Gitleaks</strong>) — уязвимости отлавливаются до попадания в прод</li>
               <li>Развернул HA-кластеры: <strong>PostgreSQL + Patroni + etcd</strong> (3 ноды, uptime 99.9%), Zabbix HA, Jira + Confluence HA</li>
-              <li>Внедрил <strong>Prometheus + Grafana</strong>, ELK + Graylog, Zabbix, Sentry — MTTD с нескольких часов до ~5 минут</li>
-              <li>Ansible-роли и плейбуки — настройка нового сервера <strong>за 15 мин</strong> вместо 2–3 часов вручную</li>
-              <li>Terraform IaC, приватный Docker Registry, SSL/TLS (Let's Encrypt), VMware/Hyper-V, Veeam, Zimbra</li>
+              <li>Внедрил <strong>Prometheus + Grafana</strong>, ELK + Graylog, Zabbix, Sentry — MTTD с нескольких часов до ~5 минут; Uptime Kuma, <strong>LibreNMS + Oxidized</strong>, NetBox — мониторинг доступности и сетевая документация</li>
+              <li>Ansible-роли и плейбуки — настройка нового сервера <strong>за 15 мин</strong> вместо 2–3 часов вручную; скрипты автоматизации на Python, Bash, PowerShell</li>
+              <li>Terraform IaC, приватный Docker Registry, SSL/TLS (Let's Encrypt), VMware/Hyper-V, AD/DNS/DHCP, Veeam, Zimbra; СУБД: PostgreSQL, MySQL, MongoDB, ClickHouse, MS SQL Server</li>
+              <li>Провёл аудит IT-инфраструктуры, составил и реализовал план модернизации; внедрил <strong>OCS Inventory</strong> для автоматической инвентаризации IT-активов</li>
+              <li>Внедрил DevOps-практики в команде разработки: CI/CD-пайплайны, контейнеризация</li>
             </ul>
             <ul class="jlist" data-lang="en">
               <li>Migrated <strong>12+ microservices</strong> from Docker Compose to self-hosted Kubernetes — namespace isolation, HPA, Ingress</li>
-              <li>Designed CI/CD pipelines (<strong>GitLab CI/CD, ArgoCD</strong>) — covered 100% of production repositories</li>
+              <li>Designed CI/CD pipelines (<strong>GitLab CI/CD, Jenkins, ArgoCD</strong>) — covered 100% of production repositories with automated builds and deployments</li>
               <li>Integrated security scanning (<strong>Trivy, Gitleaks</strong>) — vulnerabilities caught before reaching production</li>
               <li>Deployed HA clusters: <strong>PostgreSQL + Patroni + etcd</strong> (3 nodes, 99.9% uptime), Zabbix HA, Jira + Confluence HA</li>
-              <li>Implemented <strong>Prometheus + Grafana</strong>, ELK + Graylog, Zabbix, Sentry — MTTD reduced from hours to ~5 minutes</li>
-              <li>Ansible roles and playbooks — new server setup in <strong>15 min</strong> instead of 2–3 hours manually</li>
-              <li>Terraform IaC, private Docker Registry, SSL/TLS (Let's Encrypt), VMware/Hyper-V, Veeam, Zimbra</li>
+              <li>Implemented <strong>Prometheus + Grafana</strong>, ELK + Graylog, Zabbix, Sentry — MTTD reduced from hours to ~5 minutes; Uptime Kuma, <strong>LibreNMS + Oxidized</strong>, NetBox — availability monitoring and network documentation</li>
+              <li>Ansible roles and playbooks — new server setup in <strong>15 min</strong> instead of 2–3 hours manually; automation scripts in Python, Bash, PowerShell</li>
+              <li>Terraform IaC, private Docker Registry, SSL/TLS (Let's Encrypt), VMware/Hyper-V, AD/DNS/DHCP, Veeam, Zimbra; databases: PostgreSQL, MySQL, MongoDB, ClickHouse, MS SQL Server</li>
+              <li>Conducted IT infrastructure audit and implemented modernization plan; deployed <strong>OCS Inventory</strong> for automated IT asset tracking</li>
+              <li>Introduced DevOps practices to the development team: CI/CD pipelines, containerization</li>
             </ul>
           </div>
         </div>
@@ -335,14 +339,14 @@
               </div>
             </div>
             <ul class="jlist" data-lang="ru">
-              <li>Настроил и поддерживал мониторинг распределённой сети на <strong>Zabbix</strong>: сетевое оборудование торговых точек, отслеживание доступности модемов и каналов связи</li>
+              <li>Настроил и поддерживал мониторинг распределённой сети на <strong>Zabbix</strong>: сетевое оборудование торговых точек, отслеживание доступности модемов и каналов связи, оповещения об инцидентах</li>
               <li>Автоматизировал рутинные операции скриптами на <strong>Bash и PowerShell</strong> — резервное копирование, обслуживание и подготовка серверов</li>
               <li>Автоматизировал развёртывание ОС Linux — подготовка рабочего места <strong>с 3 часов до 40 минут</strong></li>
               <li>Хранил и версионировал скрипты и конфигурации в <strong>self-hosted GitLab</strong>; запускал контейнеризированные сервисы (<strong>Docker</strong>)</li>
               <li>Диагностировал и устранял инфраструктурные инциденты, вёл техническую документацию</li>
             </ul>
             <ul class="jlist" data-lang="en">
-              <li>Set up and maintained distributed network monitoring in <strong>Zabbix</strong>: retail site equipment, modem and channel availability tracking</li>
+              <li>Set up and maintained distributed network monitoring in <strong>Zabbix</strong>: retail site equipment, modem and channel availability tracking, incident alerts</li>
               <li>Automated routine operations with <strong>Bash and PowerShell</strong> scripts — backup, server maintenance and provisioning</li>
               <li>Automated Linux OS deployment — workstation setup reduced <strong>from 3 hours to 40 minutes</strong></li>
               <li>Stored and versioned scripts and configs in <strong>self-hosted GitLab</strong>; ran containerized services (<strong>Docker</strong>)</li>
@@ -362,16 +366,22 @@
               </div>
             </div>
             <ul class="jlist" data-lang="ru">
-              <li>Администрирование <strong>Windows Server, Linux</strong>, сетевого оборудования <strong>MikroTik, Cisco</strong> (10+ объектов)</li>
-              <li>Виртуализация <strong>VMware, Hyper-V</strong>, VPN-инфраструктура Kerio, маршрутизация, коммутация</li>
-              <li>HelpDesk: поддержка парка <strong>100+ компьютеров</strong> и кассовой техники, плановые выезды на объекты</li>
-              <li>Мониторинг ИБ, обслуживание СУБД, инвентаризация IT-оборудования (Jira)</li>
+              <li>Администрировал серверы <strong>Windows Server, Linux</strong> и сетевое оборудование (<strong>MikroTik, Cisco</strong>) в розничной сети из 10+ объектов</li>
+              <li>Развёртывал и поддерживал виртуализацию <strong>VMware, Hyper-V</strong></li>
+              <li>Настроил VPN-инфраструктуру между объектами (Kerio), маршрутизацию и коммутацию</li>
+              <li>Обслуживал почтовые серверы и СУБД, обеспечивал их доступность</li>
+              <li>Настроил и перенёс <strong>30+ рабочих станций</strong> и периферии при расширении офиса</li>
+              <li>HelpDesk-поддержка парка <strong>100+ компьютеров</strong> и кассовой техники</li>
+              <li>Инвентаризация IT-оборудования, ведение документации (Jira)</li>
             </ul>
             <ul class="jlist" data-lang="en">
-              <li>Administration of <strong>Windows Server, Linux</strong>, network equipment <strong>MikroTik, Cisco</strong> (10+ sites)</li>
-              <li>Virtualization <strong>VMware, Hyper-V</strong>, Kerio VPN infrastructure, routing, switching</li>
-              <li>HelpDesk: support for <strong>100+ computers</strong> and POS equipment, scheduled on-site visits</li>
-              <li>Security monitoring, database maintenance, IT asset inventory (Jira)</li>
+              <li>Administered <strong>Windows Server, Linux</strong> servers and network equipment (<strong>MikroTik, Cisco</strong>) across 10+ retail sites</li>
+              <li>Deployed and maintained <strong>VMware, Hyper-V</strong> virtualization</li>
+              <li>Configured inter-site VPN infrastructure (Kerio), routing and switching</li>
+              <li>Maintained mail servers and databases, ensured their availability</li>
+              <li>Set up and relocated <strong>30+ workstations</strong> and peripherals during office expansion</li>
+              <li>HelpDesk support for <strong>100+ computers</strong> and POS equipment</li>
+              <li>IT asset inventory and technical documentation (Jira)</li>
             </ul>
           </div>
         </div>
@@ -393,12 +403,16 @@
             <span data-lang="en">System Administrator</span>
           </div>
           <ul class="jlist" data-lang="ru">
-            <li>Обеспечение бесперебойной работы офисной и сетевой инфраструктуры</li>
-            <li>Настройка сетевого оборудования, меры информационной безопасности, монтажные работы</li>
+            <li>Обеспечение бесперебойной работы офисного оборудования и сетевой инфраструктуры</li>
+            <li>Обслуживание и ремонт офисной техники (компьютеры, МФУ, принтеры)</li>
+            <li>Реализация мер информационной безопасности, монтажные работы, подключение абонентов к сети</li>
+            <li>Настройка сетевого и телекоммуникационного оборудования</li>
           </ul>
           <ul class="jlist" data-lang="en">
-            <li>Ensuring uninterrupted operation of office and network infrastructure</li>
-            <li>Network equipment configuration, information security measures, hardware installation</li>
+            <li>Ensuring uninterrupted operation of office equipment and network infrastructure</li>
+            <li>Maintenance and repair of office equipment (computers, MFPs, printers)</li>
+            <li>Implementing information security measures, hardware installation, subscriber network connections</li>
+            <li>Configuration of network and telecommunication equipment</li>
           </ul>
         </div>
       </div>
