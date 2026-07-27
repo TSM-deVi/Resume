@@ -59,6 +59,20 @@ a:hover { text-decoration: underline; }
 
 code, .mono { font-family: 'JetBrains Mono', monospace; }
 
+/* ── EDGE META (fills empty side margins on wide viewports) ── */
+.edge-meta {
+  position: fixed; top: 50%; transform: translateY(-50%);
+  writing-mode: vertical-rl;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .66rem; letter-spacing: .16em;
+  color: var(--dim); opacity: .5;
+  white-space: nowrap; pointer-events: none;
+  z-index: 1; text-transform: uppercase;
+}
+.edge-meta-l { left: 22px; }
+.edge-meta-r { right: 22px; transform: translateY(-50%) rotate(180deg); }
+@media (max-width: 1320px) { .edge-meta { display: none; } }
+
 /* ── NAV ── */
 nav {
   position: sticky; top: 0; z-index: 200;
@@ -145,9 +159,10 @@ section + section { border-top: 1px solid var(--border); }
 .hero-grid {
   display: grid;
   grid-template-columns: 1fr 300px;
-  gap: 3.5rem; align-items: center;
+  gap: 3.5rem; align-items: start;
   margin-bottom: 2.5rem;
 }
+.hero-terminal { margin-top: .4rem; }
 
 .hero-left { position: relative; }
 
@@ -478,7 +493,9 @@ h1 .accent-name {
 }
 .job-company-sub { font-size: .76rem; color: var(--dim); margin-top: 2px; }
 .job-period {
-  font-size: .73rem; color: var(--dim);
+  font-size: .72rem; color: var(--accent-lt);
+  background: rgba(56,139,253,.1); border: 1px solid rgba(56,139,253,.28);
+  padding: 3px 10px; border-radius: 20px;
   white-space: nowrap; font-family: 'JetBrains Mono', monospace;
 }
 
@@ -495,7 +512,7 @@ h1 .accent-name {
 }
 .job-role-title { font-size: .9rem; color: var(--accent-lt); font-weight: 600; letter-spacing: .01em; }
 .job-role-period {
-  font-size: .72rem; color: var(--dim);
+  font-size: .71rem; color: var(--accent-lt); opacity: .75;
   font-family: 'JetBrains Mono', monospace;
 }
 
@@ -526,6 +543,15 @@ h1 .accent-name {
   color: var(--accent); font-size: .62rem;
 }
 .jlist li strong { color: var(--text); font-weight: 600; }
+.jlist li.jlist-head {
+  padding-left: 0; margin-top: 1.1rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .68rem; color: var(--accent-lt);
+  text-transform: uppercase; letter-spacing: .06em;
+  font-weight: 600;
+}
+.jlist li.jlist-head:first-child { margin-top: 0; }
+.jlist li.jlist-head::before { content: none; }
 
 .chips { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .85rem; }
 .chip {
@@ -546,10 +572,13 @@ h1 .accent-name {
   font-size: .65rem; color: var(--dim); letter-spacing: .05em;
   margin-bottom: 1.3rem;
 }
-.arch-scroll { overflow-x: auto; padding-bottom: 2px; }
+.arch-scroll {
+  overflow-x: auto; padding-bottom: 2px;
+  display: flex; flex-direction: column; align-items: center;
+}
 .arch-row-main {
-  display: flex; align-items: center; justify-content: center;
-  gap: .6rem; min-width: 420px;
+  display: flex; align-items: center;
+  gap: .6rem;
 }
 .arch-node {
   font-family: 'JetBrains Mono', monospace;
@@ -578,11 +607,11 @@ h1 .accent-name {
 .arch-stem { width: 1px; height: 22px; background: var(--border-lt); margin: 0 auto; }
 
 .arch-branches {
-  display: flex; justify-content: center; gap: 1.6rem;
-  min-width: 420px; position: relative; padding-top: 22px;
+  display: flex; gap: 1.6rem;
+  position: relative; padding-top: 22px;
 }
 .arch-branches::before {
-  content: ''; position: absolute; top: 0; left: 18%; right: 18%; height: 1px;
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
   background: var(--border-lt);
 }
 .arch-node-sm { font-size: .7rem; padding: .4rem .7rem; }
@@ -622,6 +651,7 @@ h1 .accent-name {
 .skill-row[data-cat="cicd"]          { --cat-c:#db61a2; --cat-bg:rgba(219,97,162,.07);  --cat-bd:rgba(219,97,162,.3);  }
 .skill-row[data-cat="monitoring"]    { --cat-c:#388bfd; --cat-bg:rgba(56,139,253,.07);  --cat-bd:rgba(56,139,253,.3);  }
 .skill-row[data-cat="databases"]     { --cat-c:#58a6ff; --cat-bg:rgba(88,166,255,.07);  --cat-bd:rgba(88,166,255,.3);  }
+.skill-row[data-cat="management"]    { --cat-c:#d29922; --cat-bg:rgba(210,153,34,.07);  --cat-bd:rgba(210,153,34,.3);  }
 
 .sg-label {
   font-size: .68rem;
@@ -752,11 +782,12 @@ h1 .accent-name {
 }
 .ach {
   background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: 14px; padding: 1.1rem 1.2rem 1.5rem;
+  border-radius: 14px; padding: 1.1rem 1.2rem 2.4rem;
   position: relative; overflow: hidden;
   display: flex; flex-direction: column; justify-content: flex-start;
   transition: border-color .2s, transform .2s, box-shadow .2s;
 }
+.ach-grid .ach:nth-child(1) { padding-bottom: 2.8rem; }
 .ach:hover { transform: translateY(-3px); border-color: rgba(56,139,253,.4); box-shadow: 0 16px 36px -16px rgba(56,139,253,.25); }
 .ach::after {
   content: ''; position: absolute;
@@ -1046,6 +1077,37 @@ body { animation: fadeInBody .45s ease both; }
 .lang-toggle:active,
 #back-to-top:active { transform: scale(0.95) !important; transition-duration: 80ms !important; }
 
+/* ── CUSTOM CURSOR ── */
+@media (pointer: fine) and (hover: hover) {
+  * { cursor: none !important; }
+}
+#cursor-dot, #cursor-ring {
+  position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0; transition: opacity .3s;
+}
+#cursor-dot {
+  width: 5px; height: 5px;
+  background: var(--accent-lt);
+}
+#cursor-ring {
+  width: 26px; height: 26px;
+  border: 1px solid rgba(88,166,255,.4);
+  transition: opacity .3s, transform .15s ease-out, border-color .2s;
+  will-change: transform;
+}
+body.cur-active #cursor-dot,
+body.cur-active #cursor-ring { opacity: 1; }
+body.cur-hover #cursor-ring {
+  transform: translate(-50%, -50%) scale(1.7);
+  border-color: rgba(88,166,255,.75);
+}
+body.cur-hover #cursor-dot { transform: translate(-50%, -50%) scale(.6); }
+@media (pointer: coarse), (hover: none) {
+  #cursor-dot, #cursor-ring { display: none; }
+}
+
 /* ── FOCUS RINGS ── */
 :focus-visible {
   outline: 2px solid var(--accent);
@@ -1073,6 +1135,7 @@ body { animation: fadeInBody .45s ease both; }
 .skill-groups.v .skill-row:nth-child(11) { transition-delay: 400ms; }
 .skill-groups.v .skill-row:nth-child(12) { transition-delay: 440ms; }
 .skill-groups.v .skill-row:nth-child(13) { transition-delay: 480ms; }
+.skill-groups.v .skill-row:nth-child(14) { transition-delay: 520ms; }
 
 /* ── REDUCED MOTION ── */
 @media (prefers-reduced-motion: reduce) {

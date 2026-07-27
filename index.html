@@ -26,6 +26,9 @@
 
 <div id="scroll-progress"></div>
 
+<div class="edge-meta edge-meta-l" aria-hidden="true">SAINT-PETERSBURG · REMOTE / HYBRID</div>
+<div class="edge-meta edge-meta-r" aria-hidden="true">KUBERNETES · TERRAFORM · CI/CD</div>
+
 <nav>
   <div class="nav-logo">
     <div class="nav-dot"></div>
@@ -252,9 +255,15 @@
               <li>Обеспечение безопасности инфраструктуры — управление секретами через <strong>HashiCorp Vault</strong>, политики авторизации <strong>OPA/OPAL</strong>, настройка RBAC, сканирование образов через <strong>Trivy</strong>, аудит сетевых политик и доступов</li>
               <li>Развёртывание и сопровождение компонентов системы — подготовка окружений (DEV/TEST/PROD), миграции, резервное копирование, восстановление, поддержка высокой доступности и отказоустойчивости</li>
               <li>Взаимодействие с командами разработки и QA — консультирование по инфраструктурным вопросам, поддержка локальной разработки, участие в релизах, устранение инфраструктурных багов и бутылочных горлышек</li>
-              <li>Спроектировал и развернул изолированный dev-контур AI-платформы (SmartSearch, агентная система): <strong>GitLab, Harbor, K8s/k3s, Vault, Keycloak</strong>, Langflow, LiteLLM, Langfuse, PostgreSQL, Redis, Qdrant, MinIO, ClickHouse</li>
-              <li>Внедрил <strong>Istio + Kiali</strong> для контроля трафика, настроил Envoy + <strong>OPA/OPAL</strong> ext_authz для авторизации в сервисной сети; подключил <strong>Keycloak/OIDC SSO</strong> для всех сервисов</li>
-              <li>Участие в подготовке DEV/INF/PROD-контуров для enterprise-заказчика банковского сектора — документация, приёмочные тесты, сверка с требованиями ПМИ/КБ/SOC</li>
+              <li class="jlist-head">SmartSearch dev-контур · Timeweb</li>
+              <li>Спроектировал и развернул изолированный dev-контур AI-платформы (SmartSearch, агентная система): <strong>GitLab + Runner, Harbor, K8s/k3s, Vault, RabbitMQ</strong>, PostgreSQL, Redis, Qdrant, MinIO, ClickHouse, Langflow, Langfuse, LiteLLM, proxy-service — с 9-VM планом ресурсов и right-sizing по CPU/RAM/NVMe</li>
+              <li>Настроил сборку и деплой сервисов через <strong>GitLab CI/CD + Helm</strong>, подготовил шаблоны для Langflow Agent и Code Agent</li>
+              <li>Внедрил <strong>Istio + Kiali</strong> (Gateway, VirtualService, ServiceEntry, DestinationRule) для контроля трафика; схему Envoy + <strong>OPA/OPAL</strong> ext_authz для авторизации; <strong>Keycloak/OIDC SSO</strong> для всех сервисов с диагностикой callback URL и ролей</li>
+              <li>Работал с LLM-интеграциями (<strong>LiteLLM, GigaChat, Ollama, Vespa</strong>) — разделял инфраструктурные проблемы, ошибки внешних API и прикладные ошибки конфигурации</li>
+              <li>Диагностировал и устранил инциденты: исчерпание PostgreSQL connections, Vault sealed/raft leader, Harbor auth, GitLab 502, ClickHouse log storm, переполнение диска Docker-логами</li>
+              <li>Подготовил эксплуатационную документацию: inventory, runbooks, change-log, инструкции доступа, правила безопасной работы с секретами</li>
+              <li class="jlist-head">Enterprise-контур · банковский сектор · VMware Cloud.ru</li>
+              <li>Участие в подготовке DEV/INF/PROD-контуров для enterprise-заказчика на облаке <strong>VMware Cloud.ru</strong>: <strong>Kubernetes, Istio, Vault, Keycloak</strong>; сверка с требованиями ПМИ/КБ/SOC, диагностика и сопровождение без публикации секретов, токенов и kubeconfig</li>
             </ul>
             <ul class="jlist" data-lang="en">
               <li>Implementing and maintaining CI/CD pipelines — configuring <strong>GitLab CI/CD</strong>, automating build, test, deploy and rollback workflows, integrating with artifact registries and notification systems</li>
@@ -264,30 +273,17 @@
               <li>Infrastructure security — secret management via <strong>HashiCorp Vault</strong>, authorization policies with <strong>OPA/OPAL</strong>, RBAC configuration, image scanning with <strong>Trivy</strong>, audit of network policies and access controls</li>
               <li>Deploying and maintaining system components — environment provisioning (DEV/TEST/PROD), migrations, backup and recovery, maintaining high availability and fault tolerance</li>
               <li>Collaboration with development and QA teams — infrastructure consulting, supporting local development, participating in releases, resolving infrastructure bugs and bottlenecks</li>
-              <li>Designed and deployed an isolated AI platform dev environment (SmartSearch, agent system): <strong>GitLab, Harbor, K8s/k3s, Vault, Keycloak</strong>, Langflow, LiteLLM, Langfuse, PostgreSQL, Redis, Qdrant, MinIO, ClickHouse</li>
-              <li>Deployed <strong>Istio + Kiali</strong> for traffic control, configured Envoy + <strong>OPA/OPAL</strong> ext_authz for service mesh authorization; integrated <strong>Keycloak/OIDC SSO</strong> across all services</li>
-              <li>Participated in DEV/INF/PROD environment preparation for enterprise banking sector client — documentation, acceptance testing, compliance with PMI/KB/SOC requirements</li>
+              <li class="jlist-head">SmartSearch dev environment · Timeweb</li>
+              <li>Designed and deployed an isolated dev environment for an AI platform (SmartSearch, agent system): <strong>GitLab + Runner, Harbor, K8s/k3s, Vault, RabbitMQ</strong>, PostgreSQL, Redis, Qdrant, MinIO, ClickHouse, Langflow, Langfuse, LiteLLM, proxy-service — with a 9-VM resource plan and CPU/RAM/NVMe right-sizing</li>
+              <li>Configured build and deploy via <strong>GitLab CI/CD + Helm</strong>, prepared templates for Langflow Agent and Code Agent</li>
+              <li>Deployed <strong>Istio + Kiali</strong> (Gateway, VirtualService, ServiceEntry, DestinationRule) for traffic control; an Envoy + <strong>OPA/OPAL</strong> ext_authz scheme for authorization; <strong>Keycloak/OIDC SSO</strong> across all services, diagnosing callback URL and role issues</li>
+              <li>Worked with LLM integrations (<strong>LiteLLM, GigaChat, Ollama, Vespa</strong>) — separating infrastructure issues from external API and application-level errors</li>
+              <li>Diagnosed and resolved incidents: PostgreSQL connection exhaustion, Vault sealed/raft leader issues, Harbor auth, GitLab 502s, ClickHouse log storms, disk overflow from Docker logs</li>
+              <li>Prepared operational documentation: inventory, runbooks, change-log, access instructions, secret-handling guidelines</li>
+              <li class="jlist-head">Enterprise environment · banking sector · VMware Cloud.ru</li>
+              <li>Participated in DEV/INF/PROD environment preparation for an enterprise client on <strong>VMware Cloud.ru</strong>: <strong>Kubernetes, Istio, Vault, Keycloak</strong>; compliance checks against PMI/KB/SOC requirements, diagnostics and support without exposing secrets, tokens, or kubeconfig</li>
             </ul>
 
-            <div class="arch-diagram r">
-              <div class="arch-title">// infra flow · SmartSearch dev-контур</div>
-              <div class="arch-scroll">
-                <div class="arch-row-main">
-                  <div class="arch-node" data-tip="source · CI/CD">GitLab</div>
-                  <div class="arch-arrow">→</div>
-                  <div class="arch-node" data-tip="private image registry">Harbor</div>
-                  <div class="arch-arrow">→</div>
-                  <div class="arch-node arch-node-hub" data-tip="orchestration · k3s">K8s / k3s</div>
-                </div>
-                <div class="arch-stem"></div>
-                <div class="arch-branches">
-                  <div class="arch-node arch-node-sm" data-tip="secrets management">Vault</div>
-                  <div class="arch-node arch-node-sm" data-tip="SSO · OIDC">Keycloak</div>
-                  <div class="arch-node arch-node-sm" data-tip="Istio + Kiali mesh">Envoy/OPAL</div>
-                  <div class="arch-node arch-node-sm" data-tip="Langflow · LiteLLM · Langfuse · Qdrant · MinIO">AI services</div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -315,26 +311,44 @@
               </div>
             </div>
             <ul class="jlist" data-lang="ru">
-              <li>Мигрировал <strong>12+ микросервисов</strong> из Docker Compose в self-hosted Kubernetes — namespace-изоляция, HPA, Ingress</li>
+              <li class="jlist-head">Kubernetes и контейнеризация</li>
+              <li>Мигрировал <strong>12+ микросервисов</strong> из Docker Compose в self-hosted Kubernetes, сократив время деплоя с ~40 до ~8 минут</li>
+              <li>Настройка и администрирование кластеров: namespace-изоляция, ресурсные лимиты, HPA, Ingress</li>
+              <li class="jlist-head">CI/CD</li>
               <li>Спроектировал CI/CD-пайплайны (<strong>GitLab CI/CD, Jenkins, ArgoCD</strong>) — покрыл 100% продакшен-репозиториев автоматической сборкой и деплоем</li>
               <li>Интегрировал security-сканирование (<strong>Trivy, Gitleaks</strong>) — уязвимости отлавливаются до попадания в прод</li>
-              <li>Развернул HA-кластеры: <strong>PostgreSQL + Patroni + etcd</strong> (3 ноды, uptime 99.9%), Zabbix HA, Jira + Confluence HA</li>
-              <li>Внедрил <strong>Prometheus + Grafana</strong>, ELK + Graylog, Zabbix, Sentry — MTTD с нескольких часов до ~5 минут; Uptime Kuma, <strong>LibreNMS + Oxidized</strong>, NetBox — мониторинг доступности и сетевая документация</li>
-              <li>Ansible-роли и плейбуки — настройка нового сервера <strong>за 15 мин</strong> вместо 2–3 часов вручную; скрипты автоматизации на Python, Bash, PowerShell</li>
-              <li>Terraform IaC, приватный Docker Registry, SSL/TLS (Let's Encrypt), VMware/Hyper-V, AD/DNS/DHCP, Veeam, Zimbra; СУБД: PostgreSQL, MySQL, MongoDB, ClickHouse, MS SQL Server</li>
-              <li>Провёл аудит IT-инфраструктуры, составил и реализовал план модернизации; внедрил <strong>OCS Inventory</strong> для автоматической инвентаризации IT-активов</li>
-              <li>Внедрил DevOps-практики в команде разработки: CI/CD-пайплайны, контейнеризация</li>
+              <li>Настроил приватный Docker Registry и SSL/TLS (Let's Encrypt) с автовыпуском и продлением сертификатов</li>
+              <li class="jlist-head">Высокая доступность (HA)</li>
+              <li>Развернул отказоустойчивые кластеры: <strong>PostgreSQL + Patroni + etcd</strong> (3 ноды, uptime 99.9%), Zabbix HA (2 ноды), Jira + Confluence HA — устранены единые точки отказа</li>
+              <li class="jlist-head">Мониторинг и логирование</li>
+              <li>Внедрил <strong>Prometheus + Grafana</strong>, ELK + Graylog, Zabbix, Sentry — MTTD с нескольких часов до ~5 минут</li>
+              <li>Настроил Uptime Kuma, <strong>LibreNMS + Oxidized</strong>, NetBox — мониторинг доступности и сетевая документация</li>
+              <li class="jlist-head">IaC и автоматизация</li>
+              <li>Ansible-роли и плейбуки — настройка нового сервера <strong>за 15 мин</strong> вместо 2–3 часов вручную; Terraform для воспроизводимых сред; скрипты на Python, Bash, PowerShell</li>
+              <li class="jlist-head">Администрирование</li>
+              <li>Виртуализация (VMware, Hyper-V), AD/DNS/DHCP, резервное копирование (Veeam), почтовый сервер Zimbra; СУБД: PostgreSQL, MySQL, MongoDB, ClickHouse, MS SQL Server</li>
+              <li class="jlist-head">Управление</li>
+              <li>Провёл аудит IT-инфраструктуры, составил и реализовал план модернизации; внедрил <strong>OCS Inventory</strong> вместо ручного учёта в Excel; внедрил DevOps-практики в команде разработки</li>
             </ul>
             <ul class="jlist" data-lang="en">
-              <li>Migrated <strong>12+ microservices</strong> from Docker Compose to self-hosted Kubernetes — namespace isolation, HPA, Ingress</li>
+              <li class="jlist-head">Kubernetes & containerization</li>
+              <li>Migrated <strong>12+ microservices</strong> from Docker Compose to self-hosted Kubernetes, cutting deploy time from ~40 to ~8 minutes</li>
+              <li>Cluster setup and administration: namespace isolation, resource limits, HPA, Ingress</li>
+              <li class="jlist-head">CI/CD</li>
               <li>Designed CI/CD pipelines (<strong>GitLab CI/CD, Jenkins, ArgoCD</strong>) — covered 100% of production repositories with automated builds and deployments</li>
               <li>Integrated security scanning (<strong>Trivy, Gitleaks</strong>) — vulnerabilities caught before reaching production</li>
-              <li>Deployed HA clusters: <strong>PostgreSQL + Patroni + etcd</strong> (3 nodes, 99.9% uptime), Zabbix HA, Jira + Confluence HA</li>
-              <li>Implemented <strong>Prometheus + Grafana</strong>, ELK + Graylog, Zabbix, Sentry — MTTD reduced from hours to ~5 minutes; Uptime Kuma, <strong>LibreNMS + Oxidized</strong>, NetBox — availability monitoring and network documentation</li>
-              <li>Ansible roles and playbooks — new server setup in <strong>15 min</strong> instead of 2–3 hours manually; automation scripts in Python, Bash, PowerShell</li>
-              <li>Terraform IaC, private Docker Registry, SSL/TLS (Let's Encrypt), VMware/Hyper-V, AD/DNS/DHCP, Veeam, Zimbra; databases: PostgreSQL, MySQL, MongoDB, ClickHouse, MS SQL Server</li>
-              <li>Conducted IT infrastructure audit and implemented modernization plan; deployed <strong>OCS Inventory</strong> for automated IT asset tracking</li>
-              <li>Introduced DevOps practices to the development team: CI/CD pipelines, containerization</li>
+              <li>Set up a private Docker Registry and SSL/TLS (Let's Encrypt) with automated issuance and renewal</li>
+              <li class="jlist-head">High availability (HA)</li>
+              <li>Deployed fault-tolerant clusters: <strong>PostgreSQL + Patroni + etcd</strong> (3 nodes, 99.9% uptime), Zabbix HA (2 nodes), Jira + Confluence HA — eliminated single points of failure</li>
+              <li class="jlist-head">Monitoring & logging</li>
+              <li>Implemented <strong>Prometheus + Grafana</strong>, ELK + Graylog, Zabbix, Sentry — MTTD reduced from hours to ~5 minutes</li>
+              <li>Set up Uptime Kuma, <strong>LibreNMS + Oxidized</strong>, NetBox — availability monitoring and network documentation</li>
+              <li class="jlist-head">IaC & automation</li>
+              <li>Ansible roles and playbooks — new server setup in <strong>15 min</strong> instead of 2–3 hours manually; Terraform for reproducible environments; automation scripts in Python, Bash, PowerShell</li>
+              <li class="jlist-head">Administration</li>
+              <li>Virtualization (VMware, Hyper-V), AD/DNS/DHCP, backups (Veeam), Zimbra mail server; databases: PostgreSQL, MySQL, MongoDB, ClickHouse, MS SQL Server</li>
+              <li class="jlist-head">Management</li>
+              <li>Conducted an IT infrastructure audit and implemented a modernization plan; deployed <strong>OCS Inventory</strong> replacing manual Excel tracking; introduced DevOps practices to the development team</li>
             </ul>
           </div>
         </div>
@@ -483,6 +497,8 @@
         <div class="chips">
           <span class="chip chip-cat" data-tip="reverse proxy · SSL">Nginx</span>
           <span class="chip chip-cat" data-tip="load balancer">HAProxy</span>
+          <span class="chip chip-cat" data-tip="VRRP failover">Keepalived</span>
+          <span class="chip chip-cat" data-tip="service discovery">Consul</span>
         </div>
       </div>
 
@@ -561,6 +577,18 @@
           <span class="chip chip-cat" data-tip="centralized logs">ELK Stack</span>
           <span class="chip chip-cat" data-tip="log analysis">Graylog</span>
           <span class="chip chip-cat" data-tip="error tracking">Sentry</span>
+          <span class="chip chip-cat" data-tip="uptime checks">Uptime Kuma</span>
+          <span class="chip chip-cat" data-tip="network monitoring · config backup">LibreNMS + Oxidized</span>
+          <span class="chip chip-cat" data-tip="network documentation">NetBox</span>
+        </div>
+      </div>
+
+      <div class="skill-row" data-cat="management">
+        <span class="sg-label">Management & Tools</span>
+        <div class="chips">
+          <span class="chip chip-cat" data-tip="issue tracking">Jira</span>
+          <span class="chip chip-cat" data-tip="docs · wiki">Confluence</span>
+          <span class="chip chip-cat" data-tip="IT asset inventory">OCS Inventory</span>
         </div>
       </div>
 
@@ -810,6 +838,9 @@
 <button id="back-to-top" aria-label="Наверх">
   <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="18,15 12,9 6,15"/></svg>
 </button>
+
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
 
 <script src="main.js"></script>
 
