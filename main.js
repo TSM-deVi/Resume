@@ -360,3 +360,17 @@ setupCopyCard('btn-copy-email', 'btn-copy-label', 'copy-icon',    'timir-ivaniv@
     if (!running) runPipeline();
   });
 })();
+
+// ── Session uptime ticker ──
+(function () {
+  const el = document.getElementById('footer-uptime');
+  if (!el) return;
+  const start = Date.now();
+  const pad = n => String(n).padStart(2, '0');
+  function tick() {
+    const s = Math.floor((Date.now() - start) / 1000);
+    el.textContent = `${pad(Math.floor(s / 3600))}:${pad(Math.floor(s / 60) % 60)}:${pad(s % 60)}`;
+  }
+  tick();
+  setInterval(tick, 1000);
+})();

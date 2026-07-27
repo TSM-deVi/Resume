@@ -186,23 +186,29 @@
       </div>
     </div>
 
-    <!-- Stats -->
-    <div class="stats">
-      <div class="stat stat-i r">
-        <div class="stat-val" data-count="4" data-suffix="+">0</div>
-        <div class="stat-lbl"><span data-lang="ru">лет в IT</span><span data-lang="en">years in IT</span></div>
-      </div>
-      <div class="stat stat-p r d1">
-        <div class="stat-val" data-count="2" data-suffix="+">0</div>
-        <div class="stat-lbl"><span data-lang="ru">лет DevOps</span><span data-lang="en">years DevOps</span></div>
-      </div>
-      <div class="stat stat-c r d2">
-        <div class="stat-val" data-count="12" data-suffix="+">0</div>
-        <div class="stat-lbl"><span data-lang="ru">сервисов в K8s</span><span data-lang="en">services in K8s</span></div>
-      </div>
-      <div class="stat stat-g r d3">
-        <div class="stat-val" data-text="100%">0</div>
-        <div class="stat-lbl"><span data-lang="ru">CI/CD покрытие</span><span data-lang="en">CI/CD coverage</span></div>
+    <!-- Status line -->
+    <div class="status-line r">
+      <span class="status-prompt">$ status --summary</span>
+      <div class="status-items">
+        <div class="status-item">
+          <span class="stat-val" data-count="4" data-suffix="+">0</span>
+          <span class="status-key"><span data-lang="ru">лет в IT</span><span data-lang="en">years in IT</span></span>
+        </div>
+        <span class="status-sep">/</span>
+        <div class="status-item">
+          <span class="stat-val" data-count="2" data-suffix="+">0</span>
+          <span class="status-key"><span data-lang="ru">лет DevOps</span><span data-lang="en">years DevOps</span></span>
+        </div>
+        <span class="status-sep">/</span>
+        <div class="status-item">
+          <span class="stat-val" data-count="12" data-suffix="+">0</span>
+          <span class="status-key"><span data-lang="ru">сервисов в K8s</span><span data-lang="en">services in K8s</span></span>
+        </div>
+        <span class="status-sep">/</span>
+        <div class="status-item">
+          <span class="stat-val" data-text="100%">0</span>
+          <span class="status-key"><span data-lang="ru">CI/CD покрытие</span><span data-lang="en">CI/CD coverage</span></span>
+        </div>
       </div>
     </div>
   </section>
@@ -643,25 +649,29 @@
       <span data-lang="ru">Образование</span>
       <span data-lang="en">Education</span>
     </h2>
-    <div class="edu-grid">
-      <div class="edu-card r">
+    <div class="edu-list">
+      <div class="edu-row r">
         <div class="edu-yr">2020</div>
-        <div class="edu-place">КГУ им. Б.Б. Городовикова</div>
-        <div class="edu-spec">
-          <span data-lang="ru">Информационная безопасность</span>
-          <span data-lang="en">Information Security</span>
+        <div class="edu-mid">
+          <div class="edu-place">КГУ им. Б.Б. Городовикова</div>
+          <div class="edu-spec">
+            <span data-lang="ru">Информационная безопасность</span>
+            <span data-lang="en">Information Security</span>
+          </div>
         </div>
         <span class="edu-badge">
           <span data-lang="ru">Неоконченное высшее</span>
           <span data-lang="en">Incomplete Higher Education</span>
         </span>
       </div>
-      <div class="edu-card r d1">
+      <div class="edu-row r d1">
         <div class="edu-yr">2019</div>
-        <div class="edu-place">КГУ им. Б.Б. Городовикова</div>
-        <div class="edu-spec">
-          <span data-lang="ru">Программирование в компьютерных системах — Техник-программист</span>
-          <span data-lang="en">Computer Systems Programming — Programmer Technician</span>
+        <div class="edu-mid">
+          <div class="edu-place">КГУ им. Б.Б. Городовикова</div>
+          <div class="edu-spec">
+            <span data-lang="ru">Программирование в компьютерных системах — Техник-программист</span>
+            <span data-lang="en">Computer Systems Programming — Programmer Technician</span>
+          </div>
         </div>
         <span class="edu-badge">
           <span data-lang="ru">Среднее специальное</span>
@@ -674,39 +684,33 @@
       <span data-lang="ru">Сертификаты</span>
       <span data-lang="en">Certifications</span>
     </div>
-    <div class="cert-grid">
+    <div class="cert-strip r">
 
-      <div class="cert-card cert-card-b r">
-        <div class="cert-badge cert-badge-b">BASE</div>
-        <div class="cert-body">
-          <div class="cert-name">
-            <span data-lang="ru">Базовый курс</span>
-            <span data-lang="en">Foundational Course</span>
-          </div>
-          <div class="cert-issuer">Облако VMware</div>
-        </div>
+      <div class="cert-pill cert-pill-b">
+        <span class="cert-pill-badge">BASE</span>
+        <span class="cert-pill-name">
+          <span data-lang="ru">Базовый курс</span>
+          <span data-lang="en">Foundational Course</span>
+        </span>
+        <span class="cert-pill-issuer">Облако VMware</span>
       </div>
 
-      <div class="cert-card cert-card-p r d1">
-        <div class="cert-badge cert-badge-p">PRO</div>
-        <div class="cert-body">
-          <div class="cert-name">
-            <span data-lang="ru">Профессиональный курс</span>
-            <span data-lang="en">Professional Course</span>
-          </div>
-          <div class="cert-issuer">Облако VMware</div>
-        </div>
+      <div class="cert-pill cert-pill-p">
+        <span class="cert-pill-badge">PRO</span>
+        <span class="cert-pill-name">
+          <span data-lang="ru">Профессиональный курс</span>
+          <span data-lang="en">Professional Course</span>
+        </span>
+        <span class="cert-pill-issuer">Облако VMware</span>
       </div>
 
-      <div class="cert-card cert-card-e r d2">
-        <div class="cert-badge cert-badge-e">EXP</div>
-        <div class="cert-body">
-          <div class="cert-name">
-            <span data-lang="ru">Экспертный курс</span>
-            <span data-lang="en">Expert Course</span>
-          </div>
-          <div class="cert-issuer">Облако VMware</div>
-        </div>
+      <div class="cert-pill cert-pill-e">
+        <span class="cert-pill-badge">EXP</span>
+        <span class="cert-pill-name">
+          <span data-lang="ru">Экспертный курс</span>
+          <span data-lang="en">Expert Course</span>
+        </span>
+        <span class="cert-pill-issuer">Облако VMware</span>
       </div>
 
     </div>
@@ -714,51 +718,50 @@
 
   <!-- CTA -->
   <section id="cta">
-    <div class="cta-card r">
-      <div class="cta-title">
-        <span data-lang="ru">Открыт к предложениям</span>
-        <span data-lang="en">Open to Opportunities</span>
+    <div class="cta-terminal r">
+      <div class="terminal-bar">
+        <div class="t-dot t-red"></div>
+        <div class="t-dot t-yel"></div>
+        <div class="t-dot t-grn"></div>
+        <span class="terminal-title">temiriv@devops ~ contact</span>
       </div>
-      <p class="cta-sub">
-        <span data-lang="ru">Развиваюсь в сторону SRE и Platform Engineering.<br>
-        Ищу команду, где инфраструктура — это продукт, а не фон.</span>
-        <span data-lang="en">Moving toward SRE and Platform Engineering.<br>
-        Looking for a team where infrastructure is a product, not a backdrop.</span>
-      </p>
+      <div class="terminal-body">
+        <div class="tl">
+          <div class="tl-cmd"><span class="tl-prompt">❯</span> cat intent.txt</div>
+          <div class="tl-out">
+            <span data-lang="ru">Развиваюсь в сторону SRE и Platform Engineering. Ищу команду, где инфраструктура — это продукт, а не фон.</span>
+            <span data-lang="en">Moving toward SRE and Platform Engineering. Looking for a team where infrastructure is a product, not a backdrop.</span>
+          </div>
+        </div>
+        <div class="tl">
+          <div class="tl-cmd"><span class="tl-prompt">❯</span> cat status.txt</div>
+          <div class="tl-out"><span class="tl-ok">● open to work</span> <span class="cta-online-dot"></span></div>
+        </div>
+        <div class="tl-sep"></div>
 
-      <div class="contact-cards">
-
-        <!-- Telegram -->
-        <button class="contact-card contact-card-tg" id="btn-copy-tg">
-          <div class="contact-card-icon" style="position:relative">
-            <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.941z"/></svg>
-            <span class="online-dot"></span>
-          </div>
-          <div class="contact-card-body">
-            <div class="contact-card-label">Telegram</div>
-            <div class="contact-card-value" id="btn-tg-label">@ktylhus</div>
-          </div>
-          <div class="contact-card-arrow" id="copy-icon-tg">
-            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-          </div>
+        <button class="tl-contact" id="btn-copy-tg">
+          <span class="tl-prompt">❯</span>
+          <span class="tl-contact-cmd">ping</span>
+          <span class="tl-contact-val" id="btn-tg-label">@ktylhus</span>
+          <span class="tl-contact-icon" id="copy-icon-tg">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          </span>
+        </button>
+        <button class="tl-contact" id="btn-copy-email">
+          <span class="tl-prompt">❯</span>
+          <span class="tl-contact-cmd">mail</span>
+          <span class="tl-contact-val" id="btn-copy-label">timir-ivaniv@yandex.ru</span>
+          <span class="tl-contact-icon" id="copy-icon">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          </span>
         </button>
 
-        <!-- Email -->
-        <button class="contact-card contact-card-email" id="btn-copy-email">
-          <div class="contact-card-icon">
-            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          </div>
-          <div class="contact-card-body">
-            <div class="contact-card-label">Email</div>
-            <div class="contact-card-value" id="btn-copy-label">timir-ivaniv@yandex.ru</div>
-          </div>
-          <div class="contact-card-arrow" id="copy-icon">
-            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-          </div>
-        </button>
-
+        <div class="tl-sep term-sep-int"></div>
+        <div class="term-int">
+          <span class="tl-prompt">❯</span>
+          <span class="cta-cursor"></span>
+        </div>
       </div>
-
     </div>
   </section>
 
@@ -777,7 +780,7 @@
         <span class="footer-item">timir-ivaniv@yandex.ru</span>
       </div>
       <div class="footer-terminal">
-        <span class="ft-prompt">❯</span> exit 0<span class="ft-comment"> // thanks for visiting</span>
+        <span class="ft-prompt">❯</span> uptime <span id="footer-uptime" class="ft-uptime">00:00:00</span><span class="ft-comment"> // this session</span>
       </div>
     </div>
   </div>
