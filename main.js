@@ -1,3 +1,29 @@
+// ── Boot sequence (once per session) ──
+(function () {
+  const screen = document.getElementById('boot-screen');
+  if (!screen) return;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (reduce || sessionStorage.getItem('booted')) {
+    screen.remove();
+    return;
+  }
+  sessionStorage.setItem('booted', '1');
+
+  const lines = Array.from(screen.querySelectorAll('.boot-line'));
+  document.documentElement.style.overflow = 'hidden';
+
+  lines.forEach((line, i) => {
+    setTimeout(() => line.classList.add('boot-show'), 150 + i * 260);
+  });
+
+  setTimeout(() => {
+    screen.classList.add('boot-hidden');
+    document.documentElement.style.overflow = '';
+    setTimeout(() => screen.remove(), 450);
+  }, 150 + lines.length * 260 + 350);
+})();
+
 // ── Scroll progress + Back to top + Nav shadow ──
 const backBtn      = document.getElementById('back-to-top');
 const nav          = document.querySelector('nav');
@@ -406,17 +432,17 @@ setupCopyCard('btn-copy-email', 'btn-copy-label', 'copy-icon',    'timir-ivaniv@
 
 // ── Tilt + shine (achievement tiles, hero terminal) ──
 if (window.matchMedia('(pointer: fine)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  const tiltEls = document.querySelectorAll('.ach, .hero-terminal');
-  const MAX_TILT = 5;
+  const bigTilt   = document.querySelectorAll('.ach, .hero-terminal, .cta-terminal');
+  const smallTilt = document.querySelectorAll('.skill-tile');
 
-  tiltEls.forEach(el => {
+  function bindTilt(el, maxTilt, lift) {
     el.addEventListener('mousemove', e => {
       const rect = el.getBoundingClientRect();
       const px = (e.clientX - rect.left) / rect.width;
       const py = (e.clientY - rect.top) / rect.height;
-      const rotY = (px - 0.5) * MAX_TILT * 2;
-      const rotX = (0.5 - py) * MAX_TILT * 2;
-      el.style.transform = `perspective(900px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-4px)`;
+      const rotY = (px - 0.5) * maxTilt * 2;
+      const rotX = (0.5 - py) * maxTilt * 2;
+      el.style.transform = `perspective(900px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(${lift}px)`;
       el.style.setProperty('--mx', `${px * 100}%`);
       el.style.setProperty('--my', `${py * 100}%`);
       el.classList.add('tilt-active');
@@ -425,7 +451,10 @@ if (window.matchMedia('(pointer: fine)').matches && !window.matchMedia('(prefers
       el.style.transform = '';
       el.classList.remove('tilt-active');
     });
-  });
+  }
+
+  bigTilt.forEach(el => bindTilt(el, 5, -4));
+  smallTilt.forEach(el => bindTilt(el, 8, -3));
 }
 
 // ── Full-page network background ──
