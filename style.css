@@ -18,17 +18,40 @@
   --cyan:      #39c5cf;
 }
 
-html { scroll-behavior: smooth; overflow-x: hidden; }
+html {
+  scroll-behavior: smooth; overflow-x: hidden;
+  background: var(--bg);
+  background-image: radial-gradient(circle, rgba(255,255,255,.045) 1px, transparent 1px);
+  background-size: 26px 26px;
+}
 
 body {
   font-family: 'Inter', -apple-system, sans-serif;
-  background: var(--bg);
+  background: none;
   color: var(--text);
   min-height: 100vh;
-  background-image:
-    radial-gradient(at 10% 0%, rgba(56,139,253,.07) 0%, transparent 45%),
-    radial-gradient(at 90% 100%, rgba(63,185,80,.04) 0%, transparent 45%);
   overflow-x: hidden;
+  position: relative;
+}
+
+/* Aurora backdrop */
+body::before {
+  content: '';
+  position: fixed; inset: -10%; z-index: -1; pointer-events: none;
+  background-image:
+    radial-gradient(circle at 18% 18%, rgba(56,139,253,.22), transparent 42%),
+    radial-gradient(circle at 82% 12%, rgba(63,185,80,.16), transparent 40%),
+    radial-gradient(circle at 55% 92%, rgba(163,113,247,.14), transparent 45%),
+    radial-gradient(circle at 8% 85%, rgba(57,197,207,.12), transparent 40%);
+  filter: blur(70px);
+  animation: aurora-drift 26s ease-in-out infinite alternate;
+}
+@keyframes aurora-drift {
+  0%   { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
+  100% { background-position: 5% 7%, -6% 4%, 4% -5%, -4% 6%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body::before { animation: none; }
 }
 
 a { color: var(--accent-lt); text-decoration: none; }
@@ -126,19 +149,15 @@ section + section { border-top: 1px solid var(--border); }
   margin-bottom: 2.5rem;
 }
 
-.hero-left { position: relative; overflow: hidden; z-index: 1; }
-.hero-left::before {
-  content: 'DEVOPS';
-  position: absolute;
-  font-family: 'Inter', sans-serif;
-  font-size: 8.5rem; font-weight: 800;
-  letter-spacing: -0.05em;
-  color: rgba(56,139,253,.035);
-  top: -1rem; left: -0.5rem;
-  z-index: 0; pointer-events: none; user-select: none;
-  white-space: nowrap; line-height: 1;
+.hero-left { position: relative; }
+
+#hero { position: relative; }
+#hero-net {
+  position: absolute; inset: -2rem -2rem auto -2rem; height: calc(100% + 4rem);
+  width: calc(100% + 4rem);
+  z-index: 0; pointer-events: none;
 }
-.hero-left > * { position: relative; z-index: 1; }
+#hero > *:not(#hero-net) { position: relative; z-index: 1; }
 
 .hero-badge {
   display: inline-flex; align-items: center; gap: 7px;
@@ -632,7 +651,7 @@ h1 {
 .ach-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: 128px;
+  grid-auto-rows: minmax(136px, auto);
   gap: 1rem;
 }
 .ach-grid .ach:nth-child(1) { grid-column: span 2; grid-row: span 2; }
