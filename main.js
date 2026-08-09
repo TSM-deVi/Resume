@@ -439,6 +439,31 @@ setupCopyCard('btn-copy-email', 'btn-copy-label', 'copy-icon',    'timir-ivaniv@
   });
 })();
 
+// ── Frost sheen: feed the pointer position to the glass surfaces ──
+(function () {
+  if (!window.matchMedia('(pointer: fine) and (hover: hover)').matches) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const SEL = '.ach, .skill-tile, .job-company-block, .edu-row, .ticket,' +
+              '.hero-terminal, .cta-terminal, .status-line';
+  let latest = null, queued = false;
+
+  // One delegated listener, rAF-throttled — cheaper than binding ~70 cards.
+  document.addEventListener('mousemove', e => {
+    latest = e;
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(() => {
+      queued = false;
+      const card = latest.target.closest && latest.target.closest(SEL);
+      if (!card) return;
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', (latest.clientX - r.left) + 'px');
+      card.style.setProperty('--my', (latest.clientY - r.top) + 'px');
+    });
+  }, { passive: true });
+})();
+
 // ── Tilt + shine: removed.
 // The Slash system defines elevation through surface steps and 1px hairlines,
 // never through shadows or 3D transforms. Cards stay flat on purpose.

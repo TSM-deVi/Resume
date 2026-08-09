@@ -26,6 +26,9 @@
   --violet-lt: #8a68f7;
   --blueprint: #b6d9fc;
   --skywash: linear-gradient(180deg, #d8ecf8 0%, #98c0ef 100%);
+  /* success state — Deep Teal is an AuthKit token, so the green stays in-system */
+  --ok:    #269684;
+  --ok-lt: #3fbfa4;
 
   /* ── Frost: borders are inset hairlines, never solid strokes ── */
   --edge:    rgba(186,215,247,.12);
@@ -397,8 +400,7 @@ h1 .accent-name { font-style: normal; font-weight: 500; }
   transition: color .2s, box-shadow .2s, transform .2s;
 }
 .stack-tag:hover { color: var(--white); box-shadow: inset 0 1px 1px rgba(216,236,248,.3), var(--halo); transform: translateY(-2px); }
-.stack-tag.s-i, .stack-tag.s-g, .stack-tag.s-y,
-.stack-tag.s-p, .stack-tag.s-c { color: var(--moon); }
+.stack-tag.s-i, .stack-tag.s-g, .stack-tag.s-y, .stack-tag.s-p { color: var(--moon); }
 .chip-icon { width: 15px; height: 15px; flex-shrink: 0; object-fit: contain; }
 
 /* ── PIPELINE ── */
@@ -441,7 +443,14 @@ h1 .accent-name { font-style: normal; font-weight: 500; }
   content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 0;
   background: var(--blueprint); transition: width .35s ease;
 }
-.pl-line.pl-done::after { width: 100%; }
+.pl-line.pl-done::after { width: 100%; background: var(--ok-lt); }
+/* a pulse of light runs down the leg the moment it completes */
+.pl-line.pl-done::before {
+  content: ''; position: absolute; top: 0; left: 0; height: 100%; width: 40%;
+  background: linear-gradient(90deg, transparent, rgba(216,236,248,.9), transparent);
+  animation: pl-surge .9s ease-out 1;
+}
+@keyframes pl-surge { from { transform: translateX(-100%); } to { transform: translateX(320%); } }
 
 @keyframes pl-spin { to { transform: rotate(360deg); } }
 .pl-stage.pl-run .pl-circle { color: var(--frost); box-shadow: inset 0 1px 1px rgba(216,236,248,.3), var(--halo); }
@@ -451,8 +460,29 @@ h1 .accent-name { font-style: normal; font-weight: 500; }
   animation: pl-spin .65s linear infinite; pointer-events: none;
 }
 .pl-stage.pl-run .pl-label { color: var(--frost); }
-.pl-stage.pl-done .pl-circle { color: var(--blueprint); box-shadow: inset 0 1px 1px rgba(216,236,248,.24), var(--halo); }
-.pl-stage.pl-done .pl-label { color: var(--moon); }
+/* passed — a teal ring, so a glance tells you the stage succeeded */
+.pl-stage.pl-done .pl-circle {
+  color: var(--ok-lt);
+  border-color: var(--ok-lt);
+  background: rgba(38,150,132,.12);
+  box-shadow: inset 0 1px 1px rgba(216,236,248,.24), 0 0 16px rgba(63,191,164,.4);
+  animation: pl-land .5s cubic-bezier(.16,1,.3,1) 1;
+}
+@keyframes pl-land {
+  0%   { transform: scale(1);    box-shadow: 0 0 0 0 rgba(63,191,164,.55); }
+  55%  { transform: scale(1.12); box-shadow: 0 0 0 10px rgba(63,191,164,0); }
+  100% { transform: scale(1);    box-shadow: inset 0 1px 1px rgba(216,236,248,.24), 0 0 16px rgba(63,191,164,.4); }
+}
+.pl-stage.pl-done .pl-label { color: var(--ok-lt); }
+/* small tick in the corner of a passed stage */
+.pl-stage.pl-done .pl-circle::after {
+  content: '';
+  position: absolute; right: -2px; bottom: -2px;
+  width: 15px; height: 15px; border-radius: 50%;
+  background: var(--ok); border: 1.5px solid var(--canvas);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='9' viewBox='0 0 24 24' fill='none' stroke='%23e9fbf6' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: center;
+}
 
 .pl-stage[data-tip]::after {
   content: attr(data-tip);
@@ -626,20 +656,28 @@ h1 .accent-name { font-style: normal; font-weight: 500; }
   border: 1px solid var(--edge);
   border-radius: var(--r-card);
   box-shadow: var(--glass-card);
-  padding: 2rem 2.25rem;
-  display: flex; align-items: flex-start; flex-wrap: wrap;
-  gap: 1.5rem 2.5rem;
+  padding: 1.75rem 0 2rem;
+  display: block;                    /* instrument readout, not a text line */
 }
 .status-prompt {
+  display: block;
   font-family: var(--font-mono);
   font-size: 12px; letter-spacing: .10em; text-transform: uppercase;
-  color: var(--fog); flex-shrink: 0;
-  padding-top: .85rem;              /* sits on the numbers' baseline */
+  color: var(--fog);
+  padding: 0 2rem 1.5rem;
+  border-bottom: 1px solid var(--edge);
+  margin-bottom: 1.75rem;
 }
-/* flex-start, not baseline: these children are columns, so their baseline is
-   taken from the number and the captions below drift out of line. */
-.status-items { display: flex; align-items: flex-start; flex-wrap: wrap; gap: 1.5rem 3.5rem; flex: 1; }
-.status-item { display: flex; flex-direction: column; align-items: flex-start; gap: .5rem; }
+/* Equal columns divided by hairlines. Nothing competes for width, so no
+   arrangement of labels can squeeze the readout. */
+.status-items {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+}
+.status-item {
+  display: flex; flex-direction: column; align-items: flex-start; gap: .6rem;
+  padding: 0 2rem;
+}
+.status-item + .status-item { border-left: 1px solid var(--edge); }
 .status-sep { display: none; }
 .status-item .stat-val {
   font-family: var(--font-display);
@@ -649,11 +687,20 @@ h1 .accent-name { font-style: normal; font-weight: 500; }
   -webkit-text-fill-color: transparent;
   font-variant-numeric: tabular-nums;
 }
-.status-key { font-size: 14px; color: var(--fog); white-space: nowrap; }
-@media (max-width: 720px) {
-  .status-line { flex-direction: column; align-items: flex-start; padding: 1.5rem; }
-  .status-items { gap: 1.5rem 2rem; }
-  .status-item .stat-val { font-size: 32px; }
+.status-key { font-size: 14px; color: var(--fog); line-height: 1.3; }
+@media (max-width: 900px) {
+  .status-items { grid-template-columns: repeat(2, 1fr); row-gap: 1.75rem; }
+  .status-item:nth-child(3) { border-left: none; }
+  .status-item:nth-child(n+3) { padding-top: 1.75rem; border-top: 1px solid var(--edge); }
+}
+@media (max-width: 520px) {
+  .status-line { padding: 1.5rem 0; }
+  .status-prompt { padding: 0 1.5rem 1.25rem; margin-bottom: 1.5rem; }
+  .status-items { grid-template-columns: 1fr; row-gap: 0; }
+  .status-item { padding: 1.25rem 1.5rem; border-left: none !important; }
+  .status-item + .status-item { border-top: 1px solid var(--edge); }
+  .status-item:nth-child(n+3) { padding-top: 1.25rem; }
+  .status-item .stat-val { font-size: 34px; }
 }
 
 /* ── TIMELINE ── */
@@ -866,10 +913,13 @@ h1 .accent-name { font-style: normal; font-weight: 500; }
   pointer-events: none;
 }
 
+/* The label leads. A bare "100%" tells you nothing until you know what
+   is being measured, so it gets weight instead of hiding as fine print. */
 .ach-label {
-  font-family: var(--font-mono);
-  font-size: 12px; letter-spacing: .10em; text-transform: uppercase;
-  color: var(--fog); margin-bottom: 1rem;
+  font-family: var(--font-ui);
+  font-size: 15px; font-weight: 500; letter-spacing: -.01em;
+  color: var(--moon); margin-bottom: .9rem;
+  padding-bottom: .9rem; border-bottom: 1px solid var(--edge);
   position: relative; z-index: 1;
 }
 .ach-val {
@@ -885,7 +935,24 @@ h1 .accent-name { font-style: normal; font-weight: 500; }
   font-variant-numeric: tabular-nums;
   position: relative; z-index: 1;
 }
-.ach-val.v-g, .ach-val.v-i, .ach-val.v-c, .ach-val.v-y { background: var(--skywash); }
+/* No per-colour override here. `background:` is a shorthand and resets
+   background-clip to border-box, which killed the text clip above and painted
+   the gradient as a solid plate with invisible digits on top. */
+
+/* before → after, so the improvement reads without doing arithmetic.
+   These children need an explicit fill: the parent clips a gradient to its
+   text, and without this they'd inherit the transparent fill and vanish. */
+.ach-was {
+  font-size: .56em; color: var(--fog);
+  -webkit-text-fill-color: var(--fog);
+  text-decoration: line-through;
+  text-decoration-color: rgba(157,167,186,.5);
+}
+.ach-arrow {
+  font-size: .58em; margin: 0 .34em; color: var(--violet-lt);
+  -webkit-text-fill-color: var(--violet-lt);
+}
+.ach-now { white-space: nowrap; }
 .ach-text { font-size: 16px; color: var(--fog); line-height: 1.5; max-width: 40ch; position: relative; z-index: 1; }
 .ach-text strong { color: var(--frost); font-weight: 500; }
 
@@ -970,6 +1037,32 @@ h1 .accent-name { font-style: normal; font-weight: 500; }
   animation: blink-cur .85s step-start infinite;
 }
 
+/* ── FROST SHEEN — light travels across the glass under the pointer ──
+   Physically the right layer: a highlight on the pane sits in front of what
+   is behind it, so this overlays the card rather than hiding under it. */
+.ach, .skill-tile, .job-company-block, .edu-row,
+.ticket, .hero-terminal, .cta-terminal, .status-line {
+  --mx: 50%; --my: 50%;
+  position: relative;
+}
+.ach::after, .skill-tile::after, .job-company-block::after, .edu-row::after,
+.ticket::after, .hero-terminal::after, .cta-terminal::after, .status-line::after {
+  content: ''; position: absolute; inset: 0;
+  border-radius: inherit; pointer-events: none;
+  background: radial-gradient(circle 260px at var(--mx) var(--my),
+              rgba(216,236,248,.11), transparent 62%);
+  opacity: 0; transition: opacity .4s ease;
+}
+.ach:hover::after, .skill-tile:hover::after, .job-company-block:hover::after,
+.edu-row:hover::after, .ticket:hover::after, .hero-terminal:hover::after,
+.cta-terminal:hover::after, .status-line:hover::after { opacity: 1; }
+
+@media (pointer: coarse), (hover: none), (prefers-reduced-motion: reduce) {
+  .ach::after, .skill-tile::after, .job-company-block::after, .edu-row::after,
+  .ticket::after, .hero-terminal::after, .cta-terminal::after,
+  .status-line::after { display: none; }
+}
+
 /* ── REVEAL ── */
 .r { opacity: 0; transform: translateY(18px); transition: opacity .55s cubic-bezier(0,0,.2,1), transform .55s cubic-bezier(0,0,.2,1); }
 .r.v  { opacity: 1; transform: none; }
@@ -1032,13 +1125,6 @@ body.lang-en       [data-lang="ru"] { display: none !important; }
 .nav-hamburger.open span:nth-child(2) { opacity: 0; }
 .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-/* ── ONLINE DOT ── */
-.online-dot {
-  position: absolute; top: -3px; right: -3px;
-  width: 9px; height: 9px; border-radius: 50%;
-  background: var(--blueprint); border: 2px solid var(--canvas);
-  animation: pulse-dot 2s ease-in-out infinite;
-}
 
 /* ── RESPONSIVE ── */
 @media (max-width: 1040px) { .hero-grid { gap: 3rem; grid-template-columns: 1fr 330px; } }
@@ -1095,6 +1181,24 @@ body.cur-hover #cursor-dot { transform: translate(-50%, -50%) scale(.6); }
 
 /* ── FOCUS RINGS ── */
 :focus-visible { outline: 2px solid var(--violet); outline-offset: 3px; border-radius: var(--r-input); }
+
+/* ── FORCED COLORS (Windows high contrast) ──
+   Skywash relies on background-clip:text with a transparent fill. Forced-colors
+   replaces backgrounds with the system palette, which would leave that text
+   invisible. Drop the clip and hand the type back to the OS. */
+@media (forced-colors: active) {
+  h1, .nav-logo, .sec-title > span[data-lang],
+  .ach-val, .status-item .stat-val, .edu-yr {
+    background: none !important;
+    -webkit-text-fill-color: CanvasText !important;
+    color: CanvasText !important;
+  }
+  .ach::after, .skill-tile::after, .job-company-block::after, .edu-row::after,
+  .ticket::after, .hero-terminal::after, .cta-terminal::after,
+  .status-line::after, .hero-sky, #bg-net, body::before { display: none !important; }
+  .ach, .skill-tile, .job-company-block, .edu-row, .status-line,
+  .hero-terminal, .cta-terminal, .ticket { border: 1px solid CanvasText; }
+}
 
 /* ── REDUCED MOTION ── */
 @media (prefers-reduced-motion: reduce) {
