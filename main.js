@@ -204,9 +204,9 @@ startTypewriter();
 // ── Console Easter Egg ──
 try {
   const _cs = [
-    'color:#cc9166;font-family:monospace;font-size:12px;line-height:1.6;',
-    'color:#93a888;font-family:monospace;font-size:11px;',
-    'color:#9194a1;font-family:monospace;font-size:11px;',
+    'color:#7084ff;font-family:monospace;font-size:12px;line-height:1.6;',
+    'color:#3dd6f5;font-family:monospace;font-size:11px;',
+    'color:#a7a9ac;font-family:monospace;font-size:11px;',
   ];
   console.log(
     '%c╔══════════════════════════════════════════════╗\n' +
@@ -475,7 +475,7 @@ setupCopyCard('btn-copy-email', 'btn-copy-label', 'copy-icon',    'timir-ivaniv@
         const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y;
         const dist = Math.sqrt(dx * dx + dy * dy);
         if (dist < LINK_DIST) {
-          ctx.strokeStyle = `rgba(119,122,136,${0.14 * (1 - dist / LINK_DIST)})`;
+          ctx.strokeStyle = `rgba(112,132,255,${0.20 * (1 - dist / LINK_DIST)})`;
           ctx.lineWidth = 1;
           ctx.beginPath();
           ctx.moveTo(nodes[i].x, nodes[i].y);
@@ -485,7 +485,7 @@ setupCopyCard('btn-copy-email', 'btn-copy-label', 'copy-icon',    'timir-ivaniv@
       }
     }
     nodes.forEach(n => {
-      ctx.fillStyle = 'rgba(174,147,87,.38)';
+      ctx.fillStyle = 'rgba(112,132,255,.5)';
       ctx.beginPath();
       ctx.arc(n.x, n.y, 1.6, 0, Math.PI * 2);
       ctx.fill();
