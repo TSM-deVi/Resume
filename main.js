@@ -29,6 +29,9 @@ const backBtn      = document.getElementById('back-to-top');
 const nav          = document.querySelector('nav');
 const progressBar  = document.getElementById('scroll-progress');
 
+const heroSky = document.querySelector('.hero-sky');
+const _reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 let _scrollTicking = false;
 function _onScroll() {
   const scrollY   = window.scrollY;
@@ -36,6 +39,12 @@ function _onScroll() {
   progressBar.style.width = (scrollY / docHeight * 100) + '%';
   backBtn.classList.toggle('visible', scrollY > 400);
   nav.classList.toggle('scrolled', scrollY > 10);
+
+  // Parallax: the sky trails the page. Capped so the plate never runs out
+  // from under its own fade.
+  if (heroSky && !_reduceMotion) {
+    heroSky.style.setProperty('--par', Math.min(scrollY * 0.18, 90) + 'px');
+  }
   _scrollTicking = false;
 }
 window.addEventListener('scroll', () => {
@@ -204,9 +213,9 @@ startTypewriter();
 // ── Console Easter Egg ──
 try {
   const _cs = [
-    'color:#af50ff;font-family:monospace;font-size:12px;line-height:1.6;',
-    'color:#e1bdff;font-family:monospace;font-size:11px;',
-    'color:#828384;font-family:monospace;font-size:11px;',
+    'color:#8a68f7;font-family:monospace;font-size:12px;line-height:1.6;',
+    'color:#b6d9fc;font-family:monospace;font-size:11px;',
+    'color:#9da7ba;font-family:monospace;font-size:11px;',
   ];
   console.log(
     '%c╔══════════════════════════════════════════════╗\n' +
@@ -475,7 +484,7 @@ setupCopyCard('btn-copy-email', 'btn-copy-label', 'copy-icon',    'timir-ivaniv@
         const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y;
         const dist = Math.sqrt(dx * dx + dy * dy);
         if (dist < LINK_DIST) {
-          ctx.strokeStyle = `rgba(175,80,255,${0.16 * (1 - dist / LINK_DIST)})`;
+          ctx.strokeStyle = `rgba(186,215,247,${0.14 * (1 - dist / LINK_DIST)})`;
           ctx.lineWidth = 1;
           ctx.beginPath();
           ctx.moveTo(nodes[i].x, nodes[i].y);
@@ -485,7 +494,7 @@ setupCopyCard('btn-copy-email', 'btn-copy-label', 'copy-icon',    'timir-ivaniv@
       }
     }
     nodes.forEach(n => {
-      ctx.fillStyle = 'rgba(225,189,255,.45)';
+      ctx.fillStyle = 'rgba(209,228,250,.45)';
       ctx.beginPath();
       ctx.arc(n.x, n.y, 1.6, 0, Math.PI * 2);
       ctx.fill();
