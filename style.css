@@ -48,7 +48,9 @@
 
   /* ── Type ── */
   --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-display: 'Space Grotesk', 'Inter', sans-serif;
+  /* Manrope, not Space Grotesk: the latter ships no Cyrillic, so every Russian
+     heading silently fell back to Inter and the display face never appeared. */
+  --font-display: 'Manrope', 'Inter', sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
   /* ── Shapes ── */
@@ -357,14 +359,19 @@ section { padding: clamp(3.5rem, 9vw, 120px) 0; }
 /* Skywash is reserved for the largest headings and the wordmark */
 h1 {
   font-family: var(--font-display);
-  font-size: clamp(2.75rem, 6.5vw, 72px);
-  font-weight: 500; line-height: 1.06; letter-spacing: -.02em;
-  background: var(--skywash);
+  font-size: clamp(3rem, 7.4vw, 88px);
+  font-weight: 700; line-height: 1.02; letter-spacing: -.035em;
+  /* Skywash ran to #98c0ef too early and the lower half of every letter went
+     grey. Hold white through the top third, then fall away. */
+  background: linear-gradient(178deg, #ffffff 0%, #dfeefb 34%, #a8caf2 78%, #8fb6e8 100%);
   -webkit-background-clip: text; background-clip: text;
   -webkit-text-fill-color: transparent;
+  /* the halo AuthKit uses for luminous type, sized up for the wordmark */
+  filter: drop-shadow(0 0 34px rgba(102,58,243,.45))
+          drop-shadow(0 0 8px rgba(186,207,247,.22));
   margin-bottom: 1.5rem; text-wrap: balance;
 }
-h1 .accent-name { font-style: normal; font-weight: 500; }
+h1 .accent-name { font-style: normal; font-weight: 700; }
 @media print { h1 { -webkit-text-fill-color: initial; background: none; } }
 
 .hero-role {
@@ -382,9 +389,15 @@ h1 .accent-name { font-style: normal; font-weight: 500; }
 @keyframes blink-cur { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
 
 .hero-desc {
-  color: var(--fog); font-size: 18px; line-height: 1.33;
-  max-width: 52ch; margin-bottom: 2rem;
+  /* Moon, not Fog: this is the pitch, not helper text. AuthKit's ladder is
+     ice → frost → moon → fog, and Fog is the bottom rung. */
+  color: var(--moon);
+  font-size: 20px; font-weight: 400;
+  line-height: 1.5;              /* 1.33 is their single-line subheading value */
+  letter-spacing: -.015em;
+  max-width: 44ch; margin-bottom: 2.25rem;
 }
+.hero-desc strong { color: var(--frost); font-weight: 500; }
 
 /* stack chips — frosted badges */
 .hero-stack { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 2.25rem; }
