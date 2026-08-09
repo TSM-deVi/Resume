@@ -204,9 +204,9 @@ startTypewriter();
 // ── Console Easter Egg ──
 try {
   const _cs = [
-    'color:#818cf8;font-family:monospace;font-size:12px;line-height:1.6;',
-    'color:#22c55e;font-family:monospace;font-size:11px;',
-    'color:#94a3b8;font-family:monospace;font-size:11px;',
+    'color:#cc9166;font-family:monospace;font-size:12px;line-height:1.6;',
+    'color:#93a888;font-family:monospace;font-size:11px;',
+    'color:#9194a1;font-family:monospace;font-size:11px;',
   ];
   console.log(
     '%c╔══════════════════════════════════════════════╗\n' +
@@ -430,32 +430,9 @@ setupCopyCard('btn-copy-email', 'btn-copy-label', 'copy-icon',    'timir-ivaniv@
   });
 })();
 
-// ── Tilt + shine (achievement tiles, hero terminal) ──
-if (window.matchMedia('(pointer: fine)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  const bigTilt   = document.querySelectorAll('.ach, .hero-terminal, .cta-terminal');
-  const smallTilt = document.querySelectorAll('.skill-tile');
-
-  function bindTilt(el, maxTilt, lift) {
-    el.addEventListener('mousemove', e => {
-      const rect = el.getBoundingClientRect();
-      const px = (e.clientX - rect.left) / rect.width;
-      const py = (e.clientY - rect.top) / rect.height;
-      const rotY = (px - 0.5) * maxTilt * 2;
-      const rotX = (0.5 - py) * maxTilt * 2;
-      el.style.transform = `perspective(900px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(${lift}px)`;
-      el.style.setProperty('--mx', `${px * 100}%`);
-      el.style.setProperty('--my', `${py * 100}%`);
-      el.classList.add('tilt-active');
-    });
-    el.addEventListener('mouseleave', () => {
-      el.style.transform = '';
-      el.classList.remove('tilt-active');
-    });
-  }
-
-  bigTilt.forEach(el => bindTilt(el, 5, -4));
-  smallTilt.forEach(el => bindTilt(el, 8, -3));
-}
+// ── Tilt + shine: removed.
+// The Slash system defines elevation through surface steps and 1px hairlines,
+// never through shadows or 3D transforms. Cards stay flat on purpose.
 
 // ── Full-page network background ──
 (function () {
@@ -498,7 +475,7 @@ if (window.matchMedia('(pointer: fine)').matches && !window.matchMedia('(prefers
         const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y;
         const dist = Math.sqrt(dx * dx + dy * dy);
         if (dist < LINK_DIST) {
-          ctx.strokeStyle = `rgba(88,166,255,${0.16 * (1 - dist / LINK_DIST)})`;
+          ctx.strokeStyle = `rgba(119,122,136,${0.14 * (1 - dist / LINK_DIST)})`;
           ctx.lineWidth = 1;
           ctx.beginPath();
           ctx.moveTo(nodes[i].x, nodes[i].y);
@@ -508,7 +485,7 @@ if (window.matchMedia('(pointer: fine)').matches && !window.matchMedia('(prefers
       }
     }
     nodes.forEach(n => {
-      ctx.fillStyle = 'rgba(88,166,255,.4)';
+      ctx.fillStyle = 'rgba(174,147,87,.38)';
       ctx.beginPath();
       ctx.arc(n.x, n.y, 1.6, 0, Math.PI * 2);
       ctx.fill();
