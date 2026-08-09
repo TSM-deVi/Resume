@@ -17,14 +17,14 @@
   <meta property="og:url" content="https://tsm-devi.github.io/Resume/">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="512x512" href="favicon-512.png">
-  <meta name="theme-color" content="#0e0e0e">
+  <meta name="theme-color" content="#090909">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -96,6 +96,7 @@
 
   <!-- HERO -->
   <section id="hero">
+    <div class="hero-sky" aria-hidden="true"><div class="hero-aurora"></div></div>
     <div class="hero-grid">
       <div class="hero-left">
         <div class="hero-badge">open to work · remote / hybrid</div>
@@ -234,21 +235,36 @@
         </div>
       </div>
 
-      <!-- Ledger card — the only place the gilded gradient is used -->
-      <div class="ledger-card r d1">
+      <!-- Deploy ticket — the signature card: glass laid over the sky -->
+      <div class="ticket r d1">
+        <div class="ticket-hd">
+          <span class="ticket-label">Deploy ticket</span>
+          <span class="ticket-status">passing</span>
+        </div>
+        <div class="ticket-route">
+          <div class="ticket-node">
+            <span class="ticket-k">origin</span>
+            <span class="ticket-v">git:main</span>
+          </div>
+          <div class="ticket-line" aria-hidden="true"></div>
+          <div class="ticket-node ticket-node-end">
+            <span class="ticket-k">target</span>
+            <span class="ticket-v">k8s / prod</span>
+          </div>
+        </div>
         <div class="ledger-hd">
           <span class="ledger-eyebrow">uptime · 90d</span>
-          <span class="ledger-val">99.9<span style="font-size:.6em">%</span></span>
+          <span class="ledger-val">99.9<span class="ledger-pct">%</span></span>
         </div>
         <svg class="ledger-chart" viewBox="0 0 300 80" role="img" aria-label="Uptime over the last 90 days: 99.9 percent">
           <defs>
             <linearGradient id="gilded-stroke" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%"   stop-color="#405bff"/>
-              <stop offset="100%" stop-color="#7084ff"/>
+              <stop offset="0%"   stop-color="#af50ff"/>
+              <stop offset="100%" stop-color="#e1bdff"/>
             </linearGradient>
             <linearGradient id="gilded-fill" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%"   stop-color="#405bff" stop-opacity=".18"/>
-              <stop offset="100%" stop-color="#405bff" stop-opacity="0"/>
+              <stop offset="0%"   stop-color="#af50ff" stop-opacity=".22"/>
+              <stop offset="100%" stop-color="#af50ff" stop-opacity="0"/>
             </linearGradient>
           </defs>
           <path class="ledger-area" fill="url(#gilded-fill)"
@@ -259,6 +275,11 @@
         </svg>
         <div class="ledger-foot">
           <span>−90d</span><span>−60d</span><span>−30d</span><span>now</span>
+        </div>
+        <div class="ticket-perf" aria-hidden="true"></div>
+        <div class="ticket-stub">
+          <span class="ticket-k">SPB · RU</span>
+          <span class="ticket-barcode" aria-hidden="true"></span>
         </div>
       </div>
 
@@ -1166,6 +1187,7 @@
   <div class="container">
     <div class="footer-inner">
       <div class="footer-meta">
+        <span class="footer-plus" aria-hidden="true">+</span>
         <span class="footer-item"><span data-lang="ru">Санкт-Петербург</span><span data-lang="en">Saint Petersburg</span></span>
         <span class="footer-dot">·</span>
         <span class="footer-item footer-role"><span data-lang="ru">DevOps-инженер</span><span data-lang="en">DevOps Engineer</span></span>
@@ -1173,6 +1195,10 @@
         <span class="footer-item">@ktylhus</span>
         <span class="footer-dot">·</span>
         <span class="footer-item">timir-ivaniv@yandex.ru</span>
+      </div>
+      <div class="footer-coord">
+        <span class="footer-item">59.9311° N &nbsp; 30.3609° E</span>
+        <svg class="footer-heart" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-8-4.9-8-10.5A4.5 4.5 0 0112 7a4.5 4.5 0 018 3.5C20 16.1 12 21 12 21z"/></svg>
       </div>
     </div>
   </div>
