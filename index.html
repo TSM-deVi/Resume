@@ -457,46 +457,147 @@
                 <span data-lang="ru">DevOps-инженер</span>
                 <span data-lang="en">DevOps Engineer</span>
               </div>
+              <div class="job-role-period">
+                <span data-lang="ru">апр 2024 — апр 2026 · 2 г 1 мес</span>
+                <span data-lang="en">Apr 2024 — Apr 2026 · 2 yr 1 mo</span>
+              </div>
             </div>
             <ul class="jlist" data-lang="ru">
               <li class="jlist-head">Kubernetes и контейнеризация</li>
-              <li>Мигрировал <strong>12+ микросервисов</strong> из Docker Compose в self-hosted Kubernetes, сократив время деплоя с ~40 до ~8 минут</li>
+              <li>Мигрировал <strong>12+ микросервисов</strong> из Docker Compose в self-hosted Kubernetes-кластер, сократив время деплоя с ~40 до ~8 минут</li>
               <li>Настройка и администрирование кластеров: namespace-изоляция, ресурсные лимиты, HPA, Ingress</li>
-              <li class="jlist-head">CI/CD</li>
-              <li>Спроектировал CI/CD-пайплайны (<strong>GitLab CI/CD, Jenkins, ArgoCD</strong>) — покрыл 100% продакшен-репозиториев автоматической сборкой и деплоем</li>
-              <li>Интегрировал security-сканирование (<strong>Trivy, Gitleaks</strong>) — уязвимости отлавливаются до попадания в прод</li>
-              <li>Настроил приватный Docker Registry и SSL/TLS (Let's Encrypt) с автовыпуском и продлением сертификатов</li>
-              <li class="jlist-head">Высокая доступность (HA)</li>
-              <li>Развернул отказоустойчивые кластеры: <strong>PostgreSQL + Patroni + etcd</strong> (3 ноды, uptime 99.9%), Zabbix HA (2 ноды), Jira + Confluence HA — устранены единые точки отказа</li>
+              <li>Упаковал сервисы в <strong>Helm-чарты</strong>, унифицировал конфигурацию окружений через values</li>
+
+              <li class="jlist-head">CI/CD и GitOps</li>
+              <li>Спроектировал CI/CD-пайплайны (<strong>GitLab CI/CD, Jenkins</strong>), покрыв <strong>100% продакшен-репозиториев</strong> автоматической сборкой и деплоем</li>
+              <li>Внедрил <strong>GitOps-доставку</strong> в Kubernetes: пайплайн GitLab CI собирает образ, публикует в registry, обновляет Helm-values в Git и триггерит синхронизацию <strong>ArgoCD</strong>, который выкатывает изменение в кластер. Git — единственный источник правды, откат выполняется revert-коммитом</li>
+              <li>Интегрировал security-сканирование (<strong>Trivy, Gitleaks</strong>) в пайплайн — уязвимости отлавливаются до попадания в прод</li>
+              <li>Настроил SSL/TLS-сертификаты (Let's Encrypt), автоматизировал выпуск и продление</li>
+
+              <li class="jlist-head">Хранение артефактов и данных</li>
+              <li>Развернул и администрировал <strong>Harbor</strong> как основной приватный registry для Docker-образов: проекты, политики хранения и retention, робот-аккаунты, разграничение доступа, сканирование образов на уязвимости</li>
+              <li>Использовал <strong>GitLab Container Registry</strong> для образов проектных репозиториев, настроил pull secrets и интеграцию с пайплайнами и Kubernetes</li>
+              <li>Развернул <strong>Verdaccio</strong> — приватный npm-registry для внутренних пакетов с проксированием и кэшированием npmjs, настроил публикацию пакетов из CI и аутентификацию разработчиков</li>
+              <li>Подключил объектное хранилище <strong>S3 (Yandex Cloud Object Storage)</strong>: хранение артефактов, бэкапов и статики, бакеты, сервисные ключи доступа и жизненный цикл объектов</li>
+
+              <li class="jlist-head">Брокеры сообщений, кэш, service discovery</li>
+              <li>Развернул и эксплуатировал <strong>Kafka</strong> для асинхронного взаимодействия сервисов: топики, партиции, политики хранения, мониторинг лага консьюмеров</li>
+              <li>Развернул <strong>RabbitMQ</strong>: очереди, exchange, DLQ, разграничение доступа по vhost</li>
+              <li>Внедрил <strong>Redis</strong> для кэширования и хранения сессий</li>
+              <li>Настроил <strong>Consul</strong>: service discovery, health-checks, хранение конфигураций в KV</li>
+
+              <li class="jlist-head">Базы данных и высокая доступность</li>
+              <li>Развернул отказоустойчивый кластер <strong>PostgreSQL + Patroni + etcd</strong> (3 ноды), uptime СУБД <strong>99.9%</strong></li>
+              <li>Развернул и администрировал <strong>ClickHouse</strong> под аналитические нагрузки и хранение логов: схемы, партиционирование, TTL</li>
+              <li>Администрирование <strong>MySQL, MongoDB, MS SQL Server</strong></li>
+              <li>Развернул <strong>Zabbix HA-кластер</strong> (2 ноды) с базой на отказоустойчивом PostgreSQL</li>
+              <li>Развернул <strong>Jira и Confluence</strong> на HA-кластере PostgreSQL — устранил единую точку отказа</li>
+
+              <li class="jlist-head">Почтовая инфраструктура</li>
+              <li>Развернул с нуля корпоративный почтовый сервер <strong>Zimbra</strong>: установка и первичная настройка, почтовые домены и учётные записи, DNS-записи (MX, SPF, DKIM, DMARC), TLS-сертификаты, антиспам/антивирус, резервное копирование и миграция почтовых ящиков</li>
+              <li>Автоматизировал скриптом выпуск <strong>DKIM-ключей</strong> при подключении новых доменов клиентов: генерация ключа, выдача готовой DNS-записи и проверка подписи — ручная процедура сведена к одной команде</li>
+
               <li class="jlist-head">Мониторинг и логирование</li>
-              <li>Внедрил <strong>Prometheus + Grafana</strong>, ELK + Graylog, Zabbix, Sentry — MTTD с нескольких часов до ~5 минут</li>
-              <li>Настроил Uptime Kuma, <strong>LibreNMS + Oxidized</strong>, NetBox — мониторинг доступности и сетевая документация</li>
+              <li>Внедрил <strong>Prometheus + Grafana</strong> (метрики), <strong>ELK Stack + Graylog</strong> (логи), Zabbix (инфраструктура), Sentry (ошибки приложений)</li>
+              <li>Настроил Uptime Kuma, <strong>LibreNMS + Oxidized</strong>, NetBox для мониторинга доступности и сетевой документации</li>
+              <li>Сократил среднее время обнаружения инцидентов (MTTD) <strong>с нескольких часов до ~5 минут</strong></li>
+
               <li class="jlist-head">IaC и автоматизация</li>
-              <li>Ansible-роли и плейбуки — настройка нового сервера <strong>за 15 мин</strong> вместо 2–3 часов вручную; Terraform для воспроизводимых сред; скрипты на Python, Bash, PowerShell</li>
+              <li>Разработал <strong>Ansible-роли и плейбуки</strong> — настройка нового сервера за 15 минут вместо 2–3 часов вручную</li>
+              <li>Внедрил <strong>Terraform</strong> для управления инфраструктурой: воспроизводимые среды, version control конфигураций</li>
+              <li>Скрипты автоматизации на <strong>Python, Bash, PowerShell</strong></li>
+
               <li class="jlist-head">Администрирование</li>
-              <li>Виртуализация (VMware, Hyper-V), AD/DNS/DHCP, резервное копирование (Veeam), почтовый сервер Zimbra; СУБД: PostgreSQL, MySQL, MongoDB, ClickHouse, MS SQL Server</li>
+              <li>Виртуализация (<strong>VMware, Hyper-V</strong>), AD, DNS, DHCP</li>
+              <li><strong>Windows Server</strong>: IIS (публикация и сопровождение веб-приложений, пулы приложений, привязки и сертификаты), Active Directory, PowerShell</li>
+              <li>Резервное копирование (<strong>Veeam Backup &amp; Replication</strong>)</li>
+
               <li class="jlist-head">Управление</li>
-              <li>Провёл аудит IT-инфраструктуры, составил и реализовал план модернизации; внедрил <strong>OCS Inventory</strong> вместо ручного учёта в Excel; внедрил DevOps-практики в команде разработки</li>
+              <li>Провёл аудит IT-инфраструктуры, составил и реализовал план модернизации</li>
+              <li>Внедрил <strong>OCS Inventory</strong> для инвентаризации IT-активов, заменив ручной учёт в Excel — автоматическое обнаружение и актуальная база оборудования и ПО</li>
+              <li>Внедрил <strong>DevOps-практики</strong> в команде разработки: CI/CD-пайплайны, контейнеризация</li>
             </ul>
             <ul class="jlist" data-lang="en">
-              <li class="jlist-head">Kubernetes & containerization</li>
-              <li>Migrated <strong>12+ microservices</strong> from Docker Compose to self-hosted Kubernetes, cutting deploy time from ~40 to ~8 minutes</li>
+              <li class="jlist-head">Kubernetes &amp; containerization</li>
+              <li>Migrated <strong>12+ microservices</strong> from Docker Compose to a self-hosted Kubernetes cluster, cutting deploy time from ~40 to ~8 minutes</li>
               <li>Cluster setup and administration: namespace isolation, resource limits, HPA, Ingress</li>
-              <li class="jlist-head">CI/CD</li>
-              <li>Designed CI/CD pipelines (<strong>GitLab CI/CD, Jenkins, ArgoCD</strong>) — covered 100% of production repositories with automated builds and deployments</li>
-              <li>Integrated security scanning (<strong>Trivy, Gitleaks</strong>) — vulnerabilities caught before reaching production</li>
-              <li>Set up a private Docker Registry and SSL/TLS (Let's Encrypt) with automated issuance and renewal</li>
-              <li class="jlist-head">High availability (HA)</li>
-              <li>Deployed fault-tolerant clusters: <strong>PostgreSQL + Patroni + etcd</strong> (3 nodes, 99.9% uptime), Zabbix HA (2 nodes), Jira + Confluence HA — eliminated single points of failure</li>
-              <li class="jlist-head">Monitoring & logging</li>
-              <li>Implemented <strong>Prometheus + Grafana</strong>, ELK + Graylog, Zabbix, Sentry — MTTD reduced from hours to ~5 minutes</li>
-              <li>Set up Uptime Kuma, <strong>LibreNMS + Oxidized</strong>, NetBox — availability monitoring and network documentation</li>
-              <li class="jlist-head">IaC & automation</li>
-              <li>Ansible roles and playbooks — new server setup in <strong>15 min</strong> instead of 2–3 hours manually; Terraform for reproducible environments; automation scripts in Python, Bash, PowerShell</li>
+              <li>Packaged services into <strong>Helm charts</strong> and unified environment configuration through values</li>
+
+              <li class="jlist-head">CI/CD &amp; GitOps</li>
+              <li>Designed CI/CD pipelines (<strong>GitLab CI/CD, Jenkins</strong>), covering <strong>100% of production repositories</strong> with automated builds and deployments</li>
+              <li>Implemented <strong>GitOps delivery</strong> to Kubernetes: the GitLab CI pipeline builds the image, publishes it to the registry, updates Helm values in Git and triggers an <strong>ArgoCD</strong> sync that rolls the change out to the cluster. Git is the single source of truth; rollback is a revert commit</li>
+              <li>Integrated security scanning (<strong>Trivy, Gitleaks</strong>) into the pipeline — vulnerabilities caught before reaching production</li>
+              <li>Set up SSL/TLS certificates (Let's Encrypt) with automated issuance and renewal</li>
+
+              <li class="jlist-head">Artifact and data storage</li>
+              <li>Deployed and administered <strong>Harbor</strong> as the primary private Docker image registry: projects, retention policies, robot accounts, access control, image vulnerability scanning</li>
+              <li>Used <strong>GitLab Container Registry</strong> for project repository images, configured pull secrets and integration with pipelines and Kubernetes</li>
+              <li>Deployed <strong>Verdaccio</strong> — a private npm registry for internal packages with npmjs proxying and caching, package publishing from CI and developer authentication</li>
+              <li>Connected <strong>S3 object storage (Yandex Cloud Object Storage)</strong>: artifacts, backups and static assets, with buckets, service access keys and object lifecycle rules</li>
+
+              <li class="jlist-head">Message brokers, cache, service discovery</li>
+              <li>Deployed and operated <strong>Kafka</strong> for asynchronous service communication: topics, partitions, retention policies, consumer lag monitoring</li>
+              <li>Deployed <strong>RabbitMQ</strong>: queues, exchanges, DLQ, per-vhost access control</li>
+              <li>Introduced <strong>Redis</strong> for caching and session storage</li>
+              <li>Configured <strong>Consul</strong>: service discovery, health checks, configuration storage in KV</li>
+
+              <li class="jlist-head">Databases and high availability</li>
+              <li>Deployed a fault-tolerant <strong>PostgreSQL + Patroni + etcd</strong> cluster (3 nodes), <strong>99.9%</strong> database uptime</li>
+              <li>Deployed and administered <strong>ClickHouse</strong> for analytical workloads and log storage: schemas, partitioning, TTL</li>
+              <li>Administered <strong>MySQL, MongoDB, MS SQL Server</strong></li>
+              <li>Deployed a <strong>Zabbix HA cluster</strong> (2 nodes) backed by fault-tolerant PostgreSQL</li>
+              <li>Deployed <strong>Jira and Confluence</strong> on the PostgreSQL HA cluster — eliminated a single point of failure</li>
+
+              <li class="jlist-head">Mail infrastructure</li>
+              <li>Deployed a corporate <strong>Zimbra</strong> mail server from scratch: installation and initial setup, mail domains and accounts, DNS records (MX, SPF, DKIM, DMARC), TLS certificates, antispam/antivirus, backups and mailbox migration</li>
+              <li>Automated <strong>DKIM key</strong> issuance for new client domains with a script: key generation, a ready-to-use DNS record and signature verification — a manual procedure reduced to a single command</li>
+
+              <li class="jlist-head">Monitoring &amp; logging</li>
+              <li>Implemented <strong>Prometheus + Grafana</strong> (metrics), <strong>ELK Stack + Graylog</strong> (logs), Zabbix (infrastructure), Sentry (application errors)</li>
+              <li>Set up Uptime Kuma, <strong>LibreNMS + Oxidized</strong> and NetBox for availability monitoring and network documentation</li>
+              <li>Reduced mean time to detect incidents (MTTD) <strong>from several hours to ~5 minutes</strong></li>
+
+              <li class="jlist-head">IaC &amp; automation</li>
+              <li>Developed <strong>Ansible roles and playbooks</strong> — new server setup in 15 minutes instead of 2–3 hours manually</li>
+              <li>Introduced <strong>Terraform</strong> for infrastructure management: reproducible environments, version-controlled configuration</li>
+              <li>Automation scripts in <strong>Python, Bash, PowerShell</strong></li>
+
               <li class="jlist-head">Administration</li>
-              <li>Virtualization (VMware, Hyper-V), AD/DNS/DHCP, backups (Veeam), Zimbra mail server; databases: PostgreSQL, MySQL, MongoDB, ClickHouse, MS SQL Server</li>
+              <li>Virtualization (<strong>VMware, Hyper-V</strong>), AD, DNS, DHCP</li>
+              <li><strong>Windows Server</strong>: IIS (publishing and maintaining web applications, application pools, bindings and certificates), Active Directory, PowerShell</li>
+              <li>Backups (<strong>Veeam Backup &amp; Replication</strong>)</li>
+
               <li class="jlist-head">Management</li>
-              <li>Conducted an IT infrastructure audit and implemented a modernization plan; deployed <strong>OCS Inventory</strong> replacing manual Excel tracking; introduced DevOps practices to the development team</li>
+              <li>Conducted an IT infrastructure audit, drew up and implemented a modernization plan</li>
+              <li>Deployed <strong>OCS Inventory</strong> for IT asset tracking, replacing manual Excel records — automatic discovery and an up-to-date hardware and software database</li>
+              <li>Introduced <strong>DevOps practices</strong> to the development team: CI/CD pipelines, containerization</li>
+            </ul>
+          </div>
+
+          <div class="job-role">
+            <div class="job-role-hdr">
+              <div class="job-role-title">
+                <span data-lang="ru">Системный администратор</span>
+                <span data-lang="en">System Administrator</span>
+              </div>
+              <div class="job-role-period">
+                <span data-lang="ru">фев 2024 — апр 2024 · 3 мес</span>
+                <span data-lang="en">Feb 2024 — Apr 2024 · 3 mo</span>
+              </div>
+            </div>
+            <ul class="jlist" data-lang="ru">
+              <li>Настроил и перенёс <strong>30+ рабочих станций</strong> и периферийного оборудования при расширении офиса</li>
+              <li>Техническая поддержка пользователей, консультирование по корпоративному ПО</li>
+              <li>Диагностика проблем оборудования и программного обеспечения</li>
+              <li>Инвентаризация IT-оборудования, ведение документации</li>
+              <li>Поддержка удалённых пользователей</li>
+            </ul>
+            <ul class="jlist" data-lang="en">
+              <li>Set up and relocated <strong>30+ workstations</strong> and peripherals during an office expansion</li>
+              <li>User technical support and guidance on corporate software</li>
+              <li>Diagnosing hardware and software problems</li>
+              <li>IT equipment inventory and documentation</li>
+              <li>Support for remote users</li>
             </ul>
           </div>
         </div>
@@ -520,8 +621,8 @@
           <div class="job-role">
             <div class="job-role-hdr">
               <div class="job-role-title">
-                <span data-lang="ru">DevOps-инженер</span>
-                <span data-lang="en">DevOps Engineer</span>
+                <span data-lang="ru">Системный администратор / DevOps-инженер</span>
+                <span data-lang="en">System Administrator / DevOps Engineer</span>
               </div>
               <div class="job-role-period">
                 <span data-lang="ru">янв 2023 — фев 2024 · 1 г 2 мес</span>
@@ -556,20 +657,20 @@
               </div>
             </div>
             <ul class="jlist" data-lang="ru">
-              <li>Администрировал серверы <strong>Windows Server, Linux</strong> и сетевое оборудование (<strong>MikroTik, Cisco</strong>) в розничной сети из 10+ объектов</li>
+              <li>Администрировал серверы <strong>Windows Server, Linux</strong> и сетевое оборудование (<strong>MikroTik, Cisco</strong>) в розничной сети из <strong>40+ объектов</strong></li>
               <li>Развёртывал и поддерживал виртуализацию <strong>VMware, Hyper-V</strong></li>
               <li>Настроил VPN-инфраструктуру между объектами (Kerio), маршрутизацию и коммутацию</li>
               <li>Обслуживал почтовые серверы и СУБД, обеспечивал их доступность</li>
-              <li>Настроил и перенёс <strong>30+ рабочих станций</strong> и периферии при расширении офиса</li>
+              <li>Настроил и перенёс <strong>10+ рабочих станций</strong> и периферии при расширении офиса</li>
               <li>HelpDesk-поддержка парка <strong>100+ компьютеров</strong> и кассовой техники</li>
               <li>Инвентаризация IT-оборудования, ведение документации (Jira)</li>
             </ul>
             <ul class="jlist" data-lang="en">
-              <li>Administered <strong>Windows Server, Linux</strong> servers and network equipment (<strong>MikroTik, Cisco</strong>) across 10+ retail sites</li>
+              <li>Administered <strong>Windows Server, Linux</strong> servers and network equipment (<strong>MikroTik, Cisco</strong>) across <strong>40+ retail sites</strong></li>
               <li>Deployed and maintained <strong>VMware, Hyper-V</strong> virtualization</li>
               <li>Configured inter-site VPN infrastructure (Kerio), routing and switching</li>
               <li>Maintained mail servers and databases, ensured their availability</li>
-              <li>Set up and relocated <strong>30+ workstations</strong> and peripherals during office expansion</li>
+              <li>Set up and relocated <strong>10+ workstations</strong> and peripherals during office expansion</li>
               <li>HelpDesk support for <strong>100+ computers</strong> and POS equipment</li>
               <li>IT asset inventory and technical documentation (Jira)</li>
             </ul>
@@ -584,8 +685,8 @@
           <div class="job-meta">
             <h3 class="job-company-name">ООО «Форум»</h3>
             <div class="job-period">
-              <span data-lang="ru">апр 2022 — июл 2022 · 4 мес</span>
-              <span data-lang="en">Apr 2022 — Jul 2022 · 4 mo</span>
+              <span data-lang="ru">май 2022 — июл 2022 · 3 мес</span>
+              <span data-lang="en">May 2022 — Jul 2022 · 3 mo</span>
             </div>
           </div>
           <div class="job-title">
@@ -637,7 +738,7 @@
         <div class="skill-tile-icon"><img src="icons/linux.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
           <div class="skill-tile-name">Linux</div>
-          <div class="skill-tile-tip">primary OS</div>
+          <div class="skill-tile-tip">Debian · Ubuntu · systemd</div>
         </div>
       </div>
       <div class="skill-tile" data-cat="os">
@@ -702,13 +803,13 @@
           <div class="skill-tile-name">Consul</div>
           <div class="skill-tile-tip">service discovery</div>
         </div>
+      </div>
       <div class="skill-tile" data-cat="networking">
         <div class="skill-tile-icon"><img src="icons/envoy.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
           <div class="skill-tile-name">Envoy</div>
           <div class="skill-tile-tip">ext_authz · OPA</div>
         </div>
-      </div>
       </div>
       <div class="skill-tile" data-cat="security">
         <div class="skill-tile-icon"><img src="icons/vault.svg" alt="" width="22" height="22" loading="lazy"></div>
@@ -849,13 +950,13 @@
           <div class="skill-tile-name">Yandex Cloud</div>
           <div class="skill-tile-tip">K8s · VM · DNS · S3</div>
         </div>
+      </div>
       <div class="skill-tile" data-cat="cloud">
         <div class="skill-tile-icon"><img src="icons/minio.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
           <div class="skill-tile-name">MinIO</div>
           <div class="skill-tile-tip">S3 object storage</div>
         </div>
-      </div>
       </div>
       <div class="skill-tile" data-cat="cicd">
         <div class="skill-tile-icon"><img src="icons/gitlab.svg" alt="" width="22" height="22" loading="lazy"></div>
@@ -870,13 +971,13 @@
           <div class="skill-tile-name">Jenkins</div>
           <div class="skill-tile-tip">legacy pipelines</div>
         </div>
+      </div>
       <div class="skill-tile" data-cat="cicd">
         <div class="skill-tile-icon"><img src="icons/verdaccio.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
           <div class="skill-tile-name">Verdaccio</div>
           <div class="skill-tile-tip">приватный npm-registry</div>
         </div>
-      </div>
       </div>
       <div class="skill-tile" data-cat="monitoring">
         <div class="skill-tile-icon"><img src="icons/prometheus.svg" alt="" width="22" height="22" loading="lazy"></div>
@@ -917,7 +1018,7 @@
         <div class="skill-tile-icon"><img src="icons/elastic.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
           <div class="skill-tile-name">ELK Stack</div>
-          <div class="skill-tile-tip">centralized logs</div>
+          <div class="skill-tile-tip">Elasticsearch · Kibana · Logstash</div>
         </div>
       </div>
       <div class="skill-tile" data-cat="monitoring">
@@ -1003,13 +1104,13 @@
           <div class="skill-tile-name">MongoDB</div>
           <div class="skill-tile-tip">document store</div>
         </div>
+      </div>
       <div class="skill-tile" data-cat="databases">
         <div class="skill-tile-icon"><img src="icons/mssql.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
           <div class="skill-tile-name">MS SQL Server</div>
           <div class="skill-tile-tip">administration</div>
         </div>
-      </div>
       </div>
       <div class="skill-tile" data-cat="databases">
         <div class="skill-tile-icon"><img src="icons/redis.svg" alt="" width="22" height="22" loading="lazy"></div>
@@ -1024,13 +1125,13 @@
           <div class="skill-tile-name">ClickHouse</div>
           <div class="skill-tile-tip">analytics DB</div>
         </div>
+      </div>
       <div class="skill-tile" data-cat="databases">
         <div class="skill-tile-icon"><img src="icons/qdrant.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
           <div class="skill-tile-name">Qdrant</div>
           <div class="skill-tile-tip">vector store</div>
         </div>
-      </div>
       </div>
       <div class="skill-tile" data-cat="databases">
         <div class="skill-tile-icon"><img src="icons/apachekafka.svg" alt="" width="22" height="22" loading="lazy"></div>
@@ -1287,7 +1388,7 @@
         </div>
         <div class="tl-sep"></div>
 
-        <button class="tl-contact" id="btn-copy-tg">
+        <button class="tl-contact" id="btn-copy-tg" title="Telegram · @ktylhus">
           <span class="tl-prompt">❯</span>
           <span class="tl-contact-cmd">ping</span>
           <span class="tl-contact-val" id="btn-tg-label">@ktylhus</span>
@@ -1295,7 +1396,7 @@
             <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
           </span>
         </button>
-        <button class="tl-contact" id="btn-copy-email">
+        <button class="tl-contact" id="btn-copy-email" title="E-mail · timir007@mail.ru">
           <span class="tl-prompt">❯</span>
           <span class="tl-contact-cmd">mail</span>
           <span class="tl-contact-val" id="btn-copy-label">timir007@mail.ru</span>
