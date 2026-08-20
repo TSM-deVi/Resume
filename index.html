@@ -327,7 +327,13 @@
     </div>
   </section>
 
-  <!-- EXPERIENCE -->
+  <!-- EXPERIENCE
+       Выделение в пунктах: жирный начерк помечает то, О ЧЁМ пункт — технологию-якорь
+       или цифру, ради которой строку читают. Перечисления состава остаются
+       обычными: пятнадцать жирных слов подряд не выделяют ничего.
+       Ряд однородных имён выделяется одним куском («Python, Bash, PowerShell»),
+       а не по слову. Проверка на разрезанные пополам перечисления —
+       tmp/mixed.py в описании задачи. -->
   <section id="experience">
     <h2 class="sec-title">
       <span data-lang="ru">Опыт работы <span class="sub">// 4 года 3 месяца</span></span>
@@ -366,7 +372,7 @@
               <li>Развёртывание и сопровождение компонентов системы — подготовка окружений (DEV/TEST/PROD), миграции, резервное копирование, восстановление, поддержка высокой доступности и отказоустойчивости</li>
               <li>Взаимодействие с командами разработки и QA — консультирование по инфраструктурным вопросам, поддержка локальной разработки, участие в релизах, устранение инфраструктурных багов и бутылочных горлышек</li>
               <li class="jlist-head">Проект 1 · Dev-контур SmartSearch и агентной платформы — Timeweb Cloud (k3s)</li>
-              <li>Спроектировал и развернул с нуля изолированный dev-контур: <strong>GitLab CE, GitLab Runner, Harbor, Kubernetes/k3s, Vault, RabbitMQ</strong>, PostgreSQL, Redis, Qdrant, MinIO, ClickHouse, SmartSearch, Langflow, Langfuse, LiteLLM и proxy-service</li>
+              <li>Спроектировал и развернул с нуля изолированный dev-контур: GitLab CE, GitLab Runner, Harbor, Kubernetes/k3s, Vault, RabbitMQ, PostgreSQL, Redis, Qdrant, MinIO, ClickHouse, SmartSearch, Langflow, Langfuse, LiteLLM и proxy-service</li>
               <li>Подготовил план ресурсов на <strong>9 VM</strong>, провёл right-sizing по CPU/RAM/NVMe, разделил обязательные сервисы и инфраструктурные компоненты, убрал production-only зависимости</li>
               <li>Настроил <strong>GitLab CI/CD</strong> для сборки и деплоя сервисов через <strong>Helm</strong>; подготовил шаблоны пайплайнов для Langflow Agent и Code Agent</li>
               <li>Развернул Kubernetes/k3s-контур: Helm-чарты приложений, namespaces, services, deployments, pull secrets и сетевая маршрутизация</li>
@@ -382,8 +388,8 @@
 
               <li class="jlist-head">Проект 2 · Enterprise-контур для заказчика банковского сектора — приватное облако на VMware Cloud Director</li>
               <li>Развернул с нуля три изолированных контура <strong>DEV / INF / PROD</strong> в приватном облаке заказчика на базе <strong>VMware Cloud Director</strong>: отдельные виртуальные ЦОД, группировка сервисов по vApp, сетевая сегментация между контурами. Суммарно <strong>63 виртуальные машины</strong></li>
-              <li>DEV и PROD — зеркальные контуры прикладной платформы, идентичные по составу и конфигурации <strong>1:1</strong>: изменения проверяются на DEV перед выкатом в PROD. Каждый контур — 28 VM, ~90 vCPU, ~190 GB RAM, ~2.8 TB дисков; провёл right-sizing по каждому компоненту и подготовил ресурсный план</li>
-              <li>Состав прикладного контура: <strong>Kubernetes</strong> (master + 3 worker), GitLab Runner, Harbor, <strong>HashiCorp Vault</strong>, PostgreSQL (кластер из 3 нод + 2 standalone), Redis (2 ноды), RabbitMQ, Qdrant (2 ноды), Vespa, ClickHouse, MinIO, OPA/OPAL, Langflow, SmartSearch, внутренние DNS и CA, балансировщик, jump host</li>
+              <li><strong>DEV и PROD</strong> — зеркальные контуры прикладной платформы, идентичные по составу и конфигурации <strong>1:1</strong>: изменения проверяются на DEV перед выкатом в PROD. Каждый контур — 28 VM, ~90 vCPU, ~190 GB RAM, ~2.8 TB дисков; провёл right-sizing по каждому компоненту и подготовил ресурсный план</li>
+              <li>Состав прикладного контура: Kubernetes (master + 3 worker), GitLab Runner, Harbor, HashiCorp Vault, PostgreSQL (кластер из 3 нод + 2 standalone), Redis (2 ноды), RabbitMQ, Qdrant (2 ноды), Vespa, ClickHouse, MinIO, OPA/OPAL, Langflow, SmartSearch, внутренние DNS и CA, балансировщик, jump host</li>
               <li><strong>INF</strong> — отдельный контур сквозных инфраструктурных сервисов (7 VM): GitLab, центральный Harbor, Nginx, Prometheus, Grafana, Loki. Вынес общие сервисы из прикладных контуров, чтобы CI/CD, реестр образов и наблюдаемость были едиными для DEV и PROD и не дублировались</li>
               <li>Выстроил двухуровневую схему реестров образов: центральный <strong>Harbor</strong> на INF — общий для всех контуров, локальные Harbor на DEV и PROD — только под образы агентов. Снизил внешний трафик прикладных контуров и сохранил их изоляцию</li>
               <li>Развернул сквозной мониторинг и логирование на INF: <strong>Prometheus, Grafana, Loki</strong> — сбор метрик и логов с прикладных контуров в единые дашборды</li>
@@ -403,7 +409,7 @@
               <li>Deploying and maintaining system components — environment provisioning (DEV/TEST/PROD), migrations, backup and recovery, maintaining high availability and fault tolerance</li>
               <li>Collaboration with development and QA teams — infrastructure consulting, supporting local development, participating in releases, resolving infrastructure bugs and bottlenecks</li>
               <li class="jlist-head">Project 1 &middot; SmartSearch and agent-platform dev environment — Timeweb Cloud (k3s)</li>
-              <li>Designed and deployed an isolated dev environment from scratch: <strong>GitLab CE, GitLab Runner, Harbor, Kubernetes/k3s, Vault, RabbitMQ</strong>, PostgreSQL, Redis, Qdrant, MinIO, ClickHouse, SmartSearch, Langflow, Langfuse, LiteLLM and proxy-service</li>
+              <li>Designed and deployed an isolated dev environment from scratch: GitLab CE, GitLab Runner, Harbor, Kubernetes/k3s, Vault, RabbitMQ, PostgreSQL, Redis, Qdrant, MinIO, ClickHouse, SmartSearch, Langflow, Langfuse, LiteLLM and proxy-service</li>
               <li>Prepared a <strong>9-VM</strong> resource plan, performed CPU/RAM/NVMe right-sizing, separated required services from infrastructure components, and dropped production-only dependencies</li>
               <li>Configured <strong>GitLab CI/CD</strong> for building and deploying services via <strong>Helm</strong>; prepared pipeline templates for Langflow Agent and Code Agent</li>
               <li>Deployed the Kubernetes/k3s environment: application Helm charts, namespaces, services, deployments, pull secrets and network routing</li>
@@ -419,8 +425,8 @@
 
               <li class="jlist-head">Project 2 &middot; Enterprise environment for a banking-sector client — private cloud on VMware Cloud Director</li>
               <li>Deployed three isolated <strong>DEV / INF / PROD</strong> environments from scratch in the client private cloud on <strong>VMware Cloud Director</strong>: separate virtual data centers, services grouped into vApps, network segmentation between environments. <strong>63 virtual machines</strong> in total</li>
-              <li>DEV and PROD are mirrored application environments, identical in composition and configuration <strong>1:1</strong>, so changes are validated on DEV before rolling out to PROD. Each environment: 28 VMs, ~90 vCPU, ~190 GB RAM, ~2.8 TB of disk; performed per-component right-sizing and prepared a resource plan</li>
-              <li>Application environment stack: <strong>Kubernetes</strong> (master + 3 workers), GitLab Runner, Harbor, <strong>HashiCorp Vault</strong>, PostgreSQL (3-node cluster + 2 standalone instances), Redis (2 nodes), RabbitMQ, Qdrant (2 nodes), Vespa, ClickHouse, MinIO, OPA/OPAL, Langflow, SmartSearch, internal DNS and CA, load balancer, jump host</li>
+              <li><strong>DEV and PROD</strong> are mirrored application environments, identical in composition and configuration <strong>1:1</strong>, so changes are validated on DEV before rolling out to PROD. Each environment: 28 VMs, ~90 vCPU, ~190 GB RAM, ~2.8 TB of disk; performed per-component right-sizing and prepared a resource plan</li>
+              <li>Application environment stack: Kubernetes (master + 3 workers), GitLab Runner, Harbor, HashiCorp Vault, PostgreSQL (3-node cluster + 2 standalone instances), Redis (2 nodes), RabbitMQ, Qdrant (2 nodes), Vespa, ClickHouse, MinIO, OPA/OPAL, Langflow, SmartSearch, internal DNS and CA, load balancer, jump host</li>
               <li><strong>INF</strong> — a separate environment for cross-cutting infrastructure services (7 VMs): GitLab, central Harbor, Nginx, Prometheus, Grafana, Loki. Moved shared services out of the application environments so CI/CD, the image registry and observability are unified across DEV and PROD instead of duplicated</li>
               <li>Built a two-tier image registry scheme: a central <strong>Harbor</strong> on INF shared by all environments, with local Harbors on DEV and PROD for agent images only — cutting external traffic from the application environments while preserving their isolation</li>
               <li>Deployed end-to-end monitoring and logging on INF: <strong>Prometheus, Grafana, Loki</strong> — collecting metrics and logs from the application environments into unified dashboards</li>
@@ -498,8 +504,8 @@
               <li>Автоматизировал скриптом выпуск <strong>DKIM-ключей</strong> при подключении новых доменов клиентов: генерация ключа, выдача готовой DNS-записи и проверка подписи — ручная процедура сведена к одной команде</li>
 
               <li class="jlist-head">Мониторинг и логирование</li>
-              <li>Внедрил <strong>Prometheus + Grafana</strong> (метрики), <strong>ELK Stack + Graylog</strong> (логи), Zabbix (инфраструктура), Sentry (ошибки приложений)</li>
-              <li>Настроил Uptime Kuma, <strong>LibreNMS + Oxidized</strong>, NetBox для мониторинга доступности и сетевой документации</li>
+              <li>Внедрил <strong>Prometheus + Grafana</strong> (метрики), <strong>ELK Stack + Graylog</strong> (логи), <strong>Zabbix</strong> (инфраструктура), <strong>Sentry</strong> (ошибки приложений)</li>
+              <li>Настроил <strong>Uptime Kuma, LibreNMS + Oxidized, NetBox</strong> для мониторинга доступности и сетевой документации</li>
               <li>Сократил среднее время обнаружения инцидентов (MTTD) <strong>с нескольких часов до ~5 минут</strong></li>
 
               <li class="jlist-head">IaC и автоматизация</li>
@@ -553,8 +559,8 @@
               <li>Automated <strong>DKIM key</strong> issuance for new client domains with a script: key generation, a ready-to-use DNS record and signature verification — a manual procedure reduced to a single command</li>
 
               <li class="jlist-head">Monitoring &amp; logging</li>
-              <li>Implemented <strong>Prometheus + Grafana</strong> (metrics), <strong>ELK Stack + Graylog</strong> (logs), Zabbix (infrastructure), Sentry (application errors)</li>
-              <li>Set up Uptime Kuma, <strong>LibreNMS + Oxidized</strong> and NetBox for availability monitoring and network documentation</li>
+              <li>Implemented <strong>Prometheus + Grafana</strong> (metrics), <strong>ELK Stack + Graylog</strong> (logs), <strong>Zabbix</strong> (infrastructure), <strong>Sentry</strong> (application errors)</li>
+              <li>Set up <strong>Uptime Kuma, LibreNMS + Oxidized and NetBox</strong> for availability monitoring and network documentation</li>
               <li>Reduced mean time to detect incidents (MTTD) <strong>from several hours to ~5 minutes</strong></li>
 
               <li class="jlist-head">IaC &amp; automation</li>
