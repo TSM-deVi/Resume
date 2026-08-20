@@ -12,7 +12,6 @@
   /* ── Surfaces ── */
   --canvas:  #05060f;   /* page background, deepest card surface */
   --plate:   #2f343e;   /* elevated panels, ghost-button fills */
-  --gridln:  #3f4959;   /* shadow tint for elevation */
 
   /* ── Text, stepping down: ice → frost → moon → fog ── */
   --ice:     #d8ecf8;
@@ -25,7 +24,7 @@
   --violet:  #663af3;
   --violet-lt: #8a68f7;
   --blueprint: #b6d9fc;
-  --skywash: linear-gradient(180deg, #d8ecf8 0%, #98c0ef 100%);
+  --skywash: linear-gradient(180deg, var(--ice) 0%, #98c0ef 100%);
   /* success state — Deep Teal is an AuthKit token, so the green stays in-system */
   --ok:    #269684;
   --ok-lt: #3fbfa4;
@@ -62,22 +61,6 @@
   --page-max: 1200px;
   --card-pad: 24px;
   --prose: 60ch;      /* comfortable measure — 72 read as a wall of text */
-
-  /* Legacy aliases */
-  --bg: var(--canvas);
-  --bg-card: var(--canvas);
-  --bg-sec: var(--plate);
-  --border: var(--edge);
-  --border-lt: var(--edge-lt);
-  --text: var(--frost);
-  --muted: var(--moon);
-  --dim: var(--fog);
-  --accent: var(--violet);
-  --accent-lt: var(--blueprint);
-  --green: var(--blueprint);
-  --black: var(--canvas);
-  --steel: var(--fog);
-  --lavender: var(--blueprint);
 }
 
 /* ── BOOT SCREEN ── */
@@ -153,7 +136,7 @@ body::before {
 a { color: var(--frost); text-decoration: none; }
 a:hover { text-decoration: underline; text-underline-offset: 4px; }
 
-code, .mono { font-family: var(--font-mono); }
+code { font-family: var(--font-mono); }
 
 /* ── EDGE MARGINALIA ── */
 .edge-ruler {
@@ -874,8 +857,7 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
   border-radius: var(--r-pill); padding: .45rem 1.25rem .45rem .45rem;
   transition: box-shadow .25s, transform .25s;
 }
-.cert-pill:hover,
-.cert-pill-b:hover, .cert-pill-p:hover, .cert-pill-e:hover {
+.cert-pill:hover {
   box-shadow: inset 0 1px 1px rgba(216,236,248,.3), var(--halo); transform: translateY(-2px);
 }
 .cert-pill-badge {
@@ -885,16 +867,13 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
   background: var(--lum); border: 1px solid var(--edge);
   color: var(--blueprint);
 }
-.cert-pill-b .cert-pill-badge, .cert-pill-p .cert-pill-badge, .cert-pill-e .cert-pill-badge {
-  color: var(--blueprint);
-}
 .cert-pill-name { font-size: 14px; color: var(--frost); font-weight: 500; }
 .cert-pill-issuer { font-size: 13px; color: var(--fog); }
 .cert-pill-issuer::before { content: '· '; }
 @media (max-width: 480px) { .cert-pill-issuer { display: none; } }
 
-/* ── ACHIEVEMENTS (bento) ── */
-/* Six results of equal standing, so six tiles of equal size. The old bento
+/* ── ACHIEVEMENTS ── */
+/* Nine results of equal standing, so nine tiles of equal size. The old bento
    spans made some cards big and some narrow for no reason — the eye reads
    size as importance and then hunts for a rule that was never there.
    Emphasis lives in the spotlight on the lead card, not in the geometry. */

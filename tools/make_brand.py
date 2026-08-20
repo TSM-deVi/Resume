@@ -15,6 +15,7 @@ os.makedirs(OUT, exist_ok=True)
 
 GROTESK = os.path.join(FONTS, "Manrope.ttf")   # Space Grotesk has no Cyrillic
 INTER = os.path.join(FONTS, "Inter.ttf")
+MONO = os.path.join(FONTS, "JetBrainsMono.ttf")
 
 # ── AuthKit tokens ──
 CANVAS = (5, 6, 15)
@@ -27,6 +28,8 @@ SKY_END = (152, 192, 239)
 VIOLET = (102, 58, 243)
 VIOLET_LT = (138, 104, 247)
 BLUEPRINT = (182, 217, 252)
+OK = (38, 150, 132)
+OK_LT = (63, 191, 164)
 
 
 def ensure_fonts():
@@ -35,6 +38,7 @@ def ensure_fonts():
     need = {
         GROTESK: base + "manrope/Manrope%5Bwght%5D.ttf",
         INTER:   base + "inter/Inter%5Bopsz,wght%5D.ttf",
+        MONO:    base + "jetbrainsmono/JetBrainsMono%5Bwght%5D.ttf",
     }
     os.makedirs(FONTS, exist_ok=True)
     for path, url in need.items():
@@ -97,6 +101,33 @@ def gradient_text(base, xy, text, fnt, tracking=0):
     return w
 
 
+def glass(img, box, radius, blur=26, tint=(199, 211, 234), alpha=15):
+    """Frosted panel: blur what's behind it, then a whisper of light on top.
+
+    Same trick as the site's backdrop-filter — the elevation comes from an
+    inset highlight along the top edge, never from a drop shadow.
+    """
+    x0, y0, x1, y1 = box
+    region = img.crop(box).filter(ImageFilter.GaussianBlur(blur))
+    mask = Image.new("L", img.size, 0)
+    ImageDraw.Draw(mask).rounded_rectangle(box, radius=radius, fill=255)
+    holder = img.copy()
+    holder.paste(region, (x0, y0))
+    img.paste(Image.composite(holder, img, mask), (0, 0))
+
+    d = ImageDraw.Draw(img, "RGBA")
+    d.rounded_rectangle(box, radius=radius, fill=tint + (alpha,))
+    d.rounded_rectangle(box, radius=radius, outline=BLUEPRINT + (48,), width=max(radius // 18, 1))
+    # inset frost highlight — top edge only, so the panel reads as lit from above
+    hi = Image.new("L", img.size, 0)
+    hd = ImageDraw.Draw(hi)
+    hd.rounded_rectangle(box, radius=radius, outline=255, width=max(radius // 18, 1))
+    hd.rectangle([x0, y0 + (y1 - y0) // 3, x1, y1], fill=0)
+    hi = hi.filter(ImageFilter.GaussianBlur(1))
+    img.paste(Image.composite(Image.new("RGB", img.size, ICE), img,
+                              hi.point(lambda v: int(v * .40))), (0, 0))
+
+
 # ══════════════════════════════════════════════════════════
 #  OG IMAGE — 1200 × 630
 # ══════════════════════════════════════════════════════════
@@ -105,62 +136,139 @@ def make_og():
     S = 2
     img = Image.new("RGB", (W * S, H * S), CANVAS)
 
-    # blueprint grid, fading toward the edges
+    def px(v):
+        return int(v * S)
+
+    # ── blueprint grid, fading toward the edges ──
     grid = Image.new("RGB", img.size, CANVAS)
     gd = ImageDraw.Draw(grid)
-    step = 88 * S // 2
+    step = px(44)
     for x in range(0, W * S, step):
         gd.line([(x, 0), (x, H * S)], fill=(20, 24, 38), width=1)
     for y in range(0, H * S, step):
         gd.line([(0, y), (W * S, y)], fill=(20, 24, 38), width=1)
     fade = Image.new("L", img.size, 0)
     ImageDraw.Draw(fade).ellipse(
-        [-int(W * S * .1), -int(H * S * .35), int(W * S * 1.1), int(H * S * 1.05)], fill=255)
+        [px(-120), px(-220), px(W + 120), px(H + 60)], fill=255)
     fade = fade.filter(ImageFilter.GaussianBlur(180))
     img = Image.composite(grid, img, fade)
 
-    # violet bloom anchoring the top
+    # ── violet bloom behind the name ──
     bloom = Image.new("L", img.size, 0)
     ImageDraw.Draw(bloom).ellipse(
-        [int(W * S * .18), -int(H * S * .45), int(W * S * .95), int(H * S * .55)], fill=255)
-    bloom = bloom.filter(ImageFilter.GaussianBlur(210))
+        [px(-60), px(-300), px(760), px(360)], fill=255)
+    bloom = bloom.filter(ImageFilter.GaussianBlur(200))
     img = Image.composite(Image.new("RGB", img.size, VIOLET), img,
-                          bloom.point(lambda v: int(v * .34)))
+                          bloom.point(lambda v: int(v * .38)))
+
+    # ── aurora ribbon sweeping under the panel ──
+    aur = Image.new("L", img.size, 0)
+    ImageDraw.Draw(aur).ellipse([px(560), px(120), px(1320), px(430)], fill=255)
+    aur = aur.filter(ImageFilter.GaussianBlur(150))
+    img = Image.composite(Image.new("RGB", img.size, VIOLET_LT), img,
+                          aur.point(lambda v: int(v * .22)))
 
     d = ImageDraw.Draw(img)
-    PAD = 84 * S
+    dA = ImageDraw.Draw(img, "RGBA")
+    PAD = px(72)
 
-    f_eyebrow = font(INTER, 21 * S, 600)
-    f_name = font(GROTESK, 94 * S, 500)
-    f_sub = font(INTER, 27 * S, 400)
-    f_stat = font(GROTESK, 50 * S, 500)
-    f_cap = font(INTER, 19 * S, 400)
-    f_url = font(INTER, 19 * S, 500)
+    f_eyebrow = font(INTER, px(19), 600)
+    f_name = font(GROTESK, px(82), 600)
+    f_sub = font(INTER, px(21), 400)
+    f_stat = font(GROTESK, px(44), 600)
+    f_cap = font(INTER, px(17), 400)
+    f_url = font(INTER, px(18), 500)
+    f_mono = font(MONO, px(24), 500)
+    f_tag = font(MONO, px(17), 500)
 
-    y = PAD
-    tracked(d, (PAD, y), "DEVOPS ENGINEER", f_eyebrow, BLUEPRINT, tracking=2.4 * S)
-    y += 54 * S
+    # ── eyebrow ──
+    y = px(74)
+    dA.ellipse([PAD, y + px(6), PAD + px(8), y + px(14)], fill=VIOLET_LT + (255,))
+    tracked(d, (PAD + px(20), y), "MIDDLE+ DEVOPS ENGINEER", f_eyebrow, BLUEPRINT, tracking=px(2.6))
 
-    gradient_text(img, (PAD, y), "Иванов Темир", f_name)
-    y += 128 * S
+    # ── name, stacked like the hero ──
+    y = px(112)
+    gradient_text(img, (PAD, y), "Иванов", f_name)
+    gradient_text(img, (PAD, y + px(88)), "Темир", f_name)
 
+    # ── subtitle ──
+    y = px(322)
     d.text((PAD, y), "Kubernetes · GitLab CI/CD · Terraform · Observability",
-           font=f_sub, fill=FOG)
-    y += 60 * S
+           font=f_sub, fill=MOON)
 
-    d.line([(PAD, y), (W * S - PAD, y)], fill=(31, 37, 54), width=1 * S)
-    y += 46 * S
+    # ── hairline ──
+    y = px(376)
+    dA.line([(PAD, y), (px(616), y)], fill=BLUEPRINT + (36,), width=S)
 
-    stats = [("12+", "сервисов в K8s"), ("100%", "CI/CD покрытие"), ("99.9%", "uptime СУБД")]
+    # ── stats ──
+    y = px(406)
+    stats = [("63 VM", "контуры DEV/INF/PROD"), ("12+", "сервисов в K8s"), ("100%", "CI/CD покрытие")]
     x = PAD
     for val, cap in stats:
         gradient_text(img, (x, y), val, f_stat)
-        d.text((x, y + 66 * S), cap, font=f_cap, fill=FOG)
-        x += max(tracked_width(d, val, f_stat), d.textlength(cap, font=f_cap)) + 66 * S
+        d.text((x, y + px(56)), cap, font=f_cap, fill=FOG)
+        x += max(tracked_width(d, val, f_stat), d.textlength(cap, font=f_cap)) + px(32)
 
-    d.ellipse([PAD, H * S - PAD - 14 * S, PAD + 9 * S, H * S - PAD - 5 * S], fill=VIOLET_LT)
-    d.text((PAD + 22 * S, H * S - PAD - 20 * S), "tsm-devi.github.io/Resume",
-           font=f_url, fill=FOG)
+    # ── url ──
+    y = px(534)
+    dA.ellipse([PAD, y + px(7), PAD + px(8), y + px(15)], fill=VIOLET_LT + (255,))
+    d.text((PAD + px(20), y), "tsm-devi.github.io/Resume", font=f_url, fill=FOG)
+
+    # ══ pipeline panel ══
+    box = (px(660), px(96), px(1128), px(534))
+    glass(img, box, radius=px(18))
+    d = ImageDraw.Draw(img)
+    dA = ImageDraw.Draw(img, "RGBA")
+
+    ix, iy = px(660 + 28), px(96 + 26)
+    d.text((ix, iy), "// pipeline", font=f_tag, fill=BLUEPRINT)
+
+    # "passing" pill, teal — the site's success state
+    pill_txt = "passing"
+    pw = d.textlength(pill_txt, font=f_tag)
+    p_x1, p_y0 = px(1128 - 28), iy - px(6)
+    p_x0, p_y1 = int(p_x1 - pw - px(24)), iy + px(24)
+    dA.rounded_rectangle([p_x0, p_y0, p_x1, p_y1], radius=px(11),
+                         fill=OK + (46,), outline=OK_LT + (110,), width=max(S, 1))
+    d.text((p_x0 + px(12), iy), pill_txt, font=f_tag, fill=OK_LT)
+
+    dA.line([(ix, px(96 + 68)), (px(1128 - 28), px(96 + 68))],
+            fill=BLUEPRINT + (30,), width=S)
+
+    # ── six stages, chained ──
+    # tools come from the data-tip on each stage in index.html — real stack,
+    # not decoration
+    stages = [("lint", "hadolint"), ("build", "docker"), ("test", "pytest"),
+              ("scan", "trivy"), ("push", "harbor"), ("deploy", "argocd")]
+    cx = ix + px(17)
+    top = px(218)
+    stepy = px(55)
+    r = px(15)
+
+    glow = Image.new("L", img.size, 0)
+    gl = ImageDraw.Draw(glow)
+    for i in range(len(stages)):
+        cy = top + i * stepy
+        gl.ellipse([cx - r, cy - r, cx + r, cy + r], fill=255)
+    glow = glow.filter(ImageFilter.GaussianBlur(px(9)))
+    img = Image.composite(Image.new("RGB", img.size, OK_LT), img,
+                          glow.point(lambda v: int(v * .30)))
+    d = ImageDraw.Draw(img)
+    dA = ImageDraw.Draw(img, "RGBA")
+
+    for i, (name, tool) in enumerate(stages):
+        cy = top + i * stepy
+        if i:
+            dA.line([(cx, cy - stepy + r + px(3)), (cx, cy - r - px(3))],
+                    fill=OK_LT + (150,), width=max(px(2), 1))
+        dA.ellipse([cx - r, cy - r, cx + r, cy + r],
+                   fill=OK + (60,), outline=OK_LT + (255,), width=max(px(2), 1))
+        # tick
+        dA.line([(cx - px(6), cy), (cx - px(1.5), cy + px(4.5)),
+                 (cx + px(6.5), cy - px(5))],
+                fill=ICE + (255,), width=max(px(2), 1), joint="curve")
+        d.text((cx + px(34), cy), name, font=f_mono, fill=FROST, anchor="lm")
+        d.text((px(1128 - 28), cy), tool, font=f_tag, fill=FOG, anchor="rm")
 
     img = img.resize((W, H), Image.LANCZOS)
     p = os.path.join(OUT, "og-image.png")

@@ -220,14 +220,14 @@ try {
   console.log(
     '%c╔══════════════════════════════════════════════╗\n' +
     '║  $ whoami                                    ║\n' +
-    '║  > Ivanov Temir · Middle DevOps Engineer     ║\n' +
+    '║  > Ivanov Temir · Middle+ DevOps Engineer    ║\n' +
     '║                                              ║\n' +
     '║  $ kubectl get contact                       ║\n' +
     '║  > TG:    @ktylhus                           ║\n' +
-    '║  > email: timir-ivaniv@yandex.ru             ║\n' +
+    '║  > email: timir007@mail.ru                   ║\n' +
     '╚══════════════════════════════════════════════╝', _cs[0]
   );
-  console.log('%c● open to work · remote / hybrid', _cs[1]);
+  console.log('%c● open to work · remote', _cs[1]);
   console.log('%cLooking for a DevOps engineer? Let\'s talk!', _cs[2]);
 } catch(e) {}
 
@@ -269,9 +269,9 @@ const _termOut   = document.getElementById('term-output');
 
 const _termCmds = {
   help:       'contact · skills · location · ls\ngit log · sudo su\n\n── hotkeys ──\n[Tab]  autocomplete\n[↑]    previous command\n[↓]    next command',
-  contact:    'TG:    @ktylhus\nemail: timir-ivaniv@yandex.ru',
+  contact:    'TG:    @ktylhus\nemail: timir007@mail.ru',
   skills:     'K8s · Helm · ArgoCD · Vault\nTerraform · Ansible · GitLab CI\nPrometheus · Grafana · Loki',
-  location:   'Saint Petersburg · UTC+3\nremote / hybrid ✓',
+  location:   'Saint Petersburg · UTC+3\nremote ✓ · occasional trips',
   ls:         'K8s         ✓ prod\nTerraform   ✓ no drift\nArgoCD      ✓ synced\nVault       ✓ unsealed\nGitLab CI   ✓ 100%',
   'git log':  '* feat: HA clusters · 99.9% uptime\n* feat: MTTD hours → 5 min\n* feat: server setup 2h → 15 min',
   'sudo su':  'Permission denied (insufficient coffee ☕)',
@@ -394,7 +394,7 @@ function setupCopyCard(btnId, labelId, iconId, text) {
 }
 
 setupCopyCard('btn-copy-tg',    'btn-tg-label',   'copy-icon-tg', '@ktylhus');
-setupCopyCard('btn-copy-email', 'btn-copy-label', 'copy-icon',    'timir-ivaniv@yandex.ru');
+setupCopyCard('btn-copy-email', 'btn-copy-label', 'copy-icon',    'timir007@mail.ru');
 
 // ── Pipeline animation ──
 (function () {

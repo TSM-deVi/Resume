@@ -3,8 +3,8 @@
 ## make_brand.py
 
 Перерисовывает `og-image.png` и весь набор фавиконов в стиле сайта
-(«Midnight vault with gilded ledger»: обсидиан `#08080a`, золото `#ae9357`,
-Playfair Display + Inter).
+(AuthKit, «frosted glass cathedral at midnight»: `#05060f`, фиолетовый
+`#663af3`, синька `#b6d9fc`, Manrope + Inter + JetBrains Mono).
 
 ```bash
 pip install pillow
@@ -28,7 +28,16 @@ python tools/make_brand.py
 
 Палитра и токены заданы константами в начале скрипта — менять цвета там.
 
+### После перерисовки обложки
+
+В `index.html` у `og:image` стоит `?v=N`. Telegram, VK и Facebook кешируют
+превью по полному URL и сами его не сбрасывают — подними цифру, иначе в
+мессенджерах неделями будет висеть старая картинка. Принудительно сбросить
+кеш можно так:
+
+* Telegram — написать `@WebpageBot` ссылку на страницу;
+* Facebook / WhatsApp — <https://developers.facebook.com/tools/debug/>;
+* LinkedIn — <https://www.linkedin.com/post-inspector/>.
+
 **Известное ограничение:** монограмма `TS‹M` на 16px нечитаема — четыре
-засечных глифа не помещаются в шестнадцать пикселей. На 32px и выше всё
-в порядке. Если понадобится разборчивость на 16px, в `make_icon()` есть
-ветка `mark="compact"` — она рисует один шеврон линиями вместо букв.
+глифа не помещаются в шестнадцать пикселей. На 32px и выше всё в порядке.
