@@ -224,7 +224,7 @@ try {
     '║                                              ║\n' +
     '║  $ kubectl get contact                       ║\n' +
     '║  > TG:    @ktylhus                           ║\n' +
-    '║  > email: timir007@mail.ru                   ║\n' +
+    '║  > email: timir-ivaniv@yandex.ru             ║\n' +
     '╚══════════════════════════════════════════════╝', _cs[0]
   );
   console.log('%c● open to work · remote', _cs[1]);
@@ -269,7 +269,7 @@ const _termOut   = document.getElementById('term-output');
 
 const _termCmds = {
   help:       'contact · skills · location · ls\ngit log · sudo su\n\n── hotkeys ──\n[Tab]  autocomplete\n[↑]    previous command\n[↓]    next command',
-  contact:    'TG:    @ktylhus\nemail: timir007@mail.ru',
+  contact:    'TG:    @ktylhus\nemail: timir-ivaniv@yandex.ru',
   skills:     'K8s · Helm · ArgoCD · Vault\nTerraform · Ansible · GitLab CI\nPrometheus · Grafana · Loki',
   location:   'Saint Petersburg · UTC+3\nremote ✓ · occasional trips',
   ls:         'K8s         ✓ prod\nTerraform   ✓ no drift\nArgoCD      ✓ synced\nVault       ✓ unsealed\nGitLab CI   ✓ 100%',
@@ -394,7 +394,7 @@ function setupCopyCard(btnId, labelId, iconId, text) {
 }
 
 setupCopyCard('btn-copy-tg',    'btn-tg-label',   'copy-icon-tg', '@ktylhus');
-setupCopyCard('btn-copy-email', 'btn-copy-label', 'copy-icon',    'timir007@mail.ru');
+setupCopyCard('btn-copy-email', 'btn-copy-label', 'copy-icon',    'timir-ivaniv@yandex.ru');
 
 // ── Pipeline animation ──
 (function () {

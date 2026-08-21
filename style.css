@@ -999,7 +999,9 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
 #cta > * { position: relative; z-index: 1; }
 .cta-terminal .terminal-body { padding: 28px; }
 .cta-terminal .tl { margin-bottom: 18px; }
-.cta-terminal .tl-out { line-height: 1.6; color: var(--fog); max-width: 480px; }
+/* Абзац держит всю ширину терминала. С max-width:480px внутри 604px тела
+   текст жался к левому краю, а справа оставалась пустая колонка. */
+.cta-terminal .tl-out { font-size: 14px; line-height: 1.65; color: var(--fog); }
 .cta-online-dot {
   display: inline-block; width: 7px; height: 7px; border-radius: 50%;
   background: var(--blueprint); margin-left: 6px; box-shadow: var(--halo);
@@ -1131,6 +1133,7 @@ body.lang-en       [data-lang="ru"] { display: none !important; }
   .container { padding: 0 1.25rem; }
   nav { padding: 0 1.25rem; height: 60px; position: relative; }
   :root { --card-pad: 20px; }
+  .cta-terminal .terminal-body { padding: 20px; }
   .job-company-block { padding: 1.5rem; }
   .nav-hamburger { display: flex; }
   .nav-links {
