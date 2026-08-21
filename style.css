@@ -293,16 +293,16 @@ section { padding: clamp(3.5rem, 9vw, 120px) 0; }
 
 .hero-grid {
   display: grid;
-  grid-template-columns: 1fr 380px;
+  grid-template-columns: minmax(0, 1fr) 380px;
   gap: 4rem; align-items: start;
   margin-bottom: 4rem;
 }
-.hero-left { position: relative; }
+.hero-left { position: relative; min-width: 0; }
 
 /* No 3D fan here. AuthKit tilts product *screenshots*; these cards hold text
    you actually read, and a rotated layer costs font hinting, blurs glyphs and
    tears backdrop-filter at the edges. Flat cards, lift on hover instead. */
-.hero-right { display: flex; flex-direction: column; gap: 1.25rem; }
+.hero-right { display: flex; flex-direction: column; gap: 1.25rem; min-width: 0; }
 .hero-right > * { transition: box-shadow .3s, transform .3s cubic-bezier(.16,1,.3,1); }
 .hero-right .hero-terminal:hover,
 .hero-right .ticket:hover {
@@ -494,7 +494,14 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
 .pl-stage[data-tip]:hover::after { opacity: 1; }
 
 @media (max-width: 720px) {
-  .pipeline-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: .4rem; }
+  /* Пайплайн шире экрана и прокручивается вбок. Растушёванный правый край —
+     единственный намёк, что за DEPLOY что-то есть: без него он читается
+     как обрубленный. */
+  .pipeline-wrap {
+    overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: .4rem;
+    -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 44px), transparent);
+            mask-image: linear-gradient(90deg, #000 calc(100% - 44px), transparent);
+  }
   .pipeline { min-width: 380px; }
 }
 
@@ -988,7 +995,7 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
 }
 
 /* ── CTA ── */
-#cta { padding: clamp(3rem, 8vw, 120px) 2rem; position: relative; }
+#cta { padding: clamp(3rem, 8vw, 120px) 0; position: relative; }
 #cta::before {
   content: ''; position: absolute; left: 50%; top: 50%;
   width: min(900px, 92vw); height: 400px;
@@ -1128,9 +1135,9 @@ body.lang-en       [data-lang="ru"] { display: none !important; }
 
 
 /* ── RESPONSIVE ── */
-@media (max-width: 1040px) { .hero-grid { gap: 3rem; grid-template-columns: 1fr 330px; } }
+@media (max-width: 1040px) { .hero-grid { gap: 3rem; grid-template-columns: minmax(0, 1fr) 330px; } }
 @media (max-width: 900px) {
-  .hero-grid { grid-template-columns: 1fr; }
+  .hero-grid { grid-template-columns: minmax(0, 1fr); }
   .hero-terminal { display: none; }
   .hero-desc { max-width: 100%; }
   .hero-right { max-width: 440px; }
@@ -1140,7 +1147,6 @@ body.lang-en       [data-lang="ru"] { display: none !important; }
   .container { padding: 0 1.25rem; }
   nav { padding: 0 1.25rem; height: 60px; position: relative; }
   :root { --card-pad: 20px; }
-  #cta { padding-left: 1.25rem; padding-right: 1.25rem; }
   .cta-terminal .terminal-body { padding: 20px; }
   .cta-terminal .tl-out { font-size: 15px; }
   .tl-contact { font-size: 14px; }
