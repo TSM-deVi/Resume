@@ -998,13 +998,17 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
 }
 #cta > * { position: relative; z-index: 1; }
 .cta-terminal .terminal-body { padding: 28px; font-size: 14px; }
-.cta-terminal .tl { margin-bottom: 20px; }
+.cta-terminal .tl { margin-bottom: 26px; }
 .cta-terminal .terminal-title { font-size: 12px; }
+/* Команда — подпись, а не текст: мельче, тусклее и с воздухом до вывода.
+   Внутрипарный отступ 12px против межпарных 26px — группировка читается
+   без разделителей. */
+.cta-terminal .tl-cmd { font-size: 13px; margin-bottom: 12px; }
 /* Абзац держит всю ширину терминала: с max-width:480px внутри тела он жался
    к левому краю. Кегль 16 при теле 644px даёт строку ровно в 67 знаков —
    моноширинный шаг 0.6em, правый край рвётся максимум на 4 знака. Менять
    ширину и кегль только парой, иначе край снова разъедется. */
-.cta-terminal .tl-out { font-size: 16px; line-height: 1.6; color: var(--fog); }
+.cta-terminal .tl-out { font-size: 16px; line-height: 1.6; color: var(--frost); }
 .cta-online-dot {
   display: inline-block; width: 7px; height: 7px; border-radius: 50%;
   background: var(--blueprint); margin-left: 6px; box-shadow: var(--halo);
