@@ -508,7 +508,7 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
   box-shadow: var(--glass-float);
   overflow: hidden; position: relative;
 }
-.cta-terminal { max-width: 660px; margin: 0 auto; }
+.cta-terminal { max-width: 700px; margin: 0 auto; }
 
 .terminal-bar {
   background: rgba(199,211,234,.04);
@@ -988,7 +988,7 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
 }
 
 /* ── CTA ── */
-#cta { padding: clamp(3rem, 8vw, 120px) 0; position: relative; }
+#cta { padding: clamp(3rem, 8vw, 120px) 2rem; position: relative; }
 #cta::before {
   content: ''; position: absolute; left: 50%; top: 50%;
   width: min(900px, 92vw); height: 400px;
@@ -997,11 +997,14 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
   filter: blur(40px); pointer-events: none;
 }
 #cta > * { position: relative; z-index: 1; }
-.cta-terminal .terminal-body { padding: 28px; }
-.cta-terminal .tl { margin-bottom: 18px; }
-/* Абзац держит всю ширину терминала. С max-width:480px внутри 604px тела
-   текст жался к левому краю, а справа оставалась пустая колонка. */
-.cta-terminal .tl-out { font-size: 14px; line-height: 1.65; color: var(--fog); }
+.cta-terminal .terminal-body { padding: 28px; font-size: 14px; }
+.cta-terminal .tl { margin-bottom: 20px; }
+.cta-terminal .terminal-title { font-size: 12px; }
+/* Абзац держит всю ширину терминала: с max-width:480px внутри тела он жался
+   к левому краю. Кегль 16 при теле 644px даёт строку ровно в 67 знаков —
+   моноширинный шаг 0.6em, правый край рвётся максимум на 4 знака. Менять
+   ширину и кегль только парой, иначе край снова разъедется. */
+.cta-terminal .tl-out { font-size: 16px; line-height: 1.6; color: var(--fog); }
 .cta-online-dot {
   display: inline-block; width: 7px; height: 7px; border-radius: 50%;
   background: var(--blueprint); margin-left: 6px; box-shadow: var(--halo);
@@ -1010,9 +1013,9 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
 
 .tl-contact {
   display: flex; align-items: center; gap: .6rem;
-  width: 100%; background: none; border: 1px solid transparent;
+  width: calc(100% + 32px); background: none; border: 1px solid transparent;
   padding: 12px 16px; margin: 0 -16px;
-  font-family: var(--font-mono); font-size: 13px; color: var(--frost);
+  font-family: var(--font-mono); font-size: 15px; color: var(--frost);
   cursor: pointer; text-align: left; border-radius: var(--r-input);
   transition: background .2s, border-color .2s;
 }
@@ -1133,7 +1136,10 @@ body.lang-en       [data-lang="ru"] { display: none !important; }
   .container { padding: 0 1.25rem; }
   nav { padding: 0 1.25rem; height: 60px; position: relative; }
   :root { --card-pad: 20px; }
+  #cta { padding-left: 1.25rem; padding-right: 1.25rem; }
   .cta-terminal .terminal-body { padding: 20px; }
+  .cta-terminal .tl-out { font-size: 15px; }
+  .tl-contact { font-size: 14px; }
   .job-company-block { padding: 1.5rem; }
   .nav-hamburger { display: flex; }
   .nav-links {
