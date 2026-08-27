@@ -350,7 +350,7 @@
           <div class="job-company-hdr">
             <div>
               <h3 class="job-company-name">ООО ДЮК Технологии</h3>
-              <div class="job-company-sub">duc-technologies.ru</div>
+              <div class="job-company-sub">duc-technologies.ru · <span data-lang="ru">Москва</span><span data-lang="en">Moscow</span></div>
             </div>
             <div class="job-period">
               <span data-lang="ru">апр 2026 — июл 2026 · 4 мес</span>
@@ -464,7 +464,7 @@
           <div class="job-company-hdr">
             <div>
               <h3 class="job-company-name">Слетать.ру</h3>
-              <div class="job-company-sub">sletat.ru</div>
+              <div class="job-company-sub">sletat.ru · <span data-lang="ru">Санкт-Петербург</span><span data-lang="en">Saint Petersburg</span></div>
             </div>
             <div class="job-period">
               <span data-lang="ru">фев 2024 — апр 2026 · 2 г 3 мес</span>
@@ -493,7 +493,7 @@
               <li class="jlist-head">Kubernetes и контейнеризация</li>
               <li>Развернул и администрировал Kubernetes-кластер на <strong>bare-metal</strong>: мастер и два воркера на физических серверах, без managed-облака — etcd, CNI, storage и обновления настраивались руками</li>
               <li>Мигрировал <strong>12+ микросервисов</strong> из Docker Compose в Kubernetes и выстроил схему для переноса остальных: время деплоя сократилось с ~40 до ~8 минут</li>
-              <li>Настройка и администрирование кластеров: namespace-изоляция, ресурсные лимиты, HPA, Ingress</li>
+              <li>Настройка и администрирование кластеров: namespace-изоляция, ресурсные лимиты, <strong>RBAC</strong>, HPA, Ingress</li>
               <li>Persistent-хранилище кластера на <strong>Longhorn</strong>: distributed block storage поверх дисков нод, тома для stateful-сервисов, репликация и снапшоты</li>
               <li>Упаковал сервисы в <strong>Helm-чарты</strong>, унифицировал конфигурацию окружений через values</li>
 
@@ -546,7 +546,7 @@
 
               <li class="jlist-head">Администрирование</li>
               <li>Виртуализация (<strong>VMware, Hyper-V</strong>), AD, DNS, DHCP</li>
-              <li><strong>Windows Server</strong>: IIS (публикация и сопровождение веб-приложений, пулы приложений, привязки и сертификаты), Active Directory, PowerShell</li>
+              <li><strong>Windows Server</strong>: IIS (публикация и сопровождение веб-приложений, пулы приложений, привязки и сертификаты), Active Directory, DNS, DHCP, SMTP, PowerShell</li>
               <li>Резервное копирование (<strong>Veeam Backup &amp; Replication</strong>)</li>
 
               <li class="jlist-head">Управление</li>
@@ -564,7 +564,7 @@
               <li class="jlist-head">Kubernetes &amp; containerization</li>
               <li>Deployed and administered a <strong>bare-metal</strong> Kubernetes cluster: a master and two workers on physical servers, with no managed cloud — etcd, CNI, storage and upgrades configured by hand</li>
               <li>Migrated <strong>12+ microservices</strong> from Docker Compose to Kubernetes and designed the path for the rest: deploy time cut from ~40 to ~8 minutes</li>
-              <li>Cluster setup and administration: namespace isolation, resource limits, HPA, Ingress</li>
+              <li>Cluster setup and administration: namespace isolation, resource limits, <strong>RBAC</strong>, HPA, Ingress</li>
               <li>Cluster persistent storage on <strong>Longhorn</strong>: distributed block storage over node disks, volumes for stateful services, replication and snapshots</li>
               <li>Packaged services into <strong>Helm charts</strong> and unified environment configuration through values</li>
 
@@ -617,7 +617,7 @@
 
               <li class="jlist-head">Administration</li>
               <li>Virtualization (<strong>VMware, Hyper-V</strong>), AD, DNS, DHCP</li>
-              <li><strong>Windows Server</strong>: IIS (publishing and maintaining web applications, application pools, bindings and certificates), Active Directory, PowerShell</li>
+              <li><strong>Windows Server</strong>: IIS (publishing and maintaining web applications, application pools, bindings and certificates), Active Directory, DNS, DHCP, SMTP, PowerShell</li>
               <li>Backups (<strong>Veeam Backup &amp; Replication</strong>)</li>
 
               <li class="jlist-head">Management</li>
@@ -639,18 +639,24 @@
               </div>
             </div>
             <ul class="jlist" data-lang="ru">
+              <li>Администрировал доменную инфраструктуру <strong>Active Directory</strong>: групповые политики, права доступа, профили пользователей</li>
+              <li>Настройка и поддержка корпоративной почты и почтовых клиентов: <strong>Exchange, Outlook, IMAP/SMTP</strong></li>
+              <li>Резервное копирование и восстановление данных, контроль целостности и доступности информации</li>
+              <li>Мониторинг состояния серверов, сетевого оборудования и рабочих станций</li>
+              <li>Настройка антивирусной защиты, обновлений и политик безопасности</li>
               <li>Настроил и перенёс <strong>30+ рабочих станций</strong> и периферийного оборудования при расширении офиса</li>
-              <li>Техническая поддержка пользователей, консультирование по корпоративному ПО</li>
-              <li>Диагностика проблем оборудования и программного обеспечения</li>
-              <li>Инвентаризация IT-оборудования, ведение документации</li>
-              <li>Поддержка удалённых пользователей</li>
+              <li>Поддержка пользователей через <strong>Service Desk (Jira)</strong>: консультирование по корпоративному ПО, диагностика проблем оборудования и ПО, поддержка удалённых пользователей</li>
+              <li>Ведение технической документации, инвентаризация оборудования и ПО</li>
             </ul>
             <ul class="jlist" data-lang="en">
+              <li>Administered the <strong>Active Directory</strong> domain infrastructure: group policies, access rights, user profiles</li>
+              <li>Set up and maintained corporate mail and mail clients: <strong>Exchange, Outlook, IMAP/SMTP</strong></li>
+              <li>Data backup and recovery, monitoring information integrity and availability</li>
+              <li>Monitored the health of servers, network equipment and workstations</li>
+              <li>Configured antivirus protection, updates and security policies</li>
               <li>Set up and relocated <strong>30+ workstations</strong> and peripherals during an office expansion</li>
-              <li>User technical support and guidance on corporate software</li>
-              <li>Diagnosing hardware and software problems</li>
-              <li>IT equipment inventory and documentation</li>
-              <li>Support for remote users</li>
+              <li>User support through <strong>Service Desk (Jira)</strong>: guidance on corporate software, hardware and software diagnostics, support for remote users</li>
+              <li>Maintained technical documentation and hardware/software inventory</li>
             </ul>
           </div>
         </div>
@@ -663,7 +669,7 @@
           <div class="job-company-hdr">
             <div>
               <h3 class="job-company-name">РеалЪ ТД, ООО</h3>
-              <div class="job-company-sub">tdreal.spb.ru</div>
+              <div class="job-company-sub">tdreal.spb.ru · <span data-lang="ru">Санкт-Петербург</span><span data-lang="en">Saint Petersburg</span></div>
             </div>
             <div class="job-period">
               <span data-lang="ru">авг 2022 — фев 2024 · 1 г 7 мес</span>
@@ -737,6 +743,7 @@
         <div class="job-company-block">
           <div class="job-meta">
             <h3 class="job-company-name">ООО «Форум»</h3>
+            <div class="job-company-sub"><span data-lang="ru">Санкт-Петербург</span><span data-lang="en">Saint Petersburg</span></div>
             <div class="job-period">
               <span data-lang="ru">май 2022 — июл 2022 · 3 мес</span>
               <span data-lang="en">May 2022 — Jul 2022 · 3 mo</span>
