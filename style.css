@@ -796,6 +796,25 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
 .jlist li.jlist-head:first-child { margin-top: 0; }
 .jlist li.jlist-head::before { content: none; }
 
+/* Проект — уровень выше рубрики: внутри одной должности два проекта по три
+   десятка пунктов, и без разделителя они читаются как один сплошной список.
+   Линия сверху отбивает блок, кегль 13 против 12 и --ice против --blueprint
+   ставят проект над рубрикой, не вводя третий тип заголовка. */
+.jlist li.jlist-proj {
+  padding-left: 0; max-width: none;
+  margin-top: 3rem; padding-top: 1.5rem;
+  border-top: 1px solid var(--edge);
+  font-family: var(--font-mono);
+  font-size: 13px; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--ice);
+}
+.jlist li.jlist-proj:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+.jlist li.jlist-proj::before { content: none; }
+/* Первый пункт сразу под заголовком проекта — рубрика это или обычная строка,
+   отступ один: .45rem поверх флексового gap .8rem даёт те же 1.25rem. Линия
+   сверху уже отбила блок, полные 1.75rem у рубрики дублировали бы её. */
+.jlist li.jlist-proj + li { margin-top: .45rem; }
+
 /* ── SKILLS ── */
 .skill-filters { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 2.25rem; justify-content: center; }
 .skill-filter {
