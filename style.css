@@ -779,6 +779,10 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
    здесь название становится обычной шапкой сверху. */
 @media (min-width: 900px) {
   .job-company-block.has-arch { display: block; }
+  /* Карточка стала шириной 918px, а пункты списка держат меру 60ch. Без
+     ограничения заголовки списка растягивались на всю ширину, и блок текста
+     получал два разных правых края — из-за этого он и выглядел поплывшим. */
+  .job-company-block.has-arch .jlist { max-width: var(--prose); }
   .job-company-block.has-arch > .job-company-hdr {
     position: static;
     flex-direction: row; align-items: flex-start; justify-content: space-between;

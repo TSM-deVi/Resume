@@ -522,29 +522,36 @@
 
               <div class="arch-scroll">
                 <svg class="arch-svg" viewBox="0 0 780 634" role="img"
-                     aria-label="Три контура DEV, INF и PROD в приватном облаке VMware Cloud Director, каждый — отдельный виртуальный ЦОД со своей подсетью, своим внешним адресом и своим доменом. L3-связности между контурами нет, всё, что должно ходить между ними, выходит наружу и возвращается через NAT и firewall. Прикладной контур — это 28 машин: кластер Kubernetes из мастера и трёх воркеров, PostgreSQL из трёх узлов кластера и двух standalone, по два узла Redis и Qdrant, Vespa, ClickHouse, MinIO, RabbitMQ, Vault, Harbor, GitLab с раннером, балансировщик на nginx, внутренние DNS и центр сертификации, SmartSearch, Langflow и OPAL. В сумме 90 виртуальных ядер, 191 гигабайт памяти и 2.7 терабайта дисков. В каждом контуре свой nginx, который держит публикацию его домена; сверху, на стороне заказчика, стоит WAF, и PAM тоже заказчика. Доступ администратора идёт цепочкой: PAM, затем jump host контура, затем целевая машина внутри подсети; до jump host работает ключ заказчика, дальше — ключ, созданный уже на jump host. На jump host контуров DEV и PROD стоит bastion, через который к ним по внешней сети ходит GitLab Runner из INF. DEV и PROD зеркальны, INF семь машин, всего 63.">
+                     aria-label="Три контура DEV, INF и PROD в приватном облаке VMware Cloud Director, каждый — отдельный виртуальный ЦОД со своей подсетью, своим внешним адресом и своим доменом. L3-связности между контурами нет, всё, что должно ходить между ними, выходит наружу и возвращается через NAT и firewall. Прикладной контур — это 28 машин: Kubernetes из мастера и трёх воркеров, PostgreSQL из трёх узлов кластера и двух standalone, по два узла Redis и Qdrant, Vespa, ClickHouse, MinIO, RabbitMQ, Vault, Harbor, GitLab с раннером, балансировщик на nginx, внутренние DNS и центр сертификации, SmartSearch, Langflow и OPAL — в сумме 90 виртуальных ядер, 191 гигабайт памяти и 2.7 терабайта дисков. В каждом контуре свой nginx, который держит публикацию его домена; сверху, на стороне заказчика, стоит WAF, и PAM тоже заказчика. Доступ администратора идёт цепочкой: PAM, затем jump host контура, затем целевая машина внутри подсети; до jump host работает ключ заказчика, дальше — ключ, созданный уже на jump host. На jump host контуров DEV и PROD стоит bastion, через который к ним по внешней сети ходит GitLab Runner из INF. DEV и PROD зеркальны, INF семь машин, всего 63.">
                   <defs>
                     <marker id="ah" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
                       <path d="M0,0 L8,4 L0,8 z" class="arch-head"/>
                     </marker>
                   </defs>
 
-                  <text class="arch-mut" x="160" y="14" text-anchor="middle">АДМИНИСТРАТОРЫ</text>
-                  <text class="arch-mut" x="620" y="14" text-anchor="middle">ИНТЕРНЕТ</text>
+                  <text class="arch-mut" x="160" y="14" text-anchor="middle" data-lang="ru">АДМИНИСТРАТОРЫ</text>
+                  <text class="arch-mut" x="160" y="14" text-anchor="middle" data-lang="en">ADMINISTRATORS</text>
+                  <text class="arch-mut" x="620" y="14" text-anchor="middle" data-lang="ru">ИНТЕРНЕТ</text>
+                  <text class="arch-mut" x="620" y="14" text-anchor="middle" data-lang="en">INTERNET</text>
 
                   <rect class="arch-cust" x="6" y="26" width="768" height="58" rx="8"/>
-                  <text class="arch-cust-t" x="760" y="78" text-anchor="end">НА СТОРОНЕ ЗАКАЗЧИКА · НЕ В МОЕЙ ЗОНЕ</text>
+                  <text class="arch-cust-t" x="760" y="78" text-anchor="end" data-lang="ru">НА СТОРОНЕ ЗАКАЗЧИКА · НЕ В МОЕЙ ЗОНЕ</text>
+                  <text class="arch-cust-t" x="760" y="78" text-anchor="end" data-lang="en">CLIENT SIDE · NOT MY SCOPE</text>
                   <rect class="arch-gate" x="80" y="38" width="160" height="28" rx="6"/>
                   <text class="arch-gate-t" x="160" y="58" text-anchor="middle">PAM</text>
-                  <text class="arch-mut sm" x="252" y="58">контролируемые сессии</text>
+                  <text class="arch-mut sm" x="252" y="58" data-lang="ru">контролируемые сессии</text>
+                  <text class="arch-mut sm" x="252" y="58" data-lang="en">controlled sessions</text>
                   <rect class="arch-gate" x="540" y="38" width="160" height="28" rx="6"/>
                   <text class="arch-gate-t" x="620" y="58" text-anchor="middle">WAF</text>
 
                   <rect class="arch-perim" x="6" y="100" width="768" height="518" rx="10"/>
-                  <text class="arch-perim-t" x="20" y="120">ПРИВАТНОЕ ОБЛАКО · ТРИ ОТДЕЛЬНЫХ VDC · МЕЖДУ НИМИ НЕТ L3-СВЯЗНОСТИ</text>
+                  <text class="arch-perim-t" x="20" y="120" data-lang="ru">ПРИВАТНОЕ ОБЛАКО · ТРИ ОТДЕЛЬНЫХ VDC · МЕЖДУ НИМИ НЕТ L3-СВЯЗНОСТИ</text>
+                  <text class="arch-perim-t" x="20" y="120" data-lang="en">PRIVATE CLOUD · THREE SEPARATE VDCs · NO L3 CONNECTIVITY</text>
 
-                  <text class="arch-chain" x="200" y="152">ДОСТУП: PAM → JUMP HOST → ЦЕЛЕВАЯ ВМ</text>
-                  <text class="arch-mut sm" x="200" y="169">ключ заказчика до jump host, свой — дальше</text>
+                  <text class="arch-chain" x="200" y="152" data-lang="ru">ДОСТУП: PAM → JUMP HOST → ЦЕЛЕВАЯ ВМ</text>
+                  <text class="arch-chain" x="200" y="152" data-lang="en">ACCESS: PAM → JUMP HOST → TARGET VM</text>
+                  <text class="arch-mut sm" x="200" y="169" data-lang="ru">ключ заказчика до jump host, свой — дальше</text>
+                  <text class="arch-mut sm" x="200" y="169" data-lang="en">client key to the jump host, ours beyond it</text>
 
                   <path class="arch-flow" d="M160,66 L160,190 M620,66 L620,190 M124,190 L656,190"/>
                   <line class="arch-flow" x1="124" y1="190" x2="124" y2="202" marker-end="url(#ah)"/>
@@ -552,11 +559,14 @@
                   <line class="arch-flow" x1="656" y1="190" x2="656" y2="202" marker-end="url(#ah)"/>
 
                   <rect class="arch-ext" x="20" y="206" width="208" height="30" rx="5"/>
-                  <text class="arch-ext-t" x="124" y="225" text-anchor="middle">ВНЕШНЯЯ СЕТЬ · IP + ДОМЕН · NAT + FW</text>
+                  <text class="arch-ext-t" x="124" y="225" text-anchor="middle" data-lang="ru">ВНЕШНЯЯ СЕТЬ · IP + ДОМЕН · NAT + FW</text>
+                  <text class="arch-ext-t" x="124" y="225" text-anchor="middle" data-lang="en">EXTERNAL NET · IP + DOMAIN · NAT + FW</text>
                   <rect class="arch-ext" x="286" y="206" width="208" height="30" rx="5"/>
-                  <text class="arch-ext-t" x="390" y="225" text-anchor="middle">ВНЕШНЯЯ СЕТЬ · IP + ДОМЕН · NAT + FW</text>
+                  <text class="arch-ext-t" x="390" y="225" text-anchor="middle" data-lang="ru">ВНЕШНЯЯ СЕТЬ · IP + ДОМЕН · NAT + FW</text>
+                  <text class="arch-ext-t" x="390" y="225" text-anchor="middle" data-lang="en">EXTERNAL NET · IP + DOMAIN · NAT + FW</text>
                   <rect class="arch-ext" x="552" y="206" width="208" height="30" rx="5"/>
-                  <text class="arch-ext-t" x="656" y="225" text-anchor="middle">ВНЕШНЯЯ СЕТЬ · IP + ДОМЕН · NAT + FW</text>
+                  <text class="arch-ext-t" x="656" y="225" text-anchor="middle" data-lang="ru">ВНЕШНЯЯ СЕТЬ · IP + ДОМЕН · NAT + FW</text>
+                  <text class="arch-ext-t" x="656" y="225" text-anchor="middle" data-lang="en">EXTERNAL NET · IP + DOMAIN · NAT + FW</text>
 
                   <line class="arch-flow" x1="282" y1="221" x2="232" y2="221" marker-end="url(#ah)"/>
                   <line class="arch-flow" x1="498" y1="221" x2="548" y2="221" marker-end="url(#ah)"/>
@@ -573,55 +583,82 @@
                   <rect class="arch-jump" x="32" y="268" width="184" height="32" rx="5"/>
                   <text class="arch-jump-t" x="124" y="289" text-anchor="middle">JUMP HOST + BASTION</text>
                   <line class="arch-flow" x1="124" y1="302" x2="124" y2="336" marker-end="url(#ah)"/>
-                  <text class="arch-subnet" x="36" y="325">своя /24</text>
+                  <text class="arch-subnet" x="36" y="325" data-lang="ru">своя /24</text>
+                  <text class="arch-subnet" x="36" y="325" data-lang="en">own /24</text>
                   <text class="arch-box-t" x="36" y="361">DEV</text>
                   <text class="arch-num" x="212" y="361" text-anchor="end">28 VM</text>
                   <line class="arch-rule" x1="36" y1="371" x2="212" y2="371"/>
-                  <text class="arch-item" x="36" y="392">k8s · master + 3 worker</text>
-                  <text class="arch-item" x="36" y="411">postgres · 3 + 2 standalone</text>
-                  <text class="arch-item" x="36" y="430">redis ×2 · qdrant ×2</text>
-                  <text class="arch-item" x="36" y="449">clickhouse · minio · vespa</text>
-                  <text class="arch-item" x="36" y="468">rabbitmq · vault · harbor</text>
-                  <text class="arch-item" x="36" y="487">gitlab · runner · nginx-lb</text>
-                  <text class="arch-item" x="36" y="506">dns · ca · opal</text>
-                  <text class="arch-item" x="36" y="525">smartsearch · langflow</text>
-                  <text class="arch-mut sm" x="36" y="546">28 VM · 90 vCPU · 191 GB · 2.7 TB</text>
+                  <text class="arch-item" x="36" y="392" data-lang="ru">k8s · master + 3 worker</text>
+                  <text class="arch-item" x="36" y="392" data-lang="en">k8s · master + 3 workers</text>
+                  <text class="arch-item" x="36" y="411" data-lang="ru">postgres · 3 + 2 standalone</text>
+                  <text class="arch-item" x="36" y="411" data-lang="en">postgres · 3 + 2 standalone</text>
+                  <text class="arch-item" x="36" y="430" data-lang="ru">redis ×2 · qdrant ×2</text>
+                  <text class="arch-item" x="36" y="430" data-lang="en">redis ×2 · qdrant ×2</text>
+                  <text class="arch-item" x="36" y="449" data-lang="ru">clickhouse · minio · vespa</text>
+                  <text class="arch-item" x="36" y="449" data-lang="en">clickhouse · minio · vespa</text>
+                  <text class="arch-item" x="36" y="468" data-lang="ru">rabbitmq · vault · harbor</text>
+                  <text class="arch-item" x="36" y="468" data-lang="en">rabbitmq · vault · harbor</text>
+                  <text class="arch-item" x="36" y="487" data-lang="ru">gitlab · runner · nginx-lb</text>
+                  <text class="arch-item" x="36" y="487" data-lang="en">gitlab · runner · nginx-lb</text>
+                  <text class="arch-item" x="36" y="506" data-lang="ru">dns · ca · opal</text>
+                  <text class="arch-item" x="36" y="506" data-lang="en">dns · ca · opal</text>
+                  <text class="arch-item" x="36" y="525" data-lang="ru">smartsearch · langflow</text>
+                  <text class="arch-item" x="36" y="525" data-lang="en">smartsearch · langflow</text>
+                  <text class="arch-mut sm" x="36" y="546" data-lang="ru">90 vCPU · 191 GB · 2.7 TB</text>
+                  <text class="arch-mut sm" x="36" y="546" data-lang="en">90 vCPU · 191 GB · 2.7 TB</text>
 
                   <rect class="arch-box inf" x="286" y="256" width="208" height="316" rx="8"/>
                   <rect class="arch-jump" x="298" y="268" width="184" height="32" rx="5"/>
                   <text class="arch-jump-t" x="390" y="289" text-anchor="middle">JUMP HOST</text>
                   <line class="arch-flow" x1="390" y1="302" x2="390" y2="336" marker-end="url(#ah)"/>
-                  <text class="arch-subnet" x="302" y="325">своя /24</text>
+                  <text class="arch-subnet" x="302" y="325" data-lang="ru">своя /24</text>
+                  <text class="arch-subnet" x="302" y="325" data-lang="en">own /24</text>
                   <text class="arch-box-t inf" x="302" y="361">INF</text>
                   <text class="arch-num" x="478" y="361" text-anchor="end">7 VM</text>
                   <line class="arch-rule" x1="302" y1="371" x2="478" y2="371"/>
-                  <text class="arch-item" x="302" y="392">gitlab · harbor (центр.)</text>
-                  <text class="arch-item" x="302" y="411">nginx · свой домен</text>
-                  <text class="arch-item" x="302" y="430">prometheus · grafana</text>
-                  <text class="arch-item" x="302" y="449">loki · promtail</text>
-                  <text class="arch-mut sm" x="302" y="546">сквозные сервисы</text>
+                  <text class="arch-item" x="302" y="392" data-lang="ru">gitlab · harbor (центр.)</text>
+                  <text class="arch-item" x="302" y="392" data-lang="en">gitlab · harbor (central)</text>
+                  <text class="arch-item" x="302" y="411" data-lang="ru">nginx · свой домен</text>
+                  <text class="arch-item" x="302" y="411" data-lang="en">nginx · own domain</text>
+                  <text class="arch-item" x="302" y="430" data-lang="ru">prometheus · grafana</text>
+                  <text class="arch-item" x="302" y="430" data-lang="en">prometheus · grafana</text>
+                  <text class="arch-item" x="302" y="449" data-lang="ru">loki · promtail</text>
+                  <text class="arch-item" x="302" y="449" data-lang="en">loki · promtail</text>
+                  <text class="arch-mut sm" x="302" y="546" data-lang="ru">сквозные сервисы</text>
+                  <text class="arch-mut sm" x="302" y="546" data-lang="en">shared services</text>
 
                   <rect class="arch-box" x="552" y="256" width="208" height="316" rx="8"/>
                   <rect class="arch-jump" x="564" y="268" width="184" height="32" rx="5"/>
                   <text class="arch-jump-t" x="656" y="289" text-anchor="middle">JUMP HOST + BASTION</text>
                   <line class="arch-flow" x1="656" y1="302" x2="656" y2="336" marker-end="url(#ah)"/>
-                  <text class="arch-subnet" x="568" y="325">своя /24</text>
+                  <text class="arch-subnet" x="568" y="325" data-lang="ru">своя /24</text>
+                  <text class="arch-subnet" x="568" y="325" data-lang="en">own /24</text>
                   <text class="arch-box-t" x="568" y="361">PROD</text>
                   <text class="arch-num" x="744" y="361" text-anchor="end">28 VM</text>
                   <line class="arch-rule" x1="568" y1="371" x2="744" y2="371"/>
-                  <text class="arch-item" x="568" y="392">k8s · master + 3 worker</text>
-                  <text class="arch-item" x="568" y="411">postgres · 3 + 2 standalone</text>
-                  <text class="arch-item" x="568" y="430">redis ×2 · qdrant ×2</text>
-                  <text class="arch-item" x="568" y="449">clickhouse · minio · vespa</text>
-                  <text class="arch-item" x="568" y="468">rabbitmq · vault · harbor</text>
-                  <text class="arch-item" x="568" y="487">gitlab · runner · nginx-lb</text>
-                  <text class="arch-item" x="568" y="506">dns · ca · opal</text>
-                  <text class="arch-item" x="568" y="525">smartsearch · langflow</text>
-                  <text class="arch-mut sm" x="568" y="546">28 VM · 90 vCPU · 191 GB · 2.7 TB</text>
+                  <text class="arch-item" x="568" y="392" data-lang="ru">k8s · master + 3 worker</text>
+                  <text class="arch-item" x="568" y="392" data-lang="en">k8s · master + 3 workers</text>
+                  <text class="arch-item" x="568" y="411" data-lang="ru">postgres · 3 + 2 standalone</text>
+                  <text class="arch-item" x="568" y="411" data-lang="en">postgres · 3 + 2 standalone</text>
+                  <text class="arch-item" x="568" y="430" data-lang="ru">redis ×2 · qdrant ×2</text>
+                  <text class="arch-item" x="568" y="430" data-lang="en">redis ×2 · qdrant ×2</text>
+                  <text class="arch-item" x="568" y="449" data-lang="ru">clickhouse · minio · vespa</text>
+                  <text class="arch-item" x="568" y="449" data-lang="en">clickhouse · minio · vespa</text>
+                  <text class="arch-item" x="568" y="468" data-lang="ru">rabbitmq · vault · harbor</text>
+                  <text class="arch-item" x="568" y="468" data-lang="en">rabbitmq · vault · harbor</text>
+                  <text class="arch-item" x="568" y="487" data-lang="ru">gitlab · runner · nginx-lb</text>
+                  <text class="arch-item" x="568" y="487" data-lang="en">gitlab · runner · nginx-lb</text>
+                  <text class="arch-item" x="568" y="506" data-lang="ru">dns · ca · opal</text>
+                  <text class="arch-item" x="568" y="506" data-lang="en">dns · ca · opal</text>
+                  <text class="arch-item" x="568" y="525" data-lang="ru">smartsearch · langflow</text>
+                  <text class="arch-item" x="568" y="525" data-lang="en">smartsearch · langflow</text>
+                  <text class="arch-mut sm" x="568" y="546" data-lang="ru">90 vCPU · 191 GB · 2.7 TB</text>
+                  <text class="arch-mut sm" x="568" y="546" data-lang="en">90 vCPU · 191 GB · 2.7 TB</text>
 
                   <path class="arch-mirror" d="M124,572 L124,586 L656,586 L656,572"/>
                   <rect class="arch-mirror-chip" x="344" y="576" width="92" height="21" rx="10"/>
-                  <text class="arch-mirror-t" x="390" y="591" text-anchor="middle">ЗЕРКАЛО 1:1</text>
+                  <text class="arch-mirror-t" x="390" y="591" text-anchor="middle" data-lang="ru">ЗЕРКАЛО 1:1</text>
+                  <text class="arch-mirror-t" x="390" y="591" text-anchor="middle" data-lang="en">MIRROR 1:1</text>
                 </svg>
               </div>
 
@@ -639,8 +676,9 @@
               </figcaption>
               <div class="arch-scroll">
                 <svg class="arch-svg" viewBox="0 0 780 246" role="img"
-                     aria-label="Минимальная конфигурация на публичном облаке Timeweb Cloud: тот же состав сервисов в одном контуре вместо трёх изолированных. Десять машин вместо двадцати восьми, тридцать четыре виртуальных ядра вместо девяноста, девяносто шесть гигабайт памяти вместо ста девяноста одного. Kubernetes свёрнут в один узел, Vault делит машину с RabbitMQ, Qdrant с Redis, PostgreSQL и ClickHouse стоят standalone, часть прикладных сервисов вынесена на отдельный узел с Docker.">
-                  <text class="arch-mut" x="19" y="16">ОДИН КОНТУР ВМЕСТО ТРЁХ · TIMEWEB CLOUD</text>
+                     aria-label="Минимальная конфигурация на публичном облаке Timeweb Cloud: тот же состав сервисов в одном контуре вместо трёх изолированных. Десять машин вместо двадцати восьми, тридцать четыре виртуальных ядра вместо девяноста, девяносто шесть гигабайт памяти вместо ста девяноста одного. Кластер Kubernetes свёрнут в некластерный k3s на одном узле, Vault делит машину с RabbitMQ, Qdrant с Redis, PostgreSQL и ClickHouse стоят standalone, часть прикладных сервисов вынесена на отдельный узел с Docker.">
+                  <text class="arch-mut" x="19" y="16" data-lang="ru">ОДИН КОНТУР ВМЕСТО ТРЁХ · TIMEWEB CLOUD</text>
+                  <text class="arch-mut" x="19" y="16" data-lang="en">ONE ENVIRONMENT INSTEAD OF THREE · TIMEWEB CLOUD</text>
 
                   <text class="arch-was" x="19"  y="48">28 VM</text>
                   <text class="arch-arrow" x="85" y="48">→</text>
@@ -656,10 +694,11 @@
                   <text class="arch-now" x="694" y="48">1.8 TB</text>
 
                   <line class="arch-rule" x1="19" y1="68" x2="761" y2="68"/>
-                  <text class="arch-mut sm" x="19" y="86">состав сервисов сохранён; bastion, jump host и контур заказчика с PAM и WAF остались только в банковском проекте</text>
+                  <text class="arch-mut sm" x="19" y="86" data-lang="ru">состав сервисов сохранён; bastion, jump host и контур заказчика с PAM и WAF остались только в банковском проекте</text>
+                  <text class="arch-mut sm" x="19" y="86" data-lang="en">service composition preserved; bastion, jump host and the client environment with PAM and WAF stayed in the banking project only</text>
 
                   <rect class="arch-box" x="19" y="100" width="140" height="58" rx="6"/>
-                  <text class="arch-node2" x="89" y="124" text-anchor="middle">k8s-single</text>
+                  <text class="arch-node2" x="89" y="124" text-anchor="middle">k3s</text>
                   <text class="arch-mut sm" x="89" y="142" text-anchor="middle">8 CPU · 20 GB</text>
                   <rect class="arch-box" x="169" y="100" width="140" height="58" rx="6"/>
                   <text class="arch-node2" x="239" y="124" text-anchor="middle">docker-apps</text>
@@ -698,7 +737,7 @@
               <li class="jlist-proj">Проект 1 · Основной контур, максимальная конфигурация — приватное облако VMware Cloud Director</li>
               <li class="jlist-head">Инфраструктура и изоляция</li>
               <li>Развернул с нуля три изолированных контура <strong>DEV / INF / PROD</strong>: отдельные виртуальные ЦОД, группировка сервисов по vApp, сетевая сегментация. Суммарно <strong>63 виртуальные машины</strong></li>
-              <li><strong>DEV и PROD</strong> — зеркальные контуры <strong>1:1</strong>, каждый 28 VM, ~90 vCPU, ~190 GB RAM, ~2.8 TB дисков; провёл right-sizing по компонентам и подготовил ресурсный план</li>
+              <li><strong>DEV и PROD</strong> — зеркальные контуры <strong>1:1</strong>, каждый 28 VM, 90 vCPU, 191 GB RAM, 2.7 TB дисков; провёл right-sizing по компонентам и подготовил ресурсный план</li>
               <li>Состав прикладного контура: Kubernetes (master + 3 worker), GitLab Runner, Harbor, HashiCorp Vault, PostgreSQL (кластер 3 ноды + 2 standalone), Redis (2 ноды), RabbitMQ, Qdrant (2 ноды), Vespa, ClickHouse, MinIO, Envoy, OPA/OPAL, Keycloak, SmartSearch, Langflow, Langfuse, LiteLLM, proxy-service, внутренние DNS и CA, балансировщик, jump host</li>
               <li><strong>INF</strong> — контур сквозных сервисов (7 VM): GitLab, центральный Harbor, Nginx, Prometheus, Grafana, Loki; вынес общие сервисы из прикладных контуров</li>
               <li>Двухуровневая схема реестров образов: центральный <strong>Harbor</strong> на INF плюс локальные на DEV и PROD — меньше внешнего трафика при сохранении изоляции</li>
@@ -732,7 +771,7 @@
               <li class="jlist-proj">Проект 2 · Минимальная конфигурация — копия основного контура на публичном облаке Timeweb Cloud</li>
               <li>Воспроизвёл архитектуру основного контура в одном контуре вместо трёх изолированных: состав сервисов и схема их взаимодействия сохранены, сквозные сервисы INF свёрнуты внутрь единого контура</li>
               <li>Уложил платформу enterprise-масштаба (28 VM, 90 vCPU, 191 GB RAM) в <strong>10 VM, 34 vCPU, 96 GB RAM, 1.8 TB NVMe</strong>: повторный right-sizing, консолидация сервисов, снятие production-only зависимостей</li>
-              <li>Архитектурные решения при сокращении: <strong>один узел Kubernetes</strong> вместо кластера master + 3 worker; Vault с RabbitMQ и Qdrant с Redis на общих машинах; standalone PostgreSQL и ClickHouse вместо кластеров; прикладные сервисы вынесены на отдельный узел с Docker; Harbor, MinIO, GitLab Runner и мониторинг — по машине на каждый</li>
+              <li>Архитектурные решения при сокращении: некластерный <strong>k3s</strong> на одном узле вместо кластера master + 3 worker; Vault с RabbitMQ и Qdrant с Redis на общих машинах; standalone PostgreSQL и ClickHouse вместо кластеров; прикладные сервисы вынесены на отдельный узел с Docker; Harbor, MinIO, GitLab Runner и мониторинг — по машине на каждый</li>
               <li>Без enterprise-обвязки: <strong>Nginx</strong> как единственный edge-router, конфиг под управлением GitLab-репозитория — балансировщик, WAF, bastion и PAM остались только в банковском контуре</li>
               <li>Собственный <strong>GitLab CE</strong> внутри контура вместо централизованного CI/CD на INF</li>
             </ul>
@@ -742,7 +781,7 @@
               <li class="jlist-proj">Project 1 &middot; Primary environment, maximum configuration — private cloud on VMware Cloud Director</li>
               <li class="jlist-head">Infrastructure and isolation</li>
               <li>Deployed three isolated <strong>DEV / INF / PROD</strong> environments from scratch: separate virtual data centers, services grouped into vApps, network segmentation. <strong>63 virtual machines</strong> in total</li>
-              <li><strong>DEV and PROD</strong> are mirrored <strong>1:1</strong>, each 28 VMs, ~90 vCPU, ~190 GB RAM, ~2.8 TB of disk; performed per-component right-sizing and prepared a resource plan</li>
+              <li><strong>DEV and PROD</strong> are mirrored <strong>1:1</strong>, each 28 VMs, 90 vCPU, 191 GB RAM, 2.7 TB of disk; performed per-component right-sizing and prepared a resource plan</li>
               <li>Application environment stack: Kubernetes (master + 3 workers), GitLab Runner, Harbor, HashiCorp Vault, PostgreSQL (3-node cluster + 2 standalone), Redis (2 nodes), RabbitMQ, Qdrant (2 nodes), Vespa, ClickHouse, MinIO, Envoy, OPA/OPAL, Keycloak, SmartSearch, Langflow, Langfuse, LiteLLM, proxy-service, internal DNS and CA, load balancer, jump host</li>
               <li><strong>INF</strong> — the cross-cutting services environment (7 VMs): GitLab, central Harbor, Nginx, Prometheus, Grafana, Loki; moved shared services out of the application environments</li>
               <li>Two-tier image registry scheme: a central <strong>Harbor</strong> on INF plus local ones on DEV and PROD — less external traffic while preserving isolation</li>
@@ -776,7 +815,7 @@
               <li class="jlist-proj">Project 2 &middot; Minimum configuration — a replica of the primary environment on Timeweb Cloud public cloud</li>
               <li>Reproduced the architecture of the primary environment in a single environment instead of three isolated ones: the service composition and their interaction scheme were preserved, with INF cross-cutting services folded inside</li>
               <li>Fitted an enterprise-scale platform (28 VMs, 90 vCPU, 191 GB RAM) into <strong>10 VMs, 34 vCPU, 96 GB RAM, 1.8 TB NVMe</strong>: repeated right-sizing, service consolidation, removal of production-only dependencies</li>
-              <li>Architectural decisions when scaling down: <strong>a single Kubernetes node</strong> instead of a master + 3 worker cluster; Vault with RabbitMQ and Qdrant with Redis on shared machines; standalone PostgreSQL and ClickHouse instead of clusters; application services moved onto a separate Docker node; Harbor, MinIO, GitLab Runner and monitoring on one machine each</li>
+              <li>Architectural decisions when scaling down: a non-clustered <strong>k3s</strong> on a single node instead of a master + 3 worker cluster; Vault with RabbitMQ and Qdrant with Redis on shared machines; standalone PostgreSQL and ClickHouse instead of clusters; application services moved onto a separate Docker node; Harbor, MinIO, GitLab Runner and monitoring on one machine each</li>
               <li>No enterprise wrapping: <strong>Nginx</strong> as the only edge router with its config managed from a GitLab repository — the load balancer, WAF, bastion and PAM stayed in the banking environment only</li>
               <li>A self-hosted <strong>GitLab CE</strong> inside the environment instead of centralized CI/CD on INF</li>
             </ul>
