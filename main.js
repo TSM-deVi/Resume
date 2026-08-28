@@ -61,6 +61,8 @@ const revealObs = new IntersectionObserver(
   { threshold: 0.1 }
 );
 document.querySelectorAll('.r').forEach(el => revealObs.observe(el));
+// Наблюдатель на месте — аварийное проявление больше не нужно.
+clearTimeout(window._revealFallback);
 
 // ── Counter animation ──
 function runCounter(el) {
@@ -69,8 +71,12 @@ function runCounter(el) {
 
   const target = parseInt(el.dataset.count, 10);
   const suffix = el.dataset.suffix || '+';
+  // Сброс анимаций в CSS не действует на setInterval — при reduced motion
+  // ставим конечное значение сразу.
+  if (_reduceMotion) { el.textContent = target + suffix; return; }
   const steps  = 55;
   let i = 0;
+  el.textContent = '0';   // в разметке лежит итог — для случая без JS
 
   const timer = setInterval(() => {
     i++;
@@ -112,13 +118,15 @@ const hamburger = document.getElementById('nav-hamburger');
 const navMenu   = document.getElementById('nav-links');
 
 hamburger.addEventListener('click', () => {
-  hamburger.classList.toggle('open');
-  navMenu.classList.toggle('open');
+  const open = hamburger.classList.toggle('open');
+  navMenu.classList.toggle('open', open);
+  hamburger.setAttribute('aria-expanded', String(open));
 });
 
 navMenu.querySelectorAll('a').forEach(a => {
   a.addEventListener('click', () => {
     hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
     navMenu.classList.remove('open');
   });
 });
@@ -206,7 +214,15 @@ function startTypewriter() {
   const heroRole = document.getElementById('hero-role');
   if (!heroRole) return;
   const isEn = document.body.classList.contains('lang-en');
-  _typeTW(isEn ? heroRole.dataset.textEn : heroRole.dataset.textRu, 45, _scheduleLive);
+  const text = isEn ? heroRole.dataset.textEn : heroRole.dataset.textRu;
+  // Строка печатается посимвольно и потом бесконечно перебирает команды —
+  // это и есть движение, от которого просили избавиться. Показываем сразу.
+  if (_reduceMotion) {
+    const el = document.getElementById('typewriter-text');
+    if (el) el.textContent = text;
+    return;
+  }
+  _typeTW(text, 45, _scheduleLive);
 }
 startTypewriter();
 
@@ -344,7 +360,10 @@ let _activeFilter = null;
 function _clearFilter() {
   _activeFilter = null;
   document.querySelectorAll('.skill-tile').forEach(t => t.classList.remove('sf-dim', 'sf-on'));
-  document.querySelectorAll('.skill-filter').forEach(b => b.classList.remove('sf-active'));
+  document.querySelectorAll('.skill-filter').forEach(b => {
+    b.classList.remove('sf-active');
+    b.setAttribute('aria-pressed', 'false');
+  });
 }
 
 document.querySelectorAll('.skill-filter').forEach(btn => {
@@ -362,7 +381,11 @@ document.querySelectorAll('.skill-filter').forEach(btn => {
         t.classList.toggle('sf-dim', !active);
         t.classList.toggle('sf-on', active);
       });
-      buttons.forEach(b => b.classList.toggle('sf-active', b.dataset.cat === cat));
+      buttons.forEach(b => {
+        const on = b.dataset.cat === cat;
+        b.classList.toggle('sf-active', on);
+        b.setAttribute('aria-pressed', String(on));
+      });
     }
   });
 });
@@ -379,17 +402,44 @@ function setupCopyCard(btnId, labelId, iconId, text) {
   const copySvg  = '<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>';
 
   if (!btn) return;
+
+  function flash(msg, ok) {
+    label.textContent = msg;
+    if (ok) { icon.innerHTML = checkSvg; btn.classList.add('copied'); }
+    setTimeout(() => {
+      label.textContent = text;
+      icon.innerHTML = copySvg;
+      btn.classList.remove('copied');
+    }, 2000);
+  }
+
+  // Запасной путь: navigator.clipboard недоступен в незащищённом контексте и
+  // в части старых браузеров. Без него кнопка молча ничего не делала.
+  function legacyCopy() {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.cssText = 'position:fixed;top:-1000px;opacity:0';
+    document.body.appendChild(ta);
+    ta.select();
+    let ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    return ok;
+  }
+
   btn.addEventListener('click', () => {
-    navigator.clipboard.writeText(text).then(() => {
-      label.textContent = document.body.classList.contains('lang-en') ? '✓ Copied!' : '✓ Скопировано!';
-      icon.innerHTML = checkSvg;
-      btn.classList.add('copied');
-      setTimeout(() => {
-        label.textContent = text;
-        icon.innerHTML = copySvg;
-        btn.classList.remove('copied');
-      }, 2000);
-    });
+    const isEn = document.body.classList.contains('lang-en');
+    const done = () => flash(isEn ? '✓ Copied!' : '✓ Скопировано!', true);
+    const failed = () => {
+      if (legacyCopy()) { done(); return; }
+      flash(isEn ? 'Copy failed — select manually' : 'Не скопировалось — выделите вручную', false);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done).catch(failed);
+    } else {
+      failed();
+    }
   });
 }
 
@@ -432,7 +482,13 @@ setupCopyCard('btn-copy-email', 'btn-copy-label', 'copy-icon',    'timir-ivaniv@
     step();
   }
 
-  setTimeout(runPipeline, 1600);
+  // Автозапуск — украшение; кнопка «re-run» остаётся и в этом режиме.
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    setTimeout(runPipeline, 1600);
+  } else {
+    stages.forEach(st => st.classList.add('pl-done'));
+    lines.forEach(l => l.classList.add('pl-done'));
+  }
 
   document.querySelector('.pl-rerun')?.addEventListener('click', () => {
     if (!running) runPipeline();
@@ -474,6 +530,10 @@ setupCopyCard('btn-copy-email', 'btn-copy-label', 'copy-icon',    'timir-ivaniv@
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // На тач-устройствах бесконечный цикл с попарным перебором узлов греет
+  // батарею ради фона, который там почти не читается. Как и курсор, выключаем.
+  const coarse = window.matchMedia('(pointer: coarse)').matches;
+  if (coarse) { canvas.style.display = 'none'; return; }
 
   let w, h, nodes, dpr = Math.min(window.devicePixelRatio || 1, 2);
   const COUNT = 70;
@@ -536,13 +596,14 @@ setupCopyCard('btn-copy-email', 'btn-copy-label', 'copy-icon',    'timir-ivaniv@
 (function () {
   const el = document.getElementById('spb-clock');
   if (!el) return;
+  // Форматтер тяжёлый и неизменный — один на модуль, а не новый каждую секунду.
+  const fmt = new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'Europe/Moscow',
+    hour: '2-digit', minute: '2-digit', second: '2-digit',
+    hour12: false,
+  });
   function tick() {
-    const parts = new Intl.DateTimeFormat('en-GB', {
-      timeZone: 'Europe/Moscow',
-      hour: '2-digit', minute: '2-digit', second: '2-digit',
-      hour12: false,
-    }).format(new Date());
-    el.textContent = `${parts} MSK`;
+    el.textContent = `${fmt.format(new Date())} MSK`;
   }
   tick();
   setInterval(tick, 1000);

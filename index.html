@@ -7,7 +7,7 @@
   <meta name="description" content="Middle+ DevOps-инженер, Санкт-Петербург. Kubernetes на bare-metal, VMware Cloud Director и k3s, GitLab CI/CD, ArgoCD, Terraform, Ansible, наблюдаемость. 63 VM в контурах DEV/INF/PROD, 70+ сервисов в эксплуатации.">
   <link rel="canonical" href="https://tsm-devi.github.io/Resume/">
 
-  <!-- Link preview. og-image.png несёт ?v=3: Telegram, VK и Facebook кешируют
+  <!-- Link preview. og-image.png несёт ?v=4: Telegram, VK и Facebook кешируют
        превью по полному URL, без смены параметра они будут отдавать старую
        картинку неделями. Меняй цифру при каждой перерисовке обложки. -->
   <meta property="og:type" content="website">
@@ -17,8 +17,8 @@
   <meta property="og:locale:alternate" content="en_US">
   <meta property="og:title" content="Иванов Темир — Middle+ DevOps Engineer">
   <meta property="og:description" content="Kubernetes · GitLab CI/CD · Terraform · Observability. 63 VM в контурах DEV/INF/PROD, 70+ сервисов в эксплуатации, 100% CI/CD покрытие.">
-  <meta property="og:image" content="https://tsm-devi.github.io/Resume/og-image.png?v=3">
-  <meta property="og:image:secure_url" content="https://tsm-devi.github.io/Resume/og-image.png?v=3">
+  <meta property="og:image" content="https://tsm-devi.github.io/Resume/og-image.png?v=4">
+  <meta property="og:image:secure_url" content="https://tsm-devi.github.io/Resume/og-image.png?v=4">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -27,12 +27,24 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Иванов Темир — Middle+ DevOps Engineer">
   <meta name="twitter:description" content="Kubernetes · GitLab CI/CD · Terraform · Observability. 63 VM в контурах DEV/INF/PROD, 70+ сервисов в эксплуатации, 100% CI/CD покрытие.">
-  <meta name="twitter:image" content="https://tsm-devi.github.io/Resume/og-image.png?v=3">
+  <meta name="twitter:image" content="https://tsm-devi.github.io/Resume/og-image.png?v=4">
   <meta name="twitter:image:alt" content="Иванов Темир, DevOps-инженер — пайплайн lint · build · test · scan · push · deploy, все шаги пройдены">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <!-- Блоки страницы скрыты через .r{opacity:0} и проявляются наблюдателем из
+       main.js. Три независимых пути, чтобы контент не пропал:
+       1) JS выключен  — этот скрипт не выполнится, класса .js не будет, и
+          правило .js .r не сработает: всё видно сразу;
+       2) main.js упал — таймер снимается только после создания наблюдателя,
+          так что через 2.5 с сработает .r-fallback;
+       3) всё в порядке — таймер снят, анимация появления работает как прежде. -->
+  <script>
+    var _d = document.documentElement;
+    _d.classList.add('js');
+    window._revealFallback = setTimeout(function () { _d.classList.add('r-fallback'); }, 2500);
+  </script>
   <link rel="icon" href="favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
@@ -47,7 +59,7 @@
     "alternateName": "Ivanov Temir",
     "jobTitle": "Middle+ DevOps Engineer",
     "url": "https://tsm-devi.github.io/Resume/",
-    "image": "https://tsm-devi.github.io/Resume/og-image.png?v=3",
+    "image": "https://tsm-devi.github.io/Resume/og-image.png?v=4",
     "email": "mailto:timir-ivaniv@yandex.ru",
     "address": {
       "@type": "PostalAddress",
@@ -77,7 +89,7 @@
   </div>
 </div>
 
-<a href="#main" class="skip-link">Skip to content</a>
+<a href="#main" class="skip-link"><span data-lang="ru">К содержимому</span><span data-lang="en">Skip to content</span></a>
 
 <div id="scroll-progress"></div>
 
@@ -102,7 +114,7 @@
   </ul>
   <div class="nav-controls">
     <button class="lang-toggle" id="lang-toggle" aria-label="Switch language">EN</button>
-    <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">
       <span></span><span></span><span></span>
     </button>
   </div>
@@ -133,11 +145,11 @@
           with focus on automation, observability and fault tolerance.</span>
         </p>
         <div class="hero-stack">
-          <span class="stack-tag s-p"><img class="chip-icon" src="icons/kubernetes.svg" alt="" width="14" height="14" loading="lazy">Kubernetes</span>
-          <span class="stack-tag s-i"><img class="chip-icon" src="icons/gitlab.svg" alt="" width="14" height="14" loading="lazy">GitLab CI/CD</span>
-          <span class="stack-tag s-y"><img class="chip-icon" src="icons/terraform.svg" alt="" width="14" height="14" loading="lazy">Terraform</span>
-          <span class="stack-tag s-g"><img class="chip-icon" src="icons/ansible.svg" alt="" width="14" height="14" loading="lazy">Ansible</span>
-          <span class="stack-tag s-i"><img class="chip-icon" src="icons/docker.svg" alt="" width="14" height="14" loading="lazy">Docker</span>
+          <span class="stack-tag s-p"><img class="chip-icon" src="icons/kubernetes.svg" alt="" width="14" height="14">Kubernetes</span>
+          <span class="stack-tag s-i"><img class="chip-icon" src="icons/gitlab.svg" alt="" width="14" height="14">GitLab CI/CD</span>
+          <span class="stack-tag s-y"><img class="chip-icon" src="icons/terraform.svg" alt="" width="14" height="14">Terraform</span>
+          <span class="stack-tag s-g"><img class="chip-icon" src="icons/ansible.svg" alt="" width="14" height="14">Ansible</span>
+          <span class="stack-tag s-i"><img class="chip-icon" src="icons/docker.svg" alt="" width="14" height="14">Docker</span>
         </div>
 
         <div class="pipeline-wrap r">
@@ -246,7 +258,7 @@
             <span class="tl-prompt">❯</span>
             <input class="term-input" id="term-input" placeholder="help" aria-label="Terminal command input" autocomplete="off" spellcheck="false" maxlength="32">
           </div>
-          <div class="term-output" id="term-output"></div>
+          <div class="term-output" id="term-output" aria-live="polite"></div>
         </div>
       </div>
 
@@ -306,22 +318,22 @@
       <span class="status-prompt">$ status --summary</span>
       <div class="status-items">
         <div class="status-item">
-          <span class="stat-val" data-count="4" data-suffix="+">0</span>
+          <span class="stat-val" data-count="4" data-suffix="+">4+</span>
           <span class="status-key"><span data-lang="ru">лет в IT</span><span data-lang="en">years in IT</span></span>
         </div>
         <span class="status-sep">/</span>
         <div class="status-item">
-          <span class="stat-val" data-count="3" data-suffix="+">0</span>
+          <span class="stat-val" data-count="3" data-suffix="+">3+</span>
           <span class="status-key"><span data-lang="ru">лет DevOps</span><span data-lang="en">years DevOps</span></span>
         </div>
         <span class="status-sep">/</span>
         <div class="status-item">
-          <span class="stat-val" data-count="12" data-suffix="+">0</span>
+          <span class="stat-val" data-count="12" data-suffix="+">12+</span>
           <span class="status-key"><span data-lang="ru">сервисов в K8s</span><span data-lang="en">services in K8s</span></span>
         </div>
         <span class="status-sep">/</span>
         <div class="status-item">
-          <span class="stat-val" data-text="100%">0</span>
+          <span class="stat-val" data-text="100%">100%</span>
           <span class="status-key"><span data-lang="ru">CI/CD покрытие</span><span data-lang="en">CI/CD coverage</span></span>
         </div>
       </div>
@@ -778,20 +790,20 @@
       <span data-lang="en">Skills <span class="sub">// click category to filter</span></span>
     </h2>
     <div class="skill-filters r" role="group" aria-label="Filter by category">
-      <button class="skill-filter" type="button" data-cat="os">OS</button>
-      <button class="skill-filter" type="button" data-cat="vcs">Version Control</button>
-      <button class="skill-filter" type="button" data-cat="scripting">Scripting</button>
-      <button class="skill-filter" type="button" data-cat="networking">Networking</button>
-      <button class="skill-filter" type="button" data-cat="security">Security</button>
-      <button class="skill-filter" type="button" data-cat="server">Server Management</button>
-      <button class="skill-filter" type="button" data-cat="containers">Containers</button>
-      <button class="skill-filter" type="button" data-cat="orchestration">Container Orchestration</button>
-      <button class="skill-filter" type="button" data-cat="iac">IaC</button>
-      <button class="skill-filter" type="button" data-cat="cloud">Cloud</button>
-      <button class="skill-filter" type="button" data-cat="cicd">CI/CD</button>
-      <button class="skill-filter" type="button" data-cat="monitoring">Monitoring & Observability</button>
-      <button class="skill-filter" type="button" data-cat="management">Management & Tools</button>
-      <button class="skill-filter" type="button" data-cat="databases">Databases & Messaging</button>
+      <button class="skill-filter" type="button" aria-pressed="false" data-cat="os">OS</button>
+      <button class="skill-filter" type="button" aria-pressed="false" data-cat="vcs">Version Control</button>
+      <button class="skill-filter" type="button" aria-pressed="false" data-cat="scripting">Scripting</button>
+      <button class="skill-filter" type="button" aria-pressed="false" data-cat="networking">Networking</button>
+      <button class="skill-filter" type="button" aria-pressed="false" data-cat="security">Security</button>
+      <button class="skill-filter" type="button" aria-pressed="false" data-cat="server">Server Management</button>
+      <button class="skill-filter" type="button" aria-pressed="false" data-cat="containers">Containers</button>
+      <button class="skill-filter" type="button" aria-pressed="false" data-cat="orchestration">Container Orchestration</button>
+      <button class="skill-filter" type="button" aria-pressed="false" data-cat="iac">IaC</button>
+      <button class="skill-filter" type="button" aria-pressed="false" data-cat="cloud">Cloud</button>
+      <button class="skill-filter" type="button" aria-pressed="false" data-cat="cicd">CI/CD</button>
+      <button class="skill-filter" type="button" aria-pressed="false" data-cat="monitoring">Monitoring & Observability</button>
+      <button class="skill-filter" type="button" aria-pressed="false" data-cat="management">Management & Tools</button>
+      <button class="skill-filter" type="button" aria-pressed="false" data-cat="databases">Databases & Messaging</button>
     </div>
     <div class="skill-wall r">
       <div class="skill-tile" data-cat="os">
@@ -802,7 +814,7 @@
         </div>
       </div>
       <div class="skill-tile" data-cat="os">
-        <div class="skill-tile-icon"><img src="icons/windows-server.svg" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-icon"><img class="icon-invert" src="icons/windows-server.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
           <div class="skill-tile-name">Windows Server</div>
           <div class="skill-tile-tip">AD · IIS · RDS</div>
@@ -844,7 +856,7 @@
         </div>
       </div>
       <div class="skill-tile" data-cat="networking">
-        <div class="skill-tile-icon"><img src="icons/devicon-haproxy.svg" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-icon"><img class="icon-invert" src="icons/devicon-haproxy.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
           <div class="skill-tile-name">HAProxy</div>
           <div class="skill-tile-tip">load balancer</div>
@@ -879,7 +891,7 @@
         </div>
       </div>
       <div class="skill-tile" data-cat="security">
-        <div class="skill-tile-icon"><img src="icons/keycloak.svg" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-icon"><img class="icon-invert" src="icons/keycloak.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
           <div class="skill-tile-name">Keycloak</div>
           <div class="skill-tile-tip">OIDC · SSO · identity provider</div>
@@ -893,7 +905,7 @@
         </div>
       </div>
       <div class="skill-tile" data-cat="security">
-        <div class="skill-tile-icon"><img src="icons/trivy.svg" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-icon"><img class="icon-invert" src="icons/trivy.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
           <div class="skill-tile-name">Trivy</div>
           <div class="skill-tile-tip">container image scanning</div>
@@ -970,7 +982,7 @@
         </div>
       </div>
       <div class="skill-tile" data-cat="orchestration">
-        <div class="skill-tile-icon"><img src="icons/helm.svg" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-icon"><img class="icon-invert" src="icons/helm.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
           <div class="skill-tile-name">Helm</div>
           <div class="skill-tile-tip">chart packaging</div>
@@ -1047,7 +1059,7 @@
         </div>
       </div>
       <div class="skill-tile" data-cat="cicd">
-        <div class="skill-tile-icon"><img src="icons/verdaccio.svg" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-icon"><img class="icon-invert" src="icons/verdaccio.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
           <div class="skill-tile-name">Verdaccio</div>
           <div class="skill-tile-tip">приватный npm-registry</div>
@@ -1089,7 +1101,7 @@
         </div>
       </div>
       <div class="skill-tile" data-cat="monitoring">
-        <div class="skill-tile-icon"><img src="icons/elastic.svg" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-icon"><img class="icon-invert" src="icons/elastic.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
           <div class="skill-tile-name">ELK Stack</div>
           <div class="skill-tile-tip">Elasticsearch · Kibana · Logstash</div>
@@ -1103,7 +1115,7 @@
         </div>
       </div>
       <div class="skill-tile" data-cat="monitoring">
-        <div class="skill-tile-icon"><img src="icons/sentry.svg" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-icon"><img class="icon-invert" src="icons/sentry.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
           <div class="skill-tile-name">Sentry</div>
           <div class="skill-tile-tip">error tracking</div>
@@ -1124,7 +1136,7 @@
         </div>
       </div>
       <div class="skill-tile" data-cat="monitoring">
-        <div class="skill-tile-icon"><img src="icons/devicon-netbox.svg" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-icon"><img class="icon-invert" src="icons/devicon-netbox.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
           <div class="skill-tile-name">NetBox</div>
           <div class="skill-tile-tip">network documentation</div>
@@ -1138,7 +1150,7 @@
         </div>
       </div>
       <div class="skill-tile" data-cat="management">
-        <div class="skill-tile-icon"><img src="icons/confluence.svg" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-icon"><img class="icon-invert" src="icons/confluence.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
           <div class="skill-tile-name">Confluence</div>
           <div class="skill-tile-tip">docs · wiki</div>
@@ -1208,7 +1220,7 @@
         </div>
       </div>
       <div class="skill-tile" data-cat="databases">
-        <div class="skill-tile-icon"><img src="icons/apachekafka.svg" alt="" width="22" height="22" loading="lazy"></div>
+        <div class="skill-tile-icon"><img class="icon-invert" src="icons/apachekafka.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
           <div class="skill-tile-name">Kafka</div>
           <div class="skill-tile-tip">event streaming</div>
@@ -1474,6 +1486,7 @@
 
   <!-- CTA -->
   <section id="cta">
+    <h2 class="sr-only"><span data-lang="ru">Контакты</span><span data-lang="en">Contact</span></h2>
     <div class="cta-terminal r">
       <div class="terminal-bar">
         <div class="t-dot t-red"></div>
@@ -1498,7 +1511,7 @@
         <button class="tl-contact" id="btn-copy-tg" title="Telegram · @ktylhus">
           <span class="tl-prompt">❯</span>
           <span class="tl-contact-cmd">ping</span>
-          <span class="tl-contact-val" id="btn-tg-label">@ktylhus</span>
+          <span class="tl-contact-val" id="btn-tg-label" aria-live="polite">@ktylhus</span>
           <span class="tl-contact-icon" id="copy-icon-tg">
             <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
           </span>
@@ -1506,7 +1519,7 @@
         <button class="tl-contact" id="btn-copy-email" title="E-mail · timir-ivaniv@yandex.ru">
           <span class="tl-prompt">❯</span>
           <span class="tl-contact-cmd">mail</span>
-          <span class="tl-contact-val" id="btn-copy-label">timir-ivaniv@yandex.ru</span>
+          <span class="tl-contact-val" id="btn-copy-label" aria-live="polite">timir-ivaniv@yandex.ru</span>
           <span class="tl-contact-icon" id="copy-icon">
             <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
           </span>

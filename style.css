@@ -88,6 +88,14 @@
 .boot-dots { display: inline-block; animation: boot-dots 1s ease-in-out infinite; }
 @media (prefers-reduced-motion: reduce) { #boot-screen { display: none; } }
 
+/* Заголовок, нужный структуре документа, но не композиции: секция контактов
+   оформлена как терминал, и видимый <h2> над ней сломал бы кадр. */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+}
+
 /* ── SKIP LINK ── */
 .skip-link {
   position: fixed; top: -100px; left: 1rem; z-index: 10000;
@@ -855,7 +863,11 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
   box-shadow: inset 0 1px 1px rgba(216,236,248,.2);
 }
 .skill-tile-icon img { width: 19px; height: 19px; object-fit: contain; }
-.skill-tile-icon img.icon-invert { filter: invert(1) brightness(1.6); }
+/* Двенадцать логотипов почти чёрные и на чипе давали контраст 1.0-2.0:1 —
+   их было физически не видно. Простая инверсия делает тёмно-синий жёлтым
+   (Windows Server, Helm, Trivy), поэтому обесцвечиваем: ровный светлый
+   монохром читается как приём, а чужой оттенок — как ошибка. */
+.skill-tile-icon img.icon-invert { filter: invert(1) grayscale(1) brightness(1.35); }
 .skill-tile-icon.icon-chip { background: var(--white); overflow: hidden; }
 .skill-tile-icon.icon-chip img { width: 100%; height: 100%; object-fit: cover; }
 .skill-tile-body { min-width: 0; }
@@ -1091,7 +1103,10 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
 }
 
 /* ── REVEAL ── */
-.r { opacity: 0; transform: translateY(18px); transition: opacity .55s cubic-bezier(0,0,.2,1), transform .55s cubic-bezier(0,0,.2,1); }
+/* Прятать блоки можно только если скрипт жив и сможет их проявить: без .js
+   на <html> правило не сработает вовсе. Подробности — в комментарии в <head>. */
+.js .r { opacity: 0; transform: translateY(18px); transition: opacity .55s cubic-bezier(0,0,.2,1), transform .55s cubic-bezier(0,0,.2,1); }
+.r-fallback .r { opacity: 1 !important; transform: none !important; }
 .r.v  { opacity: 1; transform: none; }
 .r.d1 { transition-delay: .07s; }
 .r.d2 { transition-delay: .14s; }
@@ -1192,7 +1207,9 @@ body.lang-en       [data-lang="ru"] { display: none !important; }
 .lang-toggle:active, #back-to-top:active { transform: scale(0.95) !important; transition-duration: 80ms !important; }
 
 /* ── CUSTOM CURSOR ── */
-@media (pointer: fine) and (hover: hover) { * { cursor: none !important; } }
+/* Системный курсор прячем только когда скрипт жив: рисованный курсор — его
+   работа, и если main.js не выполнился, человек остался бы вообще без курсора. */
+@media (pointer: fine) and (hover: hover) { .js * { cursor: none !important; } }
 #cursor-dot, #cursor-ring {
   position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
   border-radius: 50%; transform: translate(-50%, -50%);
@@ -1232,7 +1249,13 @@ body.cur-hover #cursor-dot { transform: translate(-50%, -50%) scale(.6); }
 
 /* ── REDUCED MOTION ── */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+  /* Обнулять только длительности мало: задержки живут отдельным свойством,
+     и строки терминала всё равно ждали до 1.65 с, а график аптайма — 2.3 с.
+     Движения при этом не было — просто пустота на месте контента. */
+  *, *::before, *::after {
+    animation-duration: .01ms !important; animation-delay: 0s !important;
+    transition-duration: .01ms !important; transition-delay: 0s !important;
+  }
 }
 
 /* ── PRINT ── */

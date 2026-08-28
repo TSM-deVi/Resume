@@ -202,7 +202,7 @@ def make_og():
 
     # ── stats ──
     y = px(406)
-    stats = [("63 VM", "контуры DEV/INF/PROD"), ("12+", "сервисов в K8s"), ("100%", "CI/CD покрытие")]
+    stats = [("63 VM", "контуры DEV/INF/PROD"), ("70+", "сервисов в работе"), ("100%", "CI/CD покрытие")]
     x = PAD
     for val, cap in stats:
         gradient_text(img, (x, y), val, f_stat)
