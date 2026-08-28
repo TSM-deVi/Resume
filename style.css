@@ -772,6 +772,21 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
   .job-role, .job-simple .job-title, .job-simple .jlist { grid-column: 2; }
 }
 
+/* Карточка со схемой выходит из двухколоночной сетки. Схема — не проза, ей
+   нужна вся ширина карточки: в текстовой колонке 644px её содержимое рисуется
+   масштабом 0.83, и подписи падают до 7-8px. А липкая колонка с названием
+   компании при прокрутке неизбежно наезжала бы на широкую схему, поэтому
+   здесь название становится обычной шапкой сверху. */
+@media (min-width: 900px) {
+  .job-company-block.has-arch { display: block; }
+  .job-company-block.has-arch > .job-company-hdr {
+    position: static;
+    flex-direction: row; align-items: flex-start; justify-content: space-between;
+    gap: 1rem; margin-bottom: 1.75rem;
+    padding-bottom: 1.25rem; border-bottom: 1px solid var(--edge);
+  }
+}
+
 
 /* ── ARCHITECTURE DIAGRAM ── */
 /* Контур на 63 машины жил тридцатью пунктами прозы, которые не дочитывают.
@@ -809,9 +824,9 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
 .arch-box-t { font-size: 15px; letter-spacing: .06em; fill: var(--ice); }
 .arch-box-t.inf { fill: var(--blueprint); }
 .arch-num { font-size: 13px; fill: var(--frost); }
-.arch-item { font-size: 10px; fill: var(--moon); }
+.arch-item { font-size: 10.5px; fill: var(--moon); }
 .arch-mut { font-size: 9px; letter-spacing: .14em; fill: var(--fog); }
-.arch-mut.sm { font-size: 8.5px; letter-spacing: .06em; text-transform: none; }
+.arch-mut.sm { font-size: 9px; letter-spacing: .06em; text-transform: none; }
 .arch-gate-t { font-size: 11px; letter-spacing: .12em; fill: var(--ice); }
 .arch-mirror-t { font-size: 8.5px; letter-spacing: .12em; fill: var(--fog); }
 
@@ -829,10 +844,10 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
    контурами, а не общая полоса и не линия напрямую между ними. */
 .arch-ext { fill: rgba(182,217,252,.05); stroke: var(--blueprint); stroke-width: 1; stroke-opacity: .4; stroke-dasharray: 4 3; }
 .arch-ext-t { font-family: var(--font-mono); font-size: 8.5px; letter-spacing: .08em; fill: var(--blueprint); opacity: .85; }
-.arch-chain { font-family: var(--font-mono); font-size: 8.5px; letter-spacing: .10em; fill: var(--ice); }
-.arch-subnet { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .04em; fill: var(--fog); }
+.arch-chain { font-family: var(--font-mono); font-size: 10px; letter-spacing: .10em; fill: var(--ice); }
+.arch-subnet { font-family: var(--font-mono); font-size: 10px; letter-spacing: .04em; fill: var(--fog); }
 .arch-jump { fill: rgba(102,58,243,.13); stroke: var(--violet-lt); stroke-width: 1; stroke-opacity: .55; }
-.arch-jump-t { font-size: 9.5px; letter-spacing: .10em; fill: var(--ice); }
+.arch-jump-t { font-size: 10.5px; letter-spacing: .10em; fill: var(--ice); }
 .arch-node2 { font-size: 11px; letter-spacing: .04em; fill: var(--frost); }
 .arch-was { font-size: 13px; fill: var(--fog); text-decoration: line-through; }
 .arch-now { font-size: 15px; fill: var(--ice); }
