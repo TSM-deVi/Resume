@@ -891,17 +891,6 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
 /* Скрытые пункты и кнопка раскрытия. Класс вешает JS: без него список
    остаётся полным, и ни одна строка опыта не пропадает. */
 .jlist li.jl-hide { display: none; }
-/* Строка «СТЕК:» из резюме — не пункт списка, а сводка: без маркера, мельче
-   и тусклее, чтобы не спорила с содержательными пунктами над ней. */
-.jlist li.jlist-stack {
-  padding-left: 0; margin-top: 1.5rem; max-width: none;
-  font-size: 13px; line-height: 1.6; color: var(--fog);
-}
-.jlist li.jlist-stack::before { content: none; }
-.jlist-stack-k {
-  font-family: var(--font-mono); font-size: 11px;
-  letter-spacing: .10em; color: var(--blueprint); margin-right: .5rem;
-}
 .jlist-more {
   align-self: flex-start; margin-top: 1.1rem;
   display: inline-flex; align-items: center; gap: .55rem;
