@@ -822,6 +822,17 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
 .arch-min { margin-top: 2.25rem; }
 /* Jump host — не украшение периметра, а хост внутри каждого контура, поэтому
    он нарисован полосой в самом контуре, а не коробкой снаружи. */
+/* Полоса заказчика: PAM и WAF были не наши, и граница ответственности —
+   содержательный факт, а не оформление. Пунктир отделяет чужое от своего. */
+.arch-cust { fill: none; stroke: var(--edge); stroke-width: 1; stroke-dasharray: 4 4; }
+.arch-cust-t { font-family: var(--font-mono); font-size: 8.5px; letter-spacing: .12em; fill: var(--fog); opacity: .8; }
+/* Внешняя сеть у каждого VDC своя, и именно через неё идут переходы между
+   контурами: внутренней связности не было. Поэтому это три отдельных узла над
+   контурами, а не общая полоса и не линия напрямую между ними. */
+.arch-ext { fill: rgba(182,217,252,.05); stroke: var(--blueprint); stroke-width: 1; stroke-opacity: .4; stroke-dasharray: 4 3; }
+.arch-ext-t { font-family: var(--font-mono); font-size: 8.5px; letter-spacing: .08em; fill: var(--blueprint); opacity: .85; }
+.arch-chain { font-family: var(--font-mono); font-size: 8.5px; letter-spacing: .10em; fill: var(--ice); }
+.arch-subnet { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .04em; fill: var(--fog); }
 .arch-jump { fill: rgba(102,58,243,.13); stroke: var(--violet-lt); stroke-width: 1; stroke-opacity: .55; }
 .arch-jump-t { font-size: 9.5px; letter-spacing: .10em; fill: var(--ice); }
 .arch-node2 { font-size: 11px; letter-spacing: .04em; fill: var(--frost); }
