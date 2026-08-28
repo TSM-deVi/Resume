@@ -849,7 +849,6 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
 .arch-ext { fill: rgba(182,217,252,.05); stroke: var(--blueprint); stroke-width: 1; stroke-opacity: .4; stroke-dasharray: 4 3; }
 .arch-ext-t { font-family: var(--font-mono); font-size: 8.5px; letter-spacing: .08em; fill: var(--blueprint); opacity: .85; }
 .arch-chain { font-family: var(--font-mono); font-size: 10px; letter-spacing: .10em; fill: var(--ice); }
-.arch-subnet { font-family: var(--font-mono); font-size: 10px; letter-spacing: .04em; fill: var(--fog); }
 .arch-jump { fill: rgba(102,58,243,.13); stroke: var(--violet-lt); stroke-width: 1; stroke-opacity: .55; }
 .arch-jump-t { font-size: 10.5px; letter-spacing: .10em; fill: var(--ice); }
 .arch-node2 { font-size: 11px; letter-spacing: .04em; fill: var(--frost); }
@@ -857,9 +856,28 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
 .arch-now { font-size: 15px; fill: var(--ice); }
 .arch-arrow { font-size: 13px; fill: var(--blueprint); }
 
-.arch-note {
-  margin-top: 1rem; max-width: var(--prose);
+/* Подпись под схемой была одним абзацем на тысячу знаков. Пять именованных
+   фактов вместо стены: ключ слева моноширинным, объяснение справа — тот же
+   приём, что у списка образования, читается по диагонали. */
+.arch-facts {
+  /* Мера считается для самого текста, а не для блока: колонка ключей в 8.5rem
+     съедала бы её, и строка сжималась до сорока знаков. */
+  list-style: none; margin-top: 1.25rem; max-width: calc(var(--prose) + 8.5rem);
+  display: flex; flex-direction: column; gap: .7rem;
+}
+.arch-facts li {
   font-size: 14px; line-height: 1.55; color: var(--fog);
+  padding-left: 8.5rem; position: relative;
+}
+.arch-fact-k {
+  position: absolute; left: 0; top: .15em;
+  font-family: var(--font-mono); font-size: 11px;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--blueprint);
+}
+@media (max-width: 620px) {
+  /* На узком экране колонка в 8.5rem съедает половину строки. */
+  .arch-facts li { padding-left: 0; }
+  .arch-fact-k { position: static; display: block; margin-bottom: .25rem; }
 }
 
 @media (max-width: 720px) {
