@@ -305,8 +305,9 @@ try {
   console.log('%cLooking for a DevOps engineer? Let\'s talk!', _cs[2]);
 } catch(e) {}
 
-// ── Custom cursor (companion dot + ring, native cursor stays on) ──
-if (window.matchMedia('(pointer: fine)').matches) {
+// ── Курсор-спутник: точка и кольцо рядом с системным указателем ──
+if (window.matchMedia('(pointer: fine)').matches
+    && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   const dot  = document.getElementById('cursor-dot');
   const ring = document.getElementById('cursor-ring');
 

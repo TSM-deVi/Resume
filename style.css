@@ -1270,9 +1270,11 @@ body.lang-en       [data-lang="ru"] { display: none !important; }
 }
 
 /* ── CUSTOM CURSOR ── */
-/* Системный курсор прячем только когда скрипт жив: рисованный курсор — его
-   работа, и если main.js не выполнился, человек остался бы вообще без курсора. */
-@media (pointer: fine) and (hover: hover) { .js * { cursor: none !important; } }
+/* Точка с кольцом — спутник системного курсора, а не его замена. Скрывать
+   указатель нельзя: форма курсора несёт смысл (рука на ссылке, I-образный над
+   текстом — единственный признак, что почту можно выделить), а в Windows
+   размер и контраст указателя настраиваются в разделе спец­возможностей,
+   и `cursor: none` перекрывал эту настройку целиком. */
 #cursor-dot, #cursor-ring {
   position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
   border-radius: 50%; transform: translate(-50%, -50%);
@@ -1333,6 +1335,10 @@ body.cur-hover #cursor-dot { transform: translate(-50%, -50%) scale(.6); }
     -webkit-text-fill-color: #111 !important;
   }
   .r { opacity: 1 !important; transform: none !important; }
+  /* На бумагу резюме уходит целиком: свёрнутые пункты разворачиваются,
+     а кнопка раскрытия на печати бессмысленна. */
+  .jlist li.jl-hide { display: list-item !important; }
+  .jlist-more { display: none !important; }
   section { padding: 1.2rem 0 !important; break-inside: avoid; }
   .job-company-block, .ach, .status-line, .edu-row, .skill-tile {
     border: 1px solid #ccc !important; background: #fff !important; box-shadow: none !important;
