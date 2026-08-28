@@ -820,6 +820,10 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
 /* Вторая схема — не вторая топология, а её сжатие: те же токены, вдвое ниже,
    и числа «было → стало» вместо связей. */
 .arch-min { margin-top: 2.25rem; }
+/* Jump host — не украшение периметра, а хост внутри каждого контура, поэтому
+   он нарисован полосой в самом контуре, а не коробкой снаружи. */
+.arch-jump { fill: rgba(102,58,243,.13); stroke: var(--violet-lt); stroke-width: 1; stroke-opacity: .55; }
+.arch-jump-t { font-size: 9.5px; letter-spacing: .10em; fill: var(--ice); }
 .arch-node2 { font-size: 11px; letter-spacing: .04em; fill: var(--frost); }
 .arch-was { font-size: 13px; fill: var(--fog); text-decoration: line-through; }
 .arch-now { font-size: 15px; fill: var(--ice); }
