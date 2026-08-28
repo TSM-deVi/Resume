@@ -471,12 +471,12 @@
 
       <div class="ach r d3">
         <div class="ach-label"><span data-lang="ru">right-sizing платформы</span><span data-lang="en">platform right-sizing</span></div>
-        <div class="ach-val"><span data-lang="ru"><span class="ach-was">28 VM</span><span class="ach-arrow">→</span><span class="ach-now">9 VM</span></span><span data-lang="en"><span class="ach-was">28 VM</span><span class="ach-arrow">→</span><span class="ach-now">9 VM</span></span></div>
+        <div class="ach-val"><span data-lang="ru"><span class="ach-was">28 VM</span><span class="ach-arrow">→</span><span class="ach-now">10 VM</span></span><span data-lang="en"><span class="ach-was">28 VM</span><span class="ach-arrow">→</span><span class="ach-now">10 VM</span></span></div>
         <div class="ach-text" data-lang="ru">
-          Enterprise-контур на ~90 vCPU и ~190 GB RAM свёрнут в <strong>~32 vCPU / ~92 GB RAM</strong> без потери состава сервисов
+          Enterprise-контур на 90 vCPU и 191 GB RAM свёрнут в <strong>34 vCPU / 96 GB RAM</strong> без потери состава сервисов
         </div>
         <div class="ach-text" data-lang="en">
-          An enterprise environment on ~90 vCPU and ~190 GB RAM folded into <strong>~32 vCPU / ~92 GB RAM</strong> with the service composition intact
+          An enterprise environment on 90 vCPU and 191 GB RAM folded into <strong>34 vCPU / 96 GB RAM</strong> with the service composition intact
         </div>
       </div>
 
@@ -635,51 +635,59 @@
               <figcaption class="arch-cap">
                 <span class="arch-cap-t" data-lang="ru">Та же платформа, свёрнутая</span>
                 <span class="arch-cap-t" data-lang="en">The same platform, folded down</span>
-                <span class="arch-cap-n">9 VM · Timeweb Cloud</span>
+                <span class="arch-cap-n">10 VM · Timeweb Cloud</span>
               </figcaption>
               <div class="arch-scroll">
-                <svg class="arch-svg" viewBox="0 0 780 236" role="img"
-                     aria-label="Минимальная конфигурация на публичном облаке Timeweb Cloud: тот же состав сервисов в одном контуре вместо трёх. Девять машин вместо двадцати восьми, тридцать два виртуальных ядра вместо девяноста, девяносто два гигабайта памяти вместо ста девяноста. Kubernetes свёрнут в single-node k3s, Vault с RabbitMQ и Qdrant с Redis делят узлы, PostgreSQL и ClickHouse стоят standalone.">
+                <svg class="arch-svg" viewBox="0 0 780 246" role="img"
+                     aria-label="Минимальная конфигурация на публичном облаке Timeweb Cloud: тот же состав сервисов в одном контуре вместо трёх изолированных. Десять машин вместо двадцати восьми, тридцать четыре виртуальных ядра вместо девяноста, девяносто шесть гигабайт памяти вместо ста девяноста одного. Kubernetes свёрнут в один узел, Vault делит машину с RabbitMQ, Qdrant с Redis, PostgreSQL и ClickHouse стоят standalone, часть прикладных сервисов вынесена на отдельный узел с Docker.">
                   <text class="arch-mut" x="19" y="16">ОДИН КОНТУР ВМЕСТО ТРЁХ · TIMEWEB CLOUD</text>
 
                   <text class="arch-was" x="19"  y="48">28 VM</text>
                   <text class="arch-arrow" x="85" y="48">→</text>
-                  <text class="arch-now" x="111" y="48">9 VM</text>
-                  <text class="arch-was" x="215" y="48">~90 vCPU</text>
-                  <text class="arch-arrow" x="313" y="48">→</text>
-                  <text class="arch-now" x="339" y="48">~32 vCPU</text>
-                  <text class="arch-was" x="475" y="48">~190 GB</text>
-                  <text class="arch-arrow" x="561" y="48">→</text>
-                  <text class="arch-now" x="587" y="48">~92 GB</text>
-                  <text class="arch-mut sm" x="697" y="48">~1.7 TB NVMe</text>
+                  <text class="arch-now" x="111" y="48">10 VM</text>
+                  <text class="arch-was" x="210" y="48">90 vCPU</text>
+                  <text class="arch-arrow" x="300" y="48">→</text>
+                  <text class="arch-now" x="326" y="48">34 vCPU</text>
+                  <text class="arch-was" x="400" y="48">191 GB</text>
+                  <text class="arch-arrow" x="478" y="48">→</text>
+                  <text class="arch-now" x="504" y="48">96 GB</text>
+                  <text class="arch-was" x="590" y="48">2.7 TB</text>
+                  <text class="arch-arrow" x="668" y="48">→</text>
+                  <text class="arch-now" x="694" y="48">1.8 TB</text>
 
                   <line class="arch-rule" x1="19" y1="68" x2="761" y2="68"/>
-                  <text class="arch-mut sm" x="19" y="86">состав сервисов и схема их взаимодействия сохранены; bastion, jump host и контур заказчика с PAM и WAF остались только в банковском проекте</text>
+                  <text class="arch-mut sm" x="19" y="86">состав сервисов сохранён; bastion, jump host и контур заказчика с PAM и WAF остались только в банковском проекте</text>
 
-                  <rect class="arch-box" x="19" y="100" width="178" height="58" rx="6"/>
-                  <text class="arch-node2" x="108" y="124" text-anchor="middle">k3s</text>
-                  <text class="arch-mut sm" x="108" y="142" text-anchor="middle">вместо master + 3 worker</text>
-                  <rect class="arch-box" x="207" y="100" width="178" height="58" rx="6"/>
-                  <text class="arch-node2" x="296" y="124" text-anchor="middle">vault + rabbitmq</text>
-                  <text class="arch-mut sm" x="296" y="142" text-anchor="middle">общий узел</text>
-                  <rect class="arch-box" x="395" y="100" width="178" height="58" rx="6"/>
-                  <text class="arch-node2" x="484" y="124" text-anchor="middle">qdrant + redis</text>
-                  <text class="arch-mut sm" x="484" y="142" text-anchor="middle">общий узел</text>
-                  <rect class="arch-box" x="583" y="100" width="178" height="58" rx="6"/>
-                  <text class="arch-node2" x="672" y="124" text-anchor="middle">postgres</text>
-                  <text class="arch-mut sm" x="672" y="142" text-anchor="middle">standalone вместо кластера</text>
-                  <rect class="arch-box" x="19" y="168" width="178" height="58" rx="6"/>
-                  <text class="arch-node2" x="108" y="192" text-anchor="middle">clickhouse</text>
-                  <text class="arch-mut sm" x="108" y="210" text-anchor="middle">standalone вместо кластера</text>
-                  <rect class="arch-box" x="207" y="168" width="178" height="58" rx="6"/>
-                  <text class="arch-node2" x="296" y="192" text-anchor="middle">docker-узел</text>
-                  <text class="arch-mut sm" x="296" y="210" text-anchor="middle">часть сервисов вынесена</text>
-                  <rect class="arch-box" x="395" y="168" width="178" height="58" rx="6"/>
-                  <text class="arch-node2" x="484" y="192" text-anchor="middle">gitlab ce</text>
-                  <text class="arch-mut sm" x="484" y="210" text-anchor="middle">свой CI/CD в контуре</text>
-                  <rect class="arch-box" x="583" y="168" width="178" height="58" rx="6"/>
-                  <text class="arch-node2" x="672" y="192" text-anchor="middle">nginx</text>
-                  <text class="arch-mut sm" x="672" y="210" text-anchor="middle">единственный edge-router</text>
+                  <rect class="arch-box" x="19" y="100" width="140" height="58" rx="6"/>
+                  <text class="arch-node2" x="89" y="124" text-anchor="middle">k8s-single</text>
+                  <text class="arch-mut sm" x="89" y="142" text-anchor="middle">8 CPU · 20 GB</text>
+                  <rect class="arch-box" x="169" y="100" width="140" height="58" rx="6"/>
+                  <text class="arch-node2" x="239" y="124" text-anchor="middle">docker-apps</text>
+                  <text class="arch-mut sm" x="239" y="142" text-anchor="middle">6 CPU · 24 GB</text>
+                  <rect class="arch-box" x="319" y="100" width="140" height="58" rx="6"/>
+                  <text class="arch-node2" x="389" y="124" text-anchor="middle">gitlab-runner</text>
+                  <text class="arch-mut sm" x="389" y="142" text-anchor="middle">4 CPU · 16 GB</text>
+                  <rect class="arch-box" x="469" y="100" width="140" height="58" rx="6"/>
+                  <text class="arch-node2" x="539" y="124" text-anchor="middle">qdrant-redis</text>
+                  <text class="arch-mut sm" x="539" y="142" text-anchor="middle">4 CPU · 10 GB</text>
+                  <rect class="arch-box" x="619" y="100" width="140" height="58" rx="6"/>
+                  <text class="arch-node2" x="689" y="124" text-anchor="middle">postgresql</text>
+                  <text class="arch-mut sm" x="689" y="142" text-anchor="middle">2 CPU · 6 GB</text>
+                  <rect class="arch-box" x="19" y="168" width="140" height="58" rx="6"/>
+                  <text class="arch-node2" x="89" y="192" text-anchor="middle">harbor</text>
+                  <text class="arch-mut sm" x="89" y="210" text-anchor="middle">2 CPU · 4 GB</text>
+                  <rect class="arch-box" x="169" y="168" width="140" height="58" rx="6"/>
+                  <text class="arch-node2" x="239" y="192" text-anchor="middle">vault-rabbitmq</text>
+                  <text class="arch-mut sm" x="239" y="210" text-anchor="middle">2 CPU · 4 GB</text>
+                  <rect class="arch-box" x="319" y="168" width="140" height="58" rx="6"/>
+                  <text class="arch-node2" x="389" y="192" text-anchor="middle">minio</text>
+                  <text class="arch-mut sm" x="389" y="210" text-anchor="middle">2 CPU · 4 GB</text>
+                  <rect class="arch-box" x="469" y="168" width="140" height="58" rx="6"/>
+                  <text class="arch-node2" x="539" y="192" text-anchor="middle">clickhouse</text>
+                  <text class="arch-mut sm" x="539" y="210" text-anchor="middle">2 CPU · 4 GB</text>
+                  <rect class="arch-box" x="619" y="168" width="140" height="58" rx="6"/>
+                  <text class="arch-node2" x="689" y="192" text-anchor="middle">monitoring</text>
+                  <text class="arch-mut sm" x="689" y="210" text-anchor="middle">2 CPU · 4 GB</text>
                 </svg>
               </div>
             </figure>
@@ -723,8 +731,8 @@
 
               <li class="jlist-proj">Проект 2 · Минимальная конфигурация — копия основного контура на публичном облаке Timeweb Cloud</li>
               <li>Воспроизвёл архитектуру основного контура в одном контуре вместо трёх изолированных: состав сервисов и схема их взаимодействия сохранены, сквозные сервисы INF свёрнуты внутрь единого контура</li>
-              <li>Уложил платформу enterprise-масштаба (28 VM, ~90 vCPU, ~190 GB RAM) в <strong>9 VM, ~32 vCPU, ~92 GB RAM, ~1.7 TB NVMe</strong>: повторный right-sizing, консолидация сервисов, снятие production-only зависимостей</li>
-              <li>Архитектурные решения при сокращении: single-node <strong>Kubernetes/k3s</strong> вместо кластера master + 3 worker; Vault + RabbitMQ и Qdrant + Redis на общих узлах; standalone PostgreSQL и ClickHouse вместо кластеров; часть прикладных сервисов вынесена на отдельный Docker-узел</li>
+              <li>Уложил платформу enterprise-масштаба (28 VM, 90 vCPU, 191 GB RAM) в <strong>10 VM, 34 vCPU, 96 GB RAM, 1.8 TB NVMe</strong>: повторный right-sizing, консолидация сервисов, снятие production-only зависимостей</li>
+              <li>Архитектурные решения при сокращении: <strong>один узел Kubernetes</strong> вместо кластера master + 3 worker; Vault с RabbitMQ и Qdrant с Redis на общих машинах; standalone PostgreSQL и ClickHouse вместо кластеров; прикладные сервисы вынесены на отдельный узел с Docker; Harbor, MinIO, GitLab Runner и мониторинг — по машине на каждый</li>
               <li>Без enterprise-обвязки: <strong>Nginx</strong> как единственный edge-router, конфиг под управлением GitLab-репозитория — балансировщик, WAF, bastion и PAM остались только в банковском контуре</li>
               <li>Собственный <strong>GitLab CE</strong> внутри контура вместо централизованного CI/CD на INF</li>
             </ul>
@@ -767,8 +775,8 @@
 
               <li class="jlist-proj">Project 2 &middot; Minimum configuration — a replica of the primary environment on Timeweb Cloud public cloud</li>
               <li>Reproduced the architecture of the primary environment in a single environment instead of three isolated ones: the service composition and their interaction scheme were preserved, with INF cross-cutting services folded inside</li>
-              <li>Fitted an enterprise-scale platform (28 VMs, ~90 vCPU, ~190 GB RAM) into <strong>9 VMs, ~32 vCPU, ~92 GB RAM, ~1.7 TB NVMe</strong>: repeated right-sizing, service consolidation, removal of production-only dependencies</li>
-              <li>Architectural decisions when scaling down: single-node <strong>Kubernetes/k3s</strong> instead of a master + 3 worker cluster; Vault + RabbitMQ and Qdrant + Redis on shared nodes; standalone PostgreSQL and ClickHouse instead of clusters; some application services moved onto a separate Docker node</li>
+              <li>Fitted an enterprise-scale platform (28 VMs, 90 vCPU, 191 GB RAM) into <strong>10 VMs, 34 vCPU, 96 GB RAM, 1.8 TB NVMe</strong>: repeated right-sizing, service consolidation, removal of production-only dependencies</li>
+              <li>Architectural decisions when scaling down: <strong>a single Kubernetes node</strong> instead of a master + 3 worker cluster; Vault with RabbitMQ and Qdrant with Redis on shared machines; standalone PostgreSQL and ClickHouse instead of clusters; application services moved onto a separate Docker node; Harbor, MinIO, GitLab Runner and monitoring on one machine each</li>
               <li>No enterprise wrapping: <strong>Nginx</strong> as the only edge router with its config managed from a GitLab repository — the load balancer, WAF, bastion and PAM stayed in the banking environment only</li>
               <li>A self-hosted <strong>GitLab CE</strong> inside the environment instead of centralized CI/CD on INF</li>
             </ul>
