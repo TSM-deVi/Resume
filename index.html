@@ -6,6 +6,9 @@
   <title>Иванов Темир — Middle+ DevOps-инженер</title>
   <meta name="description" content="Middle+ DevOps-инженер, Санкт-Петербург. Kubernetes на bare-metal, VMware Cloud Director и k3s, GitLab CI/CD, ArgoCD, Terraform, Ansible, наблюдаемость. 63 VM в контурах DEV/INF/PROD, 70+ сервисов в эксплуатации.">
   <link rel="canonical" href="https://tsm-devi.github.io/Resume/">
+  <link rel="alternate" hreflang="ru" href="https://tsm-devi.github.io/Resume/">
+  <link rel="alternate" hreflang="en" href="https://tsm-devi.github.io/Resume/?lang=en">
+  <link rel="alternate" hreflang="x-default" href="https://tsm-devi.github.io/Resume/">
 
   <!-- Link preview. og-image.png несёт ?v=4: Telegram, VK и Facebook кешируют
        превью по полному URL, без смены параметра они будут отдавать старую
@@ -31,6 +34,7 @@
   <meta name="twitter:image:alt" content="Иванов Темир, DevOps-инженер — пайплайн lint · build · test · scan · push · deploy, все шаги пройдены">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;700&display=swap">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <!-- Блоки страницы скрыты через .r{opacity:0} и проявляются наблюдателем из
@@ -83,7 +87,7 @@
 <div id="boot-screen" aria-hidden="true">
   <div class="boot-lines">
     <div class="boot-line">$ init --devops-resume</div>
-    <div class="boot-line">connecting to cluster<span class="boot-dots">...</span> <span class="boot-ok">ok</span></div>
+    <div class="boot-line">connecting to cluster<span class="boot-dots">…</span> <span class="boot-ok">ok</span></div>
     <div class="boot-line">loading profile: <span class="boot-val">ivanov.temir</span></div>
     <div class="boot-line boot-ready">system ready <span class="boot-ok">✓</span></div>
   </div>
@@ -226,7 +230,7 @@
           <div class="t-dot t-grn"></div>
           <span class="terminal-title">temiriv@devops ~ bash</span>
         </div>
-        <div class="terminal-body">
+        <div class="terminal-body" translate="no">
           <div class="tl">
             <div class="tl-cmd"><span class="tl-prompt">❯</span> whoami</div>
             <div class="tl-out"><span class="tl-val">Ivanov Temir</span></div>
@@ -283,22 +287,25 @@
           <span class="ledger-eyebrow">uptime · 90d</span>
           <span class="ledger-val">99.9<span class="ledger-pct">%</span></span>
         </div>
-        <svg class="ledger-chart" viewBox="0 0 300 80" role="img" aria-label="Uptime over the last 90 days: 99.9 percent">
+        <svg class="ledger-chart" viewBox="0 0 300 80" role="img" aria-label="Uptime over the last 90 days: 99.9 percent, scale 99.0 to 100 percent">
           <defs>
             <linearGradient id="gilded-stroke" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%"   stop-color="#d8ecf8"/>
               <stop offset="100%" stop-color="#98c0ef"/>
             </linearGradient>
             <linearGradient id="gilded-fill" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%"   stop-color="#663af3" stop-opacity=".30"/>
+              <stop offset="0%"   stop-color="#663af3" stop-opacity=".17"/>
               <stop offset="100%" stop-color="#663af3" stop-opacity="0"/>
             </linearGradient>
           </defs>
           <path class="ledger-area" fill="url(#gilded-fill)"
-                d="M0,26 L15,23 L30,28 L45,21 L60,24 L75,19 L90,30 L105,25 L120,52 L135,31 L150,26 L165,22 L180,27 L195,20 L210,24 L225,29 L240,21 L255,44 L270,27 L285,20 L300,16 L300,80 L0,80 Z"/>
+                d="M0,12 L15,11 L30,13 L45,11 L60,12 L75,10 L90,14 L105,12 L120,38 L135,16 L150,12 L165,11 L180,13 L195,10 L210,12 L225,14 L240,11 L255,28 L270,13 L285,10 L300,9 L300,80 L0,80 Z"/>
           <path class="ledger-line" fill="none" stroke="url(#gilded-stroke)"
                 stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                d="M0,26 L15,23 L30,28 L45,21 L60,24 L75,19 L90,30 L105,25 L120,52 L135,31 L150,26 L165,22 L180,27 L195,20 L210,24 L225,29 L240,21 L255,44 L270,27 L285,20 L300,16"/>
+                d="%s"/>
+          <line class="ledger-ref" x1="0" y1="8" x2="300" y2="8"/>
+          <text class="ledger-ax" x="2" y="6">100%%</text>
+          <text class="ledger-ax" x="2" y="78">99.0%%</text>
         </svg>
         <div class="ledger-foot">
           <span>−90d</span><span>−60d</span><span>−30d</span><span>now</span>
@@ -809,428 +816,428 @@
       <div class="skill-tile" data-cat="os">
         <div class="skill-tile-icon"><img src="icons/linux.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">Linux</div>
-          <div class="skill-tile-tip">Debian · Ubuntu · systemd</div>
+          <div class="skill-tile-name" translate="no">Linux</div>
+          <div class="skill-tile-tip" translate="no">Debian · Ubuntu · systemd</div>
         </div>
       </div>
       <div class="skill-tile" data-cat="os">
         <div class="skill-tile-icon"><img class="icon-invert" src="icons/windows-server.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">Windows Server</div>
-          <div class="skill-tile-tip">AD · IIS · RDS</div>
+          <div class="skill-tile-name" translate="no">Windows Server</div>
+          <div class="skill-tile-tip" translate="no">AD · IIS · RDS</div>
         </div>
       </div>
       <div class="skill-tile" data-cat="vcs">
         <div class="skill-tile-icon"><img src="icons/git.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">Git</div>
-          <div class="skill-tile-tip">daily use</div>
+          <div class="skill-tile-name" translate="no">Git</div>
+          <div class="skill-tile-tip"><span data-lang="ru">каждый день</span><span data-lang="en">daily use</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="scripting">
         <div class="skill-tile-icon"><img src="icons/python.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">Python</div>
-          <div class="skill-tile-tip">automation scripts</div>
+          <div class="skill-tile-name" translate="no">Python</div>
+          <div class="skill-tile-tip"><span data-lang="ru">скрипты автоматизации</span><span data-lang="en">automation scripts</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="scripting">
         <div class="skill-tile-icon"><img src="icons/gnubash.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">Bash</div>
-          <div class="skill-tile-tip">daily use</div>
+          <div class="skill-tile-name" translate="no">Bash</div>
+          <div class="skill-tile-tip"><span data-lang="ru">каждый день</span><span data-lang="en">daily use</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="scripting">
         <div class="skill-tile-icon"><img src="icons/devicon-powershell.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">PowerShell</div>
-          <div class="skill-tile-tip">Windows automation</div>
+          <div class="skill-tile-name" translate="no">PowerShell</div>
+          <div class="skill-tile-tip"><span data-lang="ru">автоматизация Windows</span><span data-lang="en">Windows automation</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="networking">
         <div class="skill-tile-icon"><img src="icons/nginx.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">Nginx</div>
-          <div class="skill-tile-tip">reverse proxy · SSL</div>
+          <div class="skill-tile-name" translate="no">Nginx</div>
+          <div class="skill-tile-tip" translate="no">reverse proxy · SSL</div>
         </div>
       </div>
       <div class="skill-tile" data-cat="networking">
         <div class="skill-tile-icon"><img class="icon-invert" src="icons/devicon-haproxy.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">HAProxy</div>
-          <div class="skill-tile-tip">load balancer</div>
+          <div class="skill-tile-name" translate="no">HAProxy</div>
+          <div class="skill-tile-tip"><span data-lang="ru">балансировщик</span><span data-lang="en">load balancer</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="networking">
         <div class="skill-tile-icon icon-chip"><img src="icons/keepalived.png" alt="" width="22" height="22" loading="lazy" style="object-position: 42% 55%;"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">Keepalived</div>
-          <div class="skill-tile-tip">VRRP failover</div>
+          <div class="skill-tile-name" translate="no">Keepalived</div>
+          <div class="skill-tile-tip"><span data-lang="ru">отказоустойчивость VRRP</span><span data-lang="en">VRRP failover</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="networking">
         <div class="skill-tile-icon"><img src="icons/consul.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">Consul</div>
-          <div class="skill-tile-tip">service discovery</div>
+          <div class="skill-tile-name" translate="no">Consul</div>
+          <div class="skill-tile-tip" translate="no">service discovery</div>
         </div>
       </div>
       <div class="skill-tile" data-cat="networking">
         <div class="skill-tile-icon"><img src="icons/envoy.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">Envoy</div>
-          <div class="skill-tile-tip">ext_authz · OPA</div>
+          <div class="skill-tile-name" translate="no">Envoy</div>
+          <div class="skill-tile-tip" translate="no">ext_authz · OPA</div>
         </div>
       </div>
       <div class="skill-tile" data-cat="security">
         <div class="skill-tile-icon"><img src="icons/vault.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">HashiCorp Vault</div>
-          <div class="skill-tile-tip">secrets management</div>
+          <div class="skill-tile-name" translate="no">HashiCorp Vault</div>
+          <div class="skill-tile-tip"><span data-lang="ru">хранение секретов</span><span data-lang="en">secrets management</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="security">
         <div class="skill-tile-icon"><img class="icon-invert" src="icons/keycloak.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">Keycloak</div>
-          <div class="skill-tile-tip">OIDC · SSO · identity provider</div>
+          <div class="skill-tile-name" translate="no">Keycloak</div>
+          <div class="skill-tile-tip"><span data-lang="ru">OIDC · SSO · провайдер входа</span><span data-lang="en">OIDC · SSO · identity provider</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="security">
         <div class="skill-tile-icon"><img src="icons/file-icons-openpolicyagent.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">OPA / OPAL</div>
-          <div class="skill-tile-tip">authorization policies</div>
+          <div class="skill-tile-name" translate="no">OPA / OPAL</div>
+          <div class="skill-tile-tip"><span data-lang="ru">политики авторизации</span><span data-lang="en">authorization policies</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="security">
         <div class="skill-tile-icon"><img class="icon-invert" src="icons/trivy.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">Trivy</div>
-          <div class="skill-tile-tip">container image scanning</div>
+          <div class="skill-tile-name" translate="no">Trivy</div>
+          <div class="skill-tile-tip"><span data-lang="ru">сканирование образов</span><span data-lang="en">container image scanning</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="security">
         <div class="skill-tile-icon"><img class="icon-invert" src="icons/gitleaks-logo.png" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">Gitleaks</div>
-          <div class="skill-tile-tip">secret leak detection</div>
+          <div class="skill-tile-name" translate="no">Gitleaks</div>
+          <div class="skill-tile-tip"><span data-lang="ru">поиск утечек секретов</span><span data-lang="en">secret leak detection</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="security">
         <div class="skill-tile-icon"><img src="icons/passbolt.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">Passbolt</div>
-          <div class="skill-tile-tip">self-hosted password manager</div>
+          <div class="skill-tile-name" translate="no">Passbolt</div>
+          <div class="skill-tile-tip"><span data-lang="ru">менеджер паролей на своих серверах</span><span data-lang="en">self-hosted password manager</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="server">
         <div class="skill-tile-icon"><img src="icons/vmware.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">VMware</div>
-          <div class="skill-tile-tip">vSphere · Cloud Director</div>
+          <div class="skill-tile-name" translate="no">VMware</div>
+          <div class="skill-tile-tip" translate="no">vSphere · Cloud Director</div>
         </div>
       </div>
       <div class="skill-tile" data-cat="server">
         <div class="skill-tile-icon"><img src="icons/hyperv.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">Hyper-V</div>
-          <div class="skill-tile-tip">virtualization</div>
+          <div class="skill-tile-name" translate="no">Hyper-V</div>
+          <div class="skill-tile-tip"><span data-lang="ru">виртуализация</span><span data-lang="en">virtualization</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="server">
         <div class="skill-tile-icon"><img src="icons/veeam.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">Veeam</div>
-          <div class="skill-tile-tip">backup & recovery</div>
+          <div class="skill-tile-name" translate="no">Veeam</div>
+          <div class="skill-tile-tip"><span data-lang="ru">бэкап и восстановление</span><span data-lang="en">backup & recovery</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="server">
         <div class="skill-tile-icon"><img src="icons/active-directory.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">Active Directory</div>
-          <div class="skill-tile-tip">LDAP · auth · GPO</div>
+          <div class="skill-tile-name" translate="no">Active Directory</div>
+          <div class="skill-tile-tip"><span data-lang="ru">LDAP · вход · GPO</span><span data-lang="en">LDAP · auth · GPO</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="containers">
         <div class="skill-tile-icon"><img src="icons/docker.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">Docker</div>
-          <div class="skill-tile-tip">advanced · daily use</div>
+          <div class="skill-tile-name" translate="no">Docker</div>
+          <div class="skill-tile-tip"><span data-lang="ru">уверенно · каждый день</span><span data-lang="en">advanced · daily use</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="containers">
         <div class="skill-tile-icon"><img src="icons/docker.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">Docker Compose</div>
-          <div class="skill-tile-tip">dev & staging envs</div>
+          <div class="skill-tile-name" translate="no">Docker Compose</div>
+          <div class="skill-tile-tip"><span data-lang="ru">dev- и staging-окружения</span><span data-lang="en">dev & staging envs</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="containers">
         <div class="skill-tile-icon"><img src="icons/harbor.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">Harbor</div>
-          <div class="skill-tile-tip">private registry</div>
+          <div class="skill-tile-name" translate="no">Harbor</div>
+          <div class="skill-tile-tip"><span data-lang="ru">приватный реестр образов</span><span data-lang="en">private registry</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="orchestration">
         <div class="skill-tile-icon"><img src="icons/kubernetes.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">Kubernetes</div>
-          <div class="skill-tile-tip">bare-metal · VMware · k3s</div>
+          <div class="skill-tile-name" translate="no">Kubernetes</div>
+          <div class="skill-tile-tip" translate="no">bare-metal · VMware · k3s</div>
         </div>
       </div>
       <div class="skill-tile" data-cat="orchestration">
         <div class="skill-tile-icon"><img class="icon-invert" src="icons/helm.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">Helm</div>
-          <div class="skill-tile-tip">chart packaging</div>
+          <div class="skill-tile-name" translate="no">Helm</div>
+          <div class="skill-tile-tip"><span data-lang="ru">упаковка чартов</span><span data-lang="en">chart packaging</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="orchestration">
         <div class="skill-tile-icon"><img src="icons/argo.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">ArgoCD</div>
-          <div class="skill-tile-tip">GitOps CD</div>
+          <div class="skill-tile-name" translate="no">ArgoCD</div>
+          <div class="skill-tile-tip"><span data-lang="ru">доставка по GitOps</span><span data-lang="en">GitOps CD</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="orchestration">
         <div class="skill-tile-icon"><img src="icons/istio.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">Istio</div>
-          <div class="skill-tile-tip">service mesh · traffic control</div>
+          <div class="skill-tile-name" translate="no">Istio</div>
+          <div class="skill-tile-tip"><span data-lang="ru">service mesh · маршрутизация</span><span data-lang="en">service mesh · traffic control</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="orchestration">
         <div class="skill-tile-icon"><img src="icons/gh-avatar-36001875.png" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">Kiali</div>
-          <div class="skill-tile-tip">service mesh observability</div>
+          <div class="skill-tile-name" translate="no">Kiali</div>
+          <div class="skill-tile-tip"><span data-lang="ru">наблюдаемость service mesh</span><span data-lang="en">service mesh observability</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="orchestration">
         <div class="skill-tile-icon"><img class="icon-invert" src="icons/longhorn.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">Longhorn</div>
-          <div class="skill-tile-tip">distributed block storage</div>
+          <div class="skill-tile-name" translate="no">Longhorn</div>
+          <div class="skill-tile-tip"><span data-lang="ru">распределённое блочное хранилище</span><span data-lang="en">distributed block storage</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="iac">
         <div class="skill-tile-icon"><img src="icons/terraform.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">Terraform</div>
-          <div class="skill-tile-tip">advanced · daily use</div>
+          <div class="skill-tile-name" translate="no">Terraform</div>
+          <div class="skill-tile-tip"><span data-lang="ru">уверенно · каждый день</span><span data-lang="en">advanced · daily use</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="iac">
         <div class="skill-tile-icon"><img src="icons/ansible.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">Ansible</div>
-          <div class="skill-tile-tip">advanced · daily use</div>
+          <div class="skill-tile-name" translate="no">Ansible</div>
+          <div class="skill-tile-tip"><span data-lang="ru">уверенно · каждый день</span><span data-lang="en">advanced · daily use</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="cloud">
         <div class="skill-tile-icon icon-chip" style="background:#000"><img src="icons/yandex-cloud.jpg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">Yandex Cloud</div>
-          <div class="skill-tile-tip">K8s · VM · DNS · S3</div>
+          <div class="skill-tile-name" translate="no">Yandex Cloud</div>
+          <div class="skill-tile-tip" translate="no">K8s · VM · DNS · S3</div>
         </div>
       </div>
       <div class="skill-tile" data-cat="cloud">
         <div class="skill-tile-icon"><img src="icons/minio.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">MinIO</div>
-          <div class="skill-tile-tip">S3 object storage</div>
+          <div class="skill-tile-name" translate="no">MinIO</div>
+          <div class="skill-tile-tip"><span data-lang="ru">объектное хранилище S3</span><span data-lang="en">S3 object storage</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="cicd">
         <div class="skill-tile-icon"><img src="icons/gitlab.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">GitLab CI/CD</div>
-          <div class="skill-tile-tip">advanced · 100% coverage</div>
+          <div class="skill-tile-name" translate="no">GitLab CI/CD</div>
+          <div class="skill-tile-tip"><span data-lang="ru">уверенно · покрытие 100%</span><span data-lang="en">advanced · 100% coverage</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="cicd">
         <div class="skill-tile-icon"><img src="icons/jenkins.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">Jenkins</div>
-          <div class="skill-tile-tip">legacy pipelines</div>
+          <div class="skill-tile-name" translate="no">Jenkins</div>
+          <div class="skill-tile-tip"><span data-lang="ru">исторические пайплайны</span><span data-lang="en">legacy pipelines</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="cicd">
         <div class="skill-tile-icon"><img class="icon-invert" src="icons/verdaccio.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">Verdaccio</div>
-          <div class="skill-tile-tip">приватный npm-registry</div>
+          <div class="skill-tile-name" translate="no">Verdaccio</div>
+          <div class="skill-tile-tip" translate="no">приватный npm-registry</div>
         </div>
       </div>
       <div class="skill-tile" data-cat="monitoring">
         <div class="skill-tile-icon"><img src="icons/prometheus.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">Prometheus</div>
-          <div class="skill-tile-tip">metrics · daily use</div>
+          <div class="skill-tile-name" translate="no">Prometheus</div>
+          <div class="skill-tile-tip"><span data-lang="ru">метрики · каждый день</span><span data-lang="en">metrics · daily use</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="monitoring">
         <div class="skill-tile-icon"><img src="icons/dashboardicons-alertmanager.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">Alertmanager</div>
-          <div class="skill-tile-tip">alert routing</div>
+          <div class="skill-tile-name" translate="no">Alertmanager</div>
+          <div class="skill-tile-tip"><span data-lang="ru">маршрутизация алертов</span><span data-lang="en">alert routing</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="monitoring">
         <div class="skill-tile-icon"><img src="icons/grafana.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">Grafana</div>
-          <div class="skill-tile-tip">dashboards · daily use</div>
+          <div class="skill-tile-name" translate="no">Grafana</div>
+          <div class="skill-tile-tip"><span data-lang="ru">дашборды · каждый день</span><span data-lang="en">dashboards · daily use</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="monitoring">
         <div class="skill-tile-icon"><img src="icons/selfhst-loki.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">Loki</div>
-          <div class="skill-tile-tip">log aggregation</div>
+          <div class="skill-tile-name" translate="no">Loki</div>
+          <div class="skill-tile-tip"><span data-lang="ru">сбор логов</span><span data-lang="en">log aggregation</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="monitoring">
         <div class="skill-tile-icon"><img src="icons/dashboardicons-zabbix.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">Zabbix</div>
-          <div class="skill-tile-tip">infra monitoring</div>
+          <div class="skill-tile-name" translate="no">Zabbix</div>
+          <div class="skill-tile-tip"><span data-lang="ru">мониторинг инфраструктуры</span><span data-lang="en">infra monitoring</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="monitoring">
         <div class="skill-tile-icon"><img class="icon-invert" src="icons/elastic.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">ELK Stack</div>
-          <div class="skill-tile-tip">Elasticsearch · Kibana · Logstash</div>
+          <div class="skill-tile-name" translate="no">ELK Stack</div>
+          <div class="skill-tile-tip" translate="no">Elasticsearch · Kibana · Logstash</div>
         </div>
       </div>
       <div class="skill-tile" data-cat="monitoring">
         <div class="skill-tile-icon"><img src="icons/graylog.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">Graylog</div>
-          <div class="skill-tile-tip">log analysis</div>
+          <div class="skill-tile-name" translate="no">Graylog</div>
+          <div class="skill-tile-tip"><span data-lang="ru">анализ логов</span><span data-lang="en">log analysis</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="monitoring">
         <div class="skill-tile-icon"><img class="icon-invert" src="icons/sentry.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">Sentry</div>
-          <div class="skill-tile-tip">error tracking</div>
+          <div class="skill-tile-name" translate="no">Sentry</div>
+          <div class="skill-tile-tip"><span data-lang="ru">ошибки приложений</span><span data-lang="en">error tracking</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="monitoring">
         <div class="skill-tile-icon"><img src="icons/uptimekuma.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">Uptime Kuma</div>
-          <div class="skill-tile-tip">uptime checks</div>
+          <div class="skill-tile-name" translate="no">Uptime Kuma</div>
+          <div class="skill-tile-tip"><span data-lang="ru">проверки доступности</span><span data-lang="en">uptime checks</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="monitoring">
         <div class="skill-tile-icon"><img src="icons/selfhst-librenms.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">LibreNMS + Oxidized</div>
-          <div class="skill-tile-tip">network monitoring · config backup</div>
+          <div class="skill-tile-name" translate="no">LibreNMS + Oxidized</div>
+          <div class="skill-tile-tip"><span data-lang="ru">мониторинг сети · бэкап конфигов</span><span data-lang="en">network monitoring · config backup</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="monitoring">
         <div class="skill-tile-icon"><img class="icon-invert" src="icons/devicon-netbox.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">NetBox</div>
-          <div class="skill-tile-tip">network documentation</div>
+          <div class="skill-tile-name" translate="no">NetBox</div>
+          <div class="skill-tile-tip"><span data-lang="ru">документация сети</span><span data-lang="en">network documentation</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="management">
         <div class="skill-tile-icon"><img src="icons/jira.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">Jira</div>
-          <div class="skill-tile-tip">issue tracking</div>
+          <div class="skill-tile-name" translate="no">Jira</div>
+          <div class="skill-tile-tip"><span data-lang="ru">задачи и трекинг</span><span data-lang="en">issue tracking</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="management">
         <div class="skill-tile-icon"><img class="icon-invert" src="icons/confluence.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">Confluence</div>
-          <div class="skill-tile-tip">docs · wiki</div>
+          <div class="skill-tile-name" translate="no">Confluence</div>
+          <div class="skill-tile-tip"><span data-lang="ru">документация · wiki</span><span data-lang="en">docs · wiki</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="management">
         <div class="skill-tile-icon"><img src="icons/gh-avatar-12696216.png" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">OCS Inventory</div>
-          <div class="skill-tile-tip">IT asset inventory</div>
+          <div class="skill-tile-name" translate="no">OCS Inventory</div>
+          <div class="skill-tile-tip"><span data-lang="ru">инвентаризация IT-активов</span><span data-lang="en">IT asset inventory</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="databases">
         <div class="skill-tile-icon"><img src="icons/postgresql.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">PostgreSQL</div>
-          <div class="skill-tile-tip">HA cluster · Patroni</div>
+          <div class="skill-tile-name" translate="no">PostgreSQL</div>
+          <div class="skill-tile-tip"><span data-lang="ru">HA-кластер · Patroni</span><span data-lang="en">HA cluster · Patroni</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="databases">
         <div class="skill-tile-icon icon-chip"><img src="icons/patroni.png" alt="" width="22" height="22" loading="lazy" style="object-position: 50% 18%;"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">Patroni</div>
-          <div class="skill-tile-tip">HA failover · etcd</div>
+          <div class="skill-tile-name" translate="no">Patroni</div>
+          <div class="skill-tile-tip"><span data-lang="ru">отказоустойчивость · etcd</span><span data-lang="en">HA failover · etcd</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="databases">
         <div class="skill-tile-icon"><img src="icons/mysql.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">MySQL</div>
-          <div class="skill-tile-tip">relational DB</div>
+          <div class="skill-tile-name" translate="no">MySQL</div>
+          <div class="skill-tile-tip"><span data-lang="ru">реляционная СУБД</span><span data-lang="en">relational DB</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="databases">
         <div class="skill-tile-icon"><img src="icons/mongodb.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">MongoDB</div>
-          <div class="skill-tile-tip">document store</div>
+          <div class="skill-tile-name" translate="no">MongoDB</div>
+          <div class="skill-tile-tip"><span data-lang="ru">документное хранилище</span><span data-lang="en">document store</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="databases">
         <div class="skill-tile-icon"><img src="icons/mssql.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">MS SQL Server</div>
-          <div class="skill-tile-tip">administration</div>
+          <div class="skill-tile-name" translate="no">MS SQL Server</div>
+          <div class="skill-tile-tip"><span data-lang="ru">администрирование</span><span data-lang="en">administration</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="databases">
         <div class="skill-tile-icon"><img src="icons/redis.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">Redis</div>
-          <div class="skill-tile-tip">caching · sessions</div>
+          <div class="skill-tile-name" translate="no">Redis</div>
+          <div class="skill-tile-tip"><span data-lang="ru">кэш и сессии</span><span data-lang="en">caching · sessions</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="databases">
         <div class="skill-tile-icon"><img src="icons/clickhouse.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">ClickHouse</div>
-          <div class="skill-tile-tip">analytics DB</div>
+          <div class="skill-tile-name" translate="no">ClickHouse</div>
+          <div class="skill-tile-tip"><span data-lang="ru">аналитическая СУБД</span><span data-lang="en">analytics DB</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="databases">
         <div class="skill-tile-icon"><img src="icons/qdrant.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">Qdrant</div>
-          <div class="skill-tile-tip">vector store</div>
+          <div class="skill-tile-name" translate="no">Qdrant</div>
+          <div class="skill-tile-tip"><span data-lang="ru">векторное хранилище</span><span data-lang="en">vector store</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="databases">
         <div class="skill-tile-icon"><img class="icon-invert" src="icons/apachekafka.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">Kafka</div>
-          <div class="skill-tile-tip">event streaming</div>
+          <div class="skill-tile-name" translate="no">Kafka</div>
+          <div class="skill-tile-tip"><span data-lang="ru">потоки событий</span><span data-lang="en">event streaming</span></div>
         </div>
       </div>
       <div class="skill-tile" data-cat="databases">
         <div class="skill-tile-icon"><img src="icons/rabbitmq.svg" alt="" width="22" height="22" loading="lazy"></div>
         <div class="skill-tile-body">
-          <div class="skill-tile-name">RabbitMQ</div>
-          <div class="skill-tile-tip">message broker</div>
+          <div class="skill-tile-name" translate="no">RabbitMQ</div>
+          <div class="skill-tile-tip"><span data-lang="ru">брокер сообщений</span><span data-lang="en">message broker</span></div>
         </div>
       </div>
     </div>
@@ -1244,7 +1251,7 @@
     </h2>
     <div class="ach-grid">
 
-      <div class="ach r">
+      <div class="ach ach-lead r">
         <div class="ach-label"><span data-lang="ru">контуры DEV / INF / PROD</span><span data-lang="en">DEV / INF / PROD environments</span></div>
         <div class="ach-val">63 VM</div>
         <div class="ach-text" data-lang="ru">
@@ -1255,7 +1262,7 @@
         </div>
       </div>
 
-      <div class="ach r d1">
+      <div class="ach ach-lead r d1">
         <div class="ach-label"><span data-lang="ru">сервисов в эксплуатации</span><span data-lang="en">services in operation</span></div>
         <div class="ach-val">70+</div>
         <div class="ach-text" data-lang="ru">
@@ -1266,7 +1273,7 @@
         </div>
       </div>
 
-      <div class="ach r d2">
+      <div class="ach ach-lead r d2">
         <div class="ach-label"><span data-lang="ru">время деплоя</span><span data-lang="en">deploy time</span></div>
         <div class="ach-val"><span data-lang="ru"><span class="ach-was">40 мин</span><span class="ach-arrow">→</span><span class="ach-now">8 мин</span></span><span data-lang="en"><span class="ach-was">40 min</span><span class="ach-arrow">→</span><span class="ach-now">8 min</span></span></div>
         <div class="ach-text" data-lang="ru">
@@ -1494,7 +1501,7 @@
         <div class="t-dot t-grn"></div>
         <span class="terminal-title">temiriv@devops ~ contact</span>
       </div>
-      <div class="terminal-body">
+      <div class="terminal-body" translate="no">
         <div class="tl">
           <div class="tl-cmd"><span class="tl-prompt">❯</span> cat intent.txt</div>
           <div class="tl-out">
@@ -1550,7 +1557,6 @@
         <span class="footer-item">timir-ivaniv@yandex.ru</span>
       </div>
       <div class="footer-coord">
-        <span class="footer-item">59.9311° N &nbsp; 30.3609° E</span>
         <svg class="footer-heart" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-8-4.9-8-10.5A4.5 4.5 0 0112 7a4.5 4.5 0 018 3.5C20 16.1 12 21 12 21z"/></svg>
       </div>
     </div>

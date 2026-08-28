@@ -36,7 +36,7 @@ let _scrollTicking = false;
 function _onScroll() {
   const scrollY   = window.scrollY;
   const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-  progressBar.style.width = (scrollY / docHeight * 100) + '%';
+  progressBar.style.transform = 'scaleX(' + (docHeight > 0 ? scrollY / docHeight : 0) + ')';
   backBtn.classList.toggle('visible', scrollY > 400);
   nav.classList.toggle('scrolled', scrollY > 10);
 
@@ -134,7 +134,12 @@ navMenu.querySelectorAll('a').forEach(a => {
 // ── Language toggle ──
 const langBtn   = document.getElementById('lang-toggle');
 const htmlRoot  = document.getElementById('html-root');
-let lang = localStorage.getItem('lang') || 'ru';
+// Приоритет: адрес → сохранённый выбор → русский. Адрес выигрывает, чтобы
+// ссылка ?lang=en открывала английскую версию у любого получателя.
+const _urlLang = new URLSearchParams(location.search).get('lang');
+let lang = (_urlLang === 'en' || _urlLang === 'ru')
+  ? _urlLang
+  : (localStorage.getItem('lang') || 'ru');
 
 function applyLang(l) {
   if (l === 'en') {
@@ -149,6 +154,13 @@ function applyLang(l) {
     backBtn.setAttribute('aria-label', 'Наверх');
   }
   localStorage.setItem('lang', l);
+
+  // Русский — версия по умолчанию, её параметр в адресе только мусорит и
+  // расходится с canonical; в URL держим лишь явный ?lang=en.
+  const url = new URL(location.href);
+  if (l === 'en') url.searchParams.set('lang', 'en');
+  else url.searchParams.delete('lang');
+  history.replaceState(null, '', url);
 }
 
 applyLang(lang);
@@ -226,6 +238,52 @@ function startTypewriter() {
 }
 startTypewriter();
 
+// ── Длинные списки опыта: начало видно, остальное по кнопке ──
+(function () {
+  const LIMIT = 8;          // столько пунктов видно сразу
+  const MIN_HIDDEN = 4;     // ради двух-трёх строк кнопку не заводим
+
+  function plural(n) {
+    const d10 = n % 10, d100 = n % 100;
+    if (d10 === 1 && d100 !== 11) return 'пункт';
+    if (d10 >= 2 && d10 <= 4 && (d100 < 12 || d100 > 14)) return 'пункта';
+    return 'пунктов';
+  }
+
+  document.querySelectorAll('.jlist').forEach(list => {
+    const items = Array.from(list.children);
+    const hidden = items.slice(LIMIT);
+    if (hidden.length < MIN_HIDDEN) return;
+
+    hidden.forEach(li => li.classList.add('jl-hide'));
+
+    const n = hidden.length;
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'jlist-more';
+    btn.setAttribute('aria-expanded', 'false');
+    // У каждой должности два списка, ru и en; кнопка без языка показывалась
+    // дважды подряд. Наследуем язык своего списка.
+    const listLang = list.getAttribute('data-lang');
+    if (listLang) btn.setAttribute('data-lang', listLang);
+    btn.innerHTML =
+      '<span class="jm-ico" aria-hidden="true"></span>' +
+      '<span class="jm-more" data-lang="ru">показать ещё ' + n + ' ' + plural(n) + '</span>' +
+      '<span class="jm-more" data-lang="en">show ' + n + ' more</span>' +
+      '<span class="jm-less" data-lang="ru">свернуть</span>' +
+      '<span class="jm-less" data-lang="en">collapse</span>';
+
+    btn.addEventListener('click', () => {
+      const open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!open));
+      hidden.forEach(li => li.classList.toggle('jl-hide', open));
+      if (open) list.scrollIntoView({ block: 'nearest' });
+    });
+
+    list.after(btn);
+  });
+})();
+
 // ── Console Easter Egg ──
 try {
   const _cs = [
@@ -293,7 +351,7 @@ const _termCmds = {
   'sudo su':  'Permission denied (insufficient coffee ☕)',
   sudo:       'Permission denied (insufficient coffee ☕)',
   exit:       'Nice try. The terminal stays open.',
-  'rm -rf /': '🔥 ...just kidding. Not today.',
+  'rm -rf /': '🔥 …just kidding. Not today.',
   pwd:        '/home/temiriv/devops',
   uname:      'Linux devops-node 5.15.0-k8s #1 SMP x86_64',
 };

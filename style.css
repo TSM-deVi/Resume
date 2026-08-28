@@ -107,6 +107,16 @@
 .skip-link:focus { top: 1rem; }
 
 section[id] { scroll-margin-top: 96px; }
+
+/* Страница идёт во всю ширину, поэтому боковые поля на телефонах с вырезом
+   должны учитывать системные отступы, иначе текст уезжает под скругление. */
+@supports (padding: env(safe-area-inset-left)) {
+  .container, nav, #cta {
+    padding-left: max(2rem, env(safe-area-inset-left));
+    padding-right: max(2rem, env(safe-area-inset-right));
+  }
+  footer { padding-bottom: max(2rem, env(safe-area-inset-bottom)); }
+}
 button, a { touch-action: manipulation; -webkit-tap-highlight-color: rgba(102,58,243,.25); }
 
 /* ── CANVAS ── */
@@ -223,9 +233,9 @@ section { padding: clamp(3.5rem, 9vw, 120px) 0; }
   font-family: var(--font-display);
   font-size: clamp(1.9rem, 4.2vw, 44px);
   font-weight: 500; line-height: 1.16; letter-spacing: -.01em;
-  background: var(--skywash);
-  -webkit-background-clip: text; background-clip: text;
-  -webkit-text-fill-color: transparent;
+  /* Градиент на тексте — приём одного раза: на имени в первом экране он
+     читается как акцент, повторённый над каждой секцией — как шаблон. */
+  color: var(--ice);
   text-wrap: balance;
 }
 .sec-title .sub {
@@ -445,7 +455,7 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
 .pl-line { flex: 1; height: 1px; min-width: 16px; background: var(--edge); position: relative; overflow: hidden; }
 .pl-line::after {
   content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 0;
-  background: var(--blueprint); transition: width .35s ease;
+  background: var(--blueprint); transform-origin: left; transition: transform .35s ease;
 }
 .pl-line.pl-done::after { width: 100%; background: var(--ok-lt); }
 /* a pulse of light runs down the leg the moment it completes */
@@ -654,6 +664,11 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
 .ticket.v .ledger-line { stroke-dashoffset: 0; }
 .ledger-area { opacity: 0; transition: opacity .8s ease 1.2s; }
 .ticket.v .ledger-area { opacity: 1; }
+.ledger-ref { stroke: var(--edge-lt); stroke-width: 1; }
+.ledger-ax {
+  font-family: var(--font-mono); font-size: 7px;
+  fill: var(--fog); opacity: .75;
+}
 .ledger-foot {
   display: flex; justify-content: space-between;
   font-family: var(--font-mono);
@@ -784,6 +799,30 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
 }
 
 .jlist { list-style: none; display: flex; flex-direction: column; gap: .8rem; }
+/* Скрытые пункты и кнопка раскрытия. Класс вешает JS: без него список
+   остаётся полным, и ни одна строка опыта не пропадает. */
+.jlist li.jl-hide { display: none; }
+.jlist-more {
+  align-self: flex-start; margin-top: 1.1rem;
+  display: inline-flex; align-items: center; gap: .55rem;
+  background: none; border: 1px solid var(--edge); border-radius: var(--r-pill);
+  padding: 7px 16px 7px 12px;
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: .04em;
+  color: var(--blueprint); cursor: pointer;
+  transition: border-color .2s, color .2s, transform .1s;
+}
+.jlist-more:hover { border-color: var(--edge-lt); color: var(--ice); }
+.jlist-more:active { transform: scale(0.98); }
+/* Шеврон вниз/вверх — единственный признак направления, поэтому он поворачивается,
+   а не подменяется вторым глифом: так понятно, что это одна и та же кнопка. */
+.jm-ico {
+  width: 9px; height: 9px; border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor; transform: rotate(45deg) translate(-1px, -1px);
+  transition: transform .2s ease;
+}
+.jlist-more[aria-expanded="true"] .jm-ico { transform: rotate(-135deg) translate(-2px, -2px); }
+.jlist-more[aria-expanded="false"] .jm-less { display: none !important; }
+.jlist-more[aria-expanded="true"]  .jm-more { display: none !important; }
 .jlist li {
   font-size: 16px; color: var(--fog);
   padding-left: 1.6rem; position: relative; line-height: 1.5;
@@ -934,6 +973,11 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
   transition: box-shadow .3s, transform .3s;
 }
 .ach .ach-text { margin-top: auto; }   /* copy sits on the floor, numbers align across the row */
+/* Двенадцать одинаковых карточек читаются как список без начала. Три верхних —
+   заголовки карьеры, остальные — подробности; разводим их кеглем, а не цветом,
+   чтобы не заводить второй акцент. */
+.ach-lead { min-height: 240px; }
+.ach-lead .ach-val { font-size: clamp(2.4rem, 4vw, 3.1rem); }
 .ach:hover { box-shadow: var(--glass-card), var(--halo); transform: translateY(-3px); }
 .ach::after { content: none; }
 /* the featured tile catches the spotlight */
@@ -1155,9 +1199,12 @@ body.lang-en       [data-lang="ru"] { display: none !important; }
 /* ── SCROLL PROGRESS ── */
 #scroll-progress {
   position: fixed; top: 0; left: 0; z-index: 999;
-  height: 2px; width: 0%;
+  height: 2px; width: 100%;
   background: linear-gradient(90deg, var(--violet), var(--blueprint));
-  transition: width .1s linear; pointer-events: none;
+  /* transform вместо width: ширина пересчитывает макет на каждом кадре
+     прокрутки, шкала по X живёт на композиторе. */
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .1s linear; pointer-events: none;
 }
 
 /* ── HAMBURGER ── */
@@ -1205,6 +1252,22 @@ body.lang-en       [data-lang="ru"] { display: none !important; }
 
 /* ── PRESS FEEDBACK ── */
 .lang-toggle:active, #back-to-top:active { transform: scale(0.95) !important; transition-duration: 80ms !important; }
+/* Нажимаемый элемент обязан ответить на нажатие: без этого интерфейс кажется
+   неотзывчивым, даже когда работает мгновенно. Масштаб чуть меньше, чем у
+   круглых кнопок выше, — плитки крупнее, и 0.95 на них читается как рывок. */
+.skill-tile:active, .skill-filter:active, .tl-contact:active,
+.pl-rerun:active, .stack-tag:active, .cert-pill:active {
+  transform: scale(0.98); transition-duration: 100ms;
+}
+
+/* На тач-устройствах тап засчитывается как наведение, и подсветка остаётся
+   висеть на карточке после ухода пальца. Гасим её там, где ховера нет. */
+@media (hover: none) {
+  .skill-tile:hover, .ach:hover, .job-company-block:hover, .edu-row:hover,
+  .stack-tag:hover, .cert-pill:hover, .skill-filter:hover {
+    transform: none; box-shadow: var(--glass-card);
+  }
+}
 
 /* ── CUSTOM CURSOR ── */
 /* Системный курсор прячем только когда скрипт жив: рисованный курсор — его
