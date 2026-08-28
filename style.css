@@ -762,7 +762,10 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
 /* Wide screens: meta parks in a sticky left column so the bullets get the
    full measure instead of huddling in the left half of the card. */
 @media (min-width: 900px) {
-  .job-company-block { display: grid; grid-template-columns: 230px minmax(0, 1fr); column-gap: 2.75rem; align-items: start; }
+  /* align-content нужен там, где колонка с названием компании выше содержимого
+     (короткие роли вроде «Форума»): без него лишняя высота распределяется между
+     строками сетки и между должностью и первым пунктом появляется провал. */
+  .job-company-block { display: grid; grid-template-columns: 230px minmax(0, 1fr); column-gap: 2.75rem; align-items: start; align-content: start; }
   .job-company-hdr, .job-simple .job-meta {
     grid-column: 1; grid-row: 1 / -1;
     position: sticky; top: 100px;
@@ -770,6 +773,11 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
     margin-bottom: 0; padding-bottom: 0; border-bottom: none;
   }
   .job-role, .job-simple .job-title, .job-simple .jlist { grid-column: 2; }
+  /* Без явных строк «-1» в grid-row указывает на край явной сетки, которой нет,
+     и растяжка колонки с названием схлопывается в первую строку: у коротких
+     ролей она задавала строке высоту 122px, а заголовок должности прижимался
+     кверху, оставляя под собой провал в 95px. */
+  .job-simple .job-company-block { grid-template-rows: auto 1fr; }
 }
 
 /* Карточка со схемой выходит из двухколоночной сетки. Схема — не проза, ей
@@ -893,6 +901,17 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
 /* Скрытые пункты и кнопка раскрытия. Класс вешает JS: без него список
    остаётся полным, и ни одна строка опыта не пропадает. */
 .jlist li.jl-hide { display: none; }
+/* Строка «СТЕК:» из резюме — не пункт списка, а сводка: без маркера, мельче
+   и тусклее, чтобы не спорила с содержательными пунктами над ней. */
+.jlist li.jlist-stack {
+  padding-left: 0; margin-top: 1.5rem; max-width: none;
+  font-size: 13px; line-height: 1.6; color: var(--fog);
+}
+.jlist li.jlist-stack::before { content: none; }
+.jlist-stack-k {
+  font-family: var(--font-mono); font-size: 11px;
+  letter-spacing: .10em; color: var(--blueprint); margin-right: .5rem;
+}
 .jlist-more {
   align-self: flex-start; margin-top: 1.1rem;
   display: inline-flex; align-items: center; gap: .55rem;
