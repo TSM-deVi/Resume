@@ -791,7 +791,7 @@
               <li>Архитектурные решения при сокращении: single-node Kubernetes/k3s вместо кластера master + 3 worker; <strong>Vault</strong> + RabbitMQ и Qdrant + Redis на общих узлах; standalone PostgreSQL и <strong>ClickHouse</strong> вместо кластеров; часть прикладных сервисов на отдельный Docker-узел; выделенный узел мониторинга</li>
               <li>Без enterprise-обвязки: Nginx как единственный edge-router, конфиг под управлением GitLab-репозитория — балансировщик, WAF, <strong>bastion</strong> и <strong>PAM</strong> остались только в банковском контуре</li>
               <li>Собственный GitLab CE внутри контура вместо централизованного CI/CD на INF</li>
-              <li class="jlist-stack"><span class="jlist-stack-k">СТЕК:</span>VMware Cloud Director (Cloud.ru), vDC, vApp, Timeweb Cloud, Kubernetes, k3s, Helm, GitLab CI/CD, GitLab Runner, GitLab CE, Docker, Docker Compose, Terraform, Ansible, Harbor, HashiCorp Vault, External Secrets, Keycloak/OIDC, Istio, Kiali, Envoy, OPA/OPAL, ext_authz, AuthorizationPolicy, TLS/PKI, внутренний CA, Nginx, CSP, UFW, bastion, jump host, SSH, PostgreSQL, Patroni, ClickHouse, Redis, RabbitMQ, MinIO, Qdrant, Vespa, Prometheus, Grafana, Loki, Promtail, LiteLLM, Ollama, GigaChat, Langflow, Langfuse, SmartSearch, Bash, Python</li>
+              <li class="jlist-stack"><span class="jlist-stack-k">СТЕК:</span> VMware Cloud Director (Cloud.ru), vDC, vApp, Timeweb Cloud, Kubernetes, k3s, Helm, GitLab CI/CD, GitLab Runner, GitLab CE, Docker, Docker Compose, Terraform, Ansible, Harbor, HashiCorp Vault, External Secrets, Keycloak/OIDC, Istio, Kiali, Envoy, OPA/OPAL, ext_authz, AuthorizationPolicy, TLS/PKI, внутренний CA, Nginx, CSP, UFW, bastion, jump host, SSH, PostgreSQL, Patroni, ClickHouse, Redis, RabbitMQ, MinIO, Qdrant, Vespa, Prometheus, Grafana, Loki, Promtail, LiteLLM, Ollama, GigaChat, Langflow, Langfuse, SmartSearch, Bash, Python</li>
             </ul>
             <ul class="jlist" data-lang="en">
               <li>Project engagement: the production environment of a multi-agent low-code platform for a banking-sector client — designed, deployed, handed over and closed in July 2026.</li>
@@ -839,7 +839,7 @@
               <li>Architectural decisions when scaling down: single-node Kubernetes/k3s instead of a master + 3 worker cluster; <strong>Vault</strong> + RabbitMQ and Qdrant + Redis on shared nodes; standalone PostgreSQL and <strong>ClickHouse</strong> instead of clusters; some application services on a separate Docker node; a dedicated monitoring node</li>
               <li>No enterprise wrapping: Nginx as the only edge router with its config managed from a GitLab repository — the load balancer, WAF, <strong>bastion</strong> and <strong>PAM</strong> stayed in the banking environment only</li>
               <li>A self-hosted GitLab CE inside the environment instead of centralized CI/CD on INF</li>
-              <li class="jlist-stack"><span class="jlist-stack-k">STACK:</span>VMware Cloud Director (Cloud.ru), vDC, vApp, Timeweb Cloud, Kubernetes, k3s, Helm, GitLab CI/CD, GitLab Runner, GitLab CE, Docker, Docker Compose, Terraform, Ansible, Harbor, HashiCorp Vault, External Secrets, Keycloak/OIDC, Istio, Kiali, Envoy, OPA/OPAL, ext_authz, AuthorizationPolicy, TLS/PKI, внутренний CA, Nginx, CSP, UFW, bastion, jump host, SSH, PostgreSQL, Patroni, ClickHouse, Redis, RabbitMQ, MinIO, Qdrant, Vespa, Prometheus, Grafana, Loki, Promtail, LiteLLM, Ollama, GigaChat, Langflow, Langfuse, SmartSearch, Bash, Python</li>
+              <li class="jlist-stack"><span class="jlist-stack-k">STACK:</span> VMware Cloud Director (Cloud.ru), vDC, vApp, Timeweb Cloud, Kubernetes, k3s, Helm, GitLab CI/CD, GitLab Runner, GitLab CE, Docker, Docker Compose, Terraform, Ansible, Harbor, HashiCorp Vault, External Secrets, Keycloak/OIDC, Istio, Kiali, Envoy, OPA/OPAL, ext_authz, AuthorizationPolicy, TLS/PKI, внутренний CA, Nginx, CSP, UFW, bastion, jump host, SSH, PostgreSQL, Patroni, ClickHouse, Redis, RabbitMQ, MinIO, Qdrant, Vespa, Prometheus, Grafana, Loki, Promtail, LiteLLM, Ollama, GigaChat, Langflow, Langfuse, SmartSearch, Bash, Python</li>
             </ul>
 
           </div>
@@ -927,7 +927,7 @@
               <li>Виртуализация VMware и Hyper-V; резервное копирование Veeam Backup &amp; Replication</li>
               <li><strong>Zimbra</strong> с нуля: почтовые домены и учётные записи, DNS-записи (MX, SPF, DKIM, DMARC), TLS, антиспам/антивирус, бэкапы и миграция ящиков; выпуск DKIM-ключей автоматизировал скриптом — ручная процедура сведена к одной команде</li>
               <li>Участие в проектировании архитектуры и внедрении DevOps-практик в команде разработки; аудит IT-инфраструктуры и план модернизации; OCS Inventory вместо ручного учёта в Excel</li>
-              <li class="jlist-stack"><span class="jlist-stack-k">СТЕК:</span>Kubernetes (bare-metal), Longhorn, Helm, ArgoCD, GitLab CI/CD, GitLab Container Registry, Jenkins, Docker, Docker Compose, Terraform, Ansible, Harbor, Verdaccio, Trivy, Gitleaks, Nginx, HashiCorp Vault, Unleash, Secret Server, Passbolt, Let's Encrypt, PostgreSQL, Patroni, etcd, ClickHouse, MS SQL Server, MySQL, MongoDB, Redis, Kafka, RabbitMQ, Consul, S3 / Yandex Cloud Object Storage, Prometheus, Grafana, ELK (Elasticsearch, Logstash, Kibana), Graylog, Zabbix, Sentry, Uptime Kuma, LibreNMS, Oxidized, NetBox, Jira, Confluence, Linux (Debian/Ubuntu), Windows Server, IIS, Active Directory, VMware, Hyper-V, Veeam, Zimbra, OCS Inventory, pm2, systemd, Python, Bash, PowerShell</li>
+              <li class="jlist-stack"><span class="jlist-stack-k">СТЕК:</span> Kubernetes (bare-metal), Longhorn, Helm, ArgoCD, GitLab CI/CD, GitLab Container Registry, Jenkins, Docker, Docker Compose, Terraform, Ansible, Harbor, Verdaccio, Trivy, Gitleaks, Nginx, HashiCorp Vault, Unleash, Secret Server, Passbolt, Let's Encrypt, PostgreSQL, Patroni, etcd, ClickHouse, MS SQL Server, MySQL, MongoDB, Redis, Kafka, RabbitMQ, Consul, S3 / Yandex Cloud Object Storage, Prometheus, Grafana, ELK (Elasticsearch, Logstash, Kibana), Graylog, Zabbix, Sentry, Uptime Kuma, LibreNMS, Oxidized, NetBox, Jira, Confluence, Linux (Debian/Ubuntu), Windows Server, IIS, Active Directory, VMware, Hyper-V, Veeam, Zimbra, OCS Inventory, pm2, systemd, Python, Bash, PowerShell</li>
             </ul>
             <ul class="jlist" data-lang="en">
               <li class="jlist-head">SCALE AND CONTEXT</li>
@@ -984,7 +984,7 @@
               <li>VMware and Hyper-V virtualization; Veeam Backup &amp; Replication backups</li>
               <li><strong>Zimbra</strong> from scratch: mail domains and accounts, DNS records (MX, SPF, DKIM, DMARC), TLS, antispam/antivirus, backups and mailbox migration; automated DKIM key issuance with a script — a manual procedure reduced to a single command</li>
               <li>Taking part in architecture design and introducing DevOps practices in the development team; an IT infrastructure audit and modernization plan; OCS Inventory instead of manual Excel records</li>
-              <li class="jlist-stack"><span class="jlist-stack-k">STACK:</span>Kubernetes (bare-metal), Longhorn, Helm, ArgoCD, GitLab CI/CD, GitLab Container Registry, Jenkins, Docker, Docker Compose, Terraform, Ansible, Harbor, Verdaccio, Trivy, Gitleaks, Nginx, HashiCorp Vault, Unleash, Secret Server, Passbolt, Let's Encrypt, PostgreSQL, Patroni, etcd, ClickHouse, MS SQL Server, MySQL, MongoDB, Redis, Kafka, RabbitMQ, Consul, S3 / Yandex Cloud Object Storage, Prometheus, Grafana, ELK (Elasticsearch, Logstash, Kibana), Graylog, Zabbix, Sentry, Uptime Kuma, LibreNMS, Oxidized, NetBox, Jira, Confluence, Linux (Debian/Ubuntu), Windows Server, IIS, Active Directory, VMware, Hyper-V, Veeam, Zimbra, OCS Inventory, pm2, systemd, Python, Bash, PowerShell</li>
+              <li class="jlist-stack"><span class="jlist-stack-k">STACK:</span> Kubernetes (bare-metal), Longhorn, Helm, ArgoCD, GitLab CI/CD, GitLab Container Registry, Jenkins, Docker, Docker Compose, Terraform, Ansible, Harbor, Verdaccio, Trivy, Gitleaks, Nginx, HashiCorp Vault, Unleash, Secret Server, Passbolt, Let's Encrypt, PostgreSQL, Patroni, etcd, ClickHouse, MS SQL Server, MySQL, MongoDB, Redis, Kafka, RabbitMQ, Consul, S3 / Yandex Cloud Object Storage, Prometheus, Grafana, ELK (Elasticsearch, Logstash, Kibana), Graylog, Zabbix, Sentry, Uptime Kuma, LibreNMS, Oxidized, NetBox, Jira, Confluence, Linux (Debian/Ubuntu), Windows Server, IIS, Active Directory, VMware, Hyper-V, Veeam, Zimbra, OCS Inventory, pm2, systemd, Python, Bash, PowerShell</li>
             </ul>
           </div>
 
@@ -1008,7 +1008,7 @@
               <li>Настроил и перенёс <strong>30+ рабочих станций</strong> и периферийного оборудования при расширении офиса</li>
               <li>Поддержка пользователей через Service Desk (Jira): консультирование по корпоративному ПО, диагностика проблем оборудования и ПО, поддержка удалённых пользователей</li>
               <li>Ведение технической документации, инвентаризация оборудования и ПО</li>
-              <li class="jlist-stack"><span class="jlist-stack-k">СТЕК:</span>Active Directory, групповые политики, Windows Server, Exchange, Outlook, IMAP/SMTP, Jira Service Desk, антивирусная защита, резервное копирование</li>
+              <li class="jlist-stack"><span class="jlist-stack-k">СТЕК:</span> Active Directory, групповые политики, Windows Server, Exchange, Outlook, IMAP/SMTP, Jira Service Desk, антивирусная защита, резервное копирование</li>
             </ul>
             <ul class="jlist" data-lang="en">
               <li>Administered the <strong>Active Directory</strong> domain infrastructure: group policies, access rights, user profiles</li>
@@ -1019,7 +1019,7 @@
               <li>Set up and relocated <strong>30+ workstations</strong> and peripherals during an office expansion</li>
               <li>User support through Service Desk (Jira): guidance on corporate software, hardware and software diagnostics, support for remote users</li>
               <li>Maintaining technical documentation, hardware and software inventory</li>
-              <li class="jlist-stack"><span class="jlist-stack-k">STACK:</span>Active Directory, групповые политики, Windows Server, Exchange, Outlook, IMAP/SMTP, Jira Service Desk, антивирусная защита, резервное копирование</li>
+              <li class="jlist-stack"><span class="jlist-stack-k">STACK:</span> Active Directory, групповые политики, Windows Server, Exchange, Outlook, IMAP/SMTP, Jira Service Desk, антивирусная защита, резервное копирование</li>
             </ul>
           </div>
         </div>
@@ -1088,7 +1088,7 @@
               <li>Настроил и перенёс <strong>10+ рабочих станций</strong> и периферии при расширении офиса</li>
               <li>HelpDesk-поддержка парка <strong>100+ компьютеров</strong> и кассовой техники</li>
               <li>Инвентаризация IT-оборудования, ведение документации (Jira)</li>
-              <li class="jlist-stack"><span class="jlist-stack-k">СТЕК:</span>Windows Server, Linux, MikroTik, Cisco, Kerio VPN, VMware, Hyper-V, Jira</li>
+              <li class="jlist-stack"><span class="jlist-stack-k">СТЕК:</span> Windows Server, Linux, MikroTik, Cisco, Kerio VPN, VMware, Hyper-V, Jira</li>
             </ul>
             <ul class="jlist" data-lang="en">
               <li>Administered Windows Server and Linux servers and network equipment (<strong>MikroTik, Cisco</strong>) across a retail network of <strong>40+ sites</strong></li>
@@ -1098,7 +1098,7 @@
               <li>Set up and relocated <strong>10+ workstations</strong> and peripherals during an office expansion</li>
               <li>HelpDesk support for a fleet of <strong>100+ computers</strong> and POS equipment</li>
               <li>IT asset inventory and documentation (Jira)</li>
-              <li class="jlist-stack"><span class="jlist-stack-k">STACK:</span>Windows Server, Linux, MikroTik, Cisco, Kerio VPN, VMware, Hyper-V, Jira</li>
+              <li class="jlist-stack"><span class="jlist-stack-k">STACK:</span> Windows Server, Linux, MikroTik, Cisco, Kerio VPN, VMware, Hyper-V, Jira</li>
             </ul>
           </div>
         </div>
