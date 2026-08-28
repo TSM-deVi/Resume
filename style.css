@@ -798,7 +798,6 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
 .arch-perim-t { font-family: var(--font-mono); font-size: 9px; letter-spacing: .14em; fill: var(--violet-lt); opacity: .8; }
 .arch-box { fill: rgba(199,211,234,.035); stroke: var(--edge-lt); stroke-width: 1; }
 .arch-box.inf { fill: rgba(182,217,252,.06); stroke: var(--blueprint); stroke-opacity: .5; }
-.arch-edge-node { fill: none; stroke: var(--edge-lt); stroke-width: 1; }
 .arch-gate { fill: rgba(102,58,243,.14); stroke: var(--violet-lt); stroke-width: 1; }
 .arch-rule { stroke: var(--edge); stroke-width: 1; }
 .arch-flow { stroke: var(--fog); stroke-width: 1; fill: none; opacity: .55; }
@@ -813,7 +812,6 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
 .arch-item { font-size: 10px; fill: var(--moon); }
 .arch-mut { font-size: 9px; letter-spacing: .14em; fill: var(--fog); }
 .arch-mut.sm { font-size: 8.5px; letter-spacing: .06em; text-transform: none; }
-.arch-node-t { font-size: 9px; letter-spacing: .12em; fill: var(--moon); }
 .arch-gate-t { font-size: 11px; letter-spacing: .12em; fill: var(--ice); }
 .arch-mirror-t { font-size: 8.5px; letter-spacing: .12em; fill: var(--fog); }
 
