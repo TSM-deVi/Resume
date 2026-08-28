@@ -84,25 +84,11 @@
 </head>
 <body>
 
-<div id="boot-screen" aria-hidden="true">
-  <div class="boot-lines">
-    <div class="boot-line">$ init --devops-resume</div>
-    <div class="boot-line">connecting to cluster<span class="boot-dots">…</span> <span class="boot-ok">ok</span></div>
-    <div class="boot-line">loading profile: <span class="boot-val">ivanov.temir</span></div>
-    <div class="boot-line boot-ready">system ready <span class="boot-ok">✓</span></div>
-  </div>
-</div>
-
 <a href="#main" class="skip-link"><span data-lang="ru">К содержимому</span><span data-lang="en">Skip to content</span></a>
 
 <div id="scroll-progress"></div>
 
 <canvas id="bg-net" aria-hidden="true"></canvas>
-
-<div class="edge-ruler edge-ruler-l" aria-hidden="true"></div>
-<div class="edge-ruler edge-ruler-r" aria-hidden="true"></div>
-<div class="edge-meta edge-meta-l" aria-hidden="true">SAINT-PETERSBURG · REMOTE</div>
-<div class="edge-meta edge-meta-r" aria-hidden="true">KUBERNETES · TERRAFORM · CI/CD</div>
 
 <nav>
   <div class="nav-logo">
@@ -111,9 +97,9 @@
     <span data-lang="en">Ivanov Temir</span>
   </div>
   <ul class="nav-links" id="nav-links">
+    <li><a href="#achievements"><span data-lang="ru">Результаты</span><span data-lang="en">Results</span></a></li>
     <li><a href="#experience"><span data-lang="ru">Опыт</span><span data-lang="en">Experience</span></a></li>
     <li><a href="#skills"><span data-lang="ru">Навыки</span><span data-lang="en">Skills</span></a></li>
-    <li><a href="#achievements"><span data-lang="ru">Результаты</span><span data-lang="en">Results</span></a></li>
     <li><a href="#education"><span data-lang="ru">Образование</span><span data-lang="en">Education</span></a></li>
   </ul>
   <div class="nav-controls">
@@ -290,8 +276,8 @@
         <svg class="ledger-chart" viewBox="0 0 300 80" role="img" aria-label="Uptime over the last 90 days: 99.9 percent, scale 99.0 to 100 percent">
           <defs>
             <linearGradient id="gilded-stroke" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%"   stop-color="#d8ecf8"/>
-              <stop offset="100%" stop-color="#98c0ef"/>
+              <stop offset="0%"   stop-color="var(--ice)"/>
+              <stop offset="100%" stop-color="var(--skywash-end)"/>
             </linearGradient>
             <linearGradient id="gilded-fill" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%"   stop-color="#663af3" stop-opacity=".17"/>
@@ -354,6 +340,149 @@
        Ряд однородных имён выделяется одним куском («Python, Bash, PowerShell»),
        а не по слову. Проверка на разрезанные пополам перечисления —
        tmp/mixed.py в описании задачи. -->
+  <!-- ACHIEVEMENTS -->
+  <section id="achievements">
+    <h2 class="sec-title">
+      <span data-lang="ru">Ключевые результаты</span>
+      <span data-lang="en">Key Results</span>
+    </h2>
+    <div class="ach-grid">
+
+      <div class="ach ach-lead r">
+        <div class="ach-label"><span data-lang="ru">контуры DEV / INF / PROD</span><span data-lang="en">DEV / INF / PROD environments</span></div>
+        <div class="ach-val">63 VM</div>
+        <div class="ach-text" data-lang="ru">
+          Три изолированных контура с нуля в приватном облаке на <strong>VMware Cloud Director</strong> для заказчика банковского сектора
+        </div>
+        <div class="ach-text" data-lang="en">
+          Three isolated environments built from scratch in a private cloud on <strong>VMware Cloud Director</strong> for a banking-sector client
+        </div>
+      </div>
+
+      <div class="ach ach-lead r d1">
+        <div class="ach-label"><span data-lang="ru">сервисов в эксплуатации</span><span data-lang="en">services in operation</span></div>
+        <div class="ach-val">70+</div>
+        <div class="ach-text" data-lang="ru">
+          Инфраструктурная команда из <strong>2 человек</strong> на <strong>50+ разработчиков</strong>: 12+ микросервисов в Kubernetes, 40+ под pm2, 20–30 на C#/.NET
+        </div>
+        <div class="ach-text" data-lang="en">
+          An infrastructure team of <strong>2</strong> serving <strong>50+ developers</strong>: 12+ microservices in Kubernetes, 40+ under pm2, 20–30 on C#/.NET
+        </div>
+      </div>
+
+      <div class="ach ach-lead r d2">
+        <div class="ach-label"><span data-lang="ru">время деплоя</span><span data-lang="en">deploy time</span></div>
+        <div class="ach-val"><span data-lang="ru"><span class="ach-was">40 мин</span><span class="ach-arrow">→</span><span class="ach-now">8 мин</span></span><span data-lang="en"><span class="ach-was">40 min</span><span class="ach-arrow">→</span><span class="ach-now">8 min</span></span></div>
+        <div class="ach-text" data-lang="ru">
+          <strong>12+ микросервисов</strong> мигрированы из Docker Compose в self-hosted Kubernetes с настройкой HPA и Ingress
+        </div>
+        <div class="ach-text" data-lang="en">
+          <strong>12+ microservices</strong> migrated from Docker Compose to self-hosted Kubernetes with HPA and Ingress
+        </div>
+      </div>
+
+      <div class="ach r d3">
+        <div class="ach-label"><span data-lang="ru">CI/CD покрытие</span><span data-lang="en">CI/CD coverage</span></div>
+        <div class="ach-val">100%</div>
+        <div class="ach-text" data-lang="ru">
+          Все <strong>продакшен-репозитории</strong> покрыты автосборкой и security-сканированием (Trivy, Gitleaks)
+        </div>
+        <div class="ach-text" data-lang="en">
+          All <strong>production repositories</strong> covered with automated builds and security scanning (Trivy, Gitleaks)
+        </div>
+      </div>
+
+      <div class="ach r">
+        <div class="ach-label"><span data-lang="ru">обнаружение инцидентов</span><span data-lang="en">incident detection</span></div>
+        <div class="ach-val"><span data-lang="ru"><span class="ach-was">часы</span><span class="ach-arrow">→</span><span class="ach-now">5 мин</span></span><span data-lang="en"><span class="ach-was">hours</span><span class="ach-arrow">→</span><span class="ach-now">5 min</span></span></div>
+        <div class="ach-text" data-lang="ru">
+          После внедрения стека <strong>Prometheus + Grafana + ELK + Zabbix</strong> с алертингом
+        </div>
+        <div class="ach-text" data-lang="en">
+          After implementing the <strong>Prometheus + Grafana + ELK + Zabbix</strong> stack with alerting
+        </div>
+      </div>
+
+      <div class="ach r d1">
+        <div class="ach-label"><span data-lang="ru">uptime СУБД</span><span data-lang="en">DB uptime</span></div>
+        <div class="ach-val">99.9%</div>
+        <div class="ach-text" data-lang="ru">
+          <strong>PostgreSQL + Patroni + etcd</strong>, 3 ноды — полностью отказоустойчивый кластер
+        </div>
+        <div class="ach-text" data-lang="en">
+          <strong>PostgreSQL + Patroni + etcd</strong>, 3 nodes — fully fault-tolerant cluster
+        </div>
+      </div>
+
+      <div class="ach r d2">
+        <div class="ach-label"><span data-lang="ru">точка входа в контуры</span><span data-lang="en">entry point to environments</span></div>
+        <div class="ach-val">1 bastion</div>
+        <div class="ach-text" data-lang="ru">
+          Доступ к VM только через <strong>jump host</strong> и контролируемые сессии (PAM), наружу — лишь через балансировщик и WAF
+        </div>
+        <div class="ach-text" data-lang="en">
+          VM access only through a <strong>jump host</strong> and controlled sessions (PAM); external exposure only via the load balancer and WAF
+        </div>
+      </div>
+
+      <div class="ach r d3">
+        <div class="ach-label"><span data-lang="ru">настройка сервера</span><span data-lang="en">server setup</span></div>
+        <div class="ach-val"><span data-lang="ru"><span class="ach-was">2–3 ч</span><span class="ach-arrow">→</span><span class="ach-now">15 мин</span></span><span data-lang="en"><span class="ach-was">2–3 h</span><span class="ach-arrow">→</span><span class="ach-now">15 min</span></span></div>
+        <div class="ach-text" data-lang="ru">
+          Разработанные <strong>Ansible-роли и плейбуки</strong> вместо ручной конфигурации с нуля
+        </div>
+        <div class="ach-text" data-lang="en">
+          Custom <strong>Ansible roles and playbooks</strong> instead of manual configuration from scratch
+        </div>
+      </div>
+
+      <div class="ach r">
+        <div class="ach-label"><span data-lang="ru">развёртывание ОС Linux</span><span data-lang="en">Linux OS provisioning</span></div>
+        <div class="ach-val"><span data-lang="ru"><span class="ach-was">3 ч</span><span class="ach-arrow">→</span><span class="ach-now">40 мин</span></span><span data-lang="en"><span class="ach-was">3 h</span><span class="ach-arrow">→</span><span class="ach-now">40 min</span></span></div>
+        <div class="ach-text" data-lang="ru">
+          Автоматизировал подготовку рабочего места скриптами <strong>Bash и PowerShell</strong>, конфигурации — в self-hosted GitLab
+        </div>
+        <div class="ach-text" data-lang="en">
+          Automated workstation provisioning with <strong>Bash and PowerShell</strong> scripts, with configs versioned in self-hosted GitLab
+        </div>
+      </div>
+
+      <div class="ach r d1">
+        <div class="ach-label"><span data-lang="ru">HA-кластеров развёрнуто</span><span data-lang="en">HA clusters deployed</span></div>
+        <div class="ach-val">3</div>
+        <div class="ach-text" data-lang="ru">
+          <strong>PostgreSQL</strong> (Patroni+etcd), <strong>Zabbix</strong> (2 ноды), <strong>Jira + Confluence</strong> — устранены единые точки отказа
+        </div>
+        <div class="ach-text" data-lang="en">
+          <strong>PostgreSQL</strong> (Patroni+etcd), <strong>Zabbix</strong> (2 nodes), <strong>Jira + Confluence</strong> — single points of failure eliminated
+        </div>
+      </div>
+
+      <div class="ach r d2">
+        <div class="ach-label"><span data-lang="ru">Kubernetes с нуля</span><span data-lang="en">Kubernetes from scratch</span></div>
+        <div class="ach-val"><span data-lang="ru">3 среды</span><span data-lang="en">3 environments</span></div>
+        <div class="ach-text" data-lang="ru">
+          <strong>Bare-metal</strong> на физических серверах, <strong>VMware Cloud Director</strong> (master + 3 worker) и single-node <strong>k3s</strong> в публичном облаке
+        </div>
+        <div class="ach-text" data-lang="en">
+          <strong>Bare-metal</strong> on physical servers, <strong>VMware Cloud Director</strong> (master + 3 workers) and single-node <strong>k3s</strong> in a public cloud
+        </div>
+      </div>
+
+      <div class="ach r d3">
+        <div class="ach-label"><span data-lang="ru">right-sizing платформы</span><span data-lang="en">platform right-sizing</span></div>
+        <div class="ach-val"><span data-lang="ru"><span class="ach-was">28 VM</span><span class="ach-arrow">→</span><span class="ach-now">9 VM</span></span><span data-lang="en"><span class="ach-was">28 VM</span><span class="ach-arrow">→</span><span class="ach-now">9 VM</span></span></div>
+        <div class="ach-text" data-lang="ru">
+          Enterprise-контур на ~90 vCPU и ~190 GB RAM свёрнут в <strong>~32 vCPU / ~92 GB RAM</strong> без потери состава сервисов
+        </div>
+        <div class="ach-text" data-lang="en">
+          An enterprise environment on ~90 vCPU and ~190 GB RAM folded into <strong>~32 vCPU / ~92 GB RAM</strong> with the service composition intact
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <section id="experience">
     <h2 class="sec-title">
       <span data-lang="ru">Опыт работы <span class="sub">// 4 года 3 месяца</span></span>
@@ -383,6 +512,146 @@
                 <span data-lang="en">DevOps Engineer</span>
               </div>
             </div>
+
+            <figure class="arch">
+              <figcaption class="arch-cap">
+                <span class="arch-cap-t" data-lang="ru">Топология банковского контура</span>
+                <span class="arch-cap-t" data-lang="en">Banking environment topology</span>
+                <span class="arch-cap-n">63 VM · VMware Cloud Director</span>
+              </figcaption>
+
+              <div class="arch-scroll">
+                <svg class="arch-svg" viewBox="0 0 780 396" role="img"
+                     aria-label="Три изолированных контура DEV, INF и PROD в приватном облаке VMware Cloud Director. Снаружи доступ только через WAF с балансировщиком, внутрь — только через bastion. INF на семи машинах отдаёт CI/CD, реестр образов и наблюдаемость в оба прикладных контура. DEV и PROD зеркальны, по 28 машин каждый, всего 63.">
+                  <defs>
+                    <marker id="ah" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+                      <path d="M0,0 L8,4 L0,8 z" class="arch-head"/>
+                    </marker>
+                  </defs>
+
+                  <text class="arch-mut" x="390" y="14" text-anchor="middle">ИНТЕРНЕТ</text>
+                  <line class="arch-flow" x1="390" y1="22" x2="390" y2="36" marker-end="url(#ah)"/>
+                  <rect class="arch-edge-node" x="322" y="38" width="136" height="26" rx="13"/>
+                  <text class="arch-node-t" x="390" y="55" text-anchor="middle">WAF · БАЛАНСИРОВЩИК</text>
+                  <line class="arch-flow" x1="390" y1="64" x2="390" y2="80" marker-end="url(#ah)"/>
+
+                  <rect class="arch-perim" x="6" y="82" width="768" height="298" rx="10"/>
+                  <text class="arch-perim-t" x="20" y="100">ПРИВАТНОЕ ОБЛАКО · СЕГМЕНТАЦИЯ СЕТЕЙ</text>
+
+                  <rect class="arch-gate" x="328" y="110" width="124" height="28" rx="6"/>
+                  <text class="arch-gate-t" x="390" y="128" text-anchor="middle">BASTION</text>
+                  <text class="arch-mut sm" x="462" y="128">единственный вход</text>
+
+                  <path class="arch-flow" d="M390,138 L390,150 M124,150 L656,150"/>
+                  <line class="arch-flow" x1="124" y1="150" x2="124" y2="166" marker-end="url(#ah)"/>
+                  <line class="arch-flow" x1="390" y1="150" x2="390" y2="166" marker-end="url(#ah)"/>
+                  <line class="arch-flow" x1="656" y1="150" x2="656" y2="166" marker-end="url(#ah)"/>
+
+                  <rect class="arch-box" x="20" y="170" width="208" height="150" rx="8"/>
+                  <text class="arch-box-t" x="36" y="192">DEV</text>
+                  <text class="arch-num" x="212" y="192" text-anchor="end">28 VM</text>
+                  <line class="arch-rule" x1="36" y1="202" x2="212" y2="202"/>
+                  <text class="arch-item" x="36" y="222">k8s · master + 3 worker</text>
+                  <text class="arch-item" x="36" y="240">harbor (локальный)</text>
+                  <text class="arch-item" x="36" y="258">postgres · redis · rabbitmq</text>
+                  <text class="arch-item" x="36" y="276">qdrant · vespa · clickhouse</text>
+                  <text class="arch-item" x="36" y="294">istio · envoy · opa/opal</text>
+                  <text class="arch-mut sm" x="36" y="312">~90 vCPU · ~190 GB · ~2.8 TB</text>
+
+                  <rect class="arch-box inf" x="286" y="170" width="208" height="150" rx="8"/>
+                  <text class="arch-box-t inf" x="302" y="192">INF</text>
+                  <text class="arch-num" x="478" y="192" text-anchor="end">7 VM</text>
+                  <line class="arch-rule" x1="302" y1="202" x2="478" y2="202"/>
+                  <text class="arch-item" x="302" y="222">gitlab · runner</text>
+                  <text class="arch-item" x="302" y="240">harbor (центральный)</text>
+                  <text class="arch-item" x="302" y="258">prometheus · grafana</text>
+                  <text class="arch-item" x="302" y="276">loki · promtail</text>
+                  <text class="arch-item" x="302" y="294">nginx</text>
+                  <text class="arch-mut sm" x="302" y="312">сквозные сервисы</text>
+
+                  <rect class="arch-box" x="552" y="170" width="208" height="150" rx="8"/>
+                  <text class="arch-box-t" x="568" y="192">PROD</text>
+                  <text class="arch-num" x="744" y="192" text-anchor="end">28 VM</text>
+                  <line class="arch-rule" x1="568" y1="202" x2="744" y2="202"/>
+                  <text class="arch-item" x="568" y="222">k8s · master + 3 worker</text>
+                  <text class="arch-item" x="568" y="240">harbor (локальный)</text>
+                  <text class="arch-item" x="568" y="258">postgres · redis · rabbitmq</text>
+                  <text class="arch-item" x="568" y="276">qdrant · vespa · clickhouse</text>
+                  <text class="arch-item" x="568" y="294">istio · envoy · opa/opal</text>
+                  <text class="arch-mut sm" x="568" y="312">~90 vCPU · ~190 GB · ~2.8 TB</text>
+
+                  <line class="arch-flow" x1="282" y1="245" x2="236" y2="245" marker-end="url(#ah)"/>
+                  <line class="arch-flow" x1="498" y1="245" x2="544" y2="245" marker-end="url(#ah)"/>
+                  <text class="arch-mut sm" x="259" y="238" text-anchor="middle">CI/CD</text>
+                  <text class="arch-mut sm" x="259" y="262" text-anchor="middle">образы</text>
+                  <text class="arch-mut sm" x="523" y="238" text-anchor="middle">CI/CD</text>
+                  <text class="arch-mut sm" x="523" y="262" text-anchor="middle">образы</text>
+
+                  <path class="arch-mirror" d="M124,330 L124,346 L656,346 L656,330"/>
+                  <rect class="arch-mirror-chip" x="346" y="336" width="88" height="20" rx="10"/>
+                  <text class="arch-mirror-t" x="390" y="350" text-anchor="middle">ЗЕРКАЛО 1:1</text>
+                </svg>
+              </div>
+
+              <p class="arch-note">
+                <span data-lang="ru">Прикладные контуры зеркальны и изолированы: изменение проверяется на DEV и тем же путём выкатывается в PROD. Сквозные сервисы вынесены в INF, чтобы CI/CD, реестр образов и наблюдаемость не дублировались. Наружу открыт только балансировщик, внутрь — только bastion.</span>
+                <span data-lang="en">The application environments are mirrored and isolated: a change is verified on DEV and rolled out to PROD along the same path. Cross-cutting services live in INF so CI/CD, the image registry and observability are not duplicated. Only the load balancer is exposed outward; the only way in is the bastion.</span>
+              </p>
+            </figure>
+
+            <figure class="arch arch-min">
+              <figcaption class="arch-cap">
+                <span class="arch-cap-t" data-lang="ru">Та же платформа, свёрнутая</span>
+                <span class="arch-cap-t" data-lang="en">The same platform, folded down</span>
+                <span class="arch-cap-n">9 VM · Timeweb Cloud</span>
+              </figcaption>
+              <div class="arch-scroll">
+                <svg class="arch-svg" viewBox="0 0 780 236" role="img"
+                     aria-label="Минимальная конфигурация на публичном облаке Timeweb Cloud: тот же состав сервисов в одном контуре вместо трёх. Девять машин вместо двадцати восьми, тридцать два виртуальных ядра вместо девяноста, девяносто два гигабайта памяти вместо ста девяноста. Kubernetes свёрнут в single-node k3s, Vault с RabbitMQ и Qdrant с Redis делят узлы, PostgreSQL и ClickHouse стоят standalone.">
+                  <text class="arch-mut" x="19" y="16">ОДИН КОНТУР ВМЕСТО ТРЁХ · TIMEWEB CLOUD</text>
+
+                  <text class="arch-was" x="19"  y="48">28 VM</text>
+                  <text class="arch-arrow" x="85" y="48">→</text>
+                  <text class="arch-now" x="111" y="48">9 VM</text>
+                  <text class="arch-was" x="215" y="48">~90 vCPU</text>
+                  <text class="arch-arrow" x="313" y="48">→</text>
+                  <text class="arch-now" x="339" y="48">~32 vCPU</text>
+                  <text class="arch-was" x="475" y="48">~190 GB</text>
+                  <text class="arch-arrow" x="561" y="48">→</text>
+                  <text class="arch-now" x="587" y="48">~92 GB</text>
+                  <text class="arch-mut sm" x="697" y="48">~1.7 TB NVMe</text>
+
+                  <line class="arch-rule" x1="19" y1="68" x2="761" y2="68"/>
+                  <text class="arch-mut sm" x="19" y="86">состав сервисов и схема их взаимодействия сохранены; балансировщик, WAF, bastion и PAM остались только в банковском контуре</text>
+
+                  <rect class="arch-box" x="19" y="100" width="178" height="58" rx="6"/>
+                  <text class="arch-node2" x="108" y="124" text-anchor="middle">k3s</text>
+                  <text class="arch-mut sm" x="108" y="142" text-anchor="middle">вместо master + 3 worker</text>
+                  <rect class="arch-box" x="207" y="100" width="178" height="58" rx="6"/>
+                  <text class="arch-node2" x="296" y="124" text-anchor="middle">vault + rabbitmq</text>
+                  <text class="arch-mut sm" x="296" y="142" text-anchor="middle">общий узел</text>
+                  <rect class="arch-box" x="395" y="100" width="178" height="58" rx="6"/>
+                  <text class="arch-node2" x="484" y="124" text-anchor="middle">qdrant + redis</text>
+                  <text class="arch-mut sm" x="484" y="142" text-anchor="middle">общий узел</text>
+                  <rect class="arch-box" x="583" y="100" width="178" height="58" rx="6"/>
+                  <text class="arch-node2" x="672" y="124" text-anchor="middle">postgres</text>
+                  <text class="arch-mut sm" x="672" y="142" text-anchor="middle">standalone вместо кластера</text>
+                  <rect class="arch-box" x="19" y="168" width="178" height="58" rx="6"/>
+                  <text class="arch-node2" x="108" y="192" text-anchor="middle">clickhouse</text>
+                  <text class="arch-mut sm" x="108" y="210" text-anchor="middle">standalone вместо кластера</text>
+                  <rect class="arch-box" x="207" y="168" width="178" height="58" rx="6"/>
+                  <text class="arch-node2" x="296" y="192" text-anchor="middle">docker-узел</text>
+                  <text class="arch-mut sm" x="296" y="210" text-anchor="middle">часть сервисов вынесена</text>
+                  <rect class="arch-box" x="395" y="168" width="178" height="58" rx="6"/>
+                  <text class="arch-node2" x="484" y="192" text-anchor="middle">gitlab ce</text>
+                  <text class="arch-mut sm" x="484" y="210" text-anchor="middle">свой CI/CD в контуре</text>
+                  <rect class="arch-box" x="583" y="168" width="178" height="58" rx="6"/>
+                  <text class="arch-node2" x="672" y="192" text-anchor="middle">nginx</text>
+                  <text class="arch-mut sm" x="672" y="210" text-anchor="middle">единственный edge-router</text>
+                </svg>
+              </div>
+            </figure>
+
             <ul class="jlist" data-lang="ru">
               <li>Проектная работа: production-контур мультиагентной low-code платформы для заказчика банковского сектора — спроектирован, развёрнут, сдан заказчику и закрыт в июле 2026</li>
 
@@ -1240,149 +1509,6 @@
           <div class="skill-tile-tip"><span data-lang="ru">брокер сообщений</span><span data-lang="en">message broker</span></div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- ACHIEVEMENTS -->
-  <section id="achievements">
-    <h2 class="sec-title">
-      <span data-lang="ru">Ключевые результаты</span>
-      <span data-lang="en">Key Results</span>
-    </h2>
-    <div class="ach-grid">
-
-      <div class="ach ach-lead r">
-        <div class="ach-label"><span data-lang="ru">контуры DEV / INF / PROD</span><span data-lang="en">DEV / INF / PROD environments</span></div>
-        <div class="ach-val">63 VM</div>
-        <div class="ach-text" data-lang="ru">
-          Три изолированных контура с нуля в приватном облаке на <strong>VMware Cloud Director</strong> для заказчика банковского сектора
-        </div>
-        <div class="ach-text" data-lang="en">
-          Three isolated environments built from scratch in a private cloud on <strong>VMware Cloud Director</strong> for a banking-sector client
-        </div>
-      </div>
-
-      <div class="ach ach-lead r d1">
-        <div class="ach-label"><span data-lang="ru">сервисов в эксплуатации</span><span data-lang="en">services in operation</span></div>
-        <div class="ach-val">70+</div>
-        <div class="ach-text" data-lang="ru">
-          Инфраструктурная команда из <strong>2 человек</strong> на <strong>50+ разработчиков</strong>: 12+ микросервисов в Kubernetes, 40+ под pm2, 20–30 на C#/.NET
-        </div>
-        <div class="ach-text" data-lang="en">
-          An infrastructure team of <strong>2</strong> serving <strong>50+ developers</strong>: 12+ microservices in Kubernetes, 40+ under pm2, 20–30 on C#/.NET
-        </div>
-      </div>
-
-      <div class="ach ach-lead r d2">
-        <div class="ach-label"><span data-lang="ru">время деплоя</span><span data-lang="en">deploy time</span></div>
-        <div class="ach-val"><span data-lang="ru"><span class="ach-was">40 мин</span><span class="ach-arrow">→</span><span class="ach-now">8 мин</span></span><span data-lang="en"><span class="ach-was">40 min</span><span class="ach-arrow">→</span><span class="ach-now">8 min</span></span></div>
-        <div class="ach-text" data-lang="ru">
-          <strong>12+ микросервисов</strong> мигрированы из Docker Compose в self-hosted Kubernetes с настройкой HPA и Ingress
-        </div>
-        <div class="ach-text" data-lang="en">
-          <strong>12+ microservices</strong> migrated from Docker Compose to self-hosted Kubernetes with HPA and Ingress
-        </div>
-      </div>
-
-      <div class="ach r d3">
-        <div class="ach-label"><span data-lang="ru">CI/CD покрытие</span><span data-lang="en">CI/CD coverage</span></div>
-        <div class="ach-val">100%</div>
-        <div class="ach-text" data-lang="ru">
-          Все <strong>продакшен-репозитории</strong> покрыты автосборкой и security-сканированием (Trivy, Gitleaks)
-        </div>
-        <div class="ach-text" data-lang="en">
-          All <strong>production repositories</strong> covered with automated builds and security scanning (Trivy, Gitleaks)
-        </div>
-      </div>
-
-      <div class="ach r">
-        <div class="ach-label"><span data-lang="ru">обнаружение инцидентов</span><span data-lang="en">incident detection</span></div>
-        <div class="ach-val"><span data-lang="ru"><span class="ach-was">часы</span><span class="ach-arrow">→</span><span class="ach-now">5 мин</span></span><span data-lang="en"><span class="ach-was">hours</span><span class="ach-arrow">→</span><span class="ach-now">5 min</span></span></div>
-        <div class="ach-text" data-lang="ru">
-          После внедрения стека <strong>Prometheus + Grafana + ELK + Zabbix</strong> с алертингом
-        </div>
-        <div class="ach-text" data-lang="en">
-          After implementing the <strong>Prometheus + Grafana + ELK + Zabbix</strong> stack with alerting
-        </div>
-      </div>
-
-      <div class="ach r d1">
-        <div class="ach-label"><span data-lang="ru">uptime СУБД</span><span data-lang="en">DB uptime</span></div>
-        <div class="ach-val">99.9%</div>
-        <div class="ach-text" data-lang="ru">
-          <strong>PostgreSQL + Patroni + etcd</strong>, 3 ноды — полностью отказоустойчивый кластер
-        </div>
-        <div class="ach-text" data-lang="en">
-          <strong>PostgreSQL + Patroni + etcd</strong>, 3 nodes — fully fault-tolerant cluster
-        </div>
-      </div>
-
-      <div class="ach r d2">
-        <div class="ach-label"><span data-lang="ru">точка входа в контуры</span><span data-lang="en">entry point to environments</span></div>
-        <div class="ach-val">1 bastion</div>
-        <div class="ach-text" data-lang="ru">
-          Доступ к VM только через <strong>jump host</strong> и контролируемые сессии (PAM), наружу — лишь через балансировщик и WAF
-        </div>
-        <div class="ach-text" data-lang="en">
-          VM access only through a <strong>jump host</strong> and controlled sessions (PAM); external exposure only via the load balancer and WAF
-        </div>
-      </div>
-
-      <div class="ach r d3">
-        <div class="ach-label"><span data-lang="ru">настройка сервера</span><span data-lang="en">server setup</span></div>
-        <div class="ach-val"><span data-lang="ru"><span class="ach-was">2–3 ч</span><span class="ach-arrow">→</span><span class="ach-now">15 мин</span></span><span data-lang="en"><span class="ach-was">2–3 h</span><span class="ach-arrow">→</span><span class="ach-now">15 min</span></span></div>
-        <div class="ach-text" data-lang="ru">
-          Разработанные <strong>Ansible-роли и плейбуки</strong> вместо ручной конфигурации с нуля
-        </div>
-        <div class="ach-text" data-lang="en">
-          Custom <strong>Ansible roles and playbooks</strong> instead of manual configuration from scratch
-        </div>
-      </div>
-
-      <div class="ach r">
-        <div class="ach-label"><span data-lang="ru">развёртывание ОС Linux</span><span data-lang="en">Linux OS provisioning</span></div>
-        <div class="ach-val"><span data-lang="ru"><span class="ach-was">3 ч</span><span class="ach-arrow">→</span><span class="ach-now">40 мин</span></span><span data-lang="en"><span class="ach-was">3 h</span><span class="ach-arrow">→</span><span class="ach-now">40 min</span></span></div>
-        <div class="ach-text" data-lang="ru">
-          Автоматизировал подготовку рабочего места скриптами <strong>Bash и PowerShell</strong>, конфигурации — в self-hosted GitLab
-        </div>
-        <div class="ach-text" data-lang="en">
-          Automated workstation provisioning with <strong>Bash and PowerShell</strong> scripts, with configs versioned in self-hosted GitLab
-        </div>
-      </div>
-
-      <div class="ach r d1">
-        <div class="ach-label"><span data-lang="ru">HA-кластеров развёрнуто</span><span data-lang="en">HA clusters deployed</span></div>
-        <div class="ach-val">3</div>
-        <div class="ach-text" data-lang="ru">
-          <strong>PostgreSQL</strong> (Patroni+etcd), <strong>Zabbix</strong> (2 ноды), <strong>Jira + Confluence</strong> — устранены единые точки отказа
-        </div>
-        <div class="ach-text" data-lang="en">
-          <strong>PostgreSQL</strong> (Patroni+etcd), <strong>Zabbix</strong> (2 nodes), <strong>Jira + Confluence</strong> — single points of failure eliminated
-        </div>
-      </div>
-
-      <div class="ach r d2">
-        <div class="ach-label"><span data-lang="ru">Kubernetes с нуля</span><span data-lang="en">Kubernetes from scratch</span></div>
-        <div class="ach-val"><span data-lang="ru">3 среды</span><span data-lang="en">3 environments</span></div>
-        <div class="ach-text" data-lang="ru">
-          <strong>Bare-metal</strong> на физических серверах, <strong>VMware Cloud Director</strong> (master + 3 worker) и single-node <strong>k3s</strong> в публичном облаке
-        </div>
-        <div class="ach-text" data-lang="en">
-          <strong>Bare-metal</strong> on physical servers, <strong>VMware Cloud Director</strong> (master + 3 workers) and single-node <strong>k3s</strong> in a public cloud
-        </div>
-      </div>
-
-      <div class="ach r d3">
-        <div class="ach-label"><span data-lang="ru">right-sizing платформы</span><span data-lang="en">platform right-sizing</span></div>
-        <div class="ach-val"><span data-lang="ru"><span class="ach-was">28 VM</span><span class="ach-arrow">→</span><span class="ach-now">9 VM</span></span><span data-lang="en"><span class="ach-was">28 VM</span><span class="ach-arrow">→</span><span class="ach-now">9 VM</span></span></div>
-        <div class="ach-text" data-lang="ru">
-          Enterprise-контур на ~90 vCPU и ~190 GB RAM свёрнут в <strong>~32 vCPU / ~92 GB RAM</strong> без потери состава сервисов
-        </div>
-        <div class="ach-text" data-lang="en">
-          An enterprise environment on ~90 vCPU and ~190 GB RAM folded into <strong>~32 vCPU / ~92 GB RAM</strong> with the service composition intact
-        </div>
-      </div>
-
     </div>
   </section>
 

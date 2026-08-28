@@ -1,29 +1,3 @@
-// ── Boot sequence (once per session) ──
-(function () {
-  const screen = document.getElementById('boot-screen');
-  if (!screen) return;
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  if (reduce || sessionStorage.getItem('booted')) {
-    screen.remove();
-    return;
-  }
-  sessionStorage.setItem('booted', '1');
-
-  const lines = Array.from(screen.querySelectorAll('.boot-line'));
-  document.documentElement.style.overflow = 'hidden';
-
-  lines.forEach((line, i) => {
-    setTimeout(() => line.classList.add('boot-show'), 150 + i * 260);
-  });
-
-  setTimeout(() => {
-    screen.classList.add('boot-hidden');
-    document.documentElement.style.overflow = '';
-    setTimeout(() => screen.remove(), 450);
-  }, 150 + lines.length * 260 + 350);
-})();
-
 // ── Scroll progress + Back to top + Nav shadow ──
 const backBtn      = document.getElementById('back-to-top');
 const nav          = document.querySelector('nav');

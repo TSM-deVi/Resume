@@ -24,7 +24,8 @@
   --violet:  #663af3;
   --violet-lt: #8a68f7;
   --blueprint: #b6d9fc;
-  --skywash: linear-gradient(180deg, var(--ice) 0%, #98c0ef 100%);
+  --skywash-end: #98c0ef;
+  --skywash: linear-gradient(180deg, var(--ice) 0%, var(--skywash-end) 100%);
   /* success state — Deep Teal is an AuthKit token, so the green stays in-system */
   --ok:    #269684;
   --ok-lt: #3fbfa4;
@@ -57,36 +58,30 @@
   --r-input: 6px;
   --r-pill: 999px;
 
+  /* ── Слои. Шесть ступеней, каждая названа по роли: число само по себе
+     ничего не значит, а «выше шапки» — значит. ── */
+  --z-under:   -1;   /* фон под контентом */
+  --z-base:     1;   /* содержимое над декором секции */
+  --z-float:   20;   /* всплывающее внутри секции */
+  --z-fab:     99;   /* кнопка «наверх» */
+  --z-menu:   199;   /* выпадающее меню под шапкой */
+  --z-nav:    200;   /* шапка */
+  --z-rail:   300;   /* полоса прогресса поверх шапки */
+  --z-cursor: 400;   /* рисованный курсор поверх всего */
+  --z-skip:   500;   /* skip-ссылка обязана быть выше курсора */
+
+  /* ── Длительности. Три ступени на весь интерфейс: быстрее 150 мс отклик
+     не читается, медленнее 300 мс интерфейс кажется вязким. Длинные
+     значения ниже по файлу — это раскрытие контента, а не отклик. ── */
+  --t-fast: .15s;
+  --t-base: .2s;
+  --t-slow: .3s;
+
   /* ── Layout: base unit 4px ── */
   --page-max: 1200px;
   --card-pad: 24px;
   --prose: 60ch;      /* comfortable measure — 72 read as a wall of text */
 }
-
-/* ── BOOT SCREEN ── */
-#boot-screen {
-  position: fixed; inset: 0; z-index: 100000;
-  background: var(--canvas);
-  display: flex; align-items: center; justify-content: center;
-  transition: opacity .4s ease;
-}
-#boot-screen.boot-hidden { opacity: 0; pointer-events: none; }
-.boot-lines {
-  font-family: var(--font-mono);
-  font-size: 12px; letter-spacing: .10em; text-transform: uppercase;
-  color: var(--fog); min-width: 300px;
-}
-.boot-line {
-  opacity: 0; transform: translateY(4px);
-  transition: opacity .3s ease, transform .3s ease;
-  margin-bottom: .6rem;
-}
-.boot-line.boot-show { opacity: 1; transform: none; }
-.boot-line.boot-ready { color: var(--frost); }
-.boot-ok, .boot-val { color: var(--blueprint); }
-@keyframes boot-dots { 0%,100% { opacity: .2; } 50% { opacity: 1; } }
-.boot-dots { display: inline-block; animation: boot-dots 1s ease-in-out infinite; }
-@media (prefers-reduced-motion: reduce) { #boot-screen { display: none; } }
 
 /* Заголовок, нужный структуре документа, но не композиции: секция контактов
    оформлена как терминал, и видимый <h2> над ней сломал бы кадр. */
@@ -98,7 +93,7 @@
 
 /* ── SKIP LINK ── */
 .skip-link {
-  position: fixed; top: -100px; left: 1rem; z-index: 10000;
+  position: fixed; top: -100px; left: 1rem; z-index: var(--z-skip);
   background: var(--violet); color: var(--white);
   border: none; padding: 12px 24px; border-radius: var(--r-pill);
   font-family: var(--font-ui); font-size: 14px; font-weight: 500;
@@ -135,7 +130,7 @@ body {
 /* Blueprint grid — full bleed, fading at the edges */
 body::before {
   content: '';
-  position: fixed; inset: 0; z-index: -2; pointer-events: none;
+  position: fixed; inset: 0; z-index: var(--z-under); pointer-events: none;
   background-image:
     linear-gradient(rgba(186,215,247,.06) 1px, transparent 1px),
     linear-gradient(90deg, rgba(186,215,247,.06) 1px, transparent 1px);
@@ -157,30 +152,9 @@ a:hover { text-decoration: underline; text-underline-offset: 4px; }
 code { font-family: var(--font-mono); }
 
 /* ── EDGE MARGINALIA ── */
-.edge-ruler {
-  position: fixed; top: 0; bottom: 0; width: 1px;
-  background-image: repeating-linear-gradient(to bottom, var(--edge) 0 1px, transparent 1px 48px);
-  pointer-events: none; z-index: 1;
-}
-.edge-ruler-l { left: 40px; }
-.edge-ruler-r { right: 40px; }
-@media (max-width: 1440px) { .edge-ruler { display: none; } }
-
-.edge-meta {
-  position: fixed; top: 50%; transform: translateY(-50%);
-  writing-mode: vertical-rl;
-  font-family: var(--font-mono);
-  font-size: 11px; letter-spacing: .10em; text-transform: uppercase;
-  color: var(--fog); opacity: .7;
-  white-space: nowrap; pointer-events: none; z-index: 1;
-}
-.edge-meta-l { left: 14px; }
-.edge-meta-r { right: 14px; transform: translateY(-50%) rotate(180deg); }
-@media (max-width: 1440px) { .edge-meta { display: none; } }
-
 /* ── NAV — frosted glass rail ── */
 nav {
-  position: sticky; top: 0; z-index: 200;
+  position: sticky; top: 0; z-index: var(--z-nav);
   background: rgba(5,6,15,.72);
   backdrop-filter: blur(16px) saturate(1.2);
   -webkit-backdrop-filter: blur(16px) saturate(1.2);
@@ -259,12 +233,12 @@ section { padding: clamp(3.5rem, 9vw, 120px) 0; }
   padding: clamp(3rem, 8vw, 104px) 0 clamp(3rem, 7vw, 96px);
   position: relative;
 }
-#hero > *:not(.hero-sky) { position: relative; z-index: 1; }
+#hero > *:not(.hero-sky) { position: relative; z-index: var(--z-base); }
 
 /* Conic spotlight anchoring the hero. No photography in this system —
    the atmosphere is drawn, and it moves. */
 .hero-sky {
-  position: absolute; z-index: 0;
+  position: absolute; z-index: 0;  /* декор секции под её содержимым */
   top: -160px; left: calc(50% - 50vw);
   width: 100vw; height: calc(100% + 260px);
   overflow: hidden; pointer-events: none;
@@ -329,7 +303,7 @@ section { padding: clamp(3.5rem, 9vw, 120px) 0; }
 }
 
 #bg-net {
-  position: fixed; inset: 0; z-index: -1;
+  position: fixed; inset: 0; z-index: var(--z-under);
   width: 100vw; height: 100vh; pointer-events: none;
   opacity: .75;
 }
@@ -455,7 +429,7 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
 .pl-line { flex: 1; height: 1px; min-width: 16px; background: var(--edge); position: relative; overflow: hidden; }
 .pl-line::after {
   content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 0;
-  background: var(--blueprint); transform-origin: left; transition: transform .35s ease;
+  background: var(--blueprint); transform-origin: left; transition: transform var(--t-slow) ease;
 }
 .pl-line.pl-done::after { width: 100%; background: var(--ok-lt); }
 /* a pulse of light runs down the leg the moment it completes */
@@ -507,7 +481,7 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
   color: var(--moon); font-size: 12px;
   padding: 6px 12px; border-radius: var(--r-input);
   white-space: nowrap; pointer-events: none;
-  opacity: 0; transition: opacity .15s; z-index: 20;
+  opacity: 0; transition: opacity var(--t-fast); z-index: var(--z-float);
 }
 .pl-stage[data-tip]:hover::after { opacity: 1; }
 
@@ -577,7 +551,7 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
 .term-output.err { color: var(--fog); }
 
 @keyframes tl-enter { from { opacity: 0; transform: translateX(-4px); } to { opacity: 1; transform: none; } }
-.terminal-body > * { opacity: 0; animation: tl-enter .22s ease forwards; }
+.terminal-body > * { opacity: 0; animation: tl-enter var(--t-base) ease forwards; }
 .terminal-body > *:nth-child(1) { animation-delay: .5s; }
 .terminal-body > *:nth-child(2) { animation-delay: .75s; }
 .terminal-body > *:nth-child(3) { animation-delay: .95s; }
@@ -798,6 +772,73 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
   .job-role, .job-simple .job-title, .job-simple .jlist { grid-column: 2; }
 }
 
+
+/* ── ARCHITECTURE DIAGRAM ── */
+/* Контур на 63 машины жил тридцатью пунктами прозы, которые не дочитывают.
+   Схема — это артефакт из мира самого предмета, и её PDF показать не может. */
+.arch { margin: 0 0 2.25rem; }
+.arch-cap {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem;
+}
+.arch-cap-t {
+  font-family: var(--font-mono); font-size: 12px;
+  letter-spacing: .10em; text-transform: uppercase; color: var(--blueprint);
+}
+.arch-cap-n {
+  font-family: var(--font-mono); font-size: 12px;
+  letter-spacing: .04em; color: var(--fog);
+}
+.arch-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.arch-svg { display: block; width: 100%; min-width: 640px; height: auto; }
+
+/* Волосяные линии и один акцент. Периметр — единственное, что окрашено:
+   он и есть смысл всей картинки. */
+.arch-perim { fill: rgba(102,58,243,.045); stroke: var(--violet-lt); stroke-width: 1; stroke-opacity: .45; }
+.arch-perim-t { font-family: var(--font-mono); font-size: 9px; letter-spacing: .14em; fill: var(--violet-lt); opacity: .8; }
+.arch-box { fill: rgba(199,211,234,.035); stroke: var(--edge-lt); stroke-width: 1; }
+.arch-box.inf { fill: rgba(182,217,252,.06); stroke: var(--blueprint); stroke-opacity: .5; }
+.arch-edge-node { fill: none; stroke: var(--edge-lt); stroke-width: 1; }
+.arch-gate { fill: rgba(102,58,243,.14); stroke: var(--violet-lt); stroke-width: 1; }
+.arch-rule { stroke: var(--edge); stroke-width: 1; }
+.arch-flow { stroke: var(--fog); stroke-width: 1; fill: none; opacity: .55; }
+.arch-head { fill: var(--fog); opacity: .55; }
+.arch-mirror { stroke: var(--edge-lt); stroke-width: 1; fill: none; stroke-dasharray: 3 3; }
+.arch-mirror-chip { fill: var(--canvas); stroke: var(--edge-lt); stroke-width: 1; }
+
+.arch-svg text { font-family: var(--font-mono); }
+.arch-box-t { font-size: 15px; letter-spacing: .06em; fill: var(--ice); }
+.arch-box-t.inf { fill: var(--blueprint); }
+.arch-num { font-size: 13px; fill: var(--frost); }
+.arch-item { font-size: 10px; fill: var(--moon); }
+.arch-mut { font-size: 9px; letter-spacing: .14em; fill: var(--fog); }
+.arch-mut.sm { font-size: 8.5px; letter-spacing: .06em; text-transform: none; }
+.arch-node-t { font-size: 9px; letter-spacing: .12em; fill: var(--moon); }
+.arch-gate-t { font-size: 11px; letter-spacing: .12em; fill: var(--ice); }
+.arch-mirror-t { font-size: 8.5px; letter-spacing: .12em; fill: var(--fog); }
+
+/* Вторая схема — не вторая топология, а её сжатие: те же токены, вдвое ниже,
+   и числа «было → стало» вместо связей. */
+.arch-min { margin-top: 2.25rem; }
+.arch-node2 { font-size: 11px; letter-spacing: .04em; fill: var(--frost); }
+.arch-was { font-size: 13px; fill: var(--fog); text-decoration: line-through; }
+.arch-now { font-size: 15px; fill: var(--ice); }
+.arch-arrow { font-size: 13px; fill: var(--blueprint); }
+
+.arch-note {
+  margin-top: 1rem; max-width: var(--prose);
+  font-size: 14px; line-height: 1.55; color: var(--fog);
+}
+
+@media (max-width: 720px) {
+  /* Схема шире экрана и прокручивается вбок; растушёванный край — единственный
+     намёк, что за PROD что-то есть. Тот же приём, что у пайплайна. */
+  .arch-scroll {
+    -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 40px), transparent);
+            mask-image: linear-gradient(90deg, #000 calc(100% - 40px), transparent);
+  }
+}
+
 .jlist { list-style: none; display: flex; flex-direction: column; gap: .8rem; }
 /* Скрытые пункты и кнопка раскрытия. Класс вешает JS: без него список
    остаётся полным, и ни одна строка опыта не пропадает. */
@@ -888,7 +929,7 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
   border-radius: var(--r-card);
   padding: 1rem 1.1rem;
   position: relative;
-  transition: box-shadow .25s, transform .25s, opacity .25s;
+  transition: box-shadow var(--t-base), transform var(--t-base), opacity var(--t-base);
 }
 .skill-tile:hover { box-shadow: inset 0 1px 1px rgba(216,236,248,.26), var(--halo); transform: translateY(-3px); }
 .skill-tile.sf-dim { opacity: .18; }
@@ -932,7 +973,7 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
   border: 1px solid var(--edge);
   box-shadow: inset 0 1px 1px rgba(216,236,248,.16);
   border-radius: var(--r-pill); padding: .45rem 1.25rem .45rem .45rem;
-  transition: box-shadow .25s, transform .25s;
+  transition: box-shadow var(--t-base), transform var(--t-base);
 }
 .cert-pill:hover {
   box-shadow: inset 0 1px 1px rgba(216,236,248,.3), var(--halo); transform: translateY(-2px);
@@ -994,7 +1035,7 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
   font-size: 15px; font-weight: 500; letter-spacing: -.01em;
   color: var(--moon); margin-bottom: .9rem;
   padding-bottom: .9rem; border-bottom: 1px solid var(--edge);
-  position: relative; z-index: 1;
+  position: relative; z-index: var(--z-base);
 }
 .ach-val {
   font-family: var(--font-display);
@@ -1007,7 +1048,7 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
   -webkit-background-clip: text; background-clip: text;
   -webkit-text-fill-color: transparent;
   font-variant-numeric: tabular-nums;
-  position: relative; z-index: 1;
+  position: relative; z-index: var(--z-base);
 }
 /* No per-colour override here. `background:` is a shorthand and resets
    background-clip to border-box, which killed the text clip above and painted
@@ -1027,7 +1068,7 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
   -webkit-text-fill-color: var(--violet-lt);
 }
 .ach-now { white-space: nowrap; }
-.ach-text { font-size: 16px; color: var(--fog); line-height: 1.5; max-width: 40ch; position: relative; z-index: 1; }
+.ach-text { font-size: 16px; color: var(--fog); line-height: 1.5; max-width: 40ch; position: relative; z-index: var(--z-base); }
 .ach-text strong { color: var(--frost); font-weight: 500; }
 
 /* Sparklines removed: they charted invented numbers. A picture that looks
@@ -1078,7 +1119,7 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
   background: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(102,58,243,.26), transparent 70%);
   filter: blur(40px); pointer-events: none;
 }
-#cta > * { position: relative; z-index: 1; }
+#cta > * { position: relative; z-index: var(--z-base); }
 .cta-terminal .terminal-body { padding: 28px; font-size: 14px; }
 .cta-terminal .tl { margin-bottom: 26px; }
 .cta-terminal .terminal-title { font-size: 12px; }
@@ -1169,7 +1210,7 @@ footer { border-top: 1px solid var(--edge); padding: 3rem 0; }
 
 /* ── BACK TO TOP — the one violet action ── */
 #back-to-top {
-  position: fixed; bottom: 2rem; right: 2rem; z-index: 99;
+  position: fixed; bottom: 2rem; right: 2rem; z-index: var(--z-fab);
   width: 52px; height: 52px;
   background: var(--violet); border: none;
   border-radius: 9999px; color: var(--white);
@@ -1198,7 +1239,7 @@ body.lang-en       [data-lang="ru"] { display: none !important; }
 
 /* ── SCROLL PROGRESS ── */
 #scroll-progress {
-  position: fixed; top: 0; left: 0; z-index: 999;
+  position: fixed; top: 0; left: 0; z-index: var(--z-rail);
   height: 2px; width: 100%;
   background: linear-gradient(90deg, var(--violet), var(--blueprint));
   /* transform вместо width: ширина пересчитывает макет на каждом кадре
@@ -1209,7 +1250,7 @@ body.lang-en       [data-lang="ru"] { display: none !important; }
 
 /* ── HAMBURGER ── */
 .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; }
-.nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--moon); border-radius: var(--r-pill); transition: transform .22s, opacity .22s; }
+.nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--moon); border-radius: var(--r-pill); transition: transform var(--t-base), opacity var(--t-base); }
 .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
 .nav-hamburger.open span:nth-child(2) { opacity: 0; }
 .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
@@ -1238,7 +1279,7 @@ body.lang-en       [data-lang="ru"] { display: none !important; }
     background: rgba(5,6,15,.97);
     backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--edge);
-    flex-direction: column; padding: .75rem 1.25rem 1.25rem; gap: .25rem; z-index: 199;
+    flex-direction: column; padding: .75rem 1.25rem 1.25rem; gap: .25rem; z-index: var(--z-menu);
   }
   .nav-links.open { display: flex; }
   .nav-links a { font-size: 16px; padding: .7rem 1rem; }
@@ -1276,7 +1317,7 @@ body.lang-en       [data-lang="ru"] { display: none !important; }
    размер и контраст указателя настраиваются в разделе спец­возможностей,
    и `cursor: none` перекрывал эту настройку целиком. */
 #cursor-dot, #cursor-ring {
-  position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
+  position: fixed; top: 0; left: 0; pointer-events: none; z-index: var(--z-cursor);
   border-radius: 50%; transform: translate(-50%, -50%);
   opacity: 0; transition: opacity .3s;
 }
@@ -1326,7 +1367,7 @@ body.cur-hover #cursor-dot { transform: translate(-50%, -50%) scale(.6); }
 /* ── PRINT ── */
 @media print {
   #scroll-progress, #back-to-top, nav, .hero-terminal, .ticket, .hero-sky,
-  .pipeline-wrap, .cta-terminal, .edge-ruler, .edge-meta,
+  .pipeline-wrap, .cta-terminal,
   #bg-net, #cursor-dot, #cursor-ring { display: none !important; }
   body { background: #fff !important; color: #111 !important; animation: none !important; font-size: 10pt; }
   body::before { display: none !important; }
