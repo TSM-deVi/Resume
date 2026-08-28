@@ -780,23 +780,13 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
   .job-simple .job-company-block { grid-template-rows: auto 1fr; }
 }
 
-/* Карточка со схемой выходит из двухколоночной сетки. Схема — не проза, ей
-   нужна вся ширина карточки: в текстовой колонке 644px её содержимое рисуется
-   масштабом 0.83, и подписи падают до 7-8px. А липкая колонка с названием
-   компании при прокрутке неизбежно наезжала бы на широкую схему, поэтому
-   здесь название становится обычной шапкой сверху. */
+/* Схемы — отдельная строка сетки во всю ширину карточки. Так текст остаётся
+   во второй колонке и выравнивается с соседними карточками (иначе содержимое
+   ДЮК начиналось на 41px от края против 315px у остальных), а чертежу
+   достаётся вся ширина: в колонке 644px он рисовался масштабом 0.83 и подписи
+   падали до 7px. */
 @media (min-width: 900px) {
-  .job-company-block.has-arch { display: block; }
-  /* Карточка стала шириной 918px, а пункты списка держат меру 60ch. Без
-     ограничения заголовки списка растягивались на всю ширину, и блок текста
-     получал два разных правых края — из-за этого он и выглядел поплывшим. */
-  .job-company-block.has-arch .jlist { max-width: var(--prose); }
-  .job-company-block.has-arch > .job-company-hdr {
-    position: static;
-    flex-direction: row; align-items: flex-start; justify-content: space-between;
-    gap: 1rem; margin-bottom: 1.75rem;
-    padding-bottom: 1.25rem; border-bottom: 1px solid var(--edge);
-  }
+  .job-company-block.has-arch > .arch { grid-column: 1 / -1; margin-top: 2.5rem; }
 }
 
 

@@ -513,7 +513,105 @@
               </div>
             </div>
 
-            <figure class="arch">
+            <ul class="jlist" data-lang="ru">
+              <li>Проектная работа: production-контур мультиагентной low-code платформы для заказчика банковского сектора — спроектирован, развёрнут, сдан заказчику и закрыт в июле 2026.</li>
+              <li class="jlist-proj">ПРОЕКТ 1 — ОСНОВНОЙ, МАКСИМАЛЬНАЯ КОНФИГУРАЦИЯ. Enterprise-контур заказчика банковского сектора на VMware Cloud Director (платформа Cloud.ru)</li>
+              <li class="jlist-head">Инфраструктура и изоляция</li>
+              <li>Заказчик предоставил доступ в <strong>VMware Cloud Director на Cloud.ru</strong> — всё внутри разворачивал сам: виртуальные ЦОД (vDC), контуры, сети и сервисы</li>
+              <li>Развернул с нуля три изолированных контура <strong>DEV / INF / PROD</strong>: отдельные виртуальные ЦОД, группировка сервисов по vApp, сетевая сегментация. Суммарно <strong>63 виртуальные машины</strong></li>
+              <li>DEV и PROD — зеркальные контуры 1:1, каждый 28 VM / ~90 vCPU / ~190 GB RAM / ~2.8 TB дисков; провёл right-sizing по компонентам и подготовил ресурсный план</li>
+              <li>Состав прикладного контура: Kubernetes (master + 3 worker), GitLab Runner, Harbor, HashiCorp <strong>Vault</strong>, PostgreSQL (кластер 3 ноды + 2 standalone), Redis (2 ноды), RabbitMQ, Qdrant (2 ноды), Vespa, ClickHouse, MinIO, Envoy, OPA/OPAL, Keycloak, SmartSearch, Langflow, Langfuse, LiteLLM, proxy-service, внутренние DNS и CA, балансировщик, <strong>jump host</strong></li>
+              <li>INF — контур сквозных сервисов (7 VM): GitLab, центральный <strong>Harbor</strong>, <strong>Nginx</strong>, Prometheus, Grafana, Loki; вынес общие сервисы из прикладных контуров</li>
+              <li>Двухуровневая схема реестров образов: центральный <strong>Harbor</strong> на INF + локальные на DEV и PROD — меньше внешнего трафика при сохранении изоляции</li>
+              <li class="jlist-head">Kubernetes и доставка</li>
+              <li>Развернул <strong>Kubernetes-кластер</strong> (master + 3 worker) на виртуальных машинах: <strong>Helm</strong>-чарты приложений, namespaces, services, deployments, pull secrets, сетевая маршрутизация</li>
+              <li>Настроил <strong>GitLab CI/CD</strong>: build, scan, deploy, manual production jobs, разделение dev/prod окружений; шаблоны пайплайнов для Langflow Agent и Code Agent</li>
+              <li>Выстроил GitLab-only flow: изменения только через merge requests и CI-джобы, runtime-верификация и процедуры отката</li>
+              <li>IaC: <strong>Terraform</strong> и <strong>Ansible</strong> — роли, inventory, плейбуки, GitLab CI manual jobs; идемпотентность и воспроизводимость окружений, миграции, резервное копирование и восстановление</li>
+              <li>Формализовал порядок безопасного применения изменений: pre-check → change → verification → rollback, со smoke-тестами на каждом этапе</li>
+              <li class="jlist-head">Service mesh, доступ и безопасность</li>
+              <li>Внедрил <strong>Istio + Kiali</strong> для Kubernetes-workload’ов и VM-backed сервисов: Gateway, VirtualService, ServiceEntry, DestinationRule, AuthorizationPolicy, WorkloadGroup</li>
+              <li>Настроил mesh DNS/VIP-маршрутизацию и allowed/denied smoke-тесты доступа между сервисами</li>
+              <li>Построил авторизационный слой <strong>Envoy + OPA + OPAL</strong> через ext_authz, политики подтягиваются из GitLab</li>
+              <li>Подключил SSO через <strong>Keycloak/OIDC</strong> для SmartSearch, Langflow, Langfuse и Grafana; разбирал проблемы callback URL, ролей, user sync и прав</li>
+              <li>Сетевая связность между изолированными контурами — на <strong>firewall и NAT</strong> в <strong>VMware Cloud Director</strong>: правила доступа между DEV, INF и PROD открывались точечно, под конкретные сервисы и порты, изоляция контуров при этом сохранялась</li>
+              <li>Периметровая безопасность на стороне <strong>VMware Cloud Director</strong>: firewall-правила, NAT, сегментация сетей. Публикация сервисов наружу — через <strong>Nginx</strong> на моей стороне, поверх которого на стороне заказчика стоял WAF</li>
+              <li>Настроил доступ внутри контуров: <strong>jump host</strong> в каждом контуре, распространение собственных SSH-ключей на целевые ВМ. Заказчик выдавал вход через свой <strong>PAM</strong> — итоговый путь администратора: PAM → jump host контура → целевая ВМ</li>
+              <li>Jump host развёрнут в каждом из трёх контуров (<strong>DEV / INF / PROD</strong>) как единственная точка входа; прямой доступ из внешней сети закрыт</li>
+              <li>Отдельный машинный путь для CI/CD: <strong>bastion</strong> на <strong>jump host</strong> DEV и PROD, через который GitLab Runner с контура INF ходит в эти контуры — доступ раннера изолирован от административного</li>
+              <li><strong>TLS/PKI</strong>: внутренний центр сертификации, перевыпуск сертификатов с SAN, TLS verification, защищённые service-to-service соединения</li>
+              <li>Сетевая безопасность на хостах: UFW и firewall-правила, ограничение портов, сегментация доступа, проверка plaintext- и TLS-эндпоинтов</li>
+              <li>Внутренний DNS и балансировка трафика между сервисами</li>
+              <li><strong>Nginx</strong> как production-публикация сервисов: маршрутизация, reverse proxy, заголовки CSP</li>
+              <li><strong>Vault</strong>: GitLab- и service-токены, секреты приложений, схема для External Secrets</li>
+              <li class="jlist-head">Наблюдаемость и эксплуатация</li>
+              <li>Развернул сквозной мониторинг и логирование: <strong>Prometheus, Grafana, Loki, Promtail</strong> — сбор метрик и логов с прикладных контуров в единые дашборды по Kubernetes, Envoy/OPA/OPAL и прикладным сервисам</li>
+              <li>LLM-интеграции: LiteLLM, GigaChat, Ollama, Vespa, embedding/search endpoints; разделял инфраструктурные проблемы, ошибки внешних API и ошибки конфигурации</li>
+              <li>Сопровождение production-приложений: Langflow, Langfuse, SmartSearch, Telegram Langflow Proxy; интеграция backend-сервисов с Langfuse через внутренний mesh-endpoint без изменения browser-facing URL</li>
+              <li>Разбор production-инцидентов: TLS SAN mismatch, Redis ACL/NOPERM, deprecated queue blocker в RabbitMQ, MinIO mesh timeout, CSP blocker в nginx, исчерпание PostgreSQL connections, недоступность Langflow API, <strong>Harbor</strong> auth, переполнение диска Docker JSON-логами, ClickHouse log storm, <strong>Vault</strong> sealed / raft leader, GitLab 502</li>
+              <li>Read-only диагностика и runtime-проверки через SSH, Kubernetes, GitLab pipelines и health checks — с sanitized-логами, без раскрытия секретов</li>
+              <li>Эксплуатационная документация: infrastructure inventory, runbooks, change log, acceptance evidence, compliance matrix; сверка контуров с требованиями ПМИ/КБ/SOC</li>
+              <li>Поддержка команд разработки и QA: консультации по инфраструктуре, участие в релизах, разбор инфраструктурных проблем</li>
+              <li>Участие в проектировании архитектуры production-контура, внедрении DevOps/SRE-практик и повышении надёжности платформы</li>
+              <li class="jlist-proj">ПРОЕКТ 2 — МИНИМАЛЬНАЯ КОНФИГУРАЦИЯ. Копия основного контура, свёрнутая в один контур вместо трёх, на публичном облаке Timeweb Cloud под задачи разработки</li>
+              <li>Воспроизвёл архитектуру основного контура в одном контуре вместо трёх изолированных (<strong>DEV / INF / PROD</strong>): состав сервисов и схема их взаимодействия сохранены, сквозные сервисы INF свёрнуты внутрь единого контура</li>
+              <li>Уложил платформу enterprise-масштаба (28 VM, ~90 vCPU, ~190 GB RAM) в 10 VM, 34 vCPU, 96 GB RAM, 1.8 TB NVMe: повторный right-sizing, консолидация сервисов, снятие production-only зависимостей</li>
+              <li>Архитектурные решения при сокращении: single-node Kubernetes/k3s вместо кластера master + 3 worker; <strong>Vault</strong> + RabbitMQ и Qdrant + Redis на общих узлах; standalone PostgreSQL и <strong>ClickHouse</strong> вместо кластеров; часть прикладных сервисов на отдельный Docker-узел; выделенный узел мониторинга</li>
+              <li>Без enterprise-обвязки: Nginx как единственный edge-router, конфиг под управлением GitLab-репозитория — балансировщик, WAF, <strong>bastion</strong> и <strong>PAM</strong> остались только в банковском контуре</li>
+              <li>Собственный GitLab CE внутри контура вместо централизованного CI/CD на INF</li>
+              <li class="jlist-stack"><span class="jlist-stack-k">СТЕК:</span> VMware Cloud Director (Cloud.ru), vDC, vApp, Timeweb Cloud, Kubernetes, k3s, Helm, GitLab CI/CD, GitLab Runner, GitLab CE, Docker, Docker Compose, Terraform, Ansible, Harbor, HashiCorp Vault, External Secrets, Keycloak/OIDC, Istio, Kiali, Envoy, OPA/OPAL, ext_authz, AuthorizationPolicy, TLS/PKI, внутренний CA, Nginx, CSP, UFW, bastion, jump host, SSH, PostgreSQL, Patroni, ClickHouse, Redis, RabbitMQ, MinIO, Qdrant, Vespa, Prometheus, Grafana, Loki, Promtail, LiteLLM, Ollama, GigaChat, Langflow, Langfuse, SmartSearch, Bash, Python</li>
+            </ul>
+            <ul class="jlist" data-lang="en">
+              <li>Project engagement: the production environment of a multi-agent low-code platform for a banking-sector client — designed, deployed, handed over and closed in July 2026.</li>
+              <li class="jlist-proj">PROJECT 1 — PRIMARY, MAXIMUM CONFIGURATION. Enterprise environment for a banking-sector client on VMware Cloud Director (Cloud.ru platform)</li>
+              <li class="jlist-head">Infrastructure and isolation</li>
+              <li>The client provided access to <strong>VMware Cloud Director on Cloud.ru</strong> — everything inside I built myself: virtual data centers (vDC), environments, networks and services</li>
+              <li>Deployed three isolated <strong>DEV / INF / PROD</strong> environments from scratch: separate virtual data centers, services grouped into vApps, network segmentation. <strong>63 virtual machines</strong> in total</li>
+              <li>DEV and PROD are mirrored 1:1, each 28 VMs / ~90 vCPU / ~190 GB RAM / ~2.8 TB of disk; performed per-component right-sizing and prepared a resource plan</li>
+              <li>Application environment stack: Kubernetes (master + 3 workers), GitLab Runner, Harbor, HashiCorp <strong>Vault</strong>, PostgreSQL (3-node cluster + 2 standalone), Redis (2 nodes), RabbitMQ, Qdrant (2 nodes), Vespa, ClickHouse, MinIO, Envoy, OPA/OPAL, Keycloak, SmartSearch, Langflow, Langfuse, LiteLLM, proxy-service, internal DNS and CA, load balancer, <strong>jump host</strong></li>
+              <li>INF is the cross-cutting services environment (7 VMs): GitLab, central <strong>Harbor</strong>, <strong>Nginx</strong>, Prometheus, Grafana, Loki; moved shared services out of the application environments</li>
+              <li>Two-tier image registry scheme: a central <strong>Harbor</strong> on INF plus local ones on DEV and PROD — less external traffic while preserving isolation</li>
+              <li class="jlist-head">Kubernetes and delivery</li>
+              <li>Deployed a <strong>Kubernetes cluster</strong> (master + 3 workers) on virtual machines: application <strong>Helm</strong> charts, namespaces, services, deployments, pull secrets, network routing</li>
+              <li>Configured <strong>GitLab CI/CD</strong>: build, scan, deploy, manual production jobs, dev/prod environment separation; pipeline templates for Langflow Agent and Code Agent</li>
+              <li>Established a GitLab-only flow: changes only through merge requests and CI jobs, with runtime verification and rollback procedures</li>
+              <li>IaC: <strong>Terraform</strong> and <strong>Ansible</strong> — roles, inventory, playbooks, GitLab CI manual jobs; idempotency and reproducibility of environments, migrations, backup and recovery</li>
+              <li>Formalized the safe change procedure: pre-check → change → verification → rollback, with smoke tests at every stage</li>
+              <li class="jlist-head">Service mesh, access and security</li>
+              <li>Introduced <strong>Istio + Kiali</strong> for Kubernetes workloads and VM-backed services: Gateway, VirtualService, ServiceEntry, DestinationRule, AuthorizationPolicy, WorkloadGroup</li>
+              <li>Configured mesh DNS/VIP routing and allowed/denied smoke tests for access between services</li>
+              <li>Built an <strong>Envoy + OPA + OPAL</strong> authorization layer via ext_authz, with policies pulled from GitLab</li>
+              <li>Connected SSO via <strong>Keycloak/OIDC</strong> for SmartSearch, Langflow, Langfuse and Grafana; diagnosed callback URL, role, user-sync and permission issues</li>
+              <li>Connectivity between the isolated environments runs on <strong>firewall and NAT</strong> in <strong>VMware Cloud Director</strong>: access rules between DEV, INF and PROD were opened point by point, for specific services and ports, with environment isolation preserved</li>
+              <li>Perimeter security on the <strong>VMware Cloud Director</strong> side: firewall rules, NAT, network segmentation. Services are published outward through <strong>Nginx</strong> on my side, with the client-side WAF above it</li>
+              <li>Set up access inside the environments: a <strong>jump host</strong> in each one, distributing my own SSH keys to the target VMs. The client granted entry through their <strong>PAM</strong> — the resulting administrator path is PAM → the environment jump host → the target VM</li>
+              <li>A <strong>jump host</strong> is deployed in each of the three environments (<strong>DEV / INF / PROD</strong>) as the single entry point; direct access from the external network is closed</li>
+              <li>A separate machine path for CI/CD: a <strong>bastion</strong> on the DEV and PROD <strong>jump host</strong>s that the GitLab Runner from INF goes through — the runner access is isolated from the administrative one</li>
+              <li><strong>TLS/PKI</strong>: an internal certificate authority, certificate reissue with SAN, TLS verification, secured service-to-service connections</li>
+              <li>Host-level network security: UFW and firewall rules, port restrictions, access segmentation, verification of plaintext and TLS endpoints</li>
+              <li>Internal DNS and traffic balancing between services</li>
+              <li><strong>Nginx</strong> as the production publication layer for services: routing, reverse proxy, CSP headers</li>
+              <li><strong>Vault</strong>: GitLab and service tokens, application secrets, a scheme for External Secrets</li>
+              <li class="jlist-head">Observability and operations</li>
+              <li>Deployed end-to-end monitoring and logging: <strong>Prometheus, Grafana, Loki, Promtail</strong> — collecting metrics and logs from the application environments into unified dashboards for Kubernetes, Envoy/OPA/OPAL and application services</li>
+              <li>LLM integrations: LiteLLM, GigaChat, Ollama, Vespa, embedding/search endpoints; separated infrastructure issues from external API and configuration errors</li>
+              <li>Supporting production applications: Langflow, Langfuse, SmartSearch, Telegram Langflow Proxy; integrating backend services with Langfuse through an internal mesh endpoint without changing browser-facing URLs</li>
+              <li>Production incident work: TLS SAN mismatch, Redis ACL/NOPERM, a deprecated queue blocker in RabbitMQ, MinIO mesh timeout, a CSP blocker in nginx, PostgreSQL connection exhaustion, Langflow API downtime, <strong>Harbor</strong> auth, disk overflow from Docker JSON logs, ClickHouse log storms, <strong>Vault</strong> sealed / raft leader, GitLab 502s</li>
+              <li>Read-only diagnostics and runtime checks via SSH, Kubernetes, GitLab pipelines and health checks — with sanitized logs and no exposure of secrets</li>
+              <li>Operational documentation: infrastructure inventory, runbooks, change log, acceptance evidence, compliance matrix; verifying the environments against PMI/KB/SOC requirements</li>
+              <li>Supporting development and QA teams: infrastructure consulting, participation in releases, resolving infrastructure issues</li>
+              <li>Taking part in designing the production architecture, introducing DevOps/SRE practices and improving platform reliability</li>
+              <li class="jlist-proj">PROJECT 2 — MINIMUM CONFIGURATION. A copy of the primary environment folded into one instead of three, on the Timeweb Cloud public cloud for development work</li>
+              <li>Reproduced the architecture of the primary environment in a single environment instead of three isolated ones (<strong>DEV / INF / PROD</strong>): the service composition and their interaction scheme were preserved, with INF cross-cutting services folded inside</li>
+              <li>Fitted an enterprise-scale platform (28 VMs, ~90 vCPU, ~190 GB RAM) into 10 VMs, 34 vCPU, 96 GB RAM, 1.8 TB NVMe: repeated right-sizing, service consolidation, removal of production-only dependencies</li>
+              <li>Architectural decisions when scaling down: single-node Kubernetes/k3s instead of a master + 3 worker cluster; <strong>Vault</strong> + RabbitMQ and Qdrant + Redis on shared nodes; standalone PostgreSQL and <strong>ClickHouse</strong> instead of clusters; some application services on a separate Docker node; a dedicated monitoring node</li>
+              <li>No enterprise wrapping: Nginx as the only edge router with its config managed from a GitLab repository — the load balancer, WAF, <strong>bastion</strong> and <strong>PAM</strong> stayed in the banking environment only</li>
+              <li>A self-hosted GitLab CE inside the environment instead of centralized CI/CD on INF</li>
+              <li class="jlist-stack"><span class="jlist-stack-k">STACK:</span> VMware Cloud Director (Cloud.ru), vDC, vApp, Timeweb Cloud, Kubernetes, k3s, Helm, GitLab CI/CD, GitLab Runner, GitLab CE, Docker, Docker Compose, Terraform, Ansible, Harbor, HashiCorp Vault, External Secrets, Keycloak/OIDC, Istio, Kiali, Envoy, OPA/OPAL, ext_authz, AuthorizationPolicy, TLS/PKI, внутренний CA, Nginx, CSP, UFW, bastion, jump host, SSH, PostgreSQL, Patroni, ClickHouse, Redis, RabbitMQ, MinIO, Qdrant, Vespa, Prometheus, Grafana, Loki, Promtail, LiteLLM, Ollama, GigaChat, Langflow, Langfuse, SmartSearch, Bash, Python</li>
+            </ul>
+
+          </div>
+          <figure class="arch">
               <figcaption class="arch-cap">
                 <span class="arch-cap-t" data-lang="ru">Топология банковского контура</span>
                 <span class="arch-cap-t" data-lang="en">Banking environment topology</span>
@@ -682,7 +780,7 @@
               </ul>
             </figure>
 
-            <figure class="arch arch-min">
+          <figure class="arch arch-min">
               <figcaption class="arch-cap">
                 <span class="arch-cap-t" data-lang="ru">Та же платформа, свёрнутая</span>
                 <span class="arch-cap-t" data-lang="en">The same platform, folded down</span>
@@ -744,105 +842,6 @@
                 </svg>
               </div>
             </figure>
-
-            <ul class="jlist" data-lang="ru">
-              <li>Проектная работа: production-контур мультиагентной low-code платформы для заказчика банковского сектора — спроектирован, развёрнут, сдан заказчику и закрыт в июле 2026.</li>
-              <li class="jlist-proj">ПРОЕКТ 1 — ОСНОВНОЙ, МАКСИМАЛЬНАЯ КОНФИГУРАЦИЯ. Enterprise-контур заказчика банковского сектора на VMware Cloud Director (платформа Cloud.ru)</li>
-              <li class="jlist-head">Инфраструктура и изоляция</li>
-              <li>Заказчик предоставил доступ в <strong>VMware Cloud Director на Cloud.ru</strong> — всё внутри разворачивал сам: виртуальные ЦОД (vDC), контуры, сети и сервисы</li>
-              <li>Развернул с нуля три изолированных контура <strong>DEV / INF / PROD</strong>: отдельные виртуальные ЦОД, группировка сервисов по vApp, сетевая сегментация. Суммарно <strong>63 виртуальные машины</strong></li>
-              <li>DEV и PROD — зеркальные контуры 1:1, каждый 28 VM / ~90 vCPU / ~190 GB RAM / ~2.8 TB дисков; провёл right-sizing по компонентам и подготовил ресурсный план</li>
-              <li>Состав прикладного контура: Kubernetes (master + 3 worker), GitLab Runner, Harbor, HashiCorp <strong>Vault</strong>, PostgreSQL (кластер 3 ноды + 2 standalone), Redis (2 ноды), RabbitMQ, Qdrant (2 ноды), Vespa, ClickHouse, MinIO, Envoy, OPA/OPAL, Keycloak, SmartSearch, Langflow, Langfuse, LiteLLM, proxy-service, внутренние DNS и CA, балансировщик, <strong>jump host</strong></li>
-              <li>INF — контур сквозных сервисов (7 VM): GitLab, центральный <strong>Harbor</strong>, <strong>Nginx</strong>, Prometheus, Grafana, Loki; вынес общие сервисы из прикладных контуров</li>
-              <li>Двухуровневая схема реестров образов: центральный <strong>Harbor</strong> на INF + локальные на DEV и PROD — меньше внешнего трафика при сохранении изоляции</li>
-              <li class="jlist-head">Kubernetes и доставка</li>
-              <li>Развернул <strong>Kubernetes-кластер</strong> (master + 3 worker) на виртуальных машинах: <strong>Helm</strong>-чарты приложений, namespaces, services, deployments, pull secrets, сетевая маршрутизация</li>
-              <li>Настроил <strong>GitLab CI/CD</strong>: build, scan, deploy, manual production jobs, разделение dev/prod окружений; шаблоны пайплайнов для Langflow Agent и Code Agent</li>
-              <li>Выстроил GitLab-only flow: изменения только через merge requests и CI-джобы, runtime-верификация и процедуры отката</li>
-              <li>IaC: <strong>Terraform</strong> и <strong>Ansible</strong> — роли, inventory, плейбуки, GitLab CI manual jobs; идемпотентность и воспроизводимость окружений, миграции, резервное копирование и восстановление</li>
-              <li>Формализовал порядок безопасного применения изменений: pre-check → change → verification → rollback, со smoke-тестами на каждом этапе</li>
-              <li class="jlist-head">Service mesh, доступ и безопасность</li>
-              <li>Внедрил <strong>Istio + Kiali</strong> для Kubernetes-workload’ов и VM-backed сервисов: Gateway, VirtualService, ServiceEntry, DestinationRule, AuthorizationPolicy, WorkloadGroup</li>
-              <li>Настроил mesh DNS/VIP-маршрутизацию и allowed/denied smoke-тесты доступа между сервисами</li>
-              <li>Построил авторизационный слой <strong>Envoy + OPA + OPAL</strong> через ext_authz, политики подтягиваются из GitLab</li>
-              <li>Подключил SSO через <strong>Keycloak/OIDC</strong> для SmartSearch, Langflow, Langfuse и Grafana; разбирал проблемы callback URL, ролей, user sync и прав</li>
-              <li>Сетевая связность между изолированными контурами — на <strong>firewall и NAT</strong> в <strong>VMware Cloud Director</strong>: правила доступа между DEV, INF и PROD открывались точечно, под конкретные сервисы и порты, изоляция контуров при этом сохранялась</li>
-              <li>Периметровая безопасность на стороне <strong>VMware Cloud Director</strong>: firewall-правила, NAT, сегментация сетей. Публикация сервисов наружу — через <strong>Nginx</strong> на моей стороне, поверх которого на стороне заказчика стоял WAF</li>
-              <li>Настроил доступ внутри контуров: <strong>jump host</strong> в каждом контуре, распространение собственных SSH-ключей на целевые ВМ. Заказчик выдавал вход через свой <strong>PAM</strong> — итоговый путь администратора: PAM → jump host контура → целевая ВМ</li>
-              <li>Jump host развёрнут в каждом из трёх контуров (<strong>DEV / INF / PROD</strong>) как единственная точка входа; прямой доступ из внешней сети закрыт</li>
-              <li>Отдельный машинный путь для CI/CD: <strong>bastion</strong> на <strong>jump host</strong> DEV и PROD, через который GitLab Runner с контура INF ходит в эти контуры — доступ раннера изолирован от административного</li>
-              <li><strong>TLS/PKI</strong>: внутренний центр сертификации, перевыпуск сертификатов с SAN, TLS verification, защищённые service-to-service соединения</li>
-              <li>Сетевая безопасность на хостах: UFW и firewall-правила, ограничение портов, сегментация доступа, проверка plaintext- и TLS-эндпоинтов</li>
-              <li>Внутренний DNS и балансировка трафика между сервисами</li>
-              <li><strong>Nginx</strong> как production-публикация сервисов: маршрутизация, reverse proxy, заголовки CSP</li>
-              <li><strong>Vault</strong>: GitLab- и service-токены, секреты приложений, схема для External Secrets</li>
-              <li class="jlist-head">Наблюдаемость и эксплуатация</li>
-              <li>Развернул сквозной мониторинг и логирование: <strong>Prometheus, Grafana, Loki, Promtail</strong> — сбор метрик и логов с прикладных контуров в единые дашборды по Kubernetes, Envoy/OPA/OPAL и прикладным сервисам</li>
-              <li>LLM-интеграции: LiteLLM, GigaChat, Ollama, Vespa, embedding/search endpoints; разделял инфраструктурные проблемы, ошибки внешних API и ошибки конфигурации</li>
-              <li>Сопровождение production-приложений: Langflow, Langfuse, SmartSearch, Telegram Langflow Proxy; интеграция backend-сервисов с Langfuse через внутренний mesh-endpoint без изменения browser-facing URL</li>
-              <li>Разбор production-инцидентов: TLS SAN mismatch, Redis ACL/NOPERM, deprecated queue blocker в RabbitMQ, MinIO mesh timeout, CSP blocker в nginx, исчерпание PostgreSQL connections, недоступность Langflow API, <strong>Harbor</strong> auth, переполнение диска Docker JSON-логами, ClickHouse log storm, <strong>Vault</strong> sealed / raft leader, GitLab 502</li>
-              <li>Read-only диагностика и runtime-проверки через SSH, Kubernetes, GitLab pipelines и health checks — с sanitized-логами, без раскрытия секретов</li>
-              <li>Эксплуатационная документация: infrastructure inventory, runbooks, change log, acceptance evidence, compliance matrix; сверка контуров с требованиями ПМИ/КБ/SOC</li>
-              <li>Поддержка команд разработки и QA: консультации по инфраструктуре, участие в релизах, разбор инфраструктурных проблем</li>
-              <li>Участие в проектировании архитектуры production-контура, внедрении DevOps/SRE-практик и повышении надёжности платформы</li>
-              <li class="jlist-proj">ПРОЕКТ 2 — МИНИМАЛЬНАЯ КОНФИГУРАЦИЯ. Копия основного контура, свёрнутая в один контур вместо трёх, на публичном облаке Timeweb Cloud под задачи разработки</li>
-              <li>Воспроизвёл архитектуру основного контура в одном контуре вместо трёх изолированных (<strong>DEV / INF / PROD</strong>): состав сервисов и схема их взаимодействия сохранены, сквозные сервисы INF свёрнуты внутрь единого контура</li>
-              <li>Уложил платформу enterprise-масштаба (28 VM, ~90 vCPU, ~190 GB RAM) в 10 VM, 34 vCPU, 96 GB RAM, 1.8 TB NVMe: повторный right-sizing, консолидация сервисов, снятие production-only зависимостей</li>
-              <li>Архитектурные решения при сокращении: single-node Kubernetes/k3s вместо кластера master + 3 worker; <strong>Vault</strong> + RabbitMQ и Qdrant + Redis на общих узлах; standalone PostgreSQL и <strong>ClickHouse</strong> вместо кластеров; часть прикладных сервисов на отдельный Docker-узел; выделенный узел мониторинга</li>
-              <li>Без enterprise-обвязки: Nginx как единственный edge-router, конфиг под управлением GitLab-репозитория — балансировщик, WAF, <strong>bastion</strong> и <strong>PAM</strong> остались только в банковском контуре</li>
-              <li>Собственный GitLab CE внутри контура вместо централизованного CI/CD на INF</li>
-              <li class="jlist-stack"><span class="jlist-stack-k">СТЕК:</span> VMware Cloud Director (Cloud.ru), vDC, vApp, Timeweb Cloud, Kubernetes, k3s, Helm, GitLab CI/CD, GitLab Runner, GitLab CE, Docker, Docker Compose, Terraform, Ansible, Harbor, HashiCorp Vault, External Secrets, Keycloak/OIDC, Istio, Kiali, Envoy, OPA/OPAL, ext_authz, AuthorizationPolicy, TLS/PKI, внутренний CA, Nginx, CSP, UFW, bastion, jump host, SSH, PostgreSQL, Patroni, ClickHouse, Redis, RabbitMQ, MinIO, Qdrant, Vespa, Prometheus, Grafana, Loki, Promtail, LiteLLM, Ollama, GigaChat, Langflow, Langfuse, SmartSearch, Bash, Python</li>
-            </ul>
-            <ul class="jlist" data-lang="en">
-              <li>Project engagement: the production environment of a multi-agent low-code platform for a banking-sector client — designed, deployed, handed over and closed in July 2026.</li>
-              <li class="jlist-proj">PROJECT 1 — PRIMARY, MAXIMUM CONFIGURATION. Enterprise environment for a banking-sector client on VMware Cloud Director (Cloud.ru platform)</li>
-              <li class="jlist-head">Infrastructure and isolation</li>
-              <li>The client provided access to <strong>VMware Cloud Director on Cloud.ru</strong> — everything inside I built myself: virtual data centers (vDC), environments, networks and services</li>
-              <li>Deployed three isolated <strong>DEV / INF / PROD</strong> environments from scratch: separate virtual data centers, services grouped into vApps, network segmentation. <strong>63 virtual machines</strong> in total</li>
-              <li>DEV and PROD are mirrored 1:1, each 28 VMs / ~90 vCPU / ~190 GB RAM / ~2.8 TB of disk; performed per-component right-sizing and prepared a resource plan</li>
-              <li>Application environment stack: Kubernetes (master + 3 workers), GitLab Runner, Harbor, HashiCorp <strong>Vault</strong>, PostgreSQL (3-node cluster + 2 standalone), Redis (2 nodes), RabbitMQ, Qdrant (2 nodes), Vespa, ClickHouse, MinIO, Envoy, OPA/OPAL, Keycloak, SmartSearch, Langflow, Langfuse, LiteLLM, proxy-service, internal DNS and CA, load balancer, <strong>jump host</strong></li>
-              <li>INF is the cross-cutting services environment (7 VMs): GitLab, central <strong>Harbor</strong>, <strong>Nginx</strong>, Prometheus, Grafana, Loki; moved shared services out of the application environments</li>
-              <li>Two-tier image registry scheme: a central <strong>Harbor</strong> on INF plus local ones on DEV and PROD — less external traffic while preserving isolation</li>
-              <li class="jlist-head">Kubernetes and delivery</li>
-              <li>Deployed a <strong>Kubernetes cluster</strong> (master + 3 workers) on virtual machines: application <strong>Helm</strong> charts, namespaces, services, deployments, pull secrets, network routing</li>
-              <li>Configured <strong>GitLab CI/CD</strong>: build, scan, deploy, manual production jobs, dev/prod environment separation; pipeline templates for Langflow Agent and Code Agent</li>
-              <li>Established a GitLab-only flow: changes only through merge requests and CI jobs, with runtime verification and rollback procedures</li>
-              <li>IaC: <strong>Terraform</strong> and <strong>Ansible</strong> — roles, inventory, playbooks, GitLab CI manual jobs; idempotency and reproducibility of environments, migrations, backup and recovery</li>
-              <li>Formalized the safe change procedure: pre-check → change → verification → rollback, with smoke tests at every stage</li>
-              <li class="jlist-head">Service mesh, access and security</li>
-              <li>Introduced <strong>Istio + Kiali</strong> for Kubernetes workloads and VM-backed services: Gateway, VirtualService, ServiceEntry, DestinationRule, AuthorizationPolicy, WorkloadGroup</li>
-              <li>Configured mesh DNS/VIP routing and allowed/denied smoke tests for access between services</li>
-              <li>Built an <strong>Envoy + OPA + OPAL</strong> authorization layer via ext_authz, with policies pulled from GitLab</li>
-              <li>Connected SSO via <strong>Keycloak/OIDC</strong> for SmartSearch, Langflow, Langfuse and Grafana; diagnosed callback URL, role, user-sync and permission issues</li>
-              <li>Connectivity between the isolated environments runs on <strong>firewall and NAT</strong> in <strong>VMware Cloud Director</strong>: access rules between DEV, INF and PROD were opened point by point, for specific services and ports, with environment isolation preserved</li>
-              <li>Perimeter security on the <strong>VMware Cloud Director</strong> side: firewall rules, NAT, network segmentation. Services are published outward through <strong>Nginx</strong> on my side, with the client-side WAF above it</li>
-              <li>Set up access inside the environments: a <strong>jump host</strong> in each one, distributing my own SSH keys to the target VMs. The client granted entry through their <strong>PAM</strong> — the resulting administrator path is PAM → the environment jump host → the target VM</li>
-              <li>A <strong>jump host</strong> is deployed in each of the three environments (<strong>DEV / INF / PROD</strong>) as the single entry point; direct access from the external network is closed</li>
-              <li>A separate machine path for CI/CD: a <strong>bastion</strong> on the DEV and PROD <strong>jump host</strong>s that the GitLab Runner from INF goes through — the runner access is isolated from the administrative one</li>
-              <li><strong>TLS/PKI</strong>: an internal certificate authority, certificate reissue with SAN, TLS verification, secured service-to-service connections</li>
-              <li>Host-level network security: UFW and firewall rules, port restrictions, access segmentation, verification of plaintext and TLS endpoints</li>
-              <li>Internal DNS and traffic balancing between services</li>
-              <li><strong>Nginx</strong> as the production publication layer for services: routing, reverse proxy, CSP headers</li>
-              <li><strong>Vault</strong>: GitLab and service tokens, application secrets, a scheme for External Secrets</li>
-              <li class="jlist-head">Observability and operations</li>
-              <li>Deployed end-to-end monitoring and logging: <strong>Prometheus, Grafana, Loki, Promtail</strong> — collecting metrics and logs from the application environments into unified dashboards for Kubernetes, Envoy/OPA/OPAL and application services</li>
-              <li>LLM integrations: LiteLLM, GigaChat, Ollama, Vespa, embedding/search endpoints; separated infrastructure issues from external API and configuration errors</li>
-              <li>Supporting production applications: Langflow, Langfuse, SmartSearch, Telegram Langflow Proxy; integrating backend services with Langfuse through an internal mesh endpoint without changing browser-facing URLs</li>
-              <li>Production incident work: TLS SAN mismatch, Redis ACL/NOPERM, a deprecated queue blocker in RabbitMQ, MinIO mesh timeout, a CSP blocker in nginx, PostgreSQL connection exhaustion, Langflow API downtime, <strong>Harbor</strong> auth, disk overflow from Docker JSON logs, ClickHouse log storms, <strong>Vault</strong> sealed / raft leader, GitLab 502s</li>
-              <li>Read-only diagnostics and runtime checks via SSH, Kubernetes, GitLab pipelines and health checks — with sanitized logs and no exposure of secrets</li>
-              <li>Operational documentation: infrastructure inventory, runbooks, change log, acceptance evidence, compliance matrix; verifying the environments against PMI/KB/SOC requirements</li>
-              <li>Supporting development and QA teams: infrastructure consulting, participation in releases, resolving infrastructure issues</li>
-              <li>Taking part in designing the production architecture, introducing DevOps/SRE practices and improving platform reliability</li>
-              <li class="jlist-proj">PROJECT 2 — MINIMUM CONFIGURATION. A copy of the primary environment folded into one instead of three, on the Timeweb Cloud public cloud for development work</li>
-              <li>Reproduced the architecture of the primary environment in a single environment instead of three isolated ones (<strong>DEV / INF / PROD</strong>): the service composition and their interaction scheme were preserved, with INF cross-cutting services folded inside</li>
-              <li>Fitted an enterprise-scale platform (28 VMs, ~90 vCPU, ~190 GB RAM) into 10 VMs, 34 vCPU, 96 GB RAM, 1.8 TB NVMe: repeated right-sizing, service consolidation, removal of production-only dependencies</li>
-              <li>Architectural decisions when scaling down: single-node Kubernetes/k3s instead of a master + 3 worker cluster; <strong>Vault</strong> + RabbitMQ and Qdrant + Redis on shared nodes; standalone PostgreSQL and <strong>ClickHouse</strong> instead of clusters; some application services on a separate Docker node; a dedicated monitoring node</li>
-              <li>No enterprise wrapping: Nginx as the only edge router with its config managed from a GitLab repository — the load balancer, WAF, <strong>bastion</strong> and <strong>PAM</strong> stayed in the banking environment only</li>
-              <li>A self-hosted GitLab CE inside the environment instead of centralized CI/CD on INF</li>
-              <li class="jlist-stack"><span class="jlist-stack-k">STACK:</span> VMware Cloud Director (Cloud.ru), vDC, vApp, Timeweb Cloud, Kubernetes, k3s, Helm, GitLab CI/CD, GitLab Runner, GitLab CE, Docker, Docker Compose, Terraform, Ansible, Harbor, HashiCorp Vault, External Secrets, Keycloak/OIDC, Istio, Kiali, Envoy, OPA/OPAL, ext_authz, AuthorizationPolicy, TLS/PKI, внутренний CA, Nginx, CSP, UFW, bastion, jump host, SSH, PostgreSQL, Patroni, ClickHouse, Redis, RabbitMQ, MinIO, Qdrant, Vespa, Prometheus, Grafana, Loki, Promtail, LiteLLM, Ollama, GigaChat, Langflow, Langfuse, SmartSearch, Bash, Python</li>
-            </ul>
-
-          </div>
         </div>
       </div>
 
