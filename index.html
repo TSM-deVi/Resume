@@ -710,14 +710,14 @@
                   <text class="arch-box-t inf" x="302" y="349">INF</text>
                   <text class="arch-num" x="478" y="349" text-anchor="end">7 VM</text>
                   <line class="arch-rule" x1="302" y1="359" x2="478" y2="359"/>
-                  <text class="arch-item" x="302" y="380" data-lang="ru">gitlab · инфраструктурный</text>
-                  <text class="arch-item" x="302" y="380" data-lang="en">gitlab · infrastructure</text>
-                  <text class="arch-item" x="302" y="399" data-lang="ru">runner · harbor (центр.)</text>
-                  <text class="arch-item" x="302" y="399" data-lang="en">runner · harbor (central)</text>
+                  <text class="arch-item" x="302" y="380" data-lang="ru">gitlab · runner</text>
+                  <text class="arch-item" x="302" y="380" data-lang="en">gitlab · runner</text>
+                  <text class="arch-item" x="302" y="399" data-lang="ru">harbor (центральный)</text>
+                  <text class="arch-item" x="302" y="399" data-lang="en">harbor (central)</text>
                   <text class="arch-item" x="302" y="418" data-lang="ru">monitoring · loki</text>
                   <text class="arch-item" x="302" y="418" data-lang="en">monitoring · loki</text>
-                  <text class="arch-item" x="302" y="437" data-lang="ru">nginx-lb · свой домен</text>
-                  <text class="arch-item" x="302" y="437" data-lang="en">nginx-lb · own domain</text>
+                  <text class="arch-item" x="302" y="437" data-lang="ru">nginx-lb</text>
+                  <text class="arch-item" x="302" y="437" data-lang="en">nginx-lb</text>
                   <text class="arch-mut sm" x="302" y="534" data-lang="ru">21 vCPU · 39 GB · 0.9 TB</text>
                   <text class="arch-mut sm" x="302" y="534" data-lang="en">21 vCPU · 39 GB · 0.9 TB</text>
 
@@ -878,7 +878,7 @@
               <li class="jlist-head">KUBERNETES И КОНТЕЙНЕРИЗАЦИЯ</li>
               <li>Развернул и администрировал <strong>Kubernetes-кластер</strong> на bare-metal: мастер и два воркера на физических серверах, без managed-облака — etcd, CNI, storage и обновления настраивались руками</li>
               <li>Начал поэтапную миграцию из Docker Compose в Kubernetes: перевёл <strong>12+ микросервисов</strong> и выстроил схему для переноса остальных, время деплоя сократилось с ~40 до ~8 минут</li>
-              <li>Администрирование кластера: namespace-изоляция, ресурсные лимиты, HPA, Ingress</li>
+              <li>Администрирование кластера: namespace-изоляция, ресурсные лимиты, RBAC, HPA, Ingress</li>
               <li>Persistent-хранилище кластера на <strong>Longhorn</strong>: distributed block storage поверх дисков нод, тома для stateful-сервисов, репликация и снапшоты</li>
               <li><strong>Helm</strong>-чарты: упаковка сервисов, унификация конфигурации окружений через values</li>
               <li class="jlist-head">CI/CD И GITOPS</li>
@@ -934,7 +934,7 @@
               <li class="jlist-head">KUBERNETES AND CONTAINERIZATION</li>
               <li>Deployed and administered a bare-metal <strong>Kubernetes cluster</strong>: a master and two workers on physical servers, with no managed cloud — etcd, CNI, storage and upgrades configured by hand</li>
               <li>Started a phased migration from Docker Compose to Kubernetes: moved <strong>12+ microservices</strong> and designed the path for the rest, cutting deploy time from ~40 to ~8 minutes</li>
-              <li>Cluster administration: namespace isolation, resource limits, HPA, Ingress</li>
+              <li>Cluster administration: namespace isolation, resource limits, RBAC, HPA, Ingress</li>
               <li>Cluster persistent storage on <strong>Longhorn</strong>: distributed block storage over node disks, volumes for stateful services, replication and snapshots</li>
               <li><strong>Helm</strong> charts: packaging services, unifying environment configuration through values</li>
               <li class="jlist-head">CI/CD AND GITOPS</li>
