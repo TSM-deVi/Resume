@@ -517,14 +517,14 @@
               <li>Проектная работа: production-контур мультиагентной low-code платформы для заказчика банковского сектора — спроектирован, развёрнут, сдан заказчику и закрыт в июле 2026.</li>
               <li class="jlist-proj">ПРОЕКТ 1 — ОСНОВНОЙ, МАКСИМАЛЬНАЯ КОНФИГУРАЦИЯ. Enterprise-контур заказчика банковского сектора на VMware Cloud Director (платформа Cloud.ru)</li>
               <li class="jlist-head">Инфраструктура и изоляция</li>
-              <li>Заказчик предоставил доступ в <strong>VMware Cloud Director на Cloud.ru</strong> — всё внутри разворачивал сам: виртуальные ЦОД (vDC), контуры, сети и сервисы</li>
+              <li>Заказчик предоставил доступ в <strong>VMware Cloud Director на Cloud.ru</strong> — всё внутри разворачивал сам: виртуальные ЦОД (VDC), контуры, сети и сервисы</li>
               <li>Развернул с нуля три изолированных контура <strong>DEV / INF / PROD</strong>: отдельные виртуальные ЦОД, группировка сервисов по vApp, сетевая сегментация. Суммарно <strong>63 виртуальные машины</strong></li>
               <li>DEV и PROD — зеркальные контуры 1:1, каждый 28 VM / ~90 vCPU / ~190 GB RAM / ~2.8 TB дисков; провёл right-sizing по компонентам и подготовил ресурсный план</li>
               <li>Состав прикладного контура: Kubernetes (master + 3 worker), GitLab Runner, Harbor, HashiCorp <strong>Vault</strong>, PostgreSQL (кластер 3 ноды + 2 standalone), Redis (2 ноды), RabbitMQ, Qdrant (2 ноды), Vespa, ClickHouse, MinIO, Envoy, OPA/OPAL, Keycloak, SmartSearch, Langflow, Langfuse, LiteLLM, proxy-service, внутренние DNS и CA, балансировщик, <strong>jump host</strong></li>
               <li>INF — контур сквозных сервисов (7 VM): GitLab, центральный <strong>Harbor</strong>, <strong>Nginx</strong>, Prometheus, Grafana, Loki; вынес общие сервисы из прикладных контуров</li>
               <li>Двухуровневая схема реестров образов: центральный <strong>Harbor</strong> на INF + локальные на DEV и PROD — меньше внешнего трафика при сохранении изоляции</li>
               <li class="jlist-head">Kubernetes и доставка</li>
-              <li>Развернул <strong>Kubernetes-кластер</strong> (master + 3 worker) на виртуальных машинах: <strong>Helm</strong>-чарты приложений, namespaces, services, deployments, pull secrets, сетевая маршрутизация</li>
+              <li>Развернул <strong>Kubernetes-кластер</strong> (master + 3 worker) на виртуальных машинах: <strong>Helm</strong>-чарты приложений, namespaces, RBAC, services, deployments, pull secrets, сетевая маршрутизация</li>
               <li>Настроил <strong>GitLab CI/CD</strong>: build, scan, deploy, manual production jobs, разделение dev/prod окружений; шаблоны пайплайнов для Langflow Agent и Code Agent</li>
               <li>Выстроил GitLab-only flow: изменения только через merge requests и CI-джобы, runtime-верификация и процедуры отката</li>
               <li>IaC: <strong>Terraform</strong> и <strong>Ansible</strong> — роли, inventory, плейбуки, GitLab CI manual jobs; идемпотентность и воспроизводимость окружений, миграции, резервное копирование и восстановление</li>
@@ -564,14 +564,14 @@
               <li>Project engagement: the production environment of a multi-agent low-code platform for a banking-sector client — designed, deployed, handed over and closed in July 2026.</li>
               <li class="jlist-proj">PROJECT 1 — PRIMARY, MAXIMUM CONFIGURATION. Enterprise environment for a banking-sector client on VMware Cloud Director (Cloud.ru platform)</li>
               <li class="jlist-head">Infrastructure and isolation</li>
-              <li>The client provided access to <strong>VMware Cloud Director on Cloud.ru</strong> — everything inside I built myself: virtual data centers (vDC), environments, networks and services</li>
+              <li>The client provided access to <strong>VMware Cloud Director on Cloud.ru</strong> — everything inside I built myself: virtual data centers (VDC), environments, networks and services</li>
               <li>Deployed three isolated <strong>DEV / INF / PROD</strong> environments from scratch: separate virtual data centers, services grouped into vApps, network segmentation. <strong>63 virtual machines</strong> in total</li>
               <li>DEV and PROD are mirrored 1:1, each 28 VMs / ~90 vCPU / ~190 GB RAM / ~2.8 TB of disk; performed per-component right-sizing and prepared a resource plan</li>
               <li>Application environment stack: Kubernetes (master + 3 workers), GitLab Runner, Harbor, HashiCorp <strong>Vault</strong>, PostgreSQL (3-node cluster + 2 standalone), Redis (2 nodes), RabbitMQ, Qdrant (2 nodes), Vespa, ClickHouse, MinIO, Envoy, OPA/OPAL, Keycloak, SmartSearch, Langflow, Langfuse, LiteLLM, proxy-service, internal DNS and CA, load balancer, <strong>jump host</strong></li>
               <li>INF is the cross-cutting services environment (7 VMs): GitLab, central <strong>Harbor</strong>, <strong>Nginx</strong>, Prometheus, Grafana, Loki; moved shared services out of the application environments</li>
               <li>Two-tier image registry scheme: a central <strong>Harbor</strong> on INF plus local ones on DEV and PROD — less external traffic while preserving isolation</li>
               <li class="jlist-head">Kubernetes and delivery</li>
-              <li>Deployed a <strong>Kubernetes cluster</strong> (master + 3 workers) on virtual machines: application <strong>Helm</strong> charts, namespaces, services, deployments, pull secrets, network routing</li>
+              <li>Deployed a <strong>Kubernetes cluster</strong> (master + 3 workers) on virtual machines: application <strong>Helm</strong> charts, namespaces, RBAC, services, deployments, pull secrets, network routing</li>
               <li>Configured <strong>GitLab CI/CD</strong>: build, scan, deploy, manual production jobs, dev/prod environment separation; pipeline templates for Langflow Agent and Code Agent</li>
               <li>Established a GitLab-only flow: changes only through merge requests and CI jobs, with runtime verification and rollback procedures</li>
               <li>IaC: <strong>Terraform</strong> and <strong>Ansible</strong> — roles, inventory, playbooks, GitLab CI manual jobs; idempotency and reproducibility of environments, migrations, backup and recovery</li>
@@ -1000,6 +1000,7 @@
               <li>Резервное копирование и восстановление данных, контроль целостности и доступности информации</li>
               <li>Мониторинг состояния серверов, сетевого оборудования и рабочих станций</li>
               <li>Настройка антивирусной защиты, обновлений и политик безопасности</li>
+              <li>Организовал удалённый доступ пользователей: выделенные виртуальные машины по RDP и терминальные фермы <strong>Remote Desktop Services (RDS)</strong> для массового доступа — публикация приложений, лицензирование, профили и права</li>
               <li>Настроил и перенёс <strong>30+ рабочих станций</strong> и периферийного оборудования при расширении офиса</li>
               <li>Поддержка пользователей через Service Desk (Jira): консультирование по корпоративному ПО, диагностика проблем оборудования и ПО, поддержка удалённых пользователей</li>
               <li>Ведение технической документации, инвентаризация оборудования и ПО</li>
@@ -1010,6 +1011,7 @@
               <li>Data backup and recovery, monitoring information integrity and availability</li>
               <li>Monitoring the health of servers, network equipment and workstations</li>
               <li>Configuring antivirus protection, updates and security policies</li>
+              <li>Organized remote user access: dedicated virtual machines over RDP and <strong>Remote Desktop Services (RDS)</strong> terminal farms for access at scale — application publishing, licensing, profiles and permissions</li>
               <li>Set up and relocated <strong>30+ workstations</strong> and peripherals during an office expansion</li>
               <li>User support through Service Desk (Jira): guidance on corporate software, hardware and software diagnostics, support for remote users</li>
               <li>Maintaining technical documentation, hardware and software inventory</li>
