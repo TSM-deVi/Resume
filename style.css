@@ -807,6 +807,23 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
   letter-spacing: .04em; color: var(--fog);
 }
 .arch-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+/* Трёхколоночная топология не помещается на телефоне: контейнер 292px против
+   схемы в 640px — видно 46%, текст рисуется 8.6px. На узком экране показываем
+   вертикальную раскладку: viewBox 300 под контейнер 292, контуры друг под
+   другом. Порог совмещён с границей раскладки карточки: ниже 900px она одноколоночная
+   и контейнер не добирает нужных горизонтальной схеме 640px — на 781px там
+   всего 627, а на 800px текст падает до 8.7px. Селекторы составные — простой .arch-mob стоял раньше .arch-svg
+   и проигрывал ему по порядку. */
+.arch-svg.arch-mob { display: none; }
+@media (max-width: 899px) {
+  .arch-svg.arch-desk { display: none; }
+  .arch-svg.arch-mob { display: block; min-width: 0; max-width: 460px; margin: 0 auto; }
+  /* Кегли строки «было → стало» — под узкий viewBox: при прежних 13 и 15
+     подписи дотягивались до стрелок. */
+  .arch-mob .arch-was { font-size: 11px; }
+  .arch-mob .arch-now { font-size: 14px; }
+  .arch-scroll { overflow-x: visible; -webkit-mask-image: none; mask-image: none; }
+}
 .arch-svg { display: block; width: 100%; min-width: 640px; height: auto; }
 
 /* Волосяные линии и один акцент. Периметр — единственное, что окрашено:
