@@ -877,48 +877,48 @@
               <li>Поддерживал исторический контур сборки на Jenkins с публикацией в IIS одновременно с новым конвейером на GitLab CI</li>
               <li class="jlist-head">KUBERNETES И КОНТЕЙНЕРИЗАЦИЯ</li>
               <li>Развернул и администрировал <strong>Kubernetes-кластер</strong> на bare-metal: мастер и два воркера на физических серверах, без managed-облака — etcd, CNI, storage и обновления настраивались руками</li>
-              <li>Начал поэтапную миграцию из Docker Compose в Kubernetes: перевёл <strong>12+ микросервисов</strong> и выстроил схему для переноса остальных, время деплоя сократилось с ~40 до ~8 минут</li>
+              <li>Мигрировал <strong>12+ микросервисов</strong> из Docker Compose в Kubernetes и выстроил схему для переноса остальных: время деплоя сократилось с ~40 до ~8 минут</li>
               <li>Администрирование кластера: namespace-изоляция, ресурсные лимиты, RBAC, HPA, Ingress</li>
               <li>Persistent-хранилище кластера на <strong>Longhorn</strong>: distributed block storage поверх дисков нод, тома для stateful-сервисов, репликация и снапшоты</li>
-              <li><strong>Helm</strong>-чарты: упаковка сервисов, унификация конфигурации окружений через values</li>
+              <li>Упаковал сервисы в <strong>Helm-чарты</strong>, унифицировал конфигурацию окружений через values</li>
               <li class="jlist-head">CI/CD И GITOPS</li>
               <li>Спроектировал пайплайны в <strong>GitLab CI/CD</strong> и Jenkins, покрыв <strong>100% продакшен-репозиториев</strong> автоматической сборкой и деплоем</li>
               <li>Внедрил GitOps-доставку: GitLab CI собирает образ и публикует в registry, <strong>ArgoCD</strong> синхронизирует манифесты в кластер</li>
-              <li>Security-сканирование в пайплайне: <strong>Trivy и Gitleaks</strong> — уязвимости отлавливаются до прода</li>
-              <li>SSL/TLS (Let's Encrypt): автоматизировал выпуск и продление сертификатов</li>
+              <li>Интегрировал security-сканирование (<strong>Trivy, Gitleaks</strong>) в пайплайн — уязвимости отлавливаются до попадания в прод</li>
+              <li>Настроил SSL/TLS-сертификаты (Let's Encrypt), автоматизировал выпуск и продление</li>
               <li>Оптимизировал пайплайны GitLab CI и Jenkins: кеширование, параллелизация стадий, сокращение времени сборки</li>
               <li class="jlist-head">IAC И АВТОМАТИЗАЦИЯ</li>
-              <li><strong>Ansible</strong>-роли и плейбуки — настройка нового сервера за <strong>15 минут</strong> вместо 2-3 часов вручную</li>
-              <li><strong>Terraform</strong>: воспроизводимые среды, version control конфигураций</li>
+              <li>Разработал <strong>Ansible-роли и плейбуки</strong> — настройка нового сервера за 15 минут вместо 2–3 часов вручную</li>
+              <li>Внедрил <strong>Terraform</strong> для управления инфраструктурой: воспроизводимые среды, version control конфигураций</li>
               <li>Скрипты и служебные утилиты на Python, Bash, PowerShell: автоматизация рутинных задач, интеграции между системами, сбор данных</li>
               <li class="jlist-head">БАЗЫ ДАННЫХ И ХРАНИЛИЩА</li>
-              <li>PostgreSQL: отказоустойчивый кластер <strong>Patroni + etcd</strong> (3 ноды), uptime СУБД <strong>99.9%</strong></li>
-              <li><strong>ClickHouse</strong>: аналитическое хранилище <strong>~4 ТБ</strong> на выделенных физических серверах — данные по отелям и турам, схемы, партиционирование, TTL</li>
+              <li>Развернул отказоустойчивый кластер <strong>PostgreSQL + Patroni + etcd</strong> (3 ноды), uptime СУБД <strong>99.9%</strong></li>
+              <li>Развернул и администрировал <strong>ClickHouse</strong> — аналитическое хранилище <strong>~4 ТБ</strong> на выделенных физических серверах, данные по отелям и турам: схемы, партиционирование, TTL</li>
               <li>MS SQL Server на Windows Server: кластер с репликацией master-slave, обслуживание, резервное копирование, мониторинг</li>
               <li>MySQL и MongoDB — администрирование</li>
-              <li>Redis в кластерной конфигурации: кэширование и хранение сессий</li>
-              <li>S3 (Yandex Cloud Object Storage) под медиаконтент продукта — фотографии отелей и туров, артефакты сборок, бэкапы, статика: бакеты, сервисные ключи, права, жизненный цикл объектов</li>
+              <li>Внедрил <strong>Redis</strong> для кэширования и хранения сессий</li>
+              <li>Подключил объектное хранилище <strong>S3 (Yandex Cloud Object Storage)</strong> под медиаконтент продукта — фотографии отелей и туров, артефакты сборок, бэкапы, статика: бакеты, сервисные ключи доступа, права и жизненный цикл объектов</li>
               <li class="jlist-head">БРОКЕРЫ, SERVICE DISCOVERY И СЛУЖЕБНЫЕ СЕРВИСЫ</li>
-              <li><strong>Kafka</strong>: топики, партиции, политики хранения, мониторинг лага консьюмеров</li>
-              <li><strong>RabbitMQ</strong>: очереди, exchange, DLQ, разграничение доступа по vhost</li>
-              <li><strong>Consul</strong>: service discovery, health-checks, хранение конфигураций в KV</li>
-              <li><strong>Unleash</strong>: сервер feature-флагов для управления выкаткой функциональности</li>
+              <li>Развернул и эксплуатировал <strong>Kafka</strong> для асинхронного взаимодействия сервисов: топики, партиции, политики хранения, мониторинг лага консьюмеров</li>
+              <li>Развернул <strong>RabbitMQ</strong>: очереди, exchange, DLQ, разграничение доступа по vhost</li>
+              <li>Настроил <strong>Consul</strong>: service discovery, health-checks, хранение конфигураций в KV</li>
+              <li>Развернул <strong>Unleash</strong> — сервер feature-флагов для управления выкаткой функциональности</li>
               <li class="jlist-head">СЕКРЕТЫ И ДОСТУПЫ</li>
               <li>HashiCorp <strong>Vault</strong>: хранение секретов приложений и CI, политики доступа, выдача токенов сервисам и пайплайнам</li>
               <li>Secret Server: централизованное хранение и выдача учётных данных</li>
               <li>Развернул <strong>Passbolt</strong> — общий self-hosted менеджер паролей для команды: организация хранилищ, группы и права доступа, шифрование, ротация учётных данных</li>
               <li class="jlist-head">РЕЕСТРЫ АРТЕФАКТОВ</li>
-              <li><strong>Harbor</strong> — основной приватный registry Docker-образов: проекты, retention-политики, робот-аккаунты, разграничение доступа, сканирование на уязвимости</li>
-              <li>GitLab Container Registry: pull secrets, интеграция с пайплайнами и Kubernetes</li>
-              <li><strong>Verdaccio</strong> — приватный npm-registry: проксирование и кэширование npmjs, публикация пакетов из CI, аутентификация разработчиков</li>
+              <li>Развернул и администрировал <strong>Harbor</strong> как основной приватный registry для Docker-образов: проекты, политики хранения и retention, робот-аккаунты, разграничение доступа, сканирование образов на уязвимости</li>
+              <li>Использовал <strong>GitLab Container Registry</strong> для образов проектных репозиториев, настроил pull secrets и интеграцию с пайплайнами и Kubernetes</li>
+              <li>Развернул <strong>Verdaccio</strong> — приватный npm-registry для внутренних пакетов с проксированием и кэшированием npmjs, настроил публикацию пакетов из CI и аутентификацию разработчиков</li>
               <li class="jlist-head">МОНИТОРИНГ И ЛОГИРОВАНИЕ</li>
-              <li>Prometheus + Grafana (метрики и алертинг через Alertmanager), ELK Stack — Elasticsearch, Logstash, Kibana — и Graylog (логи), <strong>Zabbix</strong> (инфраструктура и оповещения), Sentry (ошибки приложений)</li>
-              <li>Uptime Kuma, LibreNMS + Oxidized, NetBox — доступность сервисов и сетевая документация</li>
+              <li>Внедрил <strong>Prometheus + Grafana</strong> (метрики и алертинг через Alertmanager), <strong>ELK Stack</strong> — Elasticsearch, Logstash, Kibana — и Graylog (логи), Zabbix (инфраструктура и оповещения), Sentry (ошибки приложений)</li>
+              <li>Настроил <strong>Uptime Kuma, LibreNMS + Oxidized, NetBox</strong> для мониторинга доступности и сетевой документации</li>
               <li>Сократил среднее время обнаружения инцидентов (<strong>MTTD</strong>) с нескольких часов до ~5 минут</li>
               <li class="jlist-head">ОТКАЗОУСТОЙЧИВОСТЬ</li>
               <li><strong>Nginx</strong>: reverse proxy, TLS-терминация, балансировка, сложные конфигурации</li>
-              <li><strong>Zabbix</strong> HA-кластер (2 ноды) с базой на отказоустойчивом PostgreSQL</li>
-              <li>Jira и Confluence на HA-кластере PostgreSQL — устранил единую точку отказа</li>
+              <li>Развернул <strong>Zabbix HA-кластер</strong> (2 ноды) с базой на отказоустойчивом PostgreSQL</li>
+              <li>Развернул <strong>Jira и Confluence</strong> на HA-кластере PostgreSQL — устранил единую точку отказа</li>
               <li class="jlist-head">WINDOWS-КОНТУР И ДОПОЛНИТЕЛЬНО</li>
               <li>Windows Server: IIS (публикация и сопровождение веб-приложений, пулы приложений, привязки и сертификаты), <strong>Active Directory</strong>, DNS, DHCP, SMTP, PowerShell</li>
               <li>Виртуализация VMware и Hyper-V; резервное копирование Veeam Backup &amp; Replication</li>
@@ -933,52 +933,52 @@
               <li>Maintained the legacy Jenkins build pipeline publishing to IIS alongside the new GitLab CI pipeline</li>
               <li class="jlist-head">KUBERNETES AND CONTAINERIZATION</li>
               <li>Deployed and administered a bare-metal <strong>Kubernetes cluster</strong>: a master and two workers on physical servers, with no managed cloud — etcd, CNI, storage and upgrades configured by hand</li>
-              <li>Started a phased migration from Docker Compose to Kubernetes: moved <strong>12+ microservices</strong> and designed the path for the rest, cutting deploy time from ~40 to ~8 minutes</li>
+              <li>Migrated <strong>12+ microservices</strong> from Docker Compose to Kubernetes and designed the path for the rest: deploy time cut from ~40 to ~8 minutes</li>
               <li>Cluster administration: namespace isolation, resource limits, RBAC, HPA, Ingress</li>
               <li>Cluster persistent storage on <strong>Longhorn</strong>: distributed block storage over node disks, volumes for stateful services, replication and snapshots</li>
-              <li><strong>Helm</strong> charts: packaging services, unifying environment configuration through values</li>
+              <li>Packaged services into <strong>Helm charts</strong> and unified environment configuration through values</li>
               <li class="jlist-head">CI/CD AND GITOPS</li>
               <li>Designed pipelines in <strong>GitLab CI/CD</strong> and Jenkins, covering <strong>100% of production repositories</strong> with automated builds and deployments</li>
               <li>Introduced GitOps delivery: GitLab CI builds the image and publishes it to the registry, <strong>ArgoCD</strong> syncs the manifests into the cluster</li>
-              <li>Security scanning in the pipeline: <strong>Trivy and Gitleaks</strong> — vulnerabilities are caught before production</li>
-              <li>SSL/TLS (Let's Encrypt): automated certificate issuance and renewal</li>
+              <li>Integrated security scanning (<strong>Trivy, Gitleaks</strong>) into the pipeline — vulnerabilities caught before reaching production</li>
+              <li>Set up SSL/TLS certificates (Let's Encrypt) with automated issuance and renewal</li>
               <li>Optimized GitLab CI and Jenkins pipelines: caching, stage parallelization, reduced build times</li>
               <li class="jlist-head">IAC AND AUTOMATION</li>
-              <li><strong>Ansible</strong> roles and playbooks — new server setup in <strong>15 minutes</strong> instead of 2-3 hours by hand</li>
-              <li><strong>Terraform</strong>: reproducible environments, version-controlled configuration</li>
+              <li>Developed <strong>Ansible roles and playbooks</strong> — new server setup in 15 minutes instead of 2–3 hours manually</li>
+              <li>Introduced <strong>Terraform</strong> for infrastructure management: reproducible environments, version-controlled configuration</li>
               <li>Scripts and utilities in Python, Bash, PowerShell: automating routine tasks, integrations between systems, data collection</li>
               <li class="jlist-head">DATABASES AND STORAGE</li>
-              <li>PostgreSQL: a fault-tolerant <strong>Patroni + etcd</strong> cluster (3 nodes), <strong>99.9%</strong> database uptime</li>
-              <li><strong>ClickHouse</strong>: a <strong>~4 TB</strong> analytical store on dedicated physical servers — hotel and tour data, schemas, partitioning, TTL</li>
+              <li>Deployed a fault-tolerant <strong>PostgreSQL + Patroni + etcd</strong> cluster (3 nodes), <strong>99.9%</strong> database uptime</li>
+              <li>Deployed and administered <strong>ClickHouse</strong> — a <strong>~4 TB</strong> analytical store on dedicated physical servers holding hotel and tour data: schemas, partitioning, TTL</li>
               <li>MS SQL Server on Windows Server: a master-slave replication cluster, maintenance, backups, monitoring</li>
               <li>MySQL and MongoDB — administration</li>
-              <li>Redis in a cluster configuration: caching and session storage</li>
-              <li>S3 (Yandex Cloud Object Storage) for product media — hotel and tour photos, build artifacts, backups, static assets: buckets, service keys, permissions, object lifecycle</li>
+              <li>Introduced <strong>Redis</strong> for caching and session storage</li>
+              <li>Connected <strong>S3 object storage (Yandex Cloud Object Storage)</strong> for product media — hotel and tour photos, build artifacts, backups and static assets: buckets, service access keys, permissions and object lifecycle rules</li>
               <li class="jlist-head">BROKERS, SERVICE DISCOVERY AND UTILITY SERVICES</li>
-              <li><strong>Kafka</strong>: topics, partitions, retention policies, consumer lag monitoring</li>
-              <li><strong>RabbitMQ</strong>: queues, exchanges, DLQ, per-vhost access control</li>
-              <li><strong>Consul</strong>: service discovery, health checks, configuration storage in KV</li>
-              <li><strong>Unleash</strong>: a feature-flag server for controlling functionality rollout</li>
+              <li>Deployed and operated <strong>Kafka</strong> for asynchronous service communication: topics, partitions, retention policies, consumer lag monitoring</li>
+              <li>Deployed <strong>RabbitMQ</strong>: queues, exchanges, DLQ, per-vhost access control</li>
+              <li>Configured <strong>Consul</strong>: service discovery, health checks, configuration storage in KV</li>
+              <li>Deployed <strong>Unleash</strong> — a feature-flag server for controlling functionality rollout</li>
               <li class="jlist-head">SECRETS AND ACCESS</li>
               <li>HashiCorp <strong>Vault</strong>: storing application and CI secrets, access policies, issuing tokens to services and pipelines</li>
               <li>Secret Server: centralized credential storage and issuance</li>
               <li>Deployed <strong>Passbolt</strong> — a shared self-hosted password manager for the team: vault organization, groups and permissions, encryption, credential rotation</li>
               <li class="jlist-head">ARTIFACT REGISTRIES</li>
-              <li><strong>Harbor</strong> — the primary private Docker image registry: projects, retention policies, robot accounts, access control, vulnerability scanning</li>
-              <li>GitLab Container Registry: pull secrets, integration with pipelines and Kubernetes</li>
-              <li><strong>Verdaccio</strong> — a private npm registry: npmjs proxying and caching, package publishing from CI, developer authentication</li>
+              <li>Deployed and administered <strong>Harbor</strong> as the primary private Docker image registry: projects, retention policies, robot accounts, access control, image vulnerability scanning</li>
+              <li>Used <strong>GitLab Container Registry</strong> for project repository images, configured pull secrets and integration with pipelines and Kubernetes</li>
+              <li>Deployed <strong>Verdaccio</strong> — a private npm registry for internal packages with npmjs proxying and caching, package publishing from CI and developer authentication</li>
               <li class="jlist-head">MONITORING AND LOGGING</li>
-              <li>Prometheus + Grafana (metrics and alerting through Alertmanager), the ELK Stack — Elasticsearch, Logstash, Kibana — and Graylog (logs), <strong>Zabbix</strong> (infrastructure and alerts), Sentry (application errors)</li>
-              <li>Uptime Kuma, LibreNMS + Oxidized, NetBox — service availability and network documentation</li>
+              <li>Introduced <strong>Prometheus + Grafana</strong> (metrics and alerting through Alertmanager), the <strong>ELK Stack</strong> — Elasticsearch, Logstash, Kibana — and Graylog (logs), Zabbix (infrastructure and alerts), Sentry (application errors)</li>
+              <li>Set up <strong>Uptime Kuma, LibreNMS + Oxidized and NetBox</strong> for availability monitoring and network documentation</li>
               <li>Cut mean time to detect incidents (<strong>MTTD</strong>) from several hours to ~5 minutes</li>
               <li class="jlist-head">FAULT TOLERANCE</li>
               <li><strong>Nginx</strong>: reverse proxy, TLS termination, load balancing, complex configurations</li>
-              <li>A <strong>Zabbix</strong> HA cluster (2 nodes) backed by fault-tolerant PostgreSQL</li>
-              <li>Jira and Confluence on the PostgreSQL HA cluster — eliminated a single point of failure</li>
+              <li>Deployed a <strong>Zabbix HA cluster</strong> (2 nodes) backed by fault-tolerant PostgreSQL</li>
+              <li>Deployed <strong>Jira and Confluence</strong> on the PostgreSQL HA cluster — eliminated a single point of failure</li>
               <li class="jlist-head">WINDOWS ENVIRONMENT AND EXTRAS</li>
               <li>Windows Server: IIS (publishing and maintaining web applications, application pools, bindings and certificates), <strong>Active Directory</strong>, DNS, DHCP, SMTP, PowerShell</li>
               <li>VMware and Hyper-V virtualization; Veeam Backup &amp; Replication backups</li>
-              <li><strong>Zimbra</strong> from scratch: mail domains and accounts, DNS records (MX, SPF, DKIM, DMARC), TLS, antispam/antivirus, backups and mailbox migration; automated DKIM key issuance with a script — a manual procedure reduced to a single command</li>
+              <li>Deployed a corporate <strong>Zimbra</strong> mail server from scratch: installation and initial setup, mail domains and accounts, DNS records (MX, SPF, DKIM, DMARC), TLS certificates, antispam/antivirus, backups and mailbox migration</li>
               <li>Taking part in architecture design and introducing DevOps practices in the development team; an IT infrastructure audit and modernization plan; OCS Inventory instead of manual Excel records</li>
             </ul>
           </div>
@@ -1007,10 +1007,10 @@
             </ul>
             <ul class="jlist" data-lang="en">
               <li>Administered the <strong>Active Directory</strong> domain infrastructure: group policies, access rights, user profiles</li>
-              <li>Setting up and maintaining corporate mail and mail clients: Exchange, Outlook, IMAP/SMTP</li>
+              <li>Set up and maintained corporate mail and mail clients: <strong>Exchange, Outlook, IMAP/SMTP</strong></li>
               <li>Data backup and recovery, monitoring information integrity and availability</li>
               <li>Monitoring the health of servers, network equipment and workstations</li>
-              <li>Configuring antivirus protection, updates and security policies</li>
+              <li>Configured antivirus protection, updates and security policies</li>
               <li>Organized remote user access: dedicated virtual machines over RDP and <strong>Remote Desktop Services (RDS)</strong> terminal farms for access at scale — application publishing, licensing, profiles and permissions</li>
               <li>Set up and relocated <strong>30+ workstations</strong> and peripherals during an office expansion</li>
               <li>User support through Service Desk (Jira): guidance on corporate software, hardware and software diagnostics, support for remote users</li>
@@ -1059,7 +1059,7 @@
               <li>Automated routine operations with Bash and PowerShell scripts — backups, maintenance and server provisioning</li>
               <li>Automated Linux OS deployment, cutting workstation setup from 3 hours to 40 minutes</li>
               <li>Stored and versioned scripts and configurations in a self-hosted GitLab</li>
-              <li>Ran and maintained containerized services (Docker)</li>
+              <li>Stored and versioned scripts and configs in <strong>self-hosted GitLab</strong>; ran containerized services (<strong>Docker</strong>)</li>
               <li>Diagnosed and resolved infrastructure incidents, maintained technical documentation</li>
             </ul>
           </div>
