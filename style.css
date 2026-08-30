@@ -1232,7 +1232,9 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
   color: var(--fog); cursor: pointer;
   transition: background .2s, border-color .2s, color .2s;
 }
-.tl-copy:hover { background: var(--lum); border-color: var(--edge); color: var(--blueprint); }
+.tl-copy:hover { background: var(--lum); border-color: var(--edge); }
+/* У значка собственный color, цвет родителя до него не доходит. */
+.tl-copy:hover .tl-contact-icon { color: var(--blueprint); }
 .tl-contact .tl-prompt { color: var(--blueprint); }
 .tl-contact-cmd { color: var(--fog); }
 .tl-contact-val { color: var(--white); flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
@@ -1413,7 +1415,7 @@ body.lang-en       [data-lang="ru"] { display: none !important; }
 /* Нажимаемый элемент обязан ответить на нажатие: без этого интерфейс кажется
    неотзывчивым, даже когда работает мгновенно. Масштаб чуть меньше, чем у
    круглых кнопок выше, — плитки крупнее, и 0.95 на них читается как рывок. */
-.skill-tile:active, .skill-filter:active, .tl-contact:active,
+.skill-tile:active, .skill-filter:active, .tl-contact:active, .tl-copy:active,
 .pl-rerun:active, .stack-tag:active, .cert-pill:active {
   transform: scale(0.98); transition-duration: 100ms;
 }

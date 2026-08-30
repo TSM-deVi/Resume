@@ -7,3 +7,4 @@ tools/out/
 *.pdf
 
 .claude/archive/
+docs/worklog.md
