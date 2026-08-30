@@ -49,8 +49,12 @@
   .eyr{flex:0 0 14mm;font-family:var(--mono);font-size:9pt;color:var(--violet)}
   .ebody{font-size:9.4pt}
   .ebody i{font-style:normal;color:var(--mute);font-size:8.6pt}
-  .certs{font-size:9.4pt}
-  .certs b{font-family:var(--mono);color:var(--violet)}
+  .crow{display:flex;gap:4mm;align-items:baseline;margin-bottom:1.8mm;break-inside:avoid}
+  .cbadge{flex:0 0 14mm;font-family:var(--mono);font-size:8.6pt;font-weight:500;
+          color:var(--violet);letter-spacing:.06em}
+  .cbody{font-size:9.4pt}
+  .cissuer{color:var(--mute);font-size:8.6pt}
+  .langs{margin-top:3mm;font-size:9.2pt;color:var(--mute)}
   .about{margin:4mm 0 0;font-size:9.6pt;max-width:62ch}
   .goal{margin:5mm 0 0;padding:3mm 3.5mm;background:var(--wash);border-radius:5px;
         font-size:9.2pt}
@@ -91,6 +95,11 @@
     .sk{flex-basis:36mm;font-size:8pt}
     .sv{font-size:7.7pt;line-height:1.45}
     .erow{margin-bottom:1.2mm}
+    .crow{margin-bottom:1.2mm}
+    .cbody{font-size:8.4pt}
+    .cbadge{flex-basis:12mm;font-size:8pt}
+    .cissuer{font-size:7.8pt}
+    .langs{margin-top:2mm;font-size:8.2pt}
     .ebody{font-size:8.4pt}
     .about{margin-top:2mm;font-size:8.3pt;max-width:none}
     .goal{margin-top:2.4mm;padding:1.8mm 2.2mm;font-size:7.9pt}
@@ -230,7 +239,21 @@
         <span class="eyr">2019</span>
         <span class="ebody"><b><span data-lang="ru">КГУ им. Б.Б. Городовикова</span><span data-lang="en">Kalmyk State University</span></b><br><span data-lang="ru">Программирование в компьютерных системах — техник-программист</span><span data-lang="en">Computer Systems Programming — programmer technician</span><br><i><span data-lang="ru">Среднее специальное</span><span data-lang="en">Vocational education</span></i></span>
       </div>
-  <div class="certs" style="margin-top:2.5mm"><b>BASE</b> <span data-lang="ru">Облако VMware · 2026</span><span data-lang="en">VMware Cloud · 2026</span> · <b>PRO</b> <span data-lang="ru">Облако VMware · 2026</span><span data-lang="en">VMware Cloud · 2026</span></div>
+
+  <h2><span data-lang="ru">Сертификаты</span><span data-lang="en">Certifications</span></h2>
+      <div class="crow">
+        <span class="cbadge">BASE</span>
+        <span class="cbody"><span data-lang="ru">Базовый курс</span><span data-lang="en">Foundational course</span> <span class="cissuer"><span data-lang="ru">Облако VMware · 2026</span><span data-lang="en">VMware Cloud · 2026</span></span></span>
+      </div>
+      <div class="crow">
+        <span class="cbadge">PRO</span>
+        <span class="cbody"><span data-lang="ru">Профессиональный курс</span><span data-lang="en">Professional course</span> <span class="cissuer"><span data-lang="ru">Облако VMware · 2026</span><span data-lang="en">VMware Cloud · 2026</span></span></span>
+      </div>
+      <div class="crow">
+        <span class="cbadge">EXP</span>
+        <span class="cbody"><span data-lang="ru">Экспертный курс</span><span data-lang="en">Expert course</span> <span class="cissuer"><span data-lang="ru">Облако VMware · 2026</span><span data-lang="en">VMware Cloud · 2026</span></span></span>
+      </div>
+  <div class="langs"><span data-lang="ru">Языки</span><span data-lang="en">Languages</span>: <span data-lang="ru">Русский</span><span data-lang="en">Russian</span> — <span data-lang="ru">родной</span><span data-lang="en">native</span> &middot; <span data-lang="ru">Английский</span><span data-lang="en">English</span> — <span data-lang="ru">B1 — средний</span><span data-lang="en">B1 — intermediate</span></div>
 
   <p class="goal"><span data-lang="ru">Ищу позицию Middle+ DevOps / Platform Engineer. Интересны Kubernetes, CI/CD, IaC, внутренние платформы и отказоустойчивая инфраструктура; развиваюсь в сторону Platform Engineering и SRE, отдельно интересна эксплуатация инфраструктуры LLM-платформ.</span><span data-lang="en">Looking for a Middle+ DevOps / Platform Engineer role. Interested in Kubernetes, CI/CD, IaC, internal platforms and fault-tolerant infrastructure; growing towards Platform Engineering and SRE, with a particular interest in running LLM-platform infrastructure.</span></p>
 
