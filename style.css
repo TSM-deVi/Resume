@@ -946,48 +946,51 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
 
 /* ── SKILLS ── */
 
-.skill-wall { display: grid; grid-template-columns: repeat(auto-fill, minmax(205px, 1fr)); gap: .75rem; }
-.skill-tile {
-  display: flex; align-items: center; gap: .85rem;
+/* ── ЧИПЫ НАВЫКОВ ──
+   Карточка на каждую из 61 технологии занимала полторы тысячи пикселей ради
+   иконки, названия и трёх слов. Чип отдаёт то же самое втрое компактнее,
+   а глубину показывает вес: верхний уровень крупнее и с подписью, нижние
+   мельче и без неё — там подпись чаще повторяла заголовок уровня
+   («уверенно · каждый день»), чем добавляла факт. */
+.skill-chips {
+  display: flex; flex-wrap: wrap; gap: .5rem;
+  list-style: none; margin: 0; padding: 0;
+}
+.skill-chip {
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .5rem .85rem; min-width: 0;
   background: rgba(47,52,62,.24);
   border: 1px solid var(--edge);
   box-shadow: inset 0 1px 1px rgba(199,211,234,.10);
-  border-radius: var(--r-card);
-  padding: 1rem 1.1rem;
-  position: relative;
-  transition: box-shadow var(--t-base), transform var(--t-base), opacity var(--t-base);
+  border-radius: var(--r-pill);
+  font-size: 13px; color: var(--frost);
+  transition: border-color .2s, box-shadow .2s, color .2s;
 }
-.skill-tile:hover { box-shadow: inset 0 1px 1px rgba(216,236,248,.26), var(--halo); transform: translateY(-3px); }
+.skill-chip:hover {
+  border-color: var(--edge-lt); color: var(--white);
+  box-shadow: inset 0 1px 1px rgba(216,236,248,.26), var(--halo);
+}
+.skill-chip img { width: 16px; height: 16px; object-fit: contain; flex: none; }
+/* Тринадцать логотипов почти чёрные — на тёмном чипе их не видно. Простая
+   инверсия делает тёмно-синий жёлтым, поэтому обесцвечиваем: ровный светлый
+   монохром читается как приём, чужой оттенок — как ошибка. */
+.skill-chip img.icon-invert { filter: invert(1) grayscale(1) brightness(1.35); }
+.chip-name { white-space: nowrap; }
+.chip-tip {
+  font-family: var(--font-mono); font-size: 10.5px; color: var(--fog);
+  padding-left: .55rem; border-left: 1px solid var(--edge); white-space: nowrap;
+}
 
-/* Элемент грида по умолчанию не сжимается ниже своего min-content, поэтому на
-   320px длинное название распирало колонку: сетка требовала 297px при стене
-   в 272 и правый столбец уезжал за контейнер. Разрешаем сжатие и перенос. */
-.skill-tile, .skill-tile-body { min-width: 0; }
-.skill-tile-name, .skill-tile-tip { overflow-wrap: break-word; }
+/* Вес чипа = уровень владения. */
+.tier[data-tier="01"] .skill-chip { font-size: 14px; padding: .58rem .95rem; }
+.tier[data-tier="01"] .skill-chip img { width: 18px; height: 18px; }
+.tier[data-tier="03"] .skill-chip { font-size: 12.5px; padding: .42rem .72rem; }
+.tier[data-tier="03"] .skill-chip img { width: 14px; height: 14px; }
 
-.skill-tile-icon {
-  width: 40px; height: 40px; flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center;
-  border-radius: 9999px;
-  background: var(--lum); border: 1px solid var(--edge);
-  box-shadow: inset 0 1px 1px rgba(216,236,248,.2);
+@media (max-width: 620px) {
+  .skill-chips { gap: .4rem; }
+  .chip-tip { display: none; }
 }
-.skill-tile-icon img { width: 19px; height: 19px; object-fit: contain; }
-/* Двенадцать логотипов почти чёрные и на чипе давали контраст 1.0-2.0:1 —
-   их было физически не видно. Простая инверсия делает тёмно-синий жёлтым
-   (Windows Server, Helm, Trivy), поэтому обесцвечиваем: ровный светлый
-   монохром читается как приём, а чужой оттенок — как ошибка. */
-.skill-tile-icon img.icon-invert { filter: invert(1) grayscale(1) brightness(1.35); }
-.skill-tile-icon.icon-chip { background: var(--white); overflow: hidden; }
-.skill-tile-icon.icon-chip img { width: 100%; height: 100%; object-fit: cover; }
-.skill-tile-body { min-width: 0; }
-.skill-tile-name {
-  font-size: 14px; font-weight: 500; color: var(--frost); line-height: 1.3;
-  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
-  line-clamp: 2; overflow: hidden;
-}
-.skill-tile-tip { font-size: 12px; color: var(--fog); line-height: 1.35; margin-top: 3px; }
-@media (max-width: 540px) { .skill-wall { grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); } }
 
 /* ── CERTS ── */
 .certs-sep {
@@ -1130,41 +1133,6 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
   margin-left: auto; font-family: var(--font-mono); font-size: 12px; color: var(--fog);
 }
 
-/* Вес плитки сам показывает уровень: от крупных карточек ежедневного
-   инструмента к плотным чипам того, что применялось в отдельных проектах.
-   Подписи сохранены везде — они говорят, что именно я делал инструментом,
-   и это единственное, что отличает список технологий от перечня логотипов. */
-.tier[data-tier="01"] .skill-wall { grid-template-columns: repeat(auto-fill, minmax(232px, 1fr)); }
-.tier[data-tier="02"] .skill-wall { grid-template-columns: repeat(auto-fill, minmax(192px, 1fr)); gap: .6rem; }
-.tier[data-tier="03"] .skill-wall { grid-template-columns: repeat(auto-fill, minmax(164px, 1fr)); gap: .5rem; }
-
-.tier[data-tier="02"] .skill-tile { padding: .7rem .8rem; gap: .65rem; }
-.tier[data-tier="03"] .skill-tile { padding: .55rem .65rem; gap: .55rem; border-radius: var(--r-input); }
-
-.tier[data-tier="02"] .skill-tile-icon { width: 32px; height: 32px; }
-.tier[data-tier="02"] .skill-tile-icon img { width: 16px; height: 16px; }
-.tier[data-tier="03"] .skill-tile-icon { width: 26px; height: 26px; }
-.tier[data-tier="03"] .skill-tile-icon img { width: 14px; height: 14px; }
-
-.tier[data-tier="02"] .skill-tile-name { font-size: 13.5px; }
-.tier[data-tier="03"] .skill-tile-name { font-size: 12.5px; }
-.tier[data-tier="02"] .skill-tile-tip { font-size: 11px; }
-.tier[data-tier="03"] .skill-tile-tip { font-size: 10px; }
-
-/* Подъём на наведении оставлен только верхнему уровню: на плотной сетке
-   он превращается в дрожание при проводке курсором. */
-.tier[data-tier="02"] .skill-tile:hover,
-.tier[data-tier="03"] .skill-tile:hover { transform: none; }
-
-/* На телефоне 61 плитка в одну колонку даёт почти пять тысяч пикселей.
-   Нижние уровни там компактнее по определению, поэтому им хватает двух
-   колонок; верхний остаётся в одну — его читают, а не просматривают. */
-@media (max-width: 620px) {
-  .tier[data-tier="02"] .skill-wall,
-  .tier[data-tier="03"] .skill-wall { grid-template-columns: repeat(2, 1fr); }
-  .tier[data-tier="02"] .skill-tile-icon,
-  .tier[data-tier="03"] .skill-tile-icon { width: 28px; height: 28px; }
-}
 @media (max-width: 620px) {
   .tier-count { margin-left: 0; }
   .tier-note { flex-basis: 100%; }
@@ -1262,7 +1230,7 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
    is behind it,
 so this overlays the card rather than hiding under it. */
 .ach,
-.skill-tile,
+.skill-chip,
 .job-company-block,
 .edu-row,
 .cta-terminal,
@@ -1271,7 +1239,7 @@ so this overlays the card rather than hiding under it. */
   position: relative;
 }
 .ach::after,
-.skill-tile::after,
+.skill-chip::after,
 .job-company-block::after,
 .edu-row::after,
 .cta-terminal::after,
@@ -1284,7 +1252,7 @@ so this overlays the card rather than hiding under it. */
   opacity: 0; transition: opacity .4s ease;
 }
 .ach:hover::after,
-.skill-tile:hover::after,
+.skill-chip:hover::after,
 .job-company-block:hover::after,
 .edu-row:hover::after,
 .cta-terminal:hover::after,
@@ -1293,7 +1261,7 @@ so this overlays the card rather than hiding under it. */
 
 @media (pointer: coarse), (hover: none), (prefers-reduced-motion: reduce) {
 .ach::after,
-.skill-tile::after,
+.skill-chip::after,
 .job-company-block::after,
 .edu-row::after,
 .cta-terminal::after,
@@ -1406,7 +1374,7 @@ body.lang-en       [data-lang="ru"] { display: none !important; }
 /* Нажимаемый элемент обязан ответить на нажатие: без этого интерфейс кажется
    неотзывчивым, даже когда работает мгновенно. Масштаб чуть меньше, чем у
    круглых кнопок выше, — плитки крупнее, и 0.95 на них читается как рывок. */
-.skill-tile:active, .tl-contact:active,
+.skill-chip:active, .tl-contact:active,
 .stack-tag:active, .cert-pill:active {
   transform: scale(0.98); transition-duration: 100ms;
 }
@@ -1414,7 +1382,7 @@ body.lang-en       [data-lang="ru"] { display: none !important; }
 /* На тач-устройствах тап засчитывается как наведение, и подсветка остаётся
    висеть на карточке после ухода пальца. Гасим её там, где ховера нет. */
 @media (hover: none) {
-  .skill-tile:hover, .ach:hover, .job-company-block:hover, .edu-row:hover,
+  .skill-chip:hover, .ach:hover, .job-company-block:hover, .edu-row:hover,
   .stack-tag:hover, .cert-pill:hover, }
 
 /* ── CUSTOM CURSOR ── */
@@ -1455,10 +1423,10 @@ body.cur-hover #cursor-dot { transform: translate(-50%, -50%) scale(.6); }
     -webkit-text-fill-color: CanvasText !important;
     color: CanvasText !important;
   }
-  .ach::after, .skill-tile::after, .job-company-block::after, .edu-row::after,
+  .ach::after, .skill-chip::after, .job-company-block::after, .edu-row::after,
   .cta-terminal::after, .hero-cta::after,
   .status-line::after, .hero-sky, #bg-net, body::before { display: none !important; }
-  .ach, .skill-tile, .job-company-block, .edu-row, .status-line,
+  .ach, .skill-chip, .job-company-block, .edu-row, .status-line,
   .cta-terminal, .hero-cta { border: 1px solid CanvasText; }
 }
 
@@ -1490,7 +1458,7 @@ body.cur-hover #cursor-dot { transform: translate(-50%, -50%) scale(.6); }
   .jlist li.jl-hide { display: list-item !important; }
   .jlist-more { display: none !important; }
   section { padding: 1.2rem 0 !important; break-inside: avoid; }
-  .job-company-block, .ach, .status-line, .edu-row, .skill-tile {
+  .job-company-block, .ach, .status-line, .edu-row, .skill-chip {
     border: 1px solid #ccc !important; background: #fff !important; box-shadow: none !important;
   }
   .stack-tag, .cert-pill, .edu-badge, .job-period {

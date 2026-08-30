@@ -308,7 +308,7 @@ if (window.matchMedia('(pointer: fine)').matches
   document.addEventListener('mouseenter', () => document.body.classList.add('cur-active'));
   document.addEventListener('mouseleave', () => document.body.classList.remove('cur-active'));
 
-  const hoverSelector = 'a, button, .skill-filter, .skill-tile, .stack-tag, .status-item, .ach, ' +
+  const hoverSelector = 'a, button, .skill-filter, .skill-chip, .stack-tag, .status-item, .ach, ' +
     '.cert-pill, .edu-row, .job-company-block, .pl-stage';
   document.querySelectorAll(hoverSelector).forEach(el => {
     el.addEventListener('mouseenter', () => document.body.classList.add('cur-hover'));
@@ -521,7 +521,7 @@ setupCopyCard('hero-copy-mail', 'hero-mail-label', 'hero-ico-mail', 'timir-ivani
   if (!window.matchMedia('(pointer: fine) and (hover: hover)').matches) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  const SEL = '.ach, .skill-tile, .job-company-block, .edu-row, .hero-cta,' +
+  const SEL = '.ach, .skill-chip, .job-company-block, .edu-row, .hero-cta,' +
               '.cta-terminal, .status-line';
   let latest = null, queued = false;
 
