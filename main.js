@@ -391,43 +391,9 @@ if (_termInput) {
   });
 }
 
-// ── Skill category filter ──
-let _activeFilter = null;
+// Фильтрация навыков снята: уровни владения показаны группами, глубина
+// видна без нажатия, и выбирать категорию больше незачем.
 
-function _clearFilter() {
-  _activeFilter = null;
-  document.querySelectorAll('.skill-tile').forEach(t => t.classList.remove('sf-dim', 'sf-on'));
-  document.querySelectorAll('.skill-filter').forEach(b => {
-    b.classList.remove('sf-active');
-    b.setAttribute('aria-pressed', 'false');
-  });
-}
-
-document.querySelectorAll('.skill-filter').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const cat = btn.dataset.cat;
-    const tiles = document.querySelectorAll('.skill-tile');
-    const buttons = document.querySelectorAll('.skill-filter');
-
-    if (_activeFilter === cat) {
-      _clearFilter();
-    } else {
-      _activeFilter = cat;
-      tiles.forEach(t => {
-        const active = t.dataset.cat === cat;
-        t.classList.toggle('sf-dim', !active);
-        t.classList.toggle('sf-on', active);
-      });
-      buttons.forEach(b => {
-        const on = b.dataset.cat === cat;
-        b.classList.toggle('sf-active', on);
-        b.setAttribute('aria-pressed', String(on));
-      });
-    }
-  });
-});
-
-document.addEventListener('keydown', e => { if (e.key === 'Escape') _clearFilter(); });
 document.addEventListener('click', e => { if (_activeFilter && !e.target.closest('#skills')) _clearFilter(); });
 
 // ── Copy helper ──
@@ -480,11 +446,10 @@ function setupCopyCard(btnId, labelId, iconId, text) {
   });
 }
 
-setupCopyCard('btn-copy-tg',    'btn-tg-label',    'copy-icon-tg', '@ktylhus');
-setupCopyCard('btn-copy-email', 'btn-copy-label',  'copy-icon',    'timir-ivaniv@yandex.ru');
-// Те же контакты на первом экране: ссылка открывает, кнопка рядом копирует.
-// Строка первого экрана — сама кнопка копирования: id строки и id кнопки
-// совпадают, поэтому подсветка .copied ложится прямо на неё.
+// Контакты живут в одном месте — в карточке первого экрана. Строка там сама
+// является кнопкой копирования, id строки и id кнопки совпадают, поэтому
+// подсветка .copied ложится прямо на неё. Нижний блок теперь про цель поиска,
+// его кнопки и вызовы для них сняты.
 setupCopyCard('hero-copy-tg',   'hero-tg-label',   'hero-ico-tg',   '@ktylhus');
 setupCopyCard('hero-copy-mail', 'hero-mail-label', 'hero-ico-mail', 'timir-ivaniv@yandex.ru');
 
