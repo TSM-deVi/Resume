@@ -328,7 +328,8 @@ section { padding: clamp(3.5rem, 9vw, 120px) 0; }
 /* Строки контактов — высотой в область нажатия, отрицательный отступ
    возвращает подсветку к краю карточки. */
 .hcta-link {
-  display: flex; align-items: center; gap: .6rem;
+  display: flex; align-items: center; gap: .6rem; width: calc(100% + 20px);
+  background: none; text-align: left; cursor: pointer;
   min-height: 44px; margin: 0 -10px; padding: 0 10px;
   border: 1px solid transparent; border-radius: var(--r-input);
   font-family: var(--font-mono); font-size: 12.5px;
@@ -340,29 +341,18 @@ section { padding: clamp(3.5rem, 9vw, 120px) 0; }
    а адрес после этого не помещался и уходил в многоточие. */
 .hcta-key { flex: none; white-space: nowrap; }
 
-/* Ссылка открывает, кнопка рядом копирует. Вложить <button> в <a> нельзя,
-   поэтому строка — обёртка над двумя элементами. */
-.hcta-row { display: flex; align-items: center; }
-.hcta-row .hcta-link { flex: 1; min-width: 0; margin-right: 0; }
-.hcta-copy {
-  flex: none; display: flex; align-items: center; justify-content: center;
-  width: 34px; height: 44px; margin-right: -10px;
-  background: none; border: 1px solid transparent; border-radius: var(--r-input);
-  color: var(--fog); cursor: pointer;
-  transition: background .2s, border-color .2s, color .2s;
-}
-.hcta-copy:hover { background: var(--lum); border-color: var(--edge); }
-.hcta-copy:hover .hcta-copy-ico { color: var(--blueprint); }
-.hcta-copy-ico { display: flex; color: inherit; transition: color .2s; }
-.hcta-copy.copied .hcta-copy-ico { color: var(--blueprint); }
+/* Строка целиком копирует — это кнопка, а не ссылка. Значок справа только
+   подсказывает, что произойдёт по нажатию. */
+.hcta-copy-ico { display: flex; color: var(--fog); transition: color .2s; margin-left: .5rem; }
+.hcta-link:hover .hcta-copy-ico { color: var(--blueprint); }
+.hcta-link.copied .hcta-copy-ico { color: var(--blueprint); }
+.hcta-link.copied .hcta-val { color: var(--blueprint); }
 .hcta-prompt { color: var(--blueprint); }
 .hcta-key { color: var(--fog); }
 .hcta-val {
   margin-left: auto; color: var(--white);
   min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
-.hcta-go { color: var(--fog); transition: transform .2s, color .2s; }
-.hcta-link:hover .hcta-go { color: var(--blueprint); transform: translateX(2px); }
 
 .hcta-sep { height: 1px; background: var(--edge); margin: 1.15rem 0; }
 
@@ -399,6 +389,26 @@ section { padding: clamp(3.5rem, 9vw, 120px) 0; }
 }
 .hcta-case-arr { transition: transform .2s; }
 .hcta-case:hover .hcta-case-arr { transform: translateX(3px); }
+
+/* Скачивание резюме: ведёт на печатную страницу cv.html, где браузер сохраняет
+   в PDF. Отдельного файла нет намеренно — он бы устаревал при каждой правке
+   текста, а в исходной выгрузке с hh лежит личный телефон. */
+.hcta-cv {
+  display: flex; align-items: center; justify-content: center; gap: .5rem;
+  min-height: 44px; margin-top: 1.15rem;
+  border: 1px solid var(--edge-lt); border-radius: var(--r-pill);
+  background: var(--lum);
+  box-shadow: inset 0 1px 1px rgba(216,236,248,.14);
+  font-family: var(--font-ui); font-size: 13px; font-weight: 500;
+  color: var(--frost); text-decoration: none;
+  transition: color .2s, box-shadow .2s, border-color .2s;
+}
+.hcta-cv:hover {
+  color: var(--white); border-color: var(--blueprint);
+  box-shadow: inset 0 1px 1px rgba(216,236,248,.3), var(--halo);
+  text-decoration: none;
+}
+.hcta-cv-ico { font-family: var(--font-mono); color: var(--blueprint); }
 
 #bg-net {
   position: fixed; inset: 0; z-index: var(--z-under);
@@ -513,23 +523,30 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
   list-style: none; margin: 0; padding: 0;
 }
 .pl-stage {
-  display: flex; flex-direction: column; align-items: center; gap: .5rem;
+  display: flex; flex-direction: column; align-items: center; gap: .55rem;
   position: relative; min-width: 0; text-align: center;
 }
-/* Соединитель занимает зазор справа от ячейки. В конце каждой строки он
-   гасится — иначе от крайней колонки торчал бы обрубок в пустоту. */
-.pl-stage::after {
-  content: ''; position: absolute; top: 20px; right: -.625rem;
-  width: .625rem; height: 1px; background: var(--edge);
-  transition: background .3s;
+/* Шина непрерывна: отрезок идёт от центра узла до центра следующего, то есть
+   на ширину ячейки плюс зазор. Прежде перемычка занимала только зазор и
+   читалась как обрывок пунктира. В конце строки оба слоя гасятся. */
+.pl-stage::after,
+.pl-stage::before {
+  content: ''; position: absolute; top: 21px; left: 50%;
+  height: 1px; z-index: 0; pointer-events: none;
 }
-.pl-stage:last-child::after { display: none; }
-.pl-stage.pl-done::after { background: var(--ok-lt); }
+.pl-stage::after { width: calc(100% + .625rem); background: var(--edge); }
+.pl-stage::before {
+  width: 0; background: var(--ok-lt); box-shadow: 0 0 6px rgba(63,191,164,.7);
+  transition: width .42s linear;
+}
+.pl-stage.pl-done::before { width: calc(100% + .625rem); }
+.pl-stage:last-child::after, .pl-stage:last-child::before { display: none; }
 
+/* Узел — скруглённый квадрат, а не кружок: это шаг конвейера, а не точка. */
 .pl-circle {
-  width: 40px; height: 40px; border-radius: 50%; flex: none;
+  width: 42px; height: 42px; border-radius: 13px; flex: none; z-index: 1;
   border: 1px solid var(--edge);
-  background: var(--lum);
+  background: rgba(12,14,26,.92);
   box-shadow: inset 0 1px 1px rgba(216,236,248,.18);
   display: flex; align-items: center; justify-content: center;
   color: var(--fog); position: relative;
@@ -550,41 +567,35 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
 
 @keyframes pl-spin { to { transform: rotate(360deg); } }
 .pl-stage.pl-run .pl-circle {
-  color: var(--frost);
+  color: var(--frost); border-color: var(--blueprint);
   box-shadow: inset 0 1px 1px rgba(216,236,248,.3), var(--halo);
 }
 .pl-stage.pl-run .pl-circle::before {
-  content: ''; position: absolute; inset: -1px; border-radius: 50%;
+  content: ''; position: absolute; inset: -1px; border-radius: inherit;
   border: 1px solid transparent; border-top-color: var(--blueprint);
   animation: pl-spin .65s linear infinite; pointer-events: none;
 }
 .pl-stage.pl-run .pl-label { color: var(--frost); }
 
-/* Кольцо, а не галочка: блок описывает конвейер, который я собираю, а не
-   успешный прогон, которого не было. Галочка утверждала второе. */
+/* Пройденный шаг — подсвеченная рамка, не галочка: блок описывает конвейер,
+   который я собираю, а не успешный прогон, которого не было. */
 .pl-stage.pl-done .pl-circle {
   color: var(--ok-lt); border-color: var(--ok-lt);
-  background: rgba(38,150,132,.12);
-  box-shadow: inset 0 1px 1px rgba(216,236,248,.24), 0 0 16px rgba(63,191,164,.28);
-  animation: pl-land .5s cubic-bezier(.16,1,.3,1) 1;
-}
-@keyframes pl-land {
-  0%   { transform: scale(1);    box-shadow: 0 0 0 0 rgba(63,191,164,.55); }
-  55%  { transform: scale(1.12); box-shadow: 0 0 0 10px rgba(63,191,164,0); }
-  100% { transform: scale(1);    box-shadow: inset 0 1px 1px rgba(216,236,248,.24), 0 0 16px rgba(63,191,164,.28); }
+  background: rgba(38,150,132,.14);
+  box-shadow: inset 0 1px 1px rgba(216,236,248,.24), 0 0 16px rgba(63,191,164,.24);
 }
 .pl-stage.pl-done .pl-label { color: var(--ok-lt); }
 
 @media (max-width: 900px) {
   .pipeline { grid-template-columns: repeat(3, 1fr); }
-  .pl-stage:nth-child(3n)::after { display: none; }
+  .pl-stage:nth-child(3n)::after, .pl-stage:nth-child(3n)::before { display: none; }
 }
 /* Три колонки держатся до 330px: в 342px контейнера это по 107px, а самый
    длинный токен «multi-stage» занимает 66px. Две — только на совсем узких. */
 @media (max-width: 330px) {
   .pipeline { grid-template-columns: repeat(2, 1fr); }
-  .pl-stage:nth-child(3n)::after { display: block; }
-  .pl-stage:nth-child(2n)::after { display: none; }
+  .pl-stage:nth-child(3n)::after, .pl-stage:nth-child(3n)::before { display: block; }
+  .pl-stage:nth-child(2n)::after, .pl-stage:nth-child(2n)::before { display: none; }
 }
 
 /* ── STATUS LINE ── */

@@ -127,6 +127,10 @@ function applyLang(l) {
     langBtn.textContent = 'EN';
     backBtn.setAttribute('aria-label', 'Наверх');
   }
+  // Печатная версия открывается на том же языке, что и сайт.
+  const cv = document.getElementById('cv-link');
+  if (cv) cv.href = l === 'en' ? 'cv.html?lang=en' : 'cv.html';
+
   localStorage.setItem('lang', l);
 
   // Русский — версия по умолчанию, её параметр в адресе только мусорит и
@@ -479,7 +483,9 @@ function setupCopyCard(btnId, labelId, iconId, text) {
 setupCopyCard('btn-copy-tg',    'btn-tg-label',    'copy-icon-tg', '@ktylhus');
 setupCopyCard('btn-copy-email', 'btn-copy-label',  'copy-icon',    'timir-ivaniv@yandex.ru');
 // Те же контакты на первом экране: ссылка открывает, кнопка рядом копирует.
-setupCopyCard('hero-copy-tg',   'hero-tg-label',   'hero-ico-tg',  '@ktylhus');
+// Строка первого экрана — сама кнопка копирования: id строки и id кнопки
+// совпадают, поэтому подсветка .copied ложится прямо на неё.
+setupCopyCard('hero-copy-tg',   'hero-tg-label',   'hero-ico-tg',   '@ktylhus');
 setupCopyCard('hero-copy-mail', 'hero-mail-label', 'hero-ico-mail', 'timir-ivaniv@yandex.ru');
 
 // ── Pipeline animation ──
@@ -487,29 +493,62 @@ setupCopyCard('hero-copy-mail', 'hero-mail-label', 'hero-ico-mail', 'timir-ivani
   const stages = Array.from(document.querySelectorAll('.pl-stage'));
   if (!stages.length) return;
 
-  // Соединители теперь рисуют сами стадии, отдельных .pl-line больше нет.
-  // Прежний обход искал линию после каждой стадии и, не найдя, вставал после
-  // первой же — с новой разметкой он бы просто не пошёл дальше lint.
+  // Соединители рисуют сами стадии, отдельных .pl-line нет: прежний обход
+  // искал линию после каждой стадии и без неё вставал после первой.
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     stages.forEach(s => s.classList.add('pl-done'));
     return;
   }
 
-  let i = 0;
-  function step() {
-    if (i >= stages.length) return;
+  const STEP = 420;   // сколько горит активный шаг
+  const GAP  = 140;   // пауза между шагами
+  const HOLD = 2600;  // сколько конвейер стоит пройденным перед повтором
+
+  let timer = null;
+
+  function reset() {
+    stages.forEach(s => s.classList.remove('pl-run', 'pl-done'));
+  }
+
+  function walk(i) {
+    if (i >= stages.length) {
+      // Поток идёт по кругу: блок живой, но ничего не утверждает — это
+      // не прогон сборки, а то, как устроен конвейер.
+      timer = setTimeout(() => { reset(); timer = setTimeout(() => walk(0), 320); }, HOLD);
+      return;
+    }
     const s = stages[i];
     s.classList.add('pl-run');
-    setTimeout(() => {
+    timer = setTimeout(() => {
       s.classList.remove('pl-run');
       s.classList.add('pl-done');
-      i++;
-      setTimeout(step, 140);
-    }, 420);
+      timer = setTimeout(() => walk(i + 1), GAP);
+    }, STEP);
   }
-  // Проход идёт один раз: блок описывает конвейер, а не показывает сборку,
-  // поэтому кнопки повтора больше нет.
-  setTimeout(step, 1200);
+
+  // За кадром цикл не крутим: вкладка в фоне не должна жечь таймеры.
+  // Два независимых условия — блок в поле зрения и вкладка активна, — поэтому
+  // держим оба флага: снимать таймер по одному, а поднимать по другому нельзя,
+  // иначе после возврата на вкладку наблюдатель уже не сработает.
+  let inView = false;
+
+  function sync() {
+    const shouldRun = inView && !document.hidden;
+    if (shouldRun && !timer) {
+      walk(0);
+    } else if (!shouldRun && timer) {
+      clearTimeout(timer);
+      timer = null;
+      reset();
+    }
+  }
+
+  new IntersectionObserver(entries => {
+    entries.forEach(e => { inView = e.isIntersecting; });
+    sync();
+  }, { threshold: 0.25 }).observe(stages[0].parentElement);
+
+  document.addEventListener('visibilitychange', sync);
 })();
 
 // ── Frost sheen: feed the pointer position to the glass surfaces ──

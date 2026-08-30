@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ru" id="root">
+<head>
+<meta charset="utf-8">
+<title>Иванов Темир — Middle+ DevOps-инженер</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<link rel="icon" href="favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --ink:#14161d; --mute:#5b6373; --line:#dfe3ea; --violet:#663af3; --wash:#f4f2fd;
+    --ui:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:#eef0f4;color:var(--ink);font-family:var(--ui);
+       font-size:10.2pt;line-height:1.5;-webkit-font-smoothing:antialiased}
+  .sheet{max-width:210mm;margin:0 auto;background:#fff;padding:16mm 15mm 14mm}
+  h1{font-size:24pt;line-height:1.08;margin:0;letter-spacing:-.02em;font-weight:700}
+  .role-line{font-family:var(--mono);font-size:10pt;color:var(--violet);
+             margin:.35rem 0 0;letter-spacing:.01em}
+  .meta{margin-top:.7rem;font-size:9.4pt;color:var(--mute)}
+  .meta a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line)}
+  h2{font-family:var(--mono);font-size:8.6pt;letter-spacing:.14em;text-transform:uppercase;
+     color:var(--mute);margin:9mm 0 3mm;padding-bottom:1.6mm;border-bottom:1px solid var(--line);
+     font-weight:500}
+  .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:3mm 4mm}
+  .fact{background:var(--wash);border-radius:5px;padding:3mm 3.5mm}
+  .fact b{display:block;font-size:13pt;font-weight:600;letter-spacing:-.01em}
+  .fact i{display:block;font-style:normal;font-size:8.4pt;color:var(--mute);margin-top:.6mm}
+  .job{margin-bottom:6mm;break-inside:avoid}
+  .job-h{display:flex;justify-content:space-between;align-items:baseline;gap:6mm;
+         border-left:2px solid var(--violet);padding-left:3mm}
+  .job-h h3{margin:0;font-size:11.4pt;font-weight:600}
+  .per{font-family:var(--mono);font-size:8.6pt;color:var(--mute);white-space:nowrap}
+  .role{padding-left:3mm;margin-top:2.4mm}
+  .role-t{font-size:9.6pt;font-weight:500;color:var(--violet);margin-bottom:1.4mm}
+  .role ul{margin:0;padding-left:4.4mm}
+  .role li{margin-bottom:1.5mm}
+  .role li::marker{color:var(--violet)}
+  strong{font-weight:600}
+  .srow{display:flex;gap:4mm;margin-bottom:2mm;break-inside:avoid}
+  .sk{flex:0 0 42mm;font-size:9.2pt;color:var(--mute)}
+  .sv{flex:1;font-family:var(--mono);font-size:8.8pt;line-height:1.55}
+  .erow{display:flex;gap:4mm;margin-bottom:2.6mm;break-inside:avoid}
+  .eyr{flex:0 0 14mm;font-family:var(--mono);font-size:9pt;color:var(--violet)}
+  .ebody{font-size:9.4pt}
+  .ebody i{font-style:normal;color:var(--mute);font-size:8.6pt}
+  .certs{font-size:9.4pt}
+  .certs b{font-family:var(--mono);color:var(--violet)}
+  .foot{margin-top:8mm;padding-top:3mm;border-top:1px solid var(--line);
+        font-size:8.6pt;color:var(--mute)}
+  /* Панель управления на экране; на печати её нет. */
+  .bar{position:sticky;top:0;z-index:5;display:flex;gap:8px;justify-content:center;
+       padding:10px;background:rgba(238,240,244,.92);backdrop-filter:blur(8px)}
+  .bar button,.bar a{font-family:var(--ui);font-size:13px;font-weight:500;
+       padding:9px 16px;min-height:44px;display:inline-flex;align-items:center;
+       border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--ink);
+       cursor:pointer;text-decoration:none}
+  .bar button.primary{background:var(--violet);border-color:var(--violet);color:#fff}
+  html:not(.lang-en) [data-lang="en"]{display:none}
+  html.lang-en [data-lang="ru"]{display:none}
+  /* Цель — два листа A4. На исходных интервалах выжимка занимала три:
+     плотность важнее воздуха, когда резюме читают по диагонали. */
+  @media print{
+    @page{size:A4;margin:11mm}
+    body{background:#fff;font-size:8.9pt;line-height:1.4}
+    .sheet{max-width:none;padding:0;margin:0}
+    .bar{display:none}
+    h1{font-size:19pt}
+    .role-line{font-size:9pt}
+    .meta{margin-top:.45rem;font-size:8.4pt}
+    h2{margin:5mm 0 2mm;font-size:7.8pt;padding-bottom:1.2mm}
+    .facts{grid-template-columns:repeat(6,1fr);gap:2mm}
+    .fact{padding:2mm 2.2mm}
+    .fact b{font-size:10.5pt}
+    .fact i{font-size:7.2pt}
+    .job{margin-bottom:3.6mm}
+    .job-h h3{font-size:10pt}
+    .per{font-size:7.8pt}
+    .role{margin-top:1.6mm}
+    .role-t{font-size:8.6pt;margin-bottom:.9mm}
+    .role li{margin-bottom:.9mm}
+    .srow{margin-bottom:1.2mm}
+    .sk{flex-basis:38mm;font-size:8.4pt}
+    .sv{font-size:8pt}
+    .erow{margin-bottom:1.6mm}
+    .ebody{font-size:8.4pt}
+    .foot{margin-top:4mm;padding-top:2mm;font-size:7.6pt}
+    a{color:inherit}
+  }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <button class="primary" id="print" type="button"><span data-lang="ru">Сохранить в PDF</span><span data-lang="en">Save as PDF</span></button>
+  <button id="lang" type="button">EN</button>
+  <a href="./"><span data-lang="ru">На сайт</span><span data-lang="en">Back to site</span></a>
+</div>
+
+<main class="sheet">
+  <h1><span data-lang="ru">Иванов Темир</span><span data-lang="en">Ivanov Temir</span></h1>
+  <div class="role-line">Middle+ DevOps / Infrastructure Engineer</div>
+  <div class="meta">
+    <span data-lang="ru">Санкт-Петербург · удалённо</span><span data-lang="en">Saint Petersburg · remote</span> &middot; timir-ivaniv@yandex.ru &middot; telegram @ktylhus
+    &middot; <a href="https://tsm-devi.github.io/Resume/">tsm-devi.github.io/Resume</a>
+  </div>
+
+  <h2><span data-lang="ru">Ключевое</span><span data-lang="en">Key figures</span></h2>
+  <div class="facts">
+      <div class="fact"><b>4+</b><i data-lang="ru">лет в IT</i><i data-lang="en">years in IT</i></div>
+      <div class="fact"><b>3+</b><i data-lang="ru">года DevOps</i><i data-lang="en">years in DevOps</i></div>
+      <div class="fact"><b>63</b><i data-lang="ru">VM в трёх контурах</i><i data-lang="en">VMs across three environments</i></div>
+      <div class="fact"><b>70+</b><i data-lang="ru">сервисов в эксплуатации</i><i data-lang="en">services in operation</i></div>
+      <div class="fact"><b>40 → 8 мин</b><i data-lang="ru">время деплоя</i><i data-lang="en">deploy time</i></div>
+      <div class="fact"><b>часы → 5 мин</b><i data-lang="ru">обнаружение инцидентов</i><i data-lang="en">incident detection</i></div>
+  </div>
+
+  <h2><span data-lang="ru">Опыт</span><span data-lang="en">Experience</span></h2>
+    <article class="job">
+      <header class="job-h">
+        <h3><span data-lang="ru">ООО ДЮК Технологии</span><span data-lang="en">DUC Technologies</span></h3>
+        <span class="per"><span data-lang="ru">апр 2026 — июл 2026</span><span data-lang="en">Apr 2026 — Jul 2026</span></span>
+      </header>
+      <div class="role">
+        <div class="role-t"><span data-lang="ru">DevOps-инженер</span><span data-lang="en">DevOps Engineer</span></div>
+        <ul>
+        <li><span data-lang="ru">Проектная работа: production-контур мультиагентной low-code платформы для заказчика банковского сектора — спроектирован, развёрнут, сдан и закрыт в июле 2026</span><span data-lang="en">Project work: the production environment of a multi-agent low-code platform for a banking-sector client — designed, deployed, handed over and closed in July 2026</span></li>
+        <li><span data-lang="ru">Развернул с нуля три изолированных контура <strong>DEV / INF / PROD</strong> в VMware Cloud Director: отдельные виртуальные ЦОД, группировка по vApp, сетевая сегментация — суммарно <strong>63 виртуальные машины</strong></span><span data-lang="en">Built three isolated <strong>DEV / INF / PROD</strong> environments from scratch in VMware Cloud Director: separate virtual data centres, vApp grouping, network segmentation — <strong>63 virtual machines</strong> in total</span></li>
+        <li><span data-lang="ru">DEV и PROD зеркальны 1:1, каждый — 28 VM / 90 vCPU / 191 GB RAM / 2.7 TB дисков; провёл right-sizing по компонентам и подготовил ресурсный план</span><span data-lang="en">DEV and PROD mirror each other 1:1, each 28 VMs / 90 vCPU / 191 GB RAM / 2.7 TB of disk; I right-sized the components and prepared the resource plan</span></li>
+        <li><span data-lang="ru"><strong>Kubernetes</strong> (master + 3 worker), Helm-чарты, RBAC и namespace-изоляция; <strong>GitLab CI/CD</strong> с разделением dev/prod и ручными production-джобами; Terraform и Ansible для воспроизводимости окружений</span><span data-lang="en"><strong>Kubernetes</strong> (master + 3 workers), Helm charts, RBAC and namespace isolation; <strong>GitLab CI/CD</strong> with dev/prod separation and manual production jobs; Terraform and Ansible for reproducible environments</span></li>
+        <li><span data-lang="ru">L3-связности между контурами нет — доступ открывался точечно через firewall и NAT. Вход администратора: <strong>PAM заказчика → jump host контура → целевая ВМ</strong>; для CI/CD отдельный путь — bastion на jump host DEV и PROD, через который раннер с INF ходит в прикладные контуры</span><span data-lang="en">There is no L3 connectivity between environments — access was opened per service through firewall and NAT. Admin path: <strong>the client’s PAM → the environment’s jump host → the target VM</strong>; CI/CD has its own route through a bastion on the DEV and PROD jump hosts, which the INF runner uses to reach them</span></li>
+        <li><span data-lang="ru">Сквозная наблюдаемость на Prometheus, Grafana, Loki и Promtail; разбирал production-инциденты — TLS SAN mismatch, Redis NOPERM, исчерпание PostgreSQL connections, MinIO mesh timeout, Vault sealed, переполнение диска Docker-логами</span><span data-lang="en">End-to-end observability on Prometheus, Grafana, Loki and Promtail; handled production incidents — TLS SAN mismatch, Redis NOPERM, PostgreSQL connection exhaustion, MinIO mesh timeout, Vault sealed, disks filled by Docker logs</span></li>
+        <li><span data-lang="ru">Отдельно воспроизвёл ту же архитектуру в одном контуре вместо трёх на Timeweb Cloud: уложил платформу с <strong>28 VM в 10 VM</strong> (34 vCPU, 96 GB, 1.8 TB NVMe) — k3s вместо кластера, standalone PostgreSQL и ClickHouse, сервисы на общих узлах</span><span data-lang="en">Separately reproduced the same architecture in a single environment instead of three on Timeweb Cloud: fitted a platform of <strong>28 VMs into 10</strong> (34 vCPU, 96 GB, 1.8 TB NVMe) — k3s instead of a cluster, standalone PostgreSQL and ClickHouse, services sharing nodes</span></li>
+        </ul>
+      </div>
+    </article>
+    <article class="job">
+      <header class="job-h">
+        <h3><span data-lang="ru">Слетать.ру</span><span data-lang="en">Sletat.ru</span></h3>
+        <span class="per"><span data-lang="ru">фев 2024 — апр 2026</span><span data-lang="en">Feb 2024 — Apr 2026</span></span>
+      </header>
+      <div class="role">
+        <div class="role-t"><span data-lang="ru">DevOps-инженер</span><span data-lang="en">DevOps Engineer</span></div>
+        <ul>
+        <li><span data-lang="ru">Инфраструктурная команда из <strong>2 человек</strong> на <strong>50+ разработчиков</strong>: окружения, доступы, сертификаты, CI/CD и мониторинг для <strong>более 70 сервисов</strong> — 12+ микросервисов в Kubernetes, 40+ Node.js под pm2, 20–30 бэкендов на C#/.NET</span><span data-lang="en">An infrastructure team of <strong>2</strong> serving <strong>50+ developers</strong>: environments, access, certificates, CI/CD and monitoring for <strong>70+ services</strong> — 12+ microservices in Kubernetes, 40+ Node.js under pm2, 20–30 C#/.NET backends</span></li>
+        <li><span data-lang="ru">Развернул <strong>Kubernetes на bare-metal</strong> (мастер и два воркера на физических серверах) и мигрировал <strong>12+ микросервисов</strong> из Docker Compose: время деплоя сократилось <strong>с ~40 до ~8 минут</strong></span><span data-lang="en">Deployed <strong>bare-metal Kubernetes</strong> (a master and two workers on physical servers) and migrated <strong>12+ microservices</strong> off Docker Compose: deploy time dropped <strong>from ~40 to ~8 minutes</strong></span></li>
+        <li><span data-lang="ru">Покрыл <strong>100% продакшен-репозиториев</strong> автоматической сборкой и деплоем в GitLab CI и Jenkins, внедрил GitOps-доставку через ArgoCD и встроил сканирование <strong>Trivy и Gitleaks</strong> в пайплайн</span><span data-lang="en">Covered <strong>100% of production repositories</strong> with automated build and deploy in GitLab CI and Jenkins, introduced GitOps delivery through ArgoCD and built <strong>Trivy and Gitleaks</strong> scanning into the pipeline</span></li>
+        <li><span data-lang="ru">Разработал Ansible-роли и плейбуки — настройка нового сервера занимает <strong>15 минут вместо 2–3 часов</strong>; Terraform под воспроизводимые среды и version control конфигураций</span><span data-lang="en">Wrote Ansible roles and playbooks — a new server is set up in <strong>15 minutes instead of 2–3 hours</strong>; Terraform for reproducible environments and configuration version control</span></li>
+        <li><span data-lang="ru">Отказоустойчивый кластер <strong>PostgreSQL + Patroni + etcd</strong> на трёх нодах с uptime СУБД <strong>99.9%</strong>; аналитическое хранилище <strong>ClickHouse ~4 ТБ</strong> на выделенных серверах</span><span data-lang="en">A fault-tolerant <strong>PostgreSQL + Patroni + etcd</strong> cluster on three nodes with <strong>99.9%</strong> database uptime; a <strong>ClickHouse</strong> analytics store of <strong>~4 TB</strong> on dedicated servers</span></li>
+        <li><span data-lang="ru">Внедрил Prometheus с Grafana и алертингом через Alertmanager, ELK и Graylog для логов, Zabbix для инфраструктуры — среднее время обнаружения инцидентов упало <strong>с нескольких часов до ~5 минут</strong></span><span data-lang="en">Introduced Prometheus with Grafana and Alertmanager alerting, ELK and Graylog for logs, Zabbix for infrastructure — mean time to detect incidents fell <strong>from several hours to ~5 minutes</strong></span></li>
+        </ul>
+      </div>
+      <div class="role">
+        <div class="role-t"><span data-lang="ru">Системный администратор</span><span data-lang="en">System Administrator</span></div>
+        <ul>
+        <li><span data-lang="ru">Администрировал доменную инфраструктуру <strong>Active Directory</strong>: групповые политики, права доступа, профили пользователей</span><span data-lang="en">Administered the <strong>Active Directory</strong> domain: group policies, access rights, user profiles</span></li>
+        <li><span data-lang="ru">Организовал удалённый доступ через терминальные фермы RDS, настроил и перенёс <strong>30+ рабочих станций</strong> при расширении офиса</span><span data-lang="en">Set up remote access through RDS terminal farms, configured and relocated <strong>30+ workstations</strong> during an office expansion</span></li>
+        </ul>
+      </div>
+    </article>
+    <article class="job">
+      <header class="job-h">
+        <h3><span data-lang="ru">РеалЪ ТД, ООО</span><span data-lang="en">Real TD</span></h3>
+        <span class="per"><span data-lang="ru">авг 2022 — фев 2024</span><span data-lang="en">Aug 2022 — Feb 2024</span></span>
+      </header>
+      <div class="role">
+        <div class="role-t"><span data-lang="ru">Системный администратор / DevOps-инженер</span><span data-lang="en">System Administrator / DevOps Engineer</span></div>
+        <ul>
+        <li><span data-lang="ru">Автоматизировал развёртывание ОС Linux, сократив подготовку рабочего места <strong>с 3 часов до 40 минут</strong></span><span data-lang="en">Automated Linux OS provisioning, cutting workstation setup <strong>from 3 hours to 40 minutes</strong></span></li>
+        <li><span data-lang="ru">Настроил мониторинг распределённой сети на <strong>Zabbix</strong>: сетевое оборудование торговых точек, доступность модемов и каналов связи</span><span data-lang="en">Set up monitoring of a distributed network on <strong>Zabbix</strong>: retail-site network equipment, modem and link availability</span></li>
+        <li><span data-lang="ru">Автоматизировал рутину скриптами на Bash и PowerShell, хранил и версионировал конфигурации в self-hosted GitLab</span><span data-lang="en">Automated routine work with Bash and PowerShell scripts, keeping configurations versioned in a self-hosted GitLab</span></li>
+        </ul>
+      </div>
+      <div class="role">
+        <div class="role-t"><span data-lang="ru">Системный администратор</span><span data-lang="en">System Administrator</span></div>
+        <ul>
+        <li><span data-lang="ru">Администрировал серверы Windows Server и Linux и сетевое оборудование <strong>MikroTik, Cisco</strong> в розничной сети из <strong>40+ объектов</strong></span><span data-lang="en">Administered Windows Server and Linux servers and <strong>MikroTik, Cisco</strong> network equipment across a retail network of <strong>40+ sites</strong></span></li>
+        <li><span data-lang="ru">Настроил VPN-инфраструктуру между объектами (Kerio), маршрутизацию и коммутацию; HelpDesk-поддержка парка <strong>100+ компьютеров</strong> и кассовой техники</span><span data-lang="en">Built the site-to-site VPN infrastructure (Kerio), routing and switching; HelpDesk support for a fleet of <strong>100+ computers</strong> and POS equipment</span></li>
+        </ul>
+      </div>
+    </article>
+    <article class="job">
+      <header class="job-h">
+        <h3><span data-lang="ru">ООО «Форум»</span><span data-lang="en">Forum</span></h3>
+        <span class="per"><span data-lang="ru">май 2022 — июл 2022</span><span data-lang="en">May 2022 — Jul 2022</span></span>
+      </header>
+      <div class="role">
+        <div class="role-t"><span data-lang="ru">Системный администратор / Техническая поддержка</span><span data-lang="en">System Administrator / Technical Support</span></div>
+        <ul>
+        <li><span data-lang="ru">Настройка сетевого и телекоммуникационного оборудования, монтажные работы, подключение абонентов к сети</span><span data-lang="en">Configuration of network and telecom equipment, installation work, connecting subscribers to the network</span></li>
+        </ul>
+      </div>
+    </article>
+
+  <h2><span data-lang="ru">Стек</span><span data-lang="en">Stack</span></h2>
+      <div class="srow"><span class="sk"><span data-lang="ru">Оркестрация и контейнеры</span><span data-lang="en">Orchestration & containers</span></span><span class="sv">Kubernetes · k3s · Helm · ArgoCD · Docker · Harbor · Longhorn</span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">CI/CD и IaC</span><span data-lang="en">CI/CD & IaC</span></span><span class="sv">GitLab CI/CD · Jenkins · Terraform · Ansible · Trivy · Gitleaks</span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">Инфраструктура</span><span data-lang="en">Infrastructure</span></span><span class="sv">Linux · VMware Cloud Director · Nginx · HashiCorp Vault · Keycloak · Istio</span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">Данные и очереди</span><span data-lang="en">Data & messaging</span></span><span class="sv">PostgreSQL + Patroni · ClickHouse · Redis · Kafka · RabbitMQ · MinIO · S3</span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">Наблюдаемость</span><span data-lang="en">Observability</span></span><span class="sv">Prometheus · Grafana · Alertmanager · Loki · ELK · Graylog · Zabbix</span></div>
+
+  <h2><span data-lang="ru">Образование</span><span data-lang="en">Education</span></h2>
+      <div class="erow">
+        <span class="eyr">2020</span>
+        <span class="ebody"><b><span data-lang="ru">КГУ им. Б.Б. Городовикова</span><span data-lang="en">Kalmyk State University</span></b><br><span data-lang="ru">Информационная безопасность</span><span data-lang="en">Information Security</span><br><i><span data-lang="ru">Неоконченное высшее</span><span data-lang="en">Incomplete higher education</span></i></span>
+      </div>
+      <div class="erow">
+        <span class="eyr">2019</span>
+        <span class="ebody"><b><span data-lang="ru">КГУ им. Б.Б. Городовикова</span><span data-lang="en">Kalmyk State University</span></b><br><span data-lang="ru">Программирование в компьютерных системах — техник-программист</span><span data-lang="en">Computer Systems Programming — programmer technician</span><br><i><span data-lang="ru">Среднее специальное</span><span data-lang="en">Vocational education</span></i></span>
+      </div>
+  <div class="certs" style="margin-top:2.5mm"><b>BASE</b> <span data-lang="ru">Облако VMware · 2026</span><span data-lang="en">VMware Cloud · 2026</span> · <b>PRO</b> <span data-lang="ru">Облако VMware · 2026</span><span data-lang="en">VMware Cloud · 2026</span></div>
+
+  <div class="foot"><span data-lang="ru">Это выжимка. Развёрнутое резюме со всеми обязанностями — на hh.ru.</span><span data-lang="en">This is a summary. The full resume with every responsibility is on hh.ru.</span></div>
+</main>
+
+<script>
+  // Язык берём из адреса, чтобы ссылка с сайта открывала нужную версию.
+  var root = document.getElementById('root');
+  function setLang(l) {
+    root.classList.toggle('lang-en', l === 'en');
+    root.lang = l;
+    document.getElementById('lang').textContent = l === 'en' ? 'RU' : 'EN';
+    document.title = l === 'en'
+      ? 'Ivanov Temir \u2014 Middle+ DevOps Engineer'
+      : '\u0418\u0432\u0430\u043d\u043e\u0432 \u0422\u0435\u043c\u0438\u0440 \u2014 Middle+ DevOps-\u0438\u043d\u0436\u0435\u043d\u0435\u0440';
+  }
+  var q = new URLSearchParams(location.search).get('lang');
+  var cur = q === 'en' ? 'en' : 'ru';
+  setLang(cur);
+  document.getElementById('lang').addEventListener('click', function () {
+    cur = cur === 'ru' ? 'en' : 'ru';
+    setLang(cur);
+    var u = new URL(location.href);
+    if (cur === 'en') u.searchParams.set('lang', 'en'); else u.searchParams.delete('lang');
+    history.replaceState(null, '', u);
+  });
+  document.getElementById('print').addEventListener('click', function () { window.print(); });
+</script>
+</body>
+</html>
