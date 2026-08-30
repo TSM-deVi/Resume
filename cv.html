@@ -43,7 +43,7 @@
   .role li::marker{color:var(--violet)}
   strong{font-weight:600}
   .srow{display:flex;gap:4mm;margin-bottom:2mm;break-inside:avoid}
-  .sk{flex:0 0 42mm;font-size:9.2pt;color:var(--mute)}
+  .sk{flex:0 0 40mm;font-size:8.8pt;color:var(--mute)}
   .sv{flex:1;font-family:var(--mono);font-size:8.8pt;line-height:1.55}
   .erow{display:flex;gap:4mm;margin-bottom:2.6mm;break-inside:avoid}
   .eyr{flex:0 0 14mm;font-family:var(--mono);font-size:9pt;color:var(--violet)}
@@ -80,30 +80,30 @@
     h1{font-size:17pt}
     .role-line{font-size:8.6pt}
     .meta{margin-top:.3rem;font-size:8pt}
-    h2{margin:4mm 0 1.6mm;font-size:7.6pt;padding-bottom:1mm}
+    h2{margin:3.4mm 0 1.4mm;font-size:7.4pt;padding-bottom:.9mm}
     .facts{grid-template-columns:repeat(6,1fr);gap:1.6mm}
     .fact{padding:1.6mm 2mm}
     .fact b{font-size:9.6pt}
     .fact i{font-size:6.9pt}
-    .job{margin-bottom:3mm}
+    .job{margin-bottom:2.6mm}
     .job-h h3{font-size:10pt}
     .per{font-size:7.8pt}
     .role{margin-top:1.2mm}
     .role-t{font-size:8.6pt;margin-bottom:.9mm}
-    .role li{margin-bottom:.7mm}
-    .srow{margin-bottom:1mm}
-    .sk{flex-basis:36mm;font-size:8pt}
-    .sv{font-size:7.7pt;line-height:1.45}
+    .role li{margin-bottom:.6mm}
+    .srow{margin-bottom:.8mm}
+    .sk{flex-basis:31mm;font-size:7.4pt}
+    .sv{font-size:7.2pt;line-height:1.38}
     .erow{margin-bottom:1.2mm}
-    .crow{margin-bottom:1.2mm}
+    .crow{margin-bottom:1mm}
     .cbody{font-size:8.4pt}
     .cbadge{flex-basis:12mm;font-size:8pt}
     .cissuer{font-size:7.8pt}
-    .langs{margin-top:2mm;font-size:8.2pt}
+    .langs{margin-top:1.6mm;font-size:8pt}
     .ebody{font-size:8.4pt}
     .about{margin-top:2mm;font-size:8.3pt;max-width:none}
-    .goal{margin-top:2.4mm;padding:1.8mm 2.2mm;font-size:7.9pt}
-    .foot{margin-top:3mm;padding-top:2mm;font-size:7.6pt}
+    .goal{margin-top:2mm;padding:1.5mm 2mm;font-size:7.6pt}
+    .foot{margin-top:2.2mm;padding-top:1.5mm;font-size:7.2pt}
     a{color:inherit}
   }
 </style>
@@ -217,17 +217,18 @@
     </article>
 
   <h2><span data-lang="ru">Стек</span><span data-lang="en">Stack</span></h2>
-      <div class="srow"><span class="sk"><span data-lang="ru">Платформы и ОС</span><span data-lang="en">Platforms & OS</span></span><span class="sv">Linux (Debian, Ubuntu, systemd, networking) · Windows Server · IIS · Active Directory · групповые политики · DNS · DHCP · RDS · PowerShell</span></div>
-      <div class="srow"><span class="sk"><span data-lang="ru">Kubernetes и контейнеры</span><span data-lang="en">Kubernetes & containers</span></span><span class="sv">Kubernetes с нуля на bare-metal, в VMware и single-node k3s · etcd · CNI · Helm · Ingress · HPA · RBAC · namespace-изоляция · Docker · Docker Compose · Longhorn</span></div>
-      <div class="srow"><span class="sk"><span data-lang="ru">CI/CD и GitOps</span><span data-lang="en">CI/CD & GitOps</span></span><span class="sv">GitLab CI/CD · GitLab Runner · Jenkins · ArgoCD · Trivy · Gitleaks · Let’s Encrypt · внутренний CA</span></div>
-      <div class="srow"><span class="sk"><span data-lang="ru">IaC и автоматизация</span><span data-lang="en">IaC & automation</span></span><span class="sv">Terraform · Ansible (роли, плейбуки) · Python · Bash · PowerShell</span></div>
-      <div class="srow"><span class="sk"><span data-lang="ru">Service mesh, доступ, безопасность</span><span data-lang="en">Service mesh, access, security</span></span><span class="sv">Istio + Kiali · Envoy + OPA/OPAL (ext_authz) · Keycloak/OIDC · HashiCorp Vault · Secret Server · Passbolt · bastion и jump host · firewall + NAT · UFW · TLS/PKI</span></div>
-      <div class="srow"><span class="sk"><span data-lang="ru">Реестры и артефакты</span><span data-lang="en">Registries & artifacts</span></span><span class="sv">Harbor · GitLab Container Registry · Verdaccio (npm) · MinIO · S3 (Yandex Cloud)</span></div>
-      <div class="srow"><span class="sk"><span data-lang="ru">Наблюдаемость</span><span data-lang="en">Observability</span></span><span class="sv">Prometheus · Grafana · Alertmanager · Loki + Promtail · ELK (Elasticsearch, Logstash, Kibana) · Graylog · Sentry · Zabbix (HA-кластер) · Uptime Kuma · LibreNMS + Oxidized · NetBox</span></div>
-      <div class="srow"><span class="sk"><span data-lang="ru">Базы данных и хранилища</span><span data-lang="en">Databases & storage</span></span><span class="sv">PostgreSQL + Patroni + etcd (HA) · MySQL · MongoDB · MS SQL Server · ClickHouse · Redis · Qdrant · Vespa</span></div>
-      <div class="srow"><span class="sk"><span data-lang="ru">Web, очереди, служебные сервисы</span><span data-lang="en">Web, messaging, platform services</span></span><span class="sv">Nginx · HAProxy + Keepalived · Kafka · RabbitMQ · Consul · Unleash (feature flags)</span></div>
-      <div class="srow"><span class="sk"><span data-lang="ru">Виртуализация и облака</span><span data-lang="en">Virtualization & clouds</span></span><span class="sv">VMware vSphere и Cloud Director (vDC, vApp) · Hyper-V · Cloud.ru · Timeweb Cloud · Yandex Cloud · Veeam Backup & Replication</span></div>
-      <div class="srow"><span class="sk"><span data-lang="ru">LLM-платформа</span><span data-lang="en">LLM platform</span></span><span class="sv">LiteLLM · Ollama · GigaChat · Langflow · Langfuse · SmartSearch · векторный поиск Qdrant и Vespa</span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">ОС и платформы</span><span data-lang="en">OS & platforms</span></span><span class="sv">Linux — Debian, Ubuntu (администрирование, systemd, networking) · Windows Server — IIS, Active Directory, групповые политики, DNS, DHCP, RDS, PowerShell</span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">Контейнеры и оркестрация</span><span data-lang="en">Containers & orchestration</span></span><span class="sv">Docker · Docker Compose · Kubernetes с нуля в трёх средах — bare-metal, VMware Cloud Director, single-node k3s (etcd, CNI, storage, обновления, Ingress, HPA, RBAC, namespace-изоляция) · Helm · Longhorn</span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">CI/CD и GitOps</span><span data-lang="en">CI/CD & GitOps</span></span><span class="sv">GitLab CI/CD — GitLab CE, GitLab Runner · Jenkins · ArgoCD · полный цикл: сборка → тесты → сканирование (Trivy, Gitleaks) → деплой на ВМ и в Kubernetes · SSL/TLS Let’s Encrypt и внутренний центр сертификации</span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">IaC и автоматизация</span><span data-lang="en">IaC & automation</span></span><span class="sv">Terraform · Ansible — роли, плейбуки, идемпотентность · Python · Bash · PowerShell</span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">Service mesh, доступ, безопасность</span><span data-lang="en">Service mesh, access, security</span></span><span class="sv">Istio + Kiali — Gateway, VirtualService, DestinationRule, ServiceEntry, AuthorizationPolicy, WorkloadGroup · Envoy + OPA/OPAL через ext_authz · Keycloak/OIDC SSO · HashiCorp Vault (секреты, токены, схема External Secrets) · Secret Server · Passbolt · bastion и jump host, firewall и NAT, сегментация сетей, UFW, TLS/PKI</span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">Реестры и артефакты</span><span data-lang="en">Registries & artifacts</span></span><span class="sv">Harbor — проекты, retention-политики, робот-аккаунты · GitLab Container Registry с pull secrets · Verdaccio — приватный npm-registry с проксированием npmjs · MinIO · S3 в Yandex Cloud</span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">Наблюдаемость</span><span data-lang="en">Observability</span></span><span class="sv">Prometheus + Grafana · Alertmanager · Loki + Promtail · ELK — Elasticsearch, Logstash, Kibana · Graylog · Sentry · Zabbix в HA-кластере на двух нодах · Uptime Kuma · LibreNMS + Oxidized · NetBox</span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">Базы данных и хранилища</span><span data-lang="en">Databases & storage</span></span><span class="sv">PostgreSQL + Patroni + etcd — отказоустойчивый кластер на трёх нодах, uptime 99.9% · MS SQL Server с репликацией master-slave · MySQL · MongoDB · ClickHouse — аналитическое хранилище ~4 ТБ · Redis · Qdrant · Vespa</span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">Очереди и служебные сервисы</span><span data-lang="en">Messaging & platform services</span></span><span class="sv">Kafka — топики, партиции, политики хранения, мониторинг лага консьюмеров · RabbitMQ — очереди, exchange, DLQ, разграничение по vhost · Consul — service discovery, health-checks, KV · Unleash — feature-флаги</span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">Web и балансировка</span><span data-lang="en">Web & load balancing</span></span><span class="sv">Nginx — reverse proxy, TLS-терминация, балансировка, заголовки CSP · HAProxy + Keepalived</span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">Виртуализация и облака</span><span data-lang="en">Virtualization & clouds</span></span><span class="sv">VMware vSphere и Cloud Director — виртуальные ЦОД, vApp, firewall и NAT · Hyper-V · Veeam Backup & Replication · Cloud.ru · Timeweb Cloud · Yandex Cloud</span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">LLM-платформа</span><span data-lang="en">LLM platform</span></span><span class="sv">LiteLLM · Ollama · GigaChat · Langflow · Langfuse · SmartSearch · векторный поиск на Qdrant и Vespa</span></div>
       <div class="srow"><span class="sk"><span data-lang="ru">Сеть, VPN и инструменты</span><span data-lang="en">Network, VPN & tools</span></span><span class="sv">MikroTik · Cisco · Kerio VPN · Git · Jira и Jira Service Desk · Confluence · Zimbra · Exchange · OCS Inventory</span></div>
 
   <h2><span data-lang="ru">Образование</span><span data-lang="en">Education</span></h2>
