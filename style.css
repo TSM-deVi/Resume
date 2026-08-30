@@ -174,6 +174,14 @@ nav.scrolled { box-shadow: 0 16px 32px rgba(0,0,0,.3); }
   -webkit-background-clip: text; background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+/* Имя в шапке дублировало заголовок, пока тот на экране. Точка остаётся —
+   она держит место и работает индикатором, — а имя проявляется, когда
+   заголовок уезжает вверх и подписать страницу становится нечем. */
+.nav-logo span { opacity: 0; transition: opacity .3s ease; }
+nav.scrolled .nav-logo span { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .nav-logo span { transition: none; }
+}
 .nav-dot {
   width: 7px; height: 7px; border-radius: 50%;
   background: var(--blueprint); box-shadow: var(--halo);
@@ -244,6 +252,12 @@ section { padding: clamp(3.5rem, 9vw, 120px) 0; }
   overflow: hidden; pointer-events: none;
   transform: translate3d(0, var(--par, 0px), 0);
   will-change: transform;
+  /* Свечение размыто на 70px, а контейнер режет его по своей границе — выходил
+     видимый шов через всю ширину над «Ключевыми результатами»: яркость обрывалась
+     с 15 до 6.5 при типичном перепаде между строками 0.03. Маска гасит слой
+     до того, как до края дойдёт обрезка. */
+  -webkit-mask-image: linear-gradient(to bottom, #000 62%, transparent 96%);
+  mask-image: linear-gradient(to bottom, #000 62%, transparent 96%);
 }
 .hero-sky::before {
   content: '';
@@ -518,46 +532,63 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
 
 .pipeline {
   display: grid; grid-template-columns: repeat(6, 1fr);
-  gap: 1.5rem .625rem;
+  gap: 1.5rem .625rem; position: relative;
   list-style: none; margin: 0; padding: 0;
 }
+/* Единый рельс от центра первого узла до центра последнего вместо перемычек
+   между ячейками: шесть отрезков читались как пунктир, одна линия читается
+   как конвейер.
+
+   Половина колонки — это не 100%/12: пять зазоров по .625rem съедают ширину
+   до раскладки колонок. Колонка равна (100% − 5×.625rem)/6, значит центр
+   крайнего узла — половина от неё. Первая версия с 100%/12 промахивалась
+   на несколько пикселей, и рельс не доходил до центров. */
+.pipeline::before, .pipeline::after {
+  content: ''; position: absolute; top: 21px;
+  left: calc((100% - 3.125rem) / 12); right: calc((100% - 3.125rem) / 12);
+  height: 2px; border-radius: 2px; pointer-events: none;
+}
+.pipeline::before {
+  background: linear-gradient(90deg, var(--edge), var(--edge-lt) 50%, var(--edge));
+}
+/* Свет идёт по рельсу и не останавливается. Прежняя анимация заливала линию
+   и копила «пройдено» — блок описывает конвейер, а не прогон сборки, и
+   утверждать успех ему нечем. Градиент вместо сдвига элемента: анимируется
+   фон, а не раскладка. */
+.pipeline::after {
+  background: linear-gradient(90deg, transparent, rgba(182,217,252,.95), transparent);
+  background-size: 20% 100%; background-repeat: no-repeat;
+  animation: pl-run 5.5s linear infinite;
+}
+@keyframes pl-run {
+  from { background-position: -20% 0; }
+  to   { background-position: 120% 0; }
+}
+@media (prefers-reduced-motion: reduce) { .pipeline::after { animation: none; opacity: 0; } }
+
 .pl-stage {
   display: flex; flex-direction: column; align-items: center; gap: .55rem;
   position: relative; min-width: 0; text-align: center;
 }
-/* Шина непрерывна: отрезок идёт от центра узла до центра следующего, то есть
-   на ширину ячейки плюс зазор. Прежде перемычка занимала только зазор и
-   читалась как обрывок пунктира. В конце строки оба слоя гасятся. */
-.pl-stage::after,
-.pl-stage::before {
-  content: ''; position: absolute; top: 21px; left: calc(50% + 21px);
-  height: 1px; z-index: 0; pointer-events: none;
-}
-/* Отрезок идёт от правого края узла до левого края следующего, а не от центра
-   к центру: при отсчёте от центра линия проходила сквозь иконку и перечёркивала
-   её — полупрозрачный фон узла её не скрывал. 42px — ширина узла. */
-.pl-stage::after { width: calc(100% + .625rem - 42px); background: var(--edge); }
-.pl-stage::before {
-  width: 0; background: var(--ok-lt); box-shadow: 0 0 6px rgba(63,191,164,.7);
-  transition: width .42s linear;
-}
-.pl-stage.pl-done::before { width: calc(100% + .625rem - 42px); }
-.pl-stage:last-child::after, .pl-stage:last-child::before { display: none; }
-
-/* Узел — скруглённый квадрат, а не кружок: это шаг конвейера, а не точка. */
+/* Узел — круг на рельсе, а не коробка над ним. Кольцо цвета фона выгрызает
+   разрыв в линии, поэтому она не просвечивает сквозь иконку. */
 .pl-circle {
-  width: 42px; height: 42px; border-radius: 13px; flex: none; z-index: 1;
-  border: 1px solid var(--edge);
+  width: 40px; height: 40px; border-radius: 50%; flex: none; z-index: 1;
+  border: 1px solid var(--edge-lt);
   background: #0c0e1a;
-  box-shadow: inset 0 1px 1px rgba(216,236,248,.18);
+  box-shadow: inset 0 1px 1px rgba(216,236,248,.18), 0 0 0 5px var(--canvas);
   display: flex; align-items: center; justify-content: center;
-  color: var(--fog); position: relative;
-  transition: color .3s, box-shadow .3s, border-color .3s, background .3s;
+  color: var(--blueprint); position: relative;
+  transition: color .3s, box-shadow .3s, border-color .3s;
+}
+.pl-stage:hover .pl-circle {
+  color: var(--frost); border-color: var(--blueprint);
+  box-shadow: inset 0 1px 1px rgba(216,236,248,.3), 0 0 0 5px var(--canvas), var(--halo);
 }
 .pl-label {
   font-family: var(--font-mono);
   font-size: 11px; letter-spacing: .10em; text-transform: uppercase;
-  color: var(--moon); transition: color .3s;
+  color: var(--ice); transition: color .3s;
 }
 /* Инструменты отдельными элементами: переносятся по названиям, а не рвутся
    посреди слова в узкой колонке. */
@@ -567,37 +598,23 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
   color: var(--fog);
 }
 
-@keyframes pl-spin { to { transform: rotate(360deg); } }
-.pl-stage.pl-run .pl-circle {
-  color: var(--frost); border-color: var(--blueprint);
-  box-shadow: inset 0 1px 1px rgba(216,236,248,.3), var(--halo);
-}
-.pl-stage.pl-run .pl-circle::before {
-  content: ''; position: absolute; inset: -1px; border-radius: inherit;
-  border: 1px solid transparent; border-top-color: var(--blueprint);
-  animation: pl-spin .65s linear infinite; pointer-events: none;
-}
-.pl-stage.pl-run .pl-label { color: var(--frost); }
-
-/* Пройденный шаг — подсвеченная рамка, не галочка: блок описывает конвейер,
-   который я собираю, а не успешный прогон, которого не было. */
-.pl-stage.pl-done .pl-circle {
-  color: var(--ok-lt); border-color: var(--ok-lt);
-  background: rgba(38,150,132,.14);
-  box-shadow: inset 0 1px 1px rgba(216,236,248,.24), 0 0 16px rgba(63,191,164,.24);
-}
-.pl-stage.pl-done .pl-label { color: var(--ok-lt); }
-
 @media (max-width: 900px) {
   .pipeline { grid-template-columns: repeat(3, 1fr); }
-  .pl-stage:nth-child(3n)::after, .pl-stage:nth-child(3n)::before { display: none; }
+  /* Сетка переносится — сплошной рельс через всю строку стал бы враньём.
+     Возвращаем перемычки между соседями и гасим их в конце каждой строки. */
+  .pipeline::before, .pipeline::after { display: none; }
+  .pl-stage::after {
+    content: ''; position: absolute; top: 21px; left: calc(50% + 20px);
+    width: calc(100% + .625rem - 40px); height: 1px; background: var(--edge);
+  }
+  .pl-stage:last-child::after, .pl-stage:nth-child(3n)::after { display: none; }
 }
 /* Три колонки держатся до 330px: в 342px контейнера это по 107px, а самый
    длинный токен «multi-stage» занимает 66px. Две — только на совсем узких. */
 @media (max-width: 330px) {
   .pipeline { grid-template-columns: repeat(2, 1fr); }
-  .pl-stage:nth-child(3n)::after, .pl-stage:nth-child(3n)::before { display: block; }
-  .pl-stage:nth-child(2n)::after, .pl-stage:nth-child(2n)::before { display: none; }
+  .pl-stage:nth-child(3n)::after { display: block; }
+  .pl-stage:nth-child(2n)::after, .pl-stage:last-child::after { display: none; }
 }
 
 /* ── STATUS LINE ── */
@@ -1085,23 +1102,12 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
   margin: 0; font-size: 15px; font-weight: 600; letter-spacing: -.01em;
   color: var(--ice);
 }
-/* Подпись — отдельной строкой, а не в шапке: она несёт состав категории и
-   стала длинной, в одну строку с заголовком уже не помещается. Чипы — это
-   продукты, подпись — то, что внутри них, поэтому строка не повторяет сама
-   себя: «Linux» стоит чипом, «Debian · Ubuntu · systemd» — здесь. */
-.tier-note {
-  margin: .6rem 0 0; max-width: 92ch;
-  font-family: var(--font-mono); font-size: 11.5px; line-height: 1.6;
-  color: var(--fog);
-}
-.tier-note + .skill-chips { margin-top: .85rem; }
 .tier-count {
   margin-left: auto; font-family: var(--font-mono); font-size: 12px; color: var(--fog);
 }
 
 @media (max-width: 620px) {
   .tier-count { margin-left: 0; }
-  .tier-note { flex-basis: 100%; }
 }
 
 /* ── EDUCATION ── */

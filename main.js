@@ -381,68 +381,9 @@ function setupCopyCard(btnId, labelId, iconId, text) {
 setupCopyCard('hero-copy-tg',   'hero-tg-label',   'hero-ico-tg',   '@ktylhus');
 setupCopyCard('hero-copy-mail', 'hero-mail-label', 'hero-ico-mail', 'timir-ivaniv@yandex.ru');
 
-// ── Pipeline animation ──
-(function () {
-  const stages = Array.from(document.querySelectorAll('.pl-stage'));
-  if (!stages.length) return;
-
-  // Соединители рисуют сами стадии, отдельных .pl-line нет: прежний обход
-  // искал линию после каждой стадии и без неё вставал после первой.
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    stages.forEach(s => s.classList.add('pl-done'));
-    return;
-  }
-
-  const STEP = 420;   // сколько горит активный шаг
-  const GAP  = 140;   // пауза между шагами
-  const HOLD = 2600;  // сколько конвейер стоит пройденным перед повтором
-
-  let timer = null;
-
-  function reset() {
-    stages.forEach(s => s.classList.remove('pl-run', 'pl-done'));
-  }
-
-  function walk(i) {
-    if (i >= stages.length) {
-      // Поток идёт по кругу: блок живой, но ничего не утверждает — это
-      // не прогон сборки, а то, как устроен конвейер.
-      timer = setTimeout(() => { reset(); timer = setTimeout(() => walk(0), 320); }, HOLD);
-      return;
-    }
-    const s = stages[i];
-    s.classList.add('pl-run');
-    timer = setTimeout(() => {
-      s.classList.remove('pl-run');
-      s.classList.add('pl-done');
-      timer = setTimeout(() => walk(i + 1), GAP);
-    }, STEP);
-  }
-
-  // За кадром цикл не крутим: вкладка в фоне не должна жечь таймеры.
-  // Два независимых условия — блок в поле зрения и вкладка активна, — поэтому
-  // держим оба флага: снимать таймер по одному, а поднимать по другому нельзя,
-  // иначе после возврата на вкладку наблюдатель уже не сработает.
-  let inView = false;
-
-  function sync() {
-    const shouldRun = inView && !document.hidden;
-    if (shouldRun && !timer) {
-      walk(0);
-    } else if (!shouldRun && timer) {
-      clearTimeout(timer);
-      timer = null;
-      reset();
-    }
-  }
-
-  new IntersectionObserver(entries => {
-    entries.forEach(e => { inView = e.isIntersecting; });
-    sync();
-  }, { threshold: 0.25 }).observe(stages[0].parentElement);
-
-  document.addEventListener('visibilitychange', sync);
-})();
+// Анимация пайплайна теперь на CSS: свет идёт по рельсу градиентом, ничего
+// не «завершается» и накапливать состояние не нужно. Прежний обход стадий
+// с таймерами, наблюдателем и флагами видимости снят целиком.
 
 // ── Frost sheen: feed the pointer position to the glass surfaces ──
 (function () {
