@@ -207,102 +207,44 @@
       </div>
 
       <div class="hero-right">
+        <!-- Контакты и ключевой кейс.
+             Здесь стояли терминал, повторявший левую колонку строка в строку,
+             и deploy ticket с несуществующим деплоем. Рабочие ссылки полезнее:
+             до этого связаться с первого экрана было нельзя вовсе. -->
+        <div class="hero-cta r">
+          <div class="hcta-hd">
+            <span class="hcta-dot" aria-hidden="true"></span>
+            <span data-lang="ru">Связаться</span><span data-lang="en">Get in touch</span>
+          </div>
 
-      <!-- Terminal -->
-      <div class="hero-terminal">
-        <div class="terminal-bar">
-          <div class="t-dot t-red"></div>
-          <div class="t-dot t-yel"></div>
-          <div class="t-dot t-grn"></div>
-          <span class="terminal-title">temiriv@devops ~ bash</span>
-        </div>
-        <div class="terminal-body" translate="no">
-          <div class="tl">
-            <div class="tl-cmd"><span class="tl-prompt">❯</span> whoami</div>
-            <div class="tl-out"><span class="tl-val">Ivanov Temir</span></div>
-          </div>
-          <div class="tl">
-            <div class="tl-cmd"><span class="tl-prompt">❯</span> cat role.txt</div>
-            <div class="tl-out"><span class="tl-val"><span data-lang="ru">Middle+ DevOps-инженер</span><span data-lang="en">Middle+ DevOps Engineer</span></span></div>
-          </div>
-          <div class="tl-sep"></div>
-          <div class="tl">
-            <div class="tl-cmd"><span class="tl-prompt">❯</span> uptime --years</div>
-            <div class="tl-out">IT: <span class="tl-val">4+</span> / DevOps: <span class="tl-val">3+</span></div>
-          </div>
-          <div class="tl">
-            <div class="tl-cmd"><span class="tl-prompt">❯</span> kubectl get nodes</div>
-            <div class="tl-out"><span class="tl-val">12+</span> services migrated</div>
-          </div>
-          <div class="tl">
-            <div class="tl-cmd"><span class="tl-prompt">❯</span> cat cicd.stat</div>
-            <div class="tl-out">coverage: <span class="tl-ok">100%</span></div>
-          </div>
-          <div class="tl-sep"></div>
-          <div class="tl">
-            <div class="tl-cmd"><span class="tl-prompt">❯</span> cat status.txt</div>
-            <div class="tl-out"><span class="tl-ok">● open to work</span></div>
-          </div>
-          <div class="tl-sep term-sep-int"></div>
-          <div class="term-int">
-            <span class="tl-prompt">❯</span>
-            <input class="term-input" id="term-input" placeholder="help" aria-label="Terminal command input" autocomplete="off" spellcheck="false" maxlength="32">
-          </div>
-          <div class="term-output" id="term-output" aria-live="polite"></div>
-        </div>
-      </div>
+          <a class="hcta-link" href="https://t.me/ktylhus" target="_blank" rel="noopener noreferrer">
+            <span class="hcta-prompt" aria-hidden="true">&#10095;</span>
+            <span class="hcta-key">telegram</span>
+            <span class="hcta-val">@ktylhus</span>
+            <span class="hcta-go" aria-hidden="true">&#8594;</span>
+          </a>
+          <a class="hcta-link" href="mailto:timir-ivaniv@yandex.ru">
+            <span class="hcta-prompt" aria-hidden="true">&#10095;</span>
+            <span class="hcta-key">e-mail</span>
+            <span class="hcta-val">timir-ivaniv@yandex.ru</span>
+            <span class="hcta-go" aria-hidden="true">&#8594;</span>
+          </a>
 
-      <!-- Deploy ticket — the signature card: glass laid over the sky -->
-      <div class="ticket r d1">
-        <div class="ticket-hd">
-          <span class="ticket-label">Deploy ticket</span>
-          <span class="ticket-status">passing</span>
-        </div>
-        <div class="ticket-route">
-          <div class="ticket-node">
-            <span class="ticket-k">origin</span>
-            <span class="ticket-v">git:main</span>
-          </div>
-          <div class="ticket-line" aria-hidden="true"></div>
-          <div class="ticket-node ticket-node-end">
-            <span class="ticket-k">target</span>
-            <span class="ticket-v">k8s / prod</span>
-          </div>
-        </div>
-        <div class="ledger-hd">
-          <span class="ledger-eyebrow">uptime · 90d</span>
-          <span class="ledger-val">99.9<span class="ledger-pct">%</span></span>
-        </div>
-        <svg class="ledger-chart" viewBox="0 0 300 80" role="img" aria-label="Uptime over the last 90 days: 99.9 percent, scale 99.0 to 100 percent">
-          <defs>
-            <linearGradient id="gilded-stroke" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%"   stop-color="var(--ice)"/>
-              <stop offset="100%" stop-color="var(--skywash-end)"/>
-            </linearGradient>
-            <linearGradient id="gilded-fill" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%"   stop-color="#663af3" stop-opacity=".17"/>
-              <stop offset="100%" stop-color="#663af3" stop-opacity="0"/>
-            </linearGradient>
-          </defs>
-          <path class="ledger-area" fill="url(#gilded-fill)"
-                d="M0,12 L15,11 L30,13 L45,11 L60,12 L75,10 L90,14 L105,12 L120,38 L135,16 L150,12 L165,11 L180,13 L195,10 L210,12 L225,14 L240,11 L255,28 L270,13 L285,10 L300,9 L300,80 L0,80 Z"/>
-          <path class="ledger-line" fill="none" stroke="url(#gilded-stroke)"
-                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                d="%s"/>
-          <line class="ledger-ref" x1="0" y1="8" x2="300" y2="8"/>
-          <text class="ledger-ax" x="2" y="6">100%%</text>
-          <text class="ledger-ax" x="2" y="78">99.0%%</text>
-        </svg>
-        <div class="ledger-foot">
-          <span>−90d</span><span>−60d</span><span>−30d</span><span>now</span>
-        </div>
-        <div class="ticket-perf" aria-hidden="true"></div>
-        <div class="ticket-stub">
-          <span class="ticket-k">SPB · RU</span>
-          <span class="ticket-barcode" aria-hidden="true"></span>
-        </div>
-      </div>
+          <div class="hcta-sep" aria-hidden="true"></div>
 
+          <div class="hcta-hd">
+            <span data-lang="ru">Ключевой кейс</span><span data-lang="en">Flagship case</span>
+          </div>
+          <a class="hcta-case" href="#case-bank">
+            <span class="hcta-case-t" data-lang="ru">Контур заказчика банковского сектора</span>
+            <span class="hcta-case-t" data-lang="en">Banking-sector client environment</span>
+            <span class="hcta-case-m">63 VM &middot; DEV / INF / PROD</span>
+            <span class="hcta-case-go">
+              <span data-lang="ru">Смотреть архитектуру</span><span data-lang="en">See the architecture</span>
+              <span class="hcta-case-arr" aria-hidden="true">&#8594;</span>
+            </span>
+          </a>
+        </div>
       </div><!-- /hero-right -->
     </div>
 
@@ -492,7 +434,7 @@
     <div class="timeline">
 
       <!-- DUC Technologies -->
-      <div class="job r">
+      <div class="job r" id="case-bank">
         <div class="job-dot"></div>
         <div class="job-company-block has-arch">
           <div class="job-company-hdr">

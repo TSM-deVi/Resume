@@ -296,11 +296,79 @@ section { padding: clamp(3.5rem, 9vw, 120px) 0; }
    tears backdrop-filter at the edges. Flat cards, lift on hover instead. */
 .hero-right { display: flex; flex-direction: column; gap: 1.25rem; min-width: 0; }
 .hero-right > * { transition: box-shadow .3s, transform .3s cubic-bezier(.16,1,.3,1); }
-.hero-right .hero-terminal:hover,
-.hero-right .ticket:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--glass-float), var(--halo);
+
+/* ── Первый экран: контакты и ключевой кейс ──
+   Здесь стояли терминал и deploy ticket. Терминал повторял все шесть фактов
+   левой колонки и ниже 900px не показывался вовсе; тикет нёс единственный
+   собственный факт — 99.9% uptime с псевдо-живым графиком, который аудит
+   держит за неподтверждённую operational claim. Карточка не поднимается на
+   наведении целиком: внутри живые ссылки, и подсвечивать надо ту, на которую
+   реально наводят. */
+.hero-cta {
+  background: rgba(47,52,62,.32);
+  backdrop-filter: blur(18px) saturate(1.2);
+  -webkit-backdrop-filter: blur(18px) saturate(1.2);
+  border: 1px solid var(--edge);
+  border-radius: var(--r-card);
+  box-shadow: var(--glass-float);
+  padding: var(--card-pad);
+  position: relative; overflow: hidden;
 }
+.hcta-hd {
+  display: flex; align-items: center; gap: .5rem;
+  font-family: var(--font-mono); font-size: 11px;
+  letter-spacing: .08em; text-transform: uppercase;
+  color: var(--fog); margin-bottom: .8rem;
+}
+.hcta-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #46d39a; box-shadow: 0 0 0 3px rgba(70,211,154,.16);
+}
+
+/* Строки контактов — высотой в область нажатия, отрицательный отступ
+   возвращает подсветку к краю карточки. */
+.hcta-link {
+  display: flex; align-items: center; gap: .6rem;
+  min-height: 44px; margin: 0 -10px; padding: 0 10px;
+  border: 1px solid transparent; border-radius: var(--r-input);
+  font-family: var(--font-mono); font-size: 13px;
+  color: var(--frost); text-decoration: none;
+  transition: background .2s, border-color .2s;
+}
+.hcta-link:hover { background: var(--lum); border-color: var(--edge); text-decoration: none; }
+.hcta-prompt { color: var(--blueprint); }
+.hcta-key { color: var(--fog); }
+.hcta-val {
+  margin-left: auto; color: var(--white);
+  min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.hcta-go { color: var(--fog); transition: transform .2s, color .2s; }
+.hcta-link:hover .hcta-go { color: var(--blueprint); transform: translateX(2px); }
+
+.hcta-sep { height: 1px; background: var(--edge); margin: 1.15rem 0; }
+
+.hcta-case {
+  display: block; text-decoration: none;
+  margin: 0 -10px; padding: 10px; border-radius: var(--r-input);
+  border: 1px solid transparent;
+  transition: background .2s, border-color .2s;
+}
+.hcta-case:hover { background: var(--lum); border-color: var(--edge); text-decoration: none; }
+.hcta-case-t {
+  display: block; font-family: var(--font-ui); font-size: 15px; font-weight: 500;
+  color: var(--ice); line-height: 1.35;
+}
+.hcta-case-m {
+  display: block; font-family: var(--font-mono); font-size: 12px;
+  color: var(--fog); margin-top: .35rem;
+}
+.hcta-case-go {
+  display: flex; align-items: center; gap: .4rem;
+  font-family: var(--font-mono); font-size: 13px;
+  color: var(--blueprint); margin-top: .7rem;
+}
+.hcta-case-arr { transition: transform .2s; }
+.hcta-case:hover .hcta-case-arr { transform: translateX(3px); }
 
 #bg-net {
   position: fixed; inset: 0; z-index: var(--z-under);
@@ -497,8 +565,7 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
   .pipeline { min-width: 380px; }
 }
 
-/* ── GLASS CARDS: terminal + ticket ── */
-.hero-terminal, .cta-terminal, .ticket {
+.cta-terminal {
   background: rgba(47,52,62,.32);
   backdrop-filter: blur(18px) saturate(1.2);
   -webkit-backdrop-filter: blur(18px) saturate(1.2);
@@ -562,95 +629,8 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
 .terminal-body > *:nth-child(8) { animation-delay: 1.65s; }
 .tl-cmd { color: var(--fog); }
 .tl-cmd .tl-prompt { color: var(--blueprint); }
-.tl-out { color: var(--moon); padding-left: 2px; }
-.tl-out .tl-val { color: var(--white); }
-.tl-out .tl-ok  { color: var(--blueprint); }
-.tl-sep { height: 1px; background: var(--edge); margin: 14px 0; }
-
-/* ── DEPLOY TICKET ── */
-.ticket { padding: var(--card-pad); }
-.ticket::before {
-  content: ''; position: absolute; top: 0; left: 12%; right: 12%; height: 1px;
-  background: linear-gradient(to right, transparent, rgba(216,236,248,.5), transparent);
-}
-.ticket-hd { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.25rem; }
-.ticket-label {
-  font-family: var(--font-mono);
-  font-size: 11px; letter-spacing: .10em; text-transform: uppercase; color: var(--frost);
-}
-.ticket-status {
-  font-family: var(--font-mono);
-  font-size: 11px; letter-spacing: .10em; text-transform: uppercase;
-  color: var(--blueprint);
-  background: var(--lum); border: 1px solid var(--edge);
-  border-radius: var(--r-pill); padding: 4px 12px;
-}
-.ticket-route {
-  display: grid; grid-template-columns: auto 1fr auto;
-  align-items: center; gap: .85rem;
-  padding-bottom: 1.25rem; margin-bottom: 1.25rem;
-  border-bottom: 1px solid var(--edge);
-}
-.ticket-node { display: flex; flex-direction: column; gap: 5px; }
-.ticket-node-end { text-align: right; }
-.ticket-k {
-  font-family: var(--font-mono);
-  font-size: 10px; letter-spacing: .10em; text-transform: uppercase; color: var(--fog);
-}
-.ticket-v { font-family: var(--font-mono); font-size: 13px; color: var(--frost); }
-.ticket-line { position: relative; height: 1px; background: var(--edge-lt); }
-.ticket-line::before, .ticket-line::after {
-  content: ''; position: absolute; top: 50%;
-  width: 8px; height: 8px; border-radius: 50%;
-  transform: translateY(-50%);
-  border: 1px solid var(--blueprint); background: var(--canvas);
-}
-.ticket-line::before { left: -4px; }
-.ticket-line::after { right: -4px; background: var(--blueprint); box-shadow: var(--halo); }
-
-.ticket-perf {
-  height: 1px; margin: 1.25rem calc(var(--card-pad) * -1) 0;
-  background: repeating-linear-gradient(to right, var(--edge-lt) 0 5px, transparent 5px 11px);
-}
-.ticket-stub { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-top: 1rem; }
-.ticket-barcode {
-  height: 26px; flex: 1; max-width: 168px;
-  background: repeating-linear-gradient(to right,
-    var(--moon) 0 1px, transparent 1px 3px,
-    var(--moon) 3px 5px, transparent 5px 6px,
-    var(--moon) 6px 8px, transparent 8px 12px);
-  opacity: .5;
-}
-
-.ledger-hd { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: .6rem; }
-.ledger-eyebrow {
-  font-family: var(--font-mono);
-  font-size: 11px; letter-spacing: .10em; text-transform: uppercase; color: var(--fog);
-}
-.ledger-val {
-  font-family: var(--font-display);
-  font-size: 28px; font-weight: 500; letter-spacing: -.01em;
-  color: var(--white); line-height: 1.14; font-variant-numeric: tabular-nums;
-}
-.ledger-pct { font-size: .55em; }
-.ledger-chart { display: block; width: 100%; height: auto; margin: .4rem 0 .6rem; }
-.ledger-line { stroke-dasharray: 620; stroke-dashoffset: 620; transition: stroke-dashoffset 1.8s cubic-bezier(.4,0,.2,1) .5s; }
-.ticket.v .ledger-line { stroke-dashoffset: 0; }
-.ledger-area { opacity: 0; transition: opacity .8s ease 1.2s; }
-.ticket.v .ledger-area { opacity: 1; }
-.ledger-ref { stroke: var(--edge-lt); stroke-width: 1; }
-.ledger-ax {
-  font-family: var(--font-mono); font-size: 7px;
-  fill: var(--fog); opacity: .75;
-}
-.ledger-foot {
-  display: flex; justify-content: space-between;
-  font-family: var(--font-mono);
-  font-size: 11px; color: var(--fog);
-  border-top: 1px solid var(--edge); padding-top: .7rem;
-}
-
-/* ── STATUS LINE ── */
+.tl-out { color: var(--moon); padding-left: 2px; }.tl-out .tl-ok  { color: var(--blueprint); }
+.tl-sep { height: 1px; background: var(--edge); margin: 14px 0; }/* ── STATUS LINE ── */
 .status-line {
   background: rgba(47,52,62,.24);
   border: 1px solid var(--edge);
@@ -1228,28 +1208,46 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
 
 /* ── FROST SHEEN — light travels across the glass under the pointer ──
    Physically the right layer: a highlight on the pane sits in front of what
-   is behind it, so this overlays the card rather than hiding under it. */
-.ach, .skill-tile, .job-company-block, .edu-row,
-.ticket, .hero-terminal, .cta-terminal, .status-line {
+   is behind it,
+so this overlays the card rather than hiding under it. */
+.ach,
+.skill-tile,
+.job-company-block,
+.edu-row,
+.cta-terminal,
+.status-line {
   --mx: 50%; --my: 50%;
   position: relative;
 }
-.ach::after, .skill-tile::after, .job-company-block::after, .edu-row::after,
-.ticket::after, .hero-terminal::after, .cta-terminal::after, .status-line::after {
+.ach::after,
+.skill-tile::after,
+.job-company-block::after,
+.edu-row::after,
+.cta-terminal::after,
+.hero-cta::after,
+.status-line::after {
   content: ''; position: absolute; inset: 0;
   border-radius: inherit; pointer-events: none;
   background: radial-gradient(circle 260px at var(--mx) var(--my),
               rgba(216,236,248,.11), transparent 62%);
   opacity: 0; transition: opacity .4s ease;
 }
-.ach:hover::after, .skill-tile:hover::after, .job-company-block:hover::after,
-.edu-row:hover::after, .ticket:hover::after, .hero-terminal:hover::after,
-.cta-terminal:hover::after, .status-line:hover::after { opacity: 1; }
+.ach:hover::after,
+.skill-tile:hover::after,
+.job-company-block:hover::after,
+.edu-row:hover::after,
+.cta-terminal:hover::after,
+.hero-cta:hover::after,
+.status-line:hover::after { opacity: 1; }
 
 @media (pointer: coarse), (hover: none), (prefers-reduced-motion: reduce) {
-  .ach::after, .skill-tile::after, .job-company-block::after, .edu-row::after,
-  .ticket::after, .hero-terminal::after, .cta-terminal::after,
-  .status-line::after { display: none; }
+.ach::after,
+.skill-tile::after,
+.job-company-block::after,
+.edu-row::after,
+.cta-terminal::after,
+.hero-cta::after,
+.status-line::after { display: none; }
 }
 
 /* ── REVEAL ── */
@@ -1324,12 +1322,8 @@ body.lang-en       [data-lang="ru"] { display: none !important; }
 /* ── RESPONSIVE ── */
 @media (max-width: 1040px) { .hero-grid { gap: 3rem; grid-template-columns: minmax(0, 1fr) 330px; } }
 @media (max-width: 900px) {
-  .hero-grid { grid-template-columns: minmax(0, 1fr); }
-  .hero-terminal { display: none; }
-  .hero-desc { max-width: 100%; }
-  .hero-right { max-width: 440px; }
-  .hero-right .ticket { transform: none; }
-}
+  .hero-grid { grid-template-columns: minmax(0, 1fr); }  .hero-desc { max-width: 100%; }
+  .hero-right { max-width: 440px; }}
 @media (max-width: 720px) {
   .container { padding: 0 1.25rem; }
   nav { padding: 0 1.25rem; height: 60px; position: relative; }
@@ -1414,10 +1408,10 @@ body.cur-hover #cursor-dot { transform: translate(-50%, -50%) scale(.6); }
     color: CanvasText !important;
   }
   .ach::after, .skill-tile::after, .job-company-block::after, .edu-row::after,
-  .ticket::after, .hero-terminal::after, .cta-terminal::after,
+  .cta-terminal::after, .hero-cta::after,
   .status-line::after, .hero-sky, #bg-net, body::before { display: none !important; }
   .ach, .skill-tile, .job-company-block, .edu-row, .status-line,
-  .hero-terminal, .cta-terminal, .ticket { border: 1px solid CanvasText; }
+  .cta-terminal, .hero-cta { border: 1px solid CanvasText; }
 }
 
 /* ── REDUCED MOTION ── */
@@ -1433,7 +1427,7 @@ body.cur-hover #cursor-dot { transform: translate(-50%, -50%) scale(.6); }
 
 /* ── PRINT ── */
 @media print {
-  #scroll-progress, #back-to-top, nav, .hero-terminal, .ticket, .hero-sky,
+  #scroll-progress, #back-to-top, nav, .hero-cta, .hero-sky,
   .pipeline-wrap, .cta-terminal,
   #bg-net, #cursor-dot, #cursor-ring { display: none !important; }
   body { background: #fff !important; color: #111 !important; animation: none !important; font-size: 10pt; }

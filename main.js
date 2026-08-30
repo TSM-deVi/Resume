@@ -533,8 +533,8 @@ setupCopyCard('btn-copy-email', 'btn-copy-label', 'copy-icon',    'timir-ivaniv@
   if (!window.matchMedia('(pointer: fine) and (hover: hover)').matches) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  const SEL = '.ach, .skill-tile, .job-company-block, .edu-row, .ticket,' +
-              '.hero-terminal, .cta-terminal, .status-line';
+  const SEL = '.ach, .skill-tile, .job-company-block, .edu-row, .hero-cta,' +
+              '.cta-terminal, .status-line';
   let latest = null, queued = false;
 
   // One delegated listener, rAF-throttled — cheaper than binding ~70 cards.
