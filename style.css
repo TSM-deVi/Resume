@@ -933,33 +933,22 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
 
 /* ── SKILLS ── */
 
-/* ── ЧИПЫ НАВЫКОВ ──
-   Карточка на каждую из 61 технологии занимала полторы тысячи пикселей ради
-   иконки, названия и трёх слов. Чип отдаёт то же самое втрое компактнее,
-   а глубину показывает вес: верхний уровень крупнее и с подписью, нижние
-   мельче и без неё — там подпись чаще повторяла заголовок уровня
-   («уверенно · каждый день»), чем добавляла факт. */
+/* ── НАВЫКИ ──
+   Рамок у названий нет: шестьдесят семь одинаковых пилюль читались как повтор.
+   Без рамок это просто список с логотипами — иконки остаются, монотонность
+   уходит, а секция становится втрое короче. */
 .skill-chips {
-  display: flex; flex-wrap: wrap; gap: .5rem;
+  display: flex; flex-wrap: wrap; gap: 7px 16px;
   list-style: none; margin: 0; padding: 0;
 }
 .skill-chip {
-  display: inline-flex; align-items: center; gap: .5rem;
-  padding: .5rem .85rem; min-width: 0;
-  background: rgba(47,52,62,.24);
-  border: 1px solid var(--edge);
-  box-shadow: inset 0 1px 1px rgba(199,211,234,.10);
-  border-radius: var(--r-pill);
-  font-size: 13px; color: var(--frost);
-  transition: border-color .2s, box-shadow .2s, color .2s;
+  display: inline-flex; align-items: center; gap: .45rem; min-width: 0;
+  font-size: 13px; color: var(--frost); transition: color .2s;
 }
-.skill-chip:hover {
-  border-color: var(--edge-lt); color: var(--white);
-  box-shadow: inset 0 1px 1px rgba(216,236,248,.26), var(--halo);
-}
-.skill-chip img { width: 16px; height: 16px; object-fit: contain; flex: none; }
-/* Тринадцать логотипов почти чёрные — на тёмном чипе их не видно. Простая
-   инверсия делает тёмно-синий жёлтым, поэтому обесцвечиваем: ровный светлый
+.skill-chip:hover { color: var(--white); }
+.skill-chip img { width: 17px; height: 17px; object-fit: contain; flex: none; }
+/* Тринадцать логотипов почти чёрные — без обесцвечивания их не видно. Простая
+   инверсия делает тёмно-синий жёлтым, поэтому гасим цвет: ровный светлый
    монохром читается как приём, чужой оттенок — как ошибка. */
 .skill-chip img.icon-invert { filter: invert(1) grayscale(1) brightness(1.35); }
 .chip-name { white-space: nowrap; }
@@ -1089,25 +1078,23 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
    на него не отвечали: они делили по типу технологии, а не по глубине, и пять
    категорий из них давали три плитки и меньше. Уровни сделаны группами,
    а не фильтром: глубину надо видеть сразу, без нажатия. */
-.skill-tiers { display: flex; flex-direction: column; gap: 1.9rem; }
-.tier-hd {
-  display: flex; align-items: baseline; gap: .75rem;
-  padding-bottom: .55rem; border-bottom: 1px solid var(--edge);
+/* Категория моноширинным слева, инструменты справа строкой — как в
+   спецификации. Номер и счётчик сняты: они добавляли шум, а не смысл. */
+.skill-tiers { display: block; }
+.tier {
+  display: grid; grid-template-columns: 210px minmax(0, 1fr);
+  gap: 22px; padding: 13px 0;
+  border-top: 1px solid var(--edge);
 }
-.tier-n {
-  font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em;
-  color: var(--violet-lt); flex: none;
-}
+.tier-hd { display: block; padding-top: 3px; }
 .tier-t {
-  margin: 0; font-size: 15px; font-weight: 600; letter-spacing: -.01em;
-  color: var(--ice);
+  margin: 0; font-family: var(--font-mono);
+  font-size: 10.5px; font-weight: 400; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--violet-lt); line-height: 1.5;
 }
-.tier-count {
-  margin-left: auto; font-family: var(--font-mono); font-size: 12px; color: var(--fog);
-}
-
-@media (max-width: 620px) {
-  .tier-count { margin-left: 0; }
+@media (max-width: 720px) {
+  .tier { grid-template-columns: 1fr; gap: 10px; }
+  .tier-hd { padding-top: 0; }
 }
 
 /* ── EDUCATION ── */
