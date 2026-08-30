@@ -1,10 +1,9 @@
 .claude
 tools/fonts/
 tools/out/
-
+docs/worklog.md
 # Исходное резюме — в нём личный телефон, а сайт его не публикует.
 # Если захочешь отдавать PDF со страницы — git add -f нужный файл.
 *.pdf
 
 .claude/archive/
-docs/worklog.md
