@@ -393,6 +393,7 @@
               <li><strong>Kubernetes</strong> (master + 3 worker), Helm-чарты, RBAC и namespace-изоляция; <strong>GitLab CI/CD</strong> с разделением dev/prod и ручными production-джобами; Terraform и Ansible для воспроизводимости окружений</li>
               <li>L3-связности между контурами нет — доступ открывался точечно через firewall и NAT. Вход администратора: <strong>PAM заказчика → jump host контура → целевая ВМ</strong>; для CI/CD отдельный путь — bastion на jump host DEV и PROD, через который раннер с INF ходит в прикладные контуры</li>
               <li>Сквозная наблюдаемость на Prometheus, Grafana, Loki и Promtail; разбирал production-инциденты — TLS SAN mismatch, Redis NOPERM, исчерпание PostgreSQL connections, MinIO mesh timeout, Vault sealed, переполнение диска Docker-логами</li>
+              <li>Сопровождал LLM-слой платформы: LiteLLM, GigaChat, Ollama, векторный поиск на <strong>Qdrant и Vespa</strong>, Langflow, Langfuse и SmartSearch — отделял инфраструктурные отказы от ошибок внешних API и конфигурации</li>
               <li>Отдельно воспроизвёл ту же архитектуру в одном контуре вместо трёх на Timeweb Cloud: уложил платформу с <strong>28 VM в 10 VM</strong> (34 vCPU, 96 GB, 1.8 TB NVMe) — k3s вместо кластера, standalone PostgreSQL и ClickHouse, сервисы на общих узлах</li>
             </ul>
             <ul class="jlist" data-lang="en">
@@ -402,6 +403,7 @@
               <li><strong>Kubernetes</strong> (master + 3 workers), Helm charts, RBAC and namespace isolation; <strong>GitLab CI/CD</strong> with dev/prod separation and manual production jobs; Terraform and Ansible for reproducible environments</li>
               <li>There is no L3 connectivity between environments — access was opened per service through firewall and NAT. Admin path: <strong>the client’s PAM → the environment’s jump host → the target VM</strong>; CI/CD has its own route through a bastion on the DEV and PROD jump hosts, which the INF runner uses to reach them</li>
               <li>End-to-end observability on Prometheus, Grafana, Loki and Promtail; handled production incidents — TLS SAN mismatch, Redis NOPERM, PostgreSQL connection exhaustion, MinIO mesh timeout, Vault sealed, disks filled by Docker logs</li>
+              <li>Operated the platform’s LLM layer: LiteLLM, GigaChat, Ollama, vector search on <strong>Qdrant and Vespa</strong>, Langflow, Langfuse and SmartSearch — separating infrastructure failures from external API and configuration errors</li>
               <li>Separately reproduced the same architecture in a single environment instead of three on Timeweb Cloud: fitted a platform of <strong>28 VMs into 10</strong> (34 vCPU, 96 GB, 1.8 TB NVMe) — k3s instead of a cluster, standalone PostgreSQL and ClickHouse, services sharing nodes</li>
             </ul>
 
@@ -824,7 +826,9 @@
             </div>
             <ul class="jlist" data-lang="ru">
               <li>Инфраструктурная команда из <strong>2 человек</strong> на <strong>50+ разработчиков</strong>: окружения, доступы, сертификаты, CI/CD и мониторинг для <strong>более 70 сервисов</strong> — 12+ микросервисов в Kubernetes, 40+ Node.js под pm2, 20–30 бэкендов на C#/.NET</li>
+              <li>Гетерогенная инфраструктура: legacy .NET Framework под <strong>IIS на Windows Server</strong> и новые .NET-сервисы на Linux под systemd — выстроил CI/CD и сопровождение для обоих, сохранив исторический контур сборки на Jenkins рядом с новым конвейером на GitLab CI</li>
               <li>Развернул <strong>Kubernetes на bare-metal</strong> (мастер и два воркера на физических серверах) и мигрировал <strong>12+ микросервисов</strong> из Docker Compose: время деплоя сократилось <strong>с ~40 до ~8 минут</strong></li>
+              <li>Разворачивал <strong>Kubernetes с нуля в трёх разных средах</strong>: bare-metal на физических серверах, виртуальные машины в приватном облаке VMware и single-node k3s в публичном облаке — etcd, CNI, storage и обновления руками</li>
               <li>Покрыл <strong>100% продакшен-репозиториев</strong> автоматической сборкой и деплоем в GitLab CI и Jenkins, внедрил GitOps-доставку через ArgoCD и встроил сканирование <strong>Trivy и Gitleaks</strong> в пайплайн</li>
               <li>Разработал Ansible-роли и плейбуки — настройка нового сервера занимает <strong>15 минут вместо 2–3 часов</strong>; Terraform под воспроизводимые среды и version control конфигураций</li>
               <li>Отказоустойчивый кластер <strong>PostgreSQL + Patroni + etcd</strong> на трёх нодах с uptime СУБД <strong>99.9%</strong>; аналитическое хранилище <strong>ClickHouse ~4 ТБ</strong> на выделенных серверах</li>
@@ -832,7 +836,9 @@
             </ul>
             <ul class="jlist" data-lang="en">
               <li>An infrastructure team of <strong>2</strong> serving <strong>50+ developers</strong>: environments, access, certificates, CI/CD and monitoring for <strong>70+ services</strong> — 12+ microservices in Kubernetes, 40+ Node.js under pm2, 20–30 C#/.NET backends</li>
+              <li>Heterogeneous infrastructure: legacy .NET Framework under <strong>IIS on Windows Server</strong> and new .NET services on Linux under systemd — built CI/CD and support for both, keeping the historical Jenkins build path alongside the new GitLab CI pipeline</li>
               <li>Deployed <strong>bare-metal Kubernetes</strong> (a master and two workers on physical servers) and migrated <strong>12+ microservices</strong> off Docker Compose: deploy time dropped <strong>from ~40 to ~8 minutes</strong></li>
+              <li>Deployed <strong>Kubernetes from scratch in three different environments</strong>: bare metal on physical servers, virtual machines in a private VMware cloud, and single-node k3s in a public cloud — etcd, CNI, storage and upgrades by hand</li>
               <li>Covered <strong>100% of production repositories</strong> with automated build and deploy in GitLab CI and Jenkins, introduced GitOps delivery through ArgoCD and built <strong>Trivy and Gitleaks</strong> scanning into the pipeline</li>
               <li>Wrote Ansible roles and playbooks — a new server is set up in <strong>15 minutes instead of 2–3 hours</strong>; Terraform for reproducible environments and configuration version control</li>
               <li>A fault-tolerant <strong>PostgreSQL + Patroni + etcd</strong> cluster on three nodes with <strong>99.9%</strong> database uptime; a <strong>ClickHouse</strong> analytics store of <strong>~4 TB</strong> on dedicated servers</li>

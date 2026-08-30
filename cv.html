@@ -51,6 +51,9 @@
   .ebody i{font-style:normal;color:var(--mute);font-size:8.6pt}
   .certs{font-size:9.4pt}
   .certs b{font-family:var(--mono);color:var(--violet)}
+  .about{margin:4mm 0 0;font-size:9.6pt;max-width:62ch}
+  .goal{margin:5mm 0 0;padding:3mm 3.5mm;background:var(--wash);border-radius:5px;
+        font-size:9.2pt}
   .foot{margin-top:8mm;padding-top:3mm;border-top:1px solid var(--line);
         font-size:8.6pt;color:var(--mute)}
   /* Панель управления на экране; на печати её нет. */
@@ -67,29 +70,31 @@
      плотность важнее воздуха, когда резюме читают по диагонали. */
   @media print{
     @page{size:A4;margin:11mm}
-    body{background:#fff;font-size:8.9pt;line-height:1.4}
+    body{background:#fff;font-size:8.5pt;line-height:1.34}
     .sheet{max-width:none;padding:0;margin:0}
     .bar{display:none}
-    h1{font-size:19pt}
-    .role-line{font-size:9pt}
-    .meta{margin-top:.45rem;font-size:8.4pt}
-    h2{margin:5mm 0 2mm;font-size:7.8pt;padding-bottom:1.2mm}
-    .facts{grid-template-columns:repeat(6,1fr);gap:2mm}
-    .fact{padding:2mm 2.2mm}
-    .fact b{font-size:10.5pt}
-    .fact i{font-size:7.2pt}
-    .job{margin-bottom:3.6mm}
+    h1{font-size:17pt}
+    .role-line{font-size:8.6pt}
+    .meta{margin-top:.3rem;font-size:8pt}
+    h2{margin:4mm 0 1.6mm;font-size:7.6pt;padding-bottom:1mm}
+    .facts{grid-template-columns:repeat(6,1fr);gap:1.6mm}
+    .fact{padding:1.6mm 2mm}
+    .fact b{font-size:9.6pt}
+    .fact i{font-size:6.9pt}
+    .job{margin-bottom:3mm}
     .job-h h3{font-size:10pt}
     .per{font-size:7.8pt}
-    .role{margin-top:1.6mm}
+    .role{margin-top:1.2mm}
     .role-t{font-size:8.6pt;margin-bottom:.9mm}
-    .role li{margin-bottom:.9mm}
-    .srow{margin-bottom:1.2mm}
-    .sk{flex-basis:38mm;font-size:8.4pt}
-    .sv{font-size:8pt}
-    .erow{margin-bottom:1.6mm}
+    .role li{margin-bottom:.7mm}
+    .srow{margin-bottom:1mm}
+    .sk{flex-basis:36mm;font-size:8pt}
+    .sv{font-size:7.7pt;line-height:1.45}
+    .erow{margin-bottom:1.2mm}
     .ebody{font-size:8.4pt}
-    .foot{margin-top:4mm;padding-top:2mm;font-size:7.6pt}
+    .about{margin-top:2mm;font-size:8.3pt;max-width:none}
+    .goal{margin-top:2.4mm;padding:1.8mm 2.2mm;font-size:7.9pt}
+    .foot{margin-top:3mm;padding-top:2mm;font-size:7.6pt}
     a{color:inherit}
   }
 </style>
@@ -109,6 +114,8 @@
     <span data-lang="ru">Санкт-Петербург · удалённо</span><span data-lang="en">Saint Petersburg · remote</span> &middot; timir-ivaniv@yandex.ru &middot; telegram @ktylhus
     &middot; <a href="https://tsm-devi.github.io/Resume/">tsm-devi.github.io/Resume</a>
   </div>
+
+  <p class="about"><span data-lang="ru">Middle+ DevOps-инженер, 4 года в IT-инфраструктуре, из них 3+ года — DevOps. Самостоятельно реализую проекты от проектирования до продакшена: разворачиваю контуры с нуля, строю CI/CD и наблюдаемость, отвечаю за эксплуатацию.</span><span data-lang="en">Middle+ DevOps engineer, 4 years in IT infrastructure, 3+ of them in DevOps. I deliver projects end to end — building environments from scratch, setting up CI/CD and observability, and owning them in production.</span></p>
 
   <h2><span data-lang="ru">Ключевое</span><span data-lang="en">Key figures</span></h2>
   <div class="facts">
@@ -135,6 +142,7 @@
         <li><span data-lang="ru"><strong>Kubernetes</strong> (master + 3 worker), Helm-чарты, RBAC и namespace-изоляция; <strong>GitLab CI/CD</strong> с разделением dev/prod и ручными production-джобами; Terraform и Ansible для воспроизводимости окружений</span><span data-lang="en"><strong>Kubernetes</strong> (master + 3 workers), Helm charts, RBAC and namespace isolation; <strong>GitLab CI/CD</strong> with dev/prod separation and manual production jobs; Terraform and Ansible for reproducible environments</span></li>
         <li><span data-lang="ru">L3-связности между контурами нет — доступ открывался точечно через firewall и NAT. Вход администратора: <strong>PAM заказчика → jump host контура → целевая ВМ</strong>; для CI/CD отдельный путь — bastion на jump host DEV и PROD, через который раннер с INF ходит в прикладные контуры</span><span data-lang="en">There is no L3 connectivity between environments — access was opened per service through firewall and NAT. Admin path: <strong>the client’s PAM → the environment’s jump host → the target VM</strong>; CI/CD has its own route through a bastion on the DEV and PROD jump hosts, which the INF runner uses to reach them</span></li>
         <li><span data-lang="ru">Сквозная наблюдаемость на Prometheus, Grafana, Loki и Promtail; разбирал production-инциденты — TLS SAN mismatch, Redis NOPERM, исчерпание PostgreSQL connections, MinIO mesh timeout, Vault sealed, переполнение диска Docker-логами</span><span data-lang="en">End-to-end observability on Prometheus, Grafana, Loki and Promtail; handled production incidents — TLS SAN mismatch, Redis NOPERM, PostgreSQL connection exhaustion, MinIO mesh timeout, Vault sealed, disks filled by Docker logs</span></li>
+        <li><span data-lang="ru">Сопровождал LLM-слой платформы: LiteLLM, GigaChat, Ollama, векторный поиск на <strong>Qdrant и Vespa</strong>, Langflow, Langfuse и SmartSearch — отделял инфраструктурные отказы от ошибок внешних API и конфигурации</span><span data-lang="en">Operated the platform’s LLM layer: LiteLLM, GigaChat, Ollama, vector search on <strong>Qdrant and Vespa</strong>, Langflow, Langfuse and SmartSearch — separating infrastructure failures from external API and configuration errors</span></li>
         <li><span data-lang="ru">Отдельно воспроизвёл ту же архитектуру в одном контуре вместо трёх на Timeweb Cloud: уложил платформу с <strong>28 VM в 10 VM</strong> (34 vCPU, 96 GB, 1.8 TB NVMe) — k3s вместо кластера, standalone PostgreSQL и ClickHouse, сервисы на общих узлах</span><span data-lang="en">Separately reproduced the same architecture in a single environment instead of three on Timeweb Cloud: fitted a platform of <strong>28 VMs into 10</strong> (34 vCPU, 96 GB, 1.8 TB NVMe) — k3s instead of a cluster, standalone PostgreSQL and ClickHouse, services sharing nodes</span></li>
         </ul>
       </div>
@@ -148,7 +156,9 @@
         <div class="role-t"><span data-lang="ru">DevOps-инженер</span><span data-lang="en">DevOps Engineer</span></div>
         <ul>
         <li><span data-lang="ru">Инфраструктурная команда из <strong>2 человек</strong> на <strong>50+ разработчиков</strong>: окружения, доступы, сертификаты, CI/CD и мониторинг для <strong>более 70 сервисов</strong> — 12+ микросервисов в Kubernetes, 40+ Node.js под pm2, 20–30 бэкендов на C#/.NET</span><span data-lang="en">An infrastructure team of <strong>2</strong> serving <strong>50+ developers</strong>: environments, access, certificates, CI/CD and monitoring for <strong>70+ services</strong> — 12+ microservices in Kubernetes, 40+ Node.js under pm2, 20–30 C#/.NET backends</span></li>
+        <li><span data-lang="ru">Гетерогенная инфраструктура: legacy .NET Framework под <strong>IIS на Windows Server</strong> и новые .NET-сервисы на Linux под systemd — выстроил CI/CD и сопровождение для обоих, сохранив исторический контур сборки на Jenkins рядом с новым конвейером на GitLab CI</span><span data-lang="en">Heterogeneous infrastructure: legacy .NET Framework under <strong>IIS on Windows Server</strong> and new .NET services on Linux under systemd — built CI/CD and support for both, keeping the historical Jenkins build path alongside the new GitLab CI pipeline</span></li>
         <li><span data-lang="ru">Развернул <strong>Kubernetes на bare-metal</strong> (мастер и два воркера на физических серверах) и мигрировал <strong>12+ микросервисов</strong> из Docker Compose: время деплоя сократилось <strong>с ~40 до ~8 минут</strong></span><span data-lang="en">Deployed <strong>bare-metal Kubernetes</strong> (a master and two workers on physical servers) and migrated <strong>12+ microservices</strong> off Docker Compose: deploy time dropped <strong>from ~40 to ~8 minutes</strong></span></li>
+        <li><span data-lang="ru">Разворачивал <strong>Kubernetes с нуля в трёх разных средах</strong>: bare-metal на физических серверах, виртуальные машины в приватном облаке VMware и single-node k3s в публичном облаке — etcd, CNI, storage и обновления руками</span><span data-lang="en">Deployed <strong>Kubernetes from scratch in three different environments</strong>: bare metal on physical servers, virtual machines in a private VMware cloud, and single-node k3s in a public cloud — etcd, CNI, storage and upgrades by hand</span></li>
         <li><span data-lang="ru">Покрыл <strong>100% продакшен-репозиториев</strong> автоматической сборкой и деплоем в GitLab CI и Jenkins, внедрил GitOps-доставку через ArgoCD и встроил сканирование <strong>Trivy и Gitleaks</strong> в пайплайн</span><span data-lang="en">Covered <strong>100% of production repositories</strong> with automated build and deploy in GitLab CI and Jenkins, introduced GitOps delivery through ArgoCD and built <strong>Trivy and Gitleaks</strong> scanning into the pipeline</span></li>
         <li><span data-lang="ru">Разработал Ansible-роли и плейбуки — настройка нового сервера занимает <strong>15 минут вместо 2–3 часов</strong>; Terraform под воспроизводимые среды и version control конфигураций</span><span data-lang="en">Wrote Ansible roles and playbooks — a new server is set up in <strong>15 minutes instead of 2–3 hours</strong>; Terraform for reproducible environments and configuration version control</span></li>
         <li><span data-lang="ru">Отказоустойчивый кластер <strong>PostgreSQL + Patroni + etcd</strong> на трёх нодах с uptime СУБД <strong>99.9%</strong>; аналитическое хранилище <strong>ClickHouse ~4 ТБ</strong> на выделенных серверах</span><span data-lang="en">A fault-tolerant <strong>PostgreSQL + Patroni + etcd</strong> cluster on three nodes with <strong>99.9%</strong> database uptime; a <strong>ClickHouse</strong> analytics store of <strong>~4 TB</strong> on dedicated servers</span></li>
@@ -198,11 +208,18 @@
     </article>
 
   <h2><span data-lang="ru">Стек</span><span data-lang="en">Stack</span></h2>
-      <div class="srow"><span class="sk"><span data-lang="ru">Оркестрация и контейнеры</span><span data-lang="en">Orchestration & containers</span></span><span class="sv">Kubernetes · k3s · Helm · ArgoCD · Docker · Harbor · Longhorn</span></div>
-      <div class="srow"><span class="sk"><span data-lang="ru">CI/CD и IaC</span><span data-lang="en">CI/CD & IaC</span></span><span class="sv">GitLab CI/CD · Jenkins · Terraform · Ansible · Trivy · Gitleaks</span></div>
-      <div class="srow"><span class="sk"><span data-lang="ru">Инфраструктура</span><span data-lang="en">Infrastructure</span></span><span class="sv">Linux · VMware Cloud Director · Nginx · HashiCorp Vault · Keycloak · Istio</span></div>
-      <div class="srow"><span class="sk"><span data-lang="ru">Данные и очереди</span><span data-lang="en">Data & messaging</span></span><span class="sv">PostgreSQL + Patroni · ClickHouse · Redis · Kafka · RabbitMQ · MinIO · S3</span></div>
-      <div class="srow"><span class="sk"><span data-lang="ru">Наблюдаемость</span><span data-lang="en">Observability</span></span><span class="sv">Prometheus · Grafana · Alertmanager · Loki · ELK · Graylog · Zabbix</span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">Платформы и ОС</span><span data-lang="en">Platforms & OS</span></span><span class="sv">Linux (Debian, Ubuntu, systemd, networking) · Windows Server · IIS · Active Directory · групповые политики · DNS · DHCP · RDS · PowerShell</span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">Kubernetes и контейнеры</span><span data-lang="en">Kubernetes & containers</span></span><span class="sv">Kubernetes с нуля на bare-metal, в VMware и single-node k3s · etcd · CNI · Helm · Ingress · HPA · RBAC · namespace-изоляция · Docker · Docker Compose · Longhorn</span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">CI/CD и GitOps</span><span data-lang="en">CI/CD & GitOps</span></span><span class="sv">GitLab CI/CD · GitLab Runner · Jenkins · ArgoCD · Trivy · Gitleaks · Let’s Encrypt · внутренний CA</span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">IaC и автоматизация</span><span data-lang="en">IaC & automation</span></span><span class="sv">Terraform · Ansible (роли, плейбуки) · Python · Bash · PowerShell</span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">Service mesh, доступ, безопасность</span><span data-lang="en">Service mesh, access, security</span></span><span class="sv">Istio + Kiali · Envoy + OPA/OPAL (ext_authz) · Keycloak/OIDC · HashiCorp Vault · Secret Server · Passbolt · bastion и jump host · firewall + NAT · UFW · TLS/PKI</span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">Реестры и артефакты</span><span data-lang="en">Registries & artifacts</span></span><span class="sv">Harbor · GitLab Container Registry · Verdaccio (npm) · MinIO · S3 (Yandex Cloud)</span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">Наблюдаемость</span><span data-lang="en">Observability</span></span><span class="sv">Prometheus · Grafana · Alertmanager · Loki + Promtail · ELK (Elasticsearch, Logstash, Kibana) · Graylog · Sentry · Zabbix (HA-кластер) · Uptime Kuma · LibreNMS + Oxidized · NetBox</span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">Базы данных и хранилища</span><span data-lang="en">Databases & storage</span></span><span class="sv">PostgreSQL + Patroni + etcd (HA) · MySQL · MongoDB · MS SQL Server · ClickHouse · Redis · Qdrant · Vespa</span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">Web, очереди, служебные сервисы</span><span data-lang="en">Web, messaging, platform services</span></span><span class="sv">Nginx · HAProxy + Keepalived · Kafka · RabbitMQ · Consul · Unleash (feature flags)</span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">Виртуализация и облака</span><span data-lang="en">Virtualization & clouds</span></span><span class="sv">VMware vSphere и Cloud Director (vDC, vApp) · Hyper-V · Cloud.ru · Timeweb Cloud · Yandex Cloud · Veeam Backup & Replication</span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">LLM-платформа</span><span data-lang="en">LLM platform</span></span><span class="sv">LiteLLM · Ollama · GigaChat · Langflow · Langfuse · SmartSearch · векторный поиск Qdrant и Vespa</span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">Сеть, VPN и инструменты</span><span data-lang="en">Network, VPN & tools</span></span><span class="sv">MikroTik · Cisco · Kerio VPN · Git · Jira и Jira Service Desk · Confluence · Zimbra · Exchange · OCS Inventory</span></div>
 
   <h2><span data-lang="ru">Образование</span><span data-lang="en">Education</span></h2>
       <div class="erow">
@@ -214,6 +231,8 @@
         <span class="ebody"><b><span data-lang="ru">КГУ им. Б.Б. Городовикова</span><span data-lang="en">Kalmyk State University</span></b><br><span data-lang="ru">Программирование в компьютерных системах — техник-программист</span><span data-lang="en">Computer Systems Programming — programmer technician</span><br><i><span data-lang="ru">Среднее специальное</span><span data-lang="en">Vocational education</span></i></span>
       </div>
   <div class="certs" style="margin-top:2.5mm"><b>BASE</b> <span data-lang="ru">Облако VMware · 2026</span><span data-lang="en">VMware Cloud · 2026</span> · <b>PRO</b> <span data-lang="ru">Облако VMware · 2026</span><span data-lang="en">VMware Cloud · 2026</span></div>
+
+  <p class="goal"><span data-lang="ru">Ищу позицию Middle+ DevOps / Platform Engineer. Интересны Kubernetes, CI/CD, IaC, внутренние платформы и отказоустойчивая инфраструктура; развиваюсь в сторону Platform Engineering и SRE, отдельно интересна эксплуатация инфраструктуры LLM-платформ.</span><span data-lang="en">Looking for a Middle+ DevOps / Platform Engineer role. Interested in Kubernetes, CI/CD, IaC, internal platforms and fault-tolerant infrastructure; growing towards Platform Engineering and SRE, with a particular interest in running LLM-platform infrastructure.</span></p>
 
   <div class="foot"><span data-lang="ru">Это выжимка. Развёрнутое резюме со всеми обязанностями — на hh.ru.</span><span data-lang="en">This is a summary. The full resume with every responsibility is on hh.ru.</span></div>
 </main>
