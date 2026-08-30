@@ -366,7 +366,6 @@ section { padding: clamp(3.5rem, 9vw, 120px) 0; }
   .hcta-key { display: none; }
 }
 
-
 .hcta-case {
   display: block; text-decoration: none;
   margin: 0 -10px; padding: 10px; border-radius: var(--r-input);
@@ -654,7 +653,6 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
   .status-item .stat-val { font-size: 34px; }
 }
 
-
 /* ── Обвязка терминала контактов ──
    Эти правила снесло при замене диапазона PIPELINE→TIMELINE: шапка с
    тремя точками, разделители и зелёный маркер живут в секции cta, а не
@@ -764,7 +762,6 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
 @media (min-width: 900px) {
   .job-company-block.has-arch > .arch { grid-column: 1 / -1; margin-top: 2.5rem; }
 }
-
 
 /* ── ARCHITECTURE DIAGRAM ── */
 /* Контур на 63 машины жил тридцатью пунктами прозы, которые не дочитывают.
@@ -916,33 +913,6 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
   border: 1px solid var(--blueprint);
 }
 .jlist li strong { color: var(--frost); font-weight: 500; }
-.jlist li.jlist-head {
-  padding-left: 0; margin-top: 1.75rem;
-  font-family: var(--font-mono);
-  font-size: 12px; letter-spacing: .10em; text-transform: uppercase;
-  color: var(--blueprint); max-width: none;
-}
-.jlist li.jlist-head:first-child { margin-top: 0; }
-.jlist li.jlist-head::before { content: none; }
-
-/* Проект — уровень выше рубрики: внутри одной должности два проекта по три
-   десятка пунктов, и без разделителя они читаются как один сплошной список.
-   Линия сверху отбивает блок, кегль 13 против 12 и --ice против --blueprint
-   ставят проект над рубрикой, не вводя третий тип заголовка. */
-.jlist li.jlist-proj {
-  padding-left: 0; max-width: none;
-  margin-top: 3rem; padding-top: 1.5rem;
-  border-top: 1px solid var(--edge);
-  font-family: var(--font-mono);
-  font-size: 13px; letter-spacing: .08em; text-transform: uppercase;
-  color: var(--ice);
-}
-.jlist li.jlist-proj:first-child { margin-top: 0; padding-top: 0; border-top: none; }
-.jlist li.jlist-proj::before { content: none; }
-/* Первый пункт сразу под заголовком проекта — рубрика это или обычная строка,
-   отступ один: .45rem поверх флексового gap .8rem даёт те же 1.25rem. Линия
-   сверху уже отбила блок, полные 1.75rem у рубрики дублировали бы её. */
-.jlist li.jlist-proj + li { margin-top: .45rem; }
 
 /* ── SKILLS ── */
 
@@ -976,16 +946,10 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
    монохром читается как приём, чужой оттенок — как ошибка. */
 .skill-chip img.icon-invert { filter: invert(1) grayscale(1) brightness(1.35); }
 .chip-name { white-space: nowrap; }
-.chip-tip {
-  font-family: var(--font-mono); font-size: 10.5px; color: var(--fog);
-  padding-left: .55rem; border-left: 1px solid var(--edge); white-space: nowrap;
-}
-
 
 @media (max-width: 620px) {
   .skill-chips { gap: .4rem; }
-  .chip-tip { display: none; }
-}
+  }
 
 /* ── CERTS ── */
 .certs-sep {
@@ -1102,7 +1066,6 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
 /* Sparklines removed: they charted invented numbers. A picture that looks
    like data but isn't is worse than no picture. */
 
-
 /* ── УРОВНИ ВЛАДЕНИЯ ──
    Стена из 61 плитки подавала всё как равное, и первый вопрос читателя —
    где ежедневный инструмент, а где разовое знакомство. Четырнадцать фильтров
@@ -1204,23 +1167,6 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
   background: var(--blueprint); margin-left: 6px; box-shadow: var(--halo);
   animation: pulse-dot 2s ease-in-out infinite;
 }
-
-.tl-contact {
-  display: flex; align-items: center; gap: .6rem;
-  width: calc(100% + 32px); background: none; border: 1px solid transparent;
-  padding: 12px 16px; margin: 0 -16px;
-  font-family: var(--font-mono); font-size: 15px; color: var(--frost);
-  cursor: pointer; text-align: left; border-radius: var(--r-input);
-  transition: background .2s, border-color .2s;
-}
-.tl-contact:hover { background: var(--lum); border-color: var(--edge); }
-.tl-contact .tl-prompt { color: var(--blueprint); }
-.tl-contact-cmd { color: var(--fog); }
-.tl-contact-val { color: var(--white); flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
-.tl-contact-icon { color: var(--fog); display: flex; transition: color .2s; }
-.tl-contact:hover .tl-contact-icon { color: var(--blueprint); }
-.tl-contact.copied .tl-contact-val,
-.tl-contact.copied .tl-contact-icon { color: var(--blueprint); }
 
 .cta-cursor {
   display: inline-block; width: 7px; height: 1em;
@@ -1340,7 +1286,6 @@ body.lang-en       [data-lang="ru"] { display: none !important; }
 .nav-hamburger.open span:nth-child(2) { opacity: 0; }
 .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-
 /* ── RESPONSIVE ── */
 @media (max-width: 1040px) { .hero-grid { gap: 3rem; grid-template-columns: minmax(0, 1fr) 330px; } }
 @media (max-width: 900px) {
@@ -1352,8 +1297,7 @@ body.lang-en       [data-lang="ru"] { display: none !important; }
   :root { --card-pad: 20px; }
   .cta-terminal .terminal-body { padding: 20px; }
   .cta-terminal .tl-out { font-size: 15px; }
-  .tl-contact { font-size: 14px; }
-  .job-company-block { padding: 1.5rem; }
+    .job-company-block { padding: 1.5rem; }
   .nav-hamburger { display: flex; }
   .nav-links {
     display: none; position: absolute; top: 60px; left: 0; right: 0;
@@ -1364,6 +1308,22 @@ body.lang-en       [data-lang="ru"] { display: none !important; }
   }
   .nav-links.open { display: flex; }
   .nav-links a { font-size: 16px; padding: .7rem 1rem; }
+}
+
+/* ── ОБЛАСТЬ НАЖАТИЯ 44×44 ──
+   Три элемента не дотягивали до порога: гамбургер 34×27 — и это основная
+   навигация на телефоне, — переключатель языка 59×35 и ссылки меню 63×33.
+   Растим не сам элемент, а зону нажатия: псевдоэлемент добирает высоту,
+   вид и раскладка не меняются. */
+.nav-links a, .lang-toggle, .nav-hamburger { position: relative; }
+.nav-links a::after, .lang-toggle::after {
+  content: ""; position: absolute; left: 0; right: 0;
+  top: 50%; height: 44px; transform: translateY(-50%);
+}
+/* Гамбургер мал и по ширине — зона растёт в обе стороны от центра. */
+.nav-hamburger::after {
+  content: ""; position: absolute; left: 50%; top: 50%;
+  width: 44px; height: 44px; transform: translate(-50%, -50%);
 }
 
 /* ── SCROLLBAR ── */
@@ -1377,7 +1337,7 @@ body.lang-en       [data-lang="ru"] { display: none !important; }
 /* Нажимаемый элемент обязан ответить на нажатие: без этого интерфейс кажется
    неотзывчивым, даже когда работает мгновенно. Масштаб чуть меньше, чем у
    круглых кнопок выше, — плитки крупнее, и 0.95 на них читается как рывок. */
-.skill-chip:active, .tl-contact:active,
+.skill-chip:active,
 .stack-tag:active, .cert-pill:active {
   transform: scale(0.98); transition-duration: 100ms;
 }

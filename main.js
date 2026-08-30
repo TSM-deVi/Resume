@@ -316,80 +316,8 @@ if (window.matchMedia('(pointer: fine)').matches
   });
 }
 
-// ── Interactive terminal ──
-const _termInput = document.getElementById('term-input');
-const _termOut   = document.getElementById('term-output');
-
-const _termCmds = {
-  help:       'contact · skills · location · ls\ngit log · sudo su\n\n── hotkeys ──\n[Tab]  autocomplete\n[↑]    previous command\n[↓]    next command',
-  contact:    'TG:    @ktylhus\nemail: timir-ivaniv@yandex.ru',
-  skills:     'K8s · Helm · ArgoCD · Vault\nTerraform · Ansible · GitLab CI\nPrometheus · Grafana · Loki',
-  location:   'Saint Petersburg · UTC+3\nremote ✓ · occasional trips',
-  ls:         'K8s         ✓ prod\nTerraform   ✓ no drift\nArgoCD      ✓ synced\nVault       ✓ unsealed\nGitLab CI   ✓ 100%',
-  'git log':  '* feat: HA clusters · 99.9% uptime\n* feat: MTTD hours → 5 min\n* feat: server setup 2h → 15 min',
-  'sudo su':  'Permission denied (insufficient coffee ☕)',
-  sudo:       'Permission denied (insufficient coffee ☕)',
-  exit:       'Nice try. The terminal stays open.',
-  'rm -rf /': '🔥 …just kidding. Not today.',
-  pwd:        '/home/temiriv/devops',
-  uname:      'Linux devops-node 5.15.0-k8s #1 SMP x86_64',
-};
-
-if (_termInput) {
-  const _history = [];
-  let _histIdx = -1;
-
-  _termInput.addEventListener('keydown', e => {
-    // ── History navigation ──
-    if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      if (_history.length === 0) return;
-      _histIdx = Math.min(_histIdx + 1, _history.length - 1);
-      _termInput.value = _history[_histIdx];
-      return;
-    }
-    if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      _histIdx = Math.max(_histIdx - 1, -1);
-      _termInput.value = _histIdx === -1 ? '' : _history[_histIdx];
-      return;
-    }
-
-    // ── Tab autocomplete ──
-    if (e.key === 'Tab') {
-      e.preventDefault();
-      const partial = _termInput.value.toLowerCase();
-      if (!partial) return;
-      const keys = Object.keys(_termCmds).filter(k => !k.includes(' '));
-      const matches = keys.filter(k => k.startsWith(partial));
-      if (matches.length === 1) {
-        _termInput.value = matches[0];
-      } else if (matches.length > 1) {
-        _termOut.textContent = matches.join('   ');
-        _termOut.className = 'term-output';
-      }
-      return;
-    }
-
-    if (e.key !== 'Enter') return;
-    const cmd = _termInput.value.trim().toLowerCase();
-    _termInput.value = '';
-    if (!cmd) return;
-    _history.unshift(cmd);
-    _histIdx = -1;
-
-    if (cmd === 'clear') { _termOut.textContent = ''; _termOut.className = 'term-output'; return; }
-
-    const resp = _termCmds[cmd] ?? _termCmds[cmd.replace(/\/$/, '')];
-    if (resp !== undefined) {
-      _termOut.textContent = resp;
-      _termOut.className = 'term-output';
-    } else {
-      _termOut.textContent = `command not found: ${cmd}\ntry 'help'`;
-      _termOut.className = 'term-output err';
-    }
-  });
-}
+// Интерактивный ввод терминала удалён вместе с hero-терминалом: элементов
+// #term-input и #term-output в разметке больше нет и не будет.
 
 // Фильтрация навыков снята: уровни владения показаны группами, глубина
 // видна без нажатия, и выбирать категорию больше незачем.
