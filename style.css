@@ -331,11 +331,30 @@ section { padding: clamp(3.5rem, 9vw, 120px) 0; }
   display: flex; align-items: center; gap: .6rem;
   min-height: 44px; margin: 0 -10px; padding: 0 10px;
   border: 1px solid transparent; border-radius: var(--r-input);
-  font-family: var(--font-mono); font-size: 13px;
+  font-family: var(--font-mono); font-size: 12.5px;
   color: var(--frost); text-decoration: none;
   transition: background .2s, border-color .2s;
 }
 .hcta-link:hover { background: var(--lum); border-color: var(--edge); text-decoration: none; }
+/* Ключ не переносится: в колонке 380px «e-mail» рвался на «e-» и «mail»,
+   а адрес после этого не помещался и уходил в многоточие. */
+.hcta-key { flex: none; white-space: nowrap; }
+
+/* Ссылка открывает, кнопка рядом копирует. Вложить <button> в <a> нельзя,
+   поэтому строка — обёртка над двумя элементами. */
+.hcta-row { display: flex; align-items: center; }
+.hcta-row .hcta-link { flex: 1; min-width: 0; margin-right: 0; }
+.hcta-copy {
+  flex: none; display: flex; align-items: center; justify-content: center;
+  width: 34px; height: 44px; margin-right: -10px;
+  background: none; border: 1px solid transparent; border-radius: var(--r-input);
+  color: var(--fog); cursor: pointer;
+  transition: background .2s, border-color .2s, color .2s;
+}
+.hcta-copy:hover { background: var(--lum); border-color: var(--edge); }
+.hcta-copy:hover .hcta-copy-ico { color: var(--blueprint); }
+.hcta-copy-ico { display: flex; color: inherit; transition: color .2s; }
+.hcta-copy.copied .hcta-copy-ico { color: var(--blueprint); }
 .hcta-prompt { color: var(--blueprint); }
 .hcta-key { color: var(--fog); }
 .hcta-val {
@@ -346,6 +365,17 @@ section { padding: clamp(3.5rem, 9vw, 120px) 0; }
 .hcta-link:hover .hcta-go { color: var(--blueprint); transform: translateX(2px); }
 
 .hcta-sep { height: 1px; background: var(--edge); margin: 1.15rem 0; }
+
+/* Там, где колонка узкая, подпись уступает место значению: на 1000px правая
+   колонка сжимается до 330px, и адрес уходил в многоточие. Строка читается
+   и без ключа — адрес с собакой и ник с решёткой опознаются сами. */
+@media (min-width: 901px) and (max-width: 1040px) {
+  .hcta-key { display: none; }
+}
+@media (max-width: 380px) {
+  .hcta-key { display: none; }
+}
+
 
 .hcta-case {
   display: block; text-decoration: none;
@@ -459,178 +489,105 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
 .stack-tag.s-i, .stack-tag.s-g, .stack-tag.s-y, .stack-tag.s-p { color: var(--moon); }
 .chip-icon { width: 15px; height: 15px; flex-shrink: 0; object-fit: contain; }
 
-/* ── PIPELINE ── */
+/* ── PIPELINE ──
+   Сетка вместо строки: шесть колонок на десктопе, три на планшете, две на
+   узком телефоне. Раньше это была строка с min-width: 380px, которая на
+   360px уезжала под горизонтальную прокрутку, а инструменты каждой стадии
+   лежали в data-tip и открывались только по наведению мышью — то есть на
+   телефоне единственное содержательное в блоке было недоступно. */
 .pipeline-wrap { margin-top: 2.25rem; padding-top: 2rem; border-top: 1px solid var(--edge); }
-.pipeline-hdr { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; }
+.pipeline-hdr {
+  display: flex; align-items: baseline; justify-content: space-between;
+  flex-wrap: wrap; gap: .35rem 1rem; margin-bottom: 1.4rem;
+}
 .pl-title {
   font-family: var(--font-mono);
   font-size: 12px; letter-spacing: .10em; text-transform: uppercase;
   color: var(--fog);
 }
-.pl-rerun {
-  font-size: 13px; color: var(--moon);
-  background: var(--lum); border: 1px solid var(--edge);
-  box-shadow: inset 0 1px 1px rgba(216,236,248,.14);
-  border-radius: var(--r-pill); padding: 7px 16px;
-  font-family: var(--font-ui); cursor: pointer;
-  transition: color .2s, box-shadow .2s;
-}
-.pl-rerun:hover { color: var(--white); box-shadow: inset 0 1px 1px rgba(216,236,248,.3), var(--halo); }
+.pl-note { font-family: var(--font-ui); font-size: 12px; color: var(--fog); }
 
-.pipeline { display: flex; align-items: center; }
-.pl-stage { display: flex; flex-direction: column; align-items: center; gap: .6rem; position: relative; flex-shrink: 0; }
+.pipeline {
+  display: grid; grid-template-columns: repeat(6, 1fr);
+  gap: 1.5rem .625rem;
+  list-style: none; margin: 0; padding: 0;
+}
+.pl-stage {
+  display: flex; flex-direction: column; align-items: center; gap: .5rem;
+  position: relative; min-width: 0; text-align: center;
+}
+/* Соединитель занимает зазор справа от ячейки. В конце каждой строки он
+   гасится — иначе от крайней колонки торчал бы обрубок в пустоту. */
+.pl-stage::after {
+  content: ''; position: absolute; top: 20px; right: -.625rem;
+  width: .625rem; height: 1px; background: var(--edge);
+  transition: background .3s;
+}
+.pl-stage:last-child::after { display: none; }
+.pl-stage.pl-done::after { background: var(--ok-lt); }
+
 .pl-circle {
-  width: 48px; height: 48px; border-radius: 50%;
+  width: 40px; height: 40px; border-radius: 50%; flex: none;
   border: 1px solid var(--edge);
   background: var(--lum);
   box-shadow: inset 0 1px 1px rgba(216,236,248,.18);
   display: flex; align-items: center; justify-content: center;
-  color: var(--fog);
-  transition: color .3s, box-shadow .3s;
-  position: relative;
+  color: var(--fog); position: relative;
+  transition: color .3s, box-shadow .3s, border-color .3s, background .3s;
 }
 .pl-label {
   font-family: var(--font-mono);
   font-size: 11px; letter-spacing: .10em; text-transform: uppercase;
-  color: var(--fog); transition: color .3s;
+  color: var(--moon); transition: color .3s;
 }
-.pl-line { flex: 1; height: 1px; min-width: 16px; background: var(--edge); position: relative; overflow: hidden; }
-.pl-line::after {
-  content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 0;
-  background: var(--blueprint); transform-origin: left; transition: transform var(--t-slow) ease;
+/* Инструменты отдельными элементами: переносятся по названиям, а не рвутся
+   посреди слова в узкой колонке. */
+.pl-tools {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 0 .35rem;
+  font-family: var(--font-mono); font-size: 10px; line-height: 1.55;
+  color: var(--fog);
 }
-.pl-line.pl-done::after { width: 100%; background: var(--ok-lt); }
-/* a pulse of light runs down the leg the moment it completes */
-.pl-line.pl-done::before {
-  content: ''; position: absolute; top: 0; left: 0; height: 100%; width: 40%;
-  background: linear-gradient(90deg, transparent, rgba(216,236,248,.9), transparent);
-  animation: pl-surge .9s ease-out 1;
-}
-@keyframes pl-surge { from { transform: translateX(-100%); } to { transform: translateX(320%); } }
 
 @keyframes pl-spin { to { transform: rotate(360deg); } }
-.pl-stage.pl-run .pl-circle { color: var(--frost); box-shadow: inset 0 1px 1px rgba(216,236,248,.3), var(--halo); }
+.pl-stage.pl-run .pl-circle {
+  color: var(--frost);
+  box-shadow: inset 0 1px 1px rgba(216,236,248,.3), var(--halo);
+}
 .pl-stage.pl-run .pl-circle::before {
   content: ''; position: absolute; inset: -1px; border-radius: 50%;
   border: 1px solid transparent; border-top-color: var(--blueprint);
   animation: pl-spin .65s linear infinite; pointer-events: none;
 }
 .pl-stage.pl-run .pl-label { color: var(--frost); }
-/* passed — a teal ring, so a glance tells you the stage succeeded */
+
+/* Кольцо, а не галочка: блок описывает конвейер, который я собираю, а не
+   успешный прогон, которого не было. Галочка утверждала второе. */
 .pl-stage.pl-done .pl-circle {
-  color: var(--ok-lt);
-  border-color: var(--ok-lt);
+  color: var(--ok-lt); border-color: var(--ok-lt);
   background: rgba(38,150,132,.12);
-  box-shadow: inset 0 1px 1px rgba(216,236,248,.24), 0 0 16px rgba(63,191,164,.4);
+  box-shadow: inset 0 1px 1px rgba(216,236,248,.24), 0 0 16px rgba(63,191,164,.28);
   animation: pl-land .5s cubic-bezier(.16,1,.3,1) 1;
 }
 @keyframes pl-land {
   0%   { transform: scale(1);    box-shadow: 0 0 0 0 rgba(63,191,164,.55); }
   55%  { transform: scale(1.12); box-shadow: 0 0 0 10px rgba(63,191,164,0); }
-  100% { transform: scale(1);    box-shadow: inset 0 1px 1px rgba(216,236,248,.24), 0 0 16px rgba(63,191,164,.4); }
+  100% { transform: scale(1);    box-shadow: inset 0 1px 1px rgba(216,236,248,.24), 0 0 16px rgba(63,191,164,.28); }
 }
 .pl-stage.pl-done .pl-label { color: var(--ok-lt); }
-/* small tick in the corner of a passed stage */
-.pl-stage.pl-done .pl-circle::after {
-  content: '';
-  position: absolute; right: -2px; bottom: -2px;
-  width: 15px; height: 15px; border-radius: 50%;
-  background: var(--ok); border: 1.5px solid var(--canvas);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='9' viewBox='0 0 24 24' fill='none' stroke='%23e9fbf6' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
-  background-repeat: no-repeat; background-position: center;
+
+@media (max-width: 900px) {
+  .pipeline { grid-template-columns: repeat(3, 1fr); }
+  .pl-stage:nth-child(3n)::after { display: none; }
+}
+/* Три колонки держатся до 330px: в 342px контейнера это по 107px, а самый
+   длинный токен «multi-stage» занимает 66px. Две — только на совсем узких. */
+@media (max-width: 330px) {
+  .pipeline { grid-template-columns: repeat(2, 1fr); }
+  .pl-stage:nth-child(3n)::after { display: block; }
+  .pl-stage:nth-child(2n)::after { display: none; }
 }
 
-.pl-stage[data-tip]::after {
-  content: attr(data-tip);
-  position: absolute; bottom: calc(100% + 12px); left: 50%;
-  transform: translateX(-50%);
-  background: var(--plate); border: 1px solid var(--edge);
-  box-shadow: var(--glass-float);
-  color: var(--moon); font-size: 12px;
-  padding: 6px 12px; border-radius: var(--r-input);
-  white-space: nowrap; pointer-events: none;
-  opacity: 0; transition: opacity var(--t-fast); z-index: var(--z-float);
-}
-.pl-stage[data-tip]:hover::after { opacity: 1; }
-
-@media (max-width: 720px) {
-  /* Пайплайн шире экрана и прокручивается вбок. Растушёванный правый край —
-     единственный намёк, что за DEPLOY что-то есть: без него он читается
-     как обрубленный. */
-  .pipeline-wrap {
-    overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: .4rem;
-    -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 44px), transparent);
-            mask-image: linear-gradient(90deg, #000 calc(100% - 44px), transparent);
-  }
-  .pipeline { min-width: 380px; }
-}
-
-.cta-terminal {
-  background: rgba(47,52,62,.32);
-  backdrop-filter: blur(18px) saturate(1.2);
-  -webkit-backdrop-filter: blur(18px) saturate(1.2);
-  border: 1px solid var(--edge);
-  border-radius: var(--r-card);
-  box-shadow: var(--glass-float);
-  overflow: hidden; position: relative;
-}
-.cta-terminal { max-width: 700px; margin: 0 auto; }
-
-.terminal-bar {
-  background: rgba(199,211,234,.04);
-  border-bottom: 1px solid var(--edge);
-  padding: 14px 20px; display: flex; align-items: center; gap: 8px;
-}
-.t-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--plate); }
-.t-grn { background: var(--blueprint); box-shadow: var(--halo); }
-.terminal-title {
-  margin: 0 auto; font-family: var(--font-mono);
-  font-size: 11px; letter-spacing: .10em; text-transform: uppercase;
-  color: var(--fog);
-}
-.terminal-body { padding: var(--card-pad); font-family: var(--font-mono); font-size: 13px; }
-.tl { margin-bottom: 8px; }
-
-.term-sep-int, .term-int, .term-output { animation: none !important; opacity: 1 !important; }
-.term-sep-int { margin-top: 12px; }
-.term-int {
-  display: flex; align-items: center; gap: 8px; margin-top: 14px;
-  background: rgba(5,6,15,.5);
-  border: 1px solid var(--edge);
-  box-shadow: inset 0 1px 1px rgba(216,236,248,.14);
-  border-radius: var(--r-input); padding: 10px 14px;
-  transition: box-shadow .2s;
-}
-.term-int:focus-within { box-shadow: inset 0 1px 1px rgba(216,236,248,.3), 0 0 0 2px rgba(102,58,243,.5); }
-.term-input {
-  background: none; border: none;
-  color: var(--frost); font-family: var(--font-mono);
-  font-size: 13px; flex: 1; caret-color: var(--blueprint); width: 100%;
-}
-.term-input:focus:not(:focus-visible) { outline: none; }
-.term-input::placeholder { color: var(--fog); }
-.term-output {
-  font-size: 12px; color: var(--blueprint);
-  padding-left: 14px; margin-top: 8px;
-  white-space: pre-wrap; line-height: 1.5;
-  min-height: 0; word-break: break-word;
-}
-.term-output.err { color: var(--fog); }
-
-@keyframes tl-enter { from { opacity: 0; transform: translateX(-4px); } to { opacity: 1; transform: none; } }
-.terminal-body > * { opacity: 0; animation: tl-enter var(--t-base) ease forwards; }
-.terminal-body > *:nth-child(1) { animation-delay: .5s; }
-.terminal-body > *:nth-child(2) { animation-delay: .75s; }
-.terminal-body > *:nth-child(3) { animation-delay: .95s; }
-.terminal-body > *:nth-child(4) { animation-delay: 1.05s; }
-.terminal-body > *:nth-child(5) { animation-delay: 1.25s; }
-.terminal-body > *:nth-child(6) { animation-delay: 1.4s; }
-.terminal-body > *:nth-child(7) { animation-delay: 1.55s; }
-.terminal-body > *:nth-child(8) { animation-delay: 1.65s; }
-.tl-cmd { color: var(--fog); }
-.tl-cmd .tl-prompt { color: var(--blueprint); }
-.tl-out { color: var(--moon); padding-left: 2px; }.tl-out .tl-ok  { color: var(--blueprint); }
-.tl-sep { height: 1px; background: var(--edge); margin: 14px 0; }/* ── STATUS LINE ── */
+/* ── STATUS LINE ── */
 .status-line {
   background: rgba(47,52,62,.24);
   border: 1px solid var(--edge);
@@ -1356,7 +1313,7 @@ body.lang-en       [data-lang="ru"] { display: none !important; }
    неотзывчивым, даже когда работает мгновенно. Масштаб чуть меньше, чем у
    круглых кнопок выше, — плитки крупнее, и 0.95 на них читается как рывок. */
 .skill-tile:active, .skill-filter:active, .tl-contact:active,
-.pl-rerun:active, .stack-tag:active, .cert-pill:active {
+.stack-tag:active, .cert-pill:active {
   transform: scale(0.98); transition-duration: 100ms;
 }
 

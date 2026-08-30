@@ -476,56 +476,40 @@ function setupCopyCard(btnId, labelId, iconId, text) {
   });
 }
 
-setupCopyCard('btn-copy-tg',    'btn-tg-label',   'copy-icon-tg', '@ktylhus');
-setupCopyCard('btn-copy-email', 'btn-copy-label', 'copy-icon',    'timir-ivaniv@yandex.ru');
+setupCopyCard('btn-copy-tg',    'btn-tg-label',    'copy-icon-tg', '@ktylhus');
+setupCopyCard('btn-copy-email', 'btn-copy-label',  'copy-icon',    'timir-ivaniv@yandex.ru');
+// Те же контакты на первом экране: ссылка открывает, кнопка рядом копирует.
+setupCopyCard('hero-copy-tg',   'hero-tg-label',   'hero-ico-tg',  '@ktylhus');
+setupCopyCard('hero-copy-mail', 'hero-mail-label', 'hero-ico-mail', 'timir-ivaniv@yandex.ru');
 
 // ── Pipeline animation ──
 (function () {
-  const stages  = Array.from(document.querySelectorAll('.pl-stage'));
-  const lines   = Array.from(document.querySelectorAll('.pl-line'));
+  const stages = Array.from(document.querySelectorAll('.pl-stage'));
   if (!stages.length) return;
 
-  let running = false;
-
-  function runPipeline() {
-    if (running) return;
-    running = true;
-    stages.forEach(s => s.classList.remove('pl-run', 'pl-done'));
-    lines.forEach(l => l.classList.remove('pl-done'));
-
-    let i = 0;
-    function step() {
-      if (i >= stages.length) { running = false; return; }
-      stages[i].classList.add('pl-run');
-      setTimeout(() => {
-        stages[i].classList.remove('pl-run');
-        stages[i].classList.add('pl-done');
-        if (lines[i]) {
-          setTimeout(() => {
-            lines[i].classList.add('pl-done');
-            i++;
-            setTimeout(step, 120);
-          }, 280);
-        } else {
-          i++;
-          running = false;
-        }
-      }, 520);
-    }
-    step();
+  // Соединители теперь рисуют сами стадии, отдельных .pl-line больше нет.
+  // Прежний обход искал линию после каждой стадии и, не найдя, вставал после
+  // первой же — с новой разметкой он бы просто не пошёл дальше lint.
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    stages.forEach(s => s.classList.add('pl-done'));
+    return;
   }
 
-  // Автозапуск — украшение; кнопка «re-run» остаётся и в этом режиме.
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    setTimeout(runPipeline, 1600);
-  } else {
-    stages.forEach(st => st.classList.add('pl-done'));
-    lines.forEach(l => l.classList.add('pl-done'));
+  let i = 0;
+  function step() {
+    if (i >= stages.length) return;
+    const s = stages[i];
+    s.classList.add('pl-run');
+    setTimeout(() => {
+      s.classList.remove('pl-run');
+      s.classList.add('pl-done');
+      i++;
+      setTimeout(step, 140);
+    }, 420);
   }
-
-  document.querySelector('.pl-rerun')?.addEventListener('click', () => {
-    if (!running) runPipeline();
-  });
+  // Проход идёт один раз: блок описывает конвейер, а не показывает сборку,
+  // поэтому кнопки повтора больше нет.
+  setTimeout(step, 1200);
 })();
 
 // ── Frost sheen: feed the pointer position to the glass surfaces ──
