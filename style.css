@@ -170,14 +170,21 @@ nav.scrolled { box-shadow: 0 16px 32px rgba(0,0,0,.3); }
   font-family: var(--font-display);
   font-size: 18px; font-weight: 500; letter-spacing: -.01em;
   display: flex; align-items: center; gap: 10px;
-  background: var(--skywash);
-  -webkit-background-clip: text; background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 /* Имя в шапке дублировало заголовок, пока тот на экране. Точка остаётся —
    она держит место и работает индикатором, — а имя проявляется, когда
-   заголовок уезжает вверх и подписать страницу становится нечем. */
-.nav-logo span { opacity: 0; transition: opacity .3s ease; }
+   заголовок уезжает вверх и подписать страницу становится нечем.
+
+   Градиент перенесён с контейнера на сами спаны. На контейнере буквы рисовал
+   он сам: фон, обрезанный по форме глифов. Прозрачность дочернего элемента
+   эту форму из обрезки не убирала, и имя оставалось видимым вопреки
+   opacity: 0 — правило выглядело рабочим, а не работало. */
+.nav-logo span {
+  background: var(--skywash);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0; transition: opacity .3s ease;
+}
 nav.scrolled .nav-logo span { opacity: 1; }
 @media (prefers-reduced-motion: reduce) {
   .nav-logo span { transition: none; }
