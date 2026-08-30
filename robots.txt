@@ -1,0 +1,5 @@
+# Резюме-лендинг. Индексируется целиком, закрывать нечего.
+User-agent: *
+Allow: /
+
+Sitemap: https://tsm-devi.github.io/Resume/sitemap.xml

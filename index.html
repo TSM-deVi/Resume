@@ -347,8 +347,7 @@
       <span data-lang="en">Key Results</span>
     </h2>
     <div class="ach-grid">
-
-      <div class="ach ach-lead r">
+<div class="ach ach-lead r">
         <div class="ach-label"><span data-lang="ru">контуры DEV / INF / PROD</span><span data-lang="en">DEV / INF / PROD environments</span></div>
         <div class="ach-val">63 VM</div>
         <div class="ach-text" data-lang="ru">
@@ -359,18 +358,7 @@
         </div>
       </div>
 
-      <div class="ach ach-lead r d1">
-        <div class="ach-label"><span data-lang="ru">сервисов в эксплуатации</span><span data-lang="en">services in operation</span></div>
-        <div class="ach-val">70+</div>
-        <div class="ach-text" data-lang="ru">
-          Инфраструктурная команда из <strong>2 человек</strong> на <strong>50+ разработчиков</strong>: 12+ микросервисов в Kubernetes, 40+ под pm2, 20–30 на C#/.NET
-        </div>
-        <div class="ach-text" data-lang="en">
-          An infrastructure team of <strong>2</strong> serving <strong>50+ developers</strong>: 12+ microservices in Kubernetes, 40+ under pm2, 20–30 on C#/.NET
-        </div>
-      </div>
-
-      <div class="ach ach-lead r d2">
+<div class="ach ach-lead r d1">
         <div class="ach-label"><span data-lang="ru">время деплоя</span><span data-lang="en">deploy time</span></div>
         <div class="ach-val"><span data-lang="ru"><span class="ach-was">40 мин</span><span class="ach-arrow">→</span><span class="ach-now">8 мин</span></span><span data-lang="en"><span class="ach-was">40 min</span><span class="ach-arrow">→</span><span class="ach-now">8 min</span></span></div>
         <div class="ach-text" data-lang="ru">
@@ -381,18 +369,7 @@
         </div>
       </div>
 
-      <div class="ach r d3">
-        <div class="ach-label"><span data-lang="ru">CI/CD покрытие</span><span data-lang="en">CI/CD coverage</span></div>
-        <div class="ach-val">100%</div>
-        <div class="ach-text" data-lang="ru">
-          Все <strong>продакшен-репозитории</strong> покрыты автосборкой и security-сканированием (Trivy, Gitleaks)
-        </div>
-        <div class="ach-text" data-lang="en">
-          All <strong>production repositories</strong> covered with automated builds and security scanning (Trivy, Gitleaks)
-        </div>
-      </div>
-
-      <div class="ach r">
+<div class="ach ach-lead r d2">
         <div class="ach-label"><span data-lang="ru">обнаружение инцидентов</span><span data-lang="en">incident detection</span></div>
         <div class="ach-val"><span data-lang="ru"><span class="ach-was">часы</span><span class="ach-arrow">→</span><span class="ach-now">5 мин</span></span><span data-lang="en"><span class="ach-was">hours</span><span class="ach-arrow">→</span><span class="ach-now">5 min</span></span></div>
         <div class="ach-text" data-lang="ru">
@@ -403,29 +380,7 @@
         </div>
       </div>
 
-      <div class="ach r d1">
-        <div class="ach-label"><span data-lang="ru">uptime СУБД</span><span data-lang="en">DB uptime</span></div>
-        <div class="ach-val">99.9%</div>
-        <div class="ach-text" data-lang="ru">
-          <strong>PostgreSQL + Patroni + etcd</strong>, 3 ноды — полностью отказоустойчивый кластер
-        </div>
-        <div class="ach-text" data-lang="en">
-          <strong>PostgreSQL + Patroni + etcd</strong>, 3 nodes — fully fault-tolerant cluster
-        </div>
-      </div>
-
-      <div class="ach r d2">
-        <div class="ach-label"><span data-lang="ru">точка входа в контуры</span><span data-lang="en">entry point to environments</span></div>
-        <div class="ach-val">1 bastion</div>
-        <div class="ach-text" data-lang="ru">
-          Доступ к VM только через <strong>jump host</strong> и контролируемые сессии (PAM), наружу — лишь через балансировщик и WAF
-        </div>
-        <div class="ach-text" data-lang="en">
-          VM access only through a <strong>jump host</strong> and controlled sessions (PAM); external exposure only via the load balancer and WAF
-        </div>
-      </div>
-
-      <div class="ach r d3">
+<div class="ach r d3">
         <div class="ach-label"><span data-lang="ru">настройка сервера</span><span data-lang="en">server setup</span></div>
         <div class="ach-val"><span data-lang="ru"><span class="ach-was">2–3 ч</span><span class="ach-arrow">→</span><span class="ach-now">15 мин</span></span><span data-lang="en"><span class="ach-was">2–3 h</span><span class="ach-arrow">→</span><span class="ach-now">15 min</span></span></div>
         <div class="ach-text" data-lang="ru">
@@ -436,40 +391,7 @@
         </div>
       </div>
 
-      <div class="ach r">
-        <div class="ach-label"><span data-lang="ru">развёртывание ОС Linux</span><span data-lang="en">Linux OS provisioning</span></div>
-        <div class="ach-val"><span data-lang="ru"><span class="ach-was">3 ч</span><span class="ach-arrow">→</span><span class="ach-now">40 мин</span></span><span data-lang="en"><span class="ach-was">3 h</span><span class="ach-arrow">→</span><span class="ach-now">40 min</span></span></div>
-        <div class="ach-text" data-lang="ru">
-          Автоматизировал подготовку рабочего места скриптами <strong>Bash и PowerShell</strong>, конфигурации — в self-hosted GitLab
-        </div>
-        <div class="ach-text" data-lang="en">
-          Automated workstation provisioning with <strong>Bash and PowerShell</strong> scripts, with configs versioned in self-hosted GitLab
-        </div>
-      </div>
-
-      <div class="ach r d1">
-        <div class="ach-label"><span data-lang="ru">HA-кластеров развёрнуто</span><span data-lang="en">HA clusters deployed</span></div>
-        <div class="ach-val">3</div>
-        <div class="ach-text" data-lang="ru">
-          <strong>PostgreSQL</strong> (Patroni+etcd), <strong>Zabbix</strong> (2 ноды), <strong>Jira + Confluence</strong> — устранены единые точки отказа
-        </div>
-        <div class="ach-text" data-lang="en">
-          <strong>PostgreSQL</strong> (Patroni+etcd), <strong>Zabbix</strong> (2 nodes), <strong>Jira + Confluence</strong> — single points of failure eliminated
-        </div>
-      </div>
-
-      <div class="ach r d2">
-        <div class="ach-label"><span data-lang="ru">Kubernetes с нуля</span><span data-lang="en">Kubernetes from scratch</span></div>
-        <div class="ach-val"><span data-lang="ru">3 среды</span><span data-lang="en">3 environments</span></div>
-        <div class="ach-text" data-lang="ru">
-          <strong>Bare-metal</strong> на физических серверах, <strong>VMware Cloud Director</strong> (master + 3 worker) и single-node <strong>k3s</strong> в публичном облаке
-        </div>
-        <div class="ach-text" data-lang="en">
-          <strong>Bare-metal</strong> on physical servers, <strong>VMware Cloud Director</strong> (master + 3 workers) and single-node <strong>k3s</strong> in a public cloud
-        </div>
-      </div>
-
-      <div class="ach r d3">
+<div class="ach r">
         <div class="ach-label"><span data-lang="ru">right-sizing платформы</span><span data-lang="en">platform right-sizing</span></div>
         <div class="ach-val"><span data-lang="ru"><span class="ach-was">28 VM</span><span class="ach-arrow">→</span><span class="ach-now">10 VM</span></span><span data-lang="en"><span class="ach-was">28 VM</span><span class="ach-arrow">→</span><span class="ach-now">10 VM</span></span></div>
         <div class="ach-text" data-lang="ru">
@@ -479,8 +401,7 @@
           An enterprise environment on 90 vCPU and 191 GB RAM folded into <strong>34 vCPU / 96 GB RAM</strong> with the service composition intact
         </div>
       </div>
-
-    </div>
+</div>
   </section>
 
   <section id="experience">
@@ -517,95 +438,59 @@
               <li>Проектная работа: production-контур мультиагентной low-code платформы для заказчика банковского сектора — спроектирован, развёрнут, сдан заказчику и закрыт в июле 2026.</li>
               <li class="jlist-proj">ПРОЕКТ 1 — ОСНОВНОЙ, МАКСИМАЛЬНАЯ КОНФИГУРАЦИЯ. Enterprise-контур заказчика банковского сектора на VMware Cloud Director (платформа Cloud.ru)</li>
               <li class="jlist-head">Инфраструктура и изоляция</li>
-              <li>Заказчик предоставил доступ в <strong>VMware Cloud Director на Cloud.ru</strong> — всё внутри разворачивал сам: виртуальные ЦОД (VDC), контуры, сети и сервисы</li>
-              <li>Развернул с нуля три изолированных контура <strong>DEV / INF / PROD</strong>: отдельные виртуальные ЦОД, группировка сервисов по vApp, сетевая сегментация. Суммарно <strong>63 виртуальные машины</strong></li>
+              <li>Заказчик предоставил доступ в <strong>VMware Cloud Director</strong> на Cloud.ru — всё внутри разворачивал сам: с нуля поднял три изолированных контура <strong>DEV / INF / PROD</strong>, отдельные виртуальные ЦОД, группировку сервисов по vApp и сетевую сегментацию. Суммарно 63 виртуальные машины</li>
               <li>DEV и PROD — зеркальные контуры 1:1, каждый 28 VM / ~90 vCPU / ~190 GB RAM / ~2.8 TB дисков; провёл right-sizing по компонентам и подготовил ресурсный план</li>
-              <li>Состав прикладного контура: Kubernetes (master + 3 worker), GitLab Runner, Harbor, HashiCorp <strong>Vault</strong>, PostgreSQL (кластер 3 ноды + 2 standalone), Redis (2 ноды), RabbitMQ, Qdrant (2 ноды), Vespa, ClickHouse, MinIO, Envoy, OPA/OPAL, Keycloak, SmartSearch, Langflow, Langfuse, LiteLLM, proxy-service, внутренние DNS и CA, балансировщик, <strong>jump host</strong></li>
               <li>INF — контур сквозных сервисов (7 VM): GitLab, центральный <strong>Harbor</strong>, <strong>Nginx</strong>, Prometheus, Grafana, Loki; вынес общие сервисы из прикладных контуров</li>
               <li>Двухуровневая схема реестров образов: центральный <strong>Harbor</strong> на INF + локальные на DEV и PROD — меньше внешнего трафика при сохранении изоляции</li>
               <li class="jlist-head">Kubernetes и доставка</li>
               <li>Развернул <strong>Kubernetes-кластер</strong> (master + 3 worker) на виртуальных машинах: <strong>Helm</strong>-чарты приложений, namespaces, RBAC, services, deployments, pull secrets, сетевая маршрутизация</li>
-              <li>Настроил <strong>GitLab CI/CD</strong>: build, scan, deploy, manual production jobs, разделение dev/prod окружений; шаблоны пайплайнов для Langflow Agent и Code Agent</li>
-              <li>Выстроил GitLab-only flow: изменения только через merge requests и CI-джобы, runtime-верификация и процедуры отката</li>
+              <li>Настроил <strong>GitLab CI/CD</strong>: build, scan, deploy, manual production jobs, разделение dev/prod, шаблоны пайплайнов для Langflow Agent и Code Agent. Изменения — только через merge request и CI-джобы, по схеме pre-check → change → verification → rollback со smoke-тестами на каждом этапе</li>
               <li>IaC: <strong>Terraform</strong> и <strong>Ansible</strong> — роли, inventory, плейбуки, GitLab CI manual jobs; идемпотентность и воспроизводимость окружений, миграции, резервное копирование и восстановление</li>
-              <li>Формализовал порядок безопасного применения изменений: pre-check → change → verification → rollback, со smoke-тестами на каждом этапе</li>
               <li class="jlist-head">Service mesh, доступ и безопасность</li>
-              <li>Внедрил <strong>Istio + Kiali</strong> для Kubernetes-workload’ов и VM-backed сервисов: Gateway, VirtualService, ServiceEntry, DestinationRule, AuthorizationPolicy, WorkloadGroup</li>
-              <li>Настроил mesh DNS/VIP-маршрутизацию и allowed/denied smoke-тесты доступа между сервисами</li>
-              <li>Построил авторизационный слой <strong>Envoy + OPA + OPAL</strong> через ext_authz, политики подтягиваются из GitLab</li>
-              <li>Подключил SSO через <strong>Keycloak/OIDC</strong> для SmartSearch, Langflow, Langfuse и Grafana; разбирал проблемы callback URL, ролей, user sync и прав</li>
-              <li>Сетевая связность между изолированными контурами — на <strong>firewall и NAT</strong> в <strong>VMware Cloud Director</strong>: правила доступа между DEV, INF и PROD открывались точечно, под конкретные сервисы и порты, изоляция контуров при этом сохранялась</li>
-              <li>Периметровая безопасность на стороне <strong>VMware Cloud Director</strong>: firewall-правила, NAT, сегментация сетей. Публикация сервисов наружу — через <strong>Nginx</strong> на моей стороне, поверх которого на стороне заказчика стоял WAF</li>
+              <li>Service mesh и авторизация: <strong>Istio + Kiali</strong> для Kubernetes-workload’ов и VM-backed сервисов (Gateway, VirtualService, ServiceEntry, DestinationRule, AuthorizationPolicy, WorkloadGroup), mesh DNS/VIP-маршрутизация, авторизационный слой <strong>Envoy + OPA + OPAL</strong> через ext_authz с политиками из GitLab, SSO через Keycloak/OIDC для SmartSearch, Langflow, Langfuse и Grafana</li>
+              <li>L3-связности между контурами нет — доступ открывался точечно на <strong>firewall и NAT</strong> в VMware Cloud Director, под конкретные сервисы и порты, изоляция при этом сохранялась. Публикация наружу — через <strong>Nginx</strong> на моей стороне, поверх которого на стороне заказчика стоял WAF</li>
               <li>Настроил доступ внутри контуров: <strong>jump host</strong> в каждом контуре, распространение собственных SSH-ключей на целевые ВМ. Заказчик выдавал вход через свой <strong>PAM</strong> — итоговый путь администратора: PAM → jump host контура → целевая ВМ</li>
-              <li>Jump host развёрнут в каждом из трёх контуров (<strong>DEV / INF / PROD</strong>) как единственная точка входа; прямой доступ из внешней сети закрыт</li>
               <li>Отдельный машинный путь для CI/CD: <strong>bastion</strong> на <strong>jump host</strong> DEV и PROD, через который GitLab Runner с контура INF ходит в эти контуры — доступ раннера изолирован от административного</li>
-              <li><strong>TLS/PKI</strong>: внутренний центр сертификации, перевыпуск сертификатов с SAN, TLS verification, защищённые service-to-service соединения</li>
-              <li>Сетевая безопасность на хостах: UFW и firewall-правила, ограничение портов, сегментация доступа, проверка plaintext- и TLS-эндпоинтов</li>
-              <li>Внутренний DNS и балансировка трафика между сервисами</li>
-              <li><strong>Nginx</strong> как production-публикация сервисов: маршрутизация, reverse proxy, заголовки CSP</li>
-              <li><strong>Vault</strong>: GitLab- и service-токены, секреты приложений, схема для External Secrets</li>
+              <li><strong>TLS/PKI</strong> и секреты: внутренний центр сертификации, перевыпуск сертификатов с SAN, защищённые service-to-service соединения; <strong>Vault</strong> — GitLab- и service-токены, секреты приложений, схема для External Secrets</li>
               <li class="jlist-head">Наблюдаемость и эксплуатация</li>
               <li>Развернул сквозной мониторинг и логирование: <strong>Prometheus, Grafana, Loki, Promtail</strong> — сбор метрик и логов с прикладных контуров в единые дашборды по Kubernetes, Envoy/OPA/OPAL и прикладным сервисам</li>
-              <li>LLM-интеграции: LiteLLM, GigaChat, Ollama, Vespa, embedding/search endpoints; разделял инфраструктурные проблемы, ошибки внешних API и ошибки конфигурации</li>
-              <li>Сопровождение production-приложений: Langflow, Langfuse, SmartSearch, Telegram Langflow Proxy; интеграция backend-сервисов с Langfuse через внутренний mesh-endpoint без изменения browser-facing URL</li>
+              <li>Сопровождение production-приложений и LLM-интеграций: Langflow, Langfuse, SmartSearch, Telegram Langflow Proxy, LiteLLM, GigaChat, Ollama, Vespa, embedding/search endpoints — разделял инфраструктурные проблемы, ошибки внешних API и ошибки конфигурации</li>
               <li>Разбор production-инцидентов: TLS SAN mismatch, Redis ACL/NOPERM, deprecated queue blocker в RabbitMQ, MinIO mesh timeout, CSP blocker в nginx, исчерпание PostgreSQL connections, недоступность Langflow API, <strong>Harbor</strong> auth, переполнение диска Docker JSON-логами, ClickHouse log storm, <strong>Vault</strong> sealed / raft leader, GitLab 502</li>
-              <li>Read-only диагностика и runtime-проверки через SSH, Kubernetes, GitLab pipelines и health checks — с sanitized-логами, без раскрытия секретов</li>
               <li>Эксплуатационная документация: infrastructure inventory, runbooks, change log, acceptance evidence, compliance matrix; сверка контуров с требованиями ПМИ/КБ/SOC</li>
-              <li>Поддержка команд разработки и QA: консультации по инфраструктуре, участие в релизах, разбор инфраструктурных проблем</li>
-              <li>Участие в проектировании архитектуры production-контура, внедрении DevOps/SRE-практик и повышении надёжности платформы</li>
               <li class="jlist-proj">ПРОЕКТ 2 — МИНИМАЛЬНАЯ КОНФИГУРАЦИЯ. Копия основного контура, свёрнутая в один контур вместо трёх, на публичном облаке Timeweb Cloud под задачи разработки</li>
               <li>Воспроизвёл архитектуру основного контура в одном контуре вместо трёх изолированных (<strong>DEV / INF / PROD</strong>): состав сервисов и схема их взаимодействия сохранены, сквозные сервисы INF свёрнуты внутрь единого контура</li>
               <li>Уложил платформу enterprise-масштаба (28 VM, ~90 vCPU, ~190 GB RAM) в 10 VM, 34 vCPU, 96 GB RAM, 1.8 TB NVMe: повторный right-sizing, консолидация сервисов, снятие production-only зависимостей</li>
               <li>Архитектурные решения при сокращении: single-node Kubernetes/k3s вместо кластера master + 3 worker; <strong>Vault</strong> + RabbitMQ и Qdrant + Redis на общих узлах; standalone PostgreSQL и <strong>ClickHouse</strong> вместо кластеров; часть прикладных сервисов на отдельный Docker-узел; выделенный узел мониторинга</li>
-              <li>Без enterprise-обвязки: Nginx как единственный edge-router, конфиг под управлением GitLab-репозитория — балансировщик, WAF, <strong>bastion</strong> и <strong>PAM</strong> остались только в банковском контуре</li>
-              <li>Собственный GitLab CE внутри контура вместо централизованного CI/CD на INF</li>
+              <li>Без enterprise-обвязки: <strong>Nginx</strong> как единственный edge-router с конфигом в GitLab-репозитории, собственный GitLab CE внутри контура вместо централизованного CI/CD на INF — балансировщик, WAF, bastion и PAM остались только в банковском контуре</li>
             </ul>
             <ul class="jlist" data-lang="en">
               <li>Project engagement: the production environment of a multi-agent low-code platform for a banking-sector client — designed, deployed, handed over and closed in July 2026.</li>
               <li class="jlist-proj">PROJECT 1 — PRIMARY, MAXIMUM CONFIGURATION. Enterprise environment for a banking-sector client on VMware Cloud Director (Cloud.ru platform)</li>
               <li class="jlist-head">Infrastructure and isolation</li>
-              <li>The client provided access to <strong>VMware Cloud Director on Cloud.ru</strong> — everything inside I built myself: virtual data centers (VDC), environments, networks and services</li>
-              <li>Deployed three isolated <strong>DEV / INF / PROD</strong> environments from scratch: separate virtual data centers, services grouped into vApps, network segmentation. <strong>63 virtual machines</strong> in total</li>
+              <li>The client granted access to <strong>VMware Cloud Director</strong> on Cloud.ru — everything inside I built myself: three isolated <strong>DEV / INF / PROD</strong> environments from scratch, separate virtual data centres, vApp service grouping and network segmentation. 63 virtual machines in total</li>
               <li>DEV and PROD are mirrored 1:1, each 28 VMs / ~90 vCPU / ~190 GB RAM / ~2.8 TB of disk; performed per-component right-sizing and prepared a resource plan</li>
-              <li>Application environment stack: Kubernetes (master + 3 workers), GitLab Runner, Harbor, HashiCorp <strong>Vault</strong>, PostgreSQL (3-node cluster + 2 standalone), Redis (2 nodes), RabbitMQ, Qdrant (2 nodes), Vespa, ClickHouse, MinIO, Envoy, OPA/OPAL, Keycloak, SmartSearch, Langflow, Langfuse, LiteLLM, proxy-service, internal DNS and CA, load balancer, <strong>jump host</strong></li>
               <li>INF is the cross-cutting services environment (7 VMs): GitLab, central <strong>Harbor</strong>, <strong>Nginx</strong>, Prometheus, Grafana, Loki; moved shared services out of the application environments</li>
               <li>Two-tier image registry scheme: a central <strong>Harbor</strong> on INF plus local ones on DEV and PROD — less external traffic while preserving isolation</li>
               <li class="jlist-head">Kubernetes and delivery</li>
               <li>Deployed a <strong>Kubernetes cluster</strong> (master + 3 workers) on virtual machines: application <strong>Helm</strong> charts, namespaces, RBAC, services, deployments, pull secrets, network routing</li>
-              <li>Configured <strong>GitLab CI/CD</strong>: build, scan, deploy, manual production jobs, dev/prod environment separation; pipeline templates for Langflow Agent and Code Agent</li>
-              <li>Established a GitLab-only flow: changes only through merge requests and CI jobs, with runtime verification and rollback procedures</li>
+              <li>Set up <strong>GitLab CI/CD</strong>: build, scan, deploy, manual production jobs, dev/prod separation, pipeline templates for Langflow Agent and Code Agent. Changes go only through merge requests and CI jobs, following pre-check → change → verification → rollback with smoke tests at every stage</li>
               <li>IaC: <strong>Terraform</strong> and <strong>Ansible</strong> — roles, inventory, playbooks, GitLab CI manual jobs; idempotency and reproducibility of environments, migrations, backup and recovery</li>
-              <li>Formalized the safe change procedure: pre-check → change → verification → rollback, with smoke tests at every stage</li>
               <li class="jlist-head">Service mesh, access and security</li>
-              <li>Introduced <strong>Istio + Kiali</strong> for Kubernetes workloads and VM-backed services: Gateway, VirtualService, ServiceEntry, DestinationRule, AuthorizationPolicy, WorkloadGroup</li>
-              <li>Configured mesh DNS/VIP routing and allowed/denied smoke tests for access between services</li>
-              <li>Built an <strong>Envoy + OPA + OPAL</strong> authorization layer via ext_authz, with policies pulled from GitLab</li>
-              <li>Connected SSO via <strong>Keycloak/OIDC</strong> for SmartSearch, Langflow, Langfuse and Grafana; diagnosed callback URL, role, user-sync and permission issues</li>
-              <li>Connectivity between the isolated environments runs on <strong>firewall and NAT</strong> in <strong>VMware Cloud Director</strong>: access rules between DEV, INF and PROD were opened point by point, for specific services and ports, with environment isolation preserved</li>
-              <li>Perimeter security on the <strong>VMware Cloud Director</strong> side: firewall rules, NAT, network segmentation. Services are published outward through <strong>Nginx</strong> on my side, with the client-side WAF above it</li>
+              <li>Service mesh and authorization: <strong>Istio + Kiali</strong> for Kubernetes workloads and VM-backed services (Gateway, VirtualService, ServiceEntry, DestinationRule, AuthorizationPolicy, WorkloadGroup), mesh DNS/VIP routing, an <strong>Envoy + OPA + OPAL</strong> authorization layer over ext_authz with policies pulled from GitLab, and Keycloak/OIDC SSO for SmartSearch, Langflow, Langfuse and Grafana</li>
+              <li>There is no L3 connectivity between the environments — access was opened point by point on the <strong>firewall and NAT</strong> in VMware Cloud Director, per service and port, with isolation preserved. Public exposure went through <strong>Nginx</strong> on my side, with the client’s WAF on top</li>
               <li>Set up access inside the environments: a <strong>jump host</strong> in each one, distributing my own SSH keys to the target VMs. The client granted entry through their <strong>PAM</strong> — the resulting administrator path is PAM → the environment jump host → the target VM</li>
-              <li>A <strong>jump host</strong> is deployed in each of the three environments (<strong>DEV / INF / PROD</strong>) as the single entry point; direct access from the external network is closed</li>
               <li>A separate machine path for CI/CD: a <strong>bastion</strong> on the DEV and PROD <strong>jump host</strong>s that the GitLab Runner from INF goes through — the runner access is isolated from the administrative one</li>
-              <li><strong>TLS/PKI</strong>: an internal certificate authority, certificate reissue with SAN, TLS verification, secured service-to-service connections</li>
-              <li>Host-level network security: UFW and firewall rules, port restrictions, access segmentation, verification of plaintext and TLS endpoints</li>
-              <li>Internal DNS and traffic balancing between services</li>
-              <li><strong>Nginx</strong> as the production publication layer for services: routing, reverse proxy, CSP headers</li>
-              <li><strong>Vault</strong>: GitLab and service tokens, application secrets, a scheme for External Secrets</li>
+              <li><strong>TLS/PKI</strong> and secrets: internal certificate authority, certificate reissue with SAN, secured service-to-service connections; <strong>Vault</strong> for GitLab and service tokens, application secrets and an External Secrets scheme</li>
               <li class="jlist-head">Observability and operations</li>
               <li>Deployed end-to-end monitoring and logging: <strong>Prometheus, Grafana, Loki, Promtail</strong> — collecting metrics and logs from the application environments into unified dashboards for Kubernetes, Envoy/OPA/OPAL and application services</li>
-              <li>LLM integrations: LiteLLM, GigaChat, Ollama, Vespa, embedding/search endpoints; separated infrastructure issues from external API and configuration errors</li>
-              <li>Supporting production applications: Langflow, Langfuse, SmartSearch, Telegram Langflow Proxy; integrating backend services with Langfuse through an internal mesh endpoint without changing browser-facing URLs</li>
+              <li>Operating production applications and LLM integrations: Langflow, Langfuse, SmartSearch, Telegram Langflow Proxy, LiteLLM, GigaChat, Ollama, Vespa, embedding/search endpoints — separating infrastructure problems from external API errors and configuration mistakes</li>
               <li>Production incident work: TLS SAN mismatch, Redis ACL/NOPERM, a deprecated queue blocker in RabbitMQ, MinIO mesh timeout, a CSP blocker in nginx, PostgreSQL connection exhaustion, Langflow API downtime, <strong>Harbor</strong> auth, disk overflow from Docker JSON logs, ClickHouse log storms, <strong>Vault</strong> sealed / raft leader, GitLab 502s</li>
-              <li>Read-only diagnostics and runtime checks via SSH, Kubernetes, GitLab pipelines and health checks — with sanitized logs and no exposure of secrets</li>
               <li>Operational documentation: infrastructure inventory, runbooks, change log, acceptance evidence, compliance matrix; verifying the environments against PMI/KB/SOC requirements</li>
-              <li>Supporting development and QA teams: infrastructure consulting, participation in releases, resolving infrastructure issues</li>
-              <li>Taking part in designing the production architecture, introducing DevOps/SRE practices and improving platform reliability</li>
               <li class="jlist-proj">PROJECT 2 — MINIMUM CONFIGURATION. A copy of the primary environment folded into one instead of three, on the Timeweb Cloud public cloud for development work</li>
               <li>Reproduced the architecture of the primary environment in a single environment instead of three isolated ones (<strong>DEV / INF / PROD</strong>): the service composition and their interaction scheme were preserved, with INF cross-cutting services folded inside</li>
               <li>Fitted an enterprise-scale platform (28 VMs, ~90 vCPU, ~190 GB RAM) into 10 VMs, 34 vCPU, 96 GB RAM, 1.8 TB NVMe: repeated right-sizing, service consolidation, removal of production-only dependencies</li>
               <li>Architectural decisions when scaling down: single-node Kubernetes/k3s instead of a master + 3 worker cluster; <strong>Vault</strong> + RabbitMQ and Qdrant + Redis on shared nodes; standalone PostgreSQL and <strong>ClickHouse</strong> instead of clusters; some application services on a separate Docker node; a dedicated monitoring node</li>
-              <li>No enterprise wrapping: Nginx as the only edge router with its config managed from a GitLab repository — the load balancer, WAF, <strong>bastion</strong> and <strong>PAM</strong> stayed in the banking environment only</li>
-              <li>A self-hosted GitLab CE inside the environment instead of centralized CI/CD on INF</li>
+              <li>No enterprise wrapping: <strong>Nginx</strong> as the only edge router with its config in a GitLab repository, a self-hosted GitLab CE inside the environment instead of centralized CI/CD on INF — the load balancer, WAF, bastion and PAM stayed in the bank environment only</li>
             </ul>
 
           </div>
@@ -1029,113 +914,63 @@
               <li class="jlist-head">МАСШТАБ И КОНТЕКСТ</li>
               <li>Инфраструктурная команда из 2 человек: вдвоём отвечали за всю платформу — окружения, доступы, сертификаты, CI/CD, мониторинг — для команды разработки <strong>50+ человек</strong></li>
               <li>В эксплуатации <strong>более 70 сервисов</strong>: <strong>12+ микросервисов</strong> в Kubernetes, 40+ Node.js-сервисов под pm2, 20-30 бэкенд-сервисов на C#/.NET</li>
-              <li>Гетерогенная инфраструктура: legacy .NET Framework на Windows Server (IIS) и новые .NET-сервисы на Linux под systemd — выстроил CI/CD и сопровождение для обеих платформ, включая публикацию в IIS</li>
-              <li>Поддерживал исторический контур сборки на Jenkins с публикацией в IIS одновременно с новым конвейером на GitLab CI</li>
+              <li>Гетерогенная инфраструктура: legacy .NET Framework на Windows Server под IIS и новые .NET-сервисы на Linux под systemd. Выстроил CI/CD и сопровождение для обоих, поддерживая исторический контур сборки на Jenkins одновременно с новым конвейером на GitLab CI</li>
               <li class="jlist-head">KUBERNETES И КОНТЕЙНЕРИЗАЦИЯ</li>
               <li>Развернул и администрировал <strong>Kubernetes-кластер</strong> на bare-metal: мастер и два воркера на физических серверах, без managed-облака — etcd, CNI, storage и обновления настраивались руками</li>
               <li>Мигрировал <strong>12+ микросервисов</strong> из Docker Compose в Kubernetes и выстроил схему для переноса остальных: время деплоя сократилось с ~40 до ~8 минут</li>
-              <li>Администрирование кластера: namespace-изоляция, ресурсные лимиты, RBAC, HPA, Ingress</li>
-              <li>Persistent-хранилище кластера на <strong>Longhorn</strong>: distributed block storage поверх дисков нод, тома для stateful-сервисов, репликация и снапшоты</li>
-              <li>Упаковал сервисы в <strong>Helm-чарты</strong>, унифицировал конфигурацию окружений через values</li>
+              <li>Администрирование кластера: namespace-изоляция, ресурсные лимиты, <strong>RBAC</strong>, HPA, Ingress; persistent-хранилище на <strong>Longhorn</strong> с репликацией и снапшотами; сервисы упакованы в Helm-чарты с единой конфигурацией окружений через values</li>
               <li class="jlist-head">CI/CD И GITOPS</li>
               <li>Спроектировал пайплайны в <strong>GitLab CI/CD</strong> и Jenkins, покрыв <strong>100% продакшен-репозиториев</strong> автоматической сборкой и деплоем</li>
               <li>Внедрил GitOps-доставку: GitLab CI собирает образ и публикует в registry, <strong>ArgoCD</strong> синхронизирует манифесты в кластер</li>
-              <li>Интегрировал security-сканирование (<strong>Trivy, Gitleaks</strong>) в пайплайн — уязвимости отлавливаются до попадания в прод</li>
-              <li>Настроил SSL/TLS-сертификаты (Let's Encrypt), автоматизировал выпуск и продление</li>
-              <li>Оптимизировал пайплайны GitLab CI и Jenkins: кеширование, параллелизация стадий, сокращение времени сборки</li>
+              <li>Security-сканирование <strong>Trivy и Gitleaks</strong> прямо в пайплайне, автовыпуск и продление TLS-сертификатов Let’s Encrypt, оптимизация сборок кешированием и параллелизацией стадий</li>
               <li class="jlist-head">IAC И АВТОМАТИЗАЦИЯ</li>
               <li>Разработал <strong>Ansible-роли и плейбуки</strong> — настройка нового сервера за 15 минут вместо 2–3 часов вручную</li>
-              <li>Внедрил <strong>Terraform</strong> для управления инфраструктурой: воспроизводимые среды, version control конфигураций</li>
-              <li>Скрипты и служебные утилиты на Python, Bash, PowerShell: автоматизация рутинных задач, интеграции между системами, сбор данных</li>
+              <li><strong>Terraform</strong> для воспроизводимых сред и version control конфигураций; служебные утилиты на Python, Bash и PowerShell под рутину и интеграции между системами</li>
               <li class="jlist-head">БАЗЫ ДАННЫХ И ХРАНИЛИЩА</li>
               <li>Развернул отказоустойчивый кластер <strong>PostgreSQL + Patroni + etcd</strong> (3 ноды), uptime СУБД <strong>99.9%</strong></li>
               <li>Развернул и администрировал <strong>ClickHouse</strong> — аналитическое хранилище <strong>~4 ТБ</strong> на выделенных физических серверах, данные по отелям и турам: схемы, партиционирование, TTL</li>
-              <li>MS SQL Server на Windows Server: кластер с репликацией master-slave, обслуживание, резервное копирование, мониторинг</li>
-              <li>MySQL и MongoDB — администрирование</li>
-              <li>Внедрил <strong>Redis</strong> для кэширования и хранения сессий</li>
-              <li>Подключил объектное хранилище <strong>S3 (Yandex Cloud Object Storage)</strong> под медиаконтент продукта — фотографии отелей и туров, артефакты сборок, бэкапы, статика: бакеты, сервисные ключи доступа, права и жизненный цикл объектов</li>
+              <li>MS SQL Server на Windows с репликацией master-slave, MySQL и MongoDB, <strong>Redis</strong> под кэш и сессии, объектное хранилище S3 в Yandex Cloud под медиаконтент, артефакты сборок и бэкапы</li>
               <li class="jlist-head">БРОКЕРЫ, SERVICE DISCOVERY И СЛУЖЕБНЫЕ СЕРВИСЫ</li>
-              <li>Развернул и эксплуатировал <strong>Kafka</strong> для асинхронного взаимодействия сервисов: топики, партиции, политики хранения, мониторинг лага консьюмеров</li>
-              <li>Развернул <strong>RabbitMQ</strong>: очереди, exchange, DLQ, разграничение доступа по vhost</li>
-              <li>Настроил <strong>Consul</strong>: service discovery, health-checks, хранение конфигураций в KV</li>
-              <li>Развернул <strong>Unleash</strong> — сервер feature-флагов для управления выкаткой функциональности</li>
-              <li class="jlist-head">СЕКРЕТЫ И ДОСТУПЫ</li>
-              <li>HashiCorp <strong>Vault</strong>: хранение секретов приложений и CI, политики доступа, выдача токенов сервисам и пайплайнам</li>
-              <li>Secret Server: централизованное хранение и выдача учётных данных</li>
-              <li>Развернул <strong>Passbolt</strong> — общий self-hosted менеджер паролей для команды: организация хранилищ, группы и права доступа, шифрование, ротация учётных данных</li>
-              <li class="jlist-head">РЕЕСТРЫ АРТЕФАКТОВ</li>
-              <li>Развернул и администрировал <strong>Harbor</strong> как основной приватный registry для Docker-образов: проекты, политики хранения и retention, робот-аккаунты, разграничение доступа, сканирование образов на уязвимости</li>
-              <li>Использовал <strong>GitLab Container Registry</strong> для образов проектных репозиториев, настроил pull secrets и интеграцию с пайплайнами и Kubernetes</li>
-              <li>Развернул <strong>Verdaccio</strong> — приватный npm-registry для внутренних пакетов с проксированием и кэшированием npmjs, настроил публикацию пакетов из CI и аутентификацию разработчиков</li>
+              <li><strong>Kafka</strong> и <strong>RabbitMQ</strong> для асинхронного взаимодействия сервисов — топики и партиции, очереди, exchange и DLQ, разграничение по vhost, мониторинг лага консьюмеров; Consul под service discovery и KV; Unleash как сервер feature-флагов</li>
+              <li>Секреты и учётные данные: <strong>HashiCorp Vault</strong> с политиками доступа и выдачей токенов сервисам и пайплайнам, Secret Server, self-hosted <strong>Passbolt</strong> для команды — группы, права доступа и ротация</li>
+              <li>Реестры артефактов: <strong>Harbor</strong> как основной приватный registry с retention-политиками и робот-аккаунтами, GitLab Container Registry с pull secrets для Kubernetes, приватный npm-registry <strong>Verdaccio</strong> с проксированием npmjs и публикацией из CI</li>
               <li class="jlist-head">МОНИТОРИНГ И ЛОГИРОВАНИЕ</li>
               <li>Внедрил <strong>Prometheus + Grafana</strong> (метрики и алертинг через Alertmanager), <strong>ELK Stack</strong> — Elasticsearch, Logstash, Kibana — и Graylog (логи), Zabbix (инфраструктура и оповещения), Sentry (ошибки приложений)</li>
-              <li>Настроил <strong>Uptime Kuma, LibreNMS + Oxidized, NetBox</strong> для мониторинга доступности и сетевой документации</li>
               <li>Сократил среднее время обнаружения инцидентов (<strong>MTTD</strong>) с нескольких часов до ~5 минут</li>
-              <li class="jlist-head">ОТКАЗОУСТОЙЧИВОСТЬ</li>
-              <li><strong>Nginx</strong>: reverse proxy, TLS-терминация, балансировка, сложные конфигурации</li>
-              <li>Развернул <strong>Zabbix HA-кластер</strong> (2 ноды) с базой на отказоустойчивом PostgreSQL</li>
-              <li>Развернул <strong>Jira и Confluence</strong> на HA-кластере PostgreSQL — устранил единую точку отказа</li>
+              <li>Устранил единые точки отказа: <strong>Zabbix</strong> в HA-кластере на двух нодах, Jira и Confluence переведены на отказоустойчивый PostgreSQL</li>
               <li class="jlist-head">WINDOWS-КОНТУР И ДОПОЛНИТЕЛЬНО</li>
-              <li>Windows Server: IIS (публикация и сопровождение веб-приложений, пулы приложений, привязки и сертификаты), <strong>Active Directory</strong>, DNS, DHCP, SMTP, PowerShell</li>
-              <li>Виртуализация VMware и Hyper-V; резервное копирование Veeam Backup &amp; Replication</li>
-              <li><strong>Zimbra</strong> с нуля: почтовые домены и учётные записи, DNS-записи (MX, SPF, DKIM, DMARC), TLS, антиспам/антивирус, бэкапы и миграция ящиков; выпуск DKIM-ключей автоматизировал скриптом — ручная процедура сведена к одной команде</li>
-              <li>Участие в проектировании архитектуры и внедрении DevOps-практик в команде разработки; аудит IT-инфраструктуры и план модернизации; OCS Inventory вместо ручного учёта в Excel</li>
+              <li>Windows-контур: IIS с пулами приложений и сертификатами, <strong>Active Directory</strong>, DNS, DHCP, SMTP, PowerShell; виртуализация VMware и Hyper-V, резервное копирование Veeam; <strong>Zimbra</strong> с нуля — почтовые домены, MX/SPF/DKIM/DMARC, TLS, антиспам и миграция ящиков</li>
             </ul>
             <ul class="jlist" data-lang="en">
               <li class="jlist-head">SCALE AND CONTEXT</li>
               <li>An infrastructure team of 2: together we owned the whole platform — environments, access, certificates, CI/CD, monitoring — for a development team of <strong>50+</strong></li>
               <li><strong>70+ services</strong> in operation: <strong>12+ microservices</strong> in Kubernetes, 40+ Node.js services under pm2, 20-30 C#/.NET backend services</li>
-              <li>Heterogeneous infrastructure: legacy .NET Framework on Windows Server (IIS) and new .NET services on Linux under systemd — built CI/CD and operations for both platforms, including publishing to IIS</li>
-              <li>Maintained the legacy Jenkins build pipeline publishing to IIS alongside the new GitLab CI pipeline</li>
+              <li>Heterogeneous infrastructure: legacy .NET Framework on Windows Server under IIS and new .NET services on Linux under systemd. Built CI/CD and support for both, keeping the historical Jenkins build path alive alongside the new GitLab CI pipeline</li>
               <li class="jlist-head">KUBERNETES AND CONTAINERIZATION</li>
               <li>Deployed and administered a bare-metal <strong>Kubernetes cluster</strong>: a master and two workers on physical servers, with no managed cloud — etcd, CNI, storage and upgrades configured by hand</li>
               <li>Migrated <strong>12+ microservices</strong> from Docker Compose to Kubernetes and designed the path for the rest: deploy time cut from ~40 to ~8 minutes</li>
-              <li>Cluster administration: namespace isolation, resource limits, RBAC, HPA, Ingress</li>
-              <li>Cluster persistent storage on <strong>Longhorn</strong>: distributed block storage over node disks, volumes for stateful services, replication and snapshots</li>
-              <li>Packaged services into <strong>Helm charts</strong> and unified environment configuration through values</li>
+              <li>Cluster administration: namespace isolation, resource limits, <strong>RBAC</strong>, HPA, Ingress; persistent storage on <strong>Longhorn</strong> with replication and snapshots; services packaged as Helm charts with environment configuration unified through values</li>
               <li class="jlist-head">CI/CD AND GITOPS</li>
               <li>Designed pipelines in <strong>GitLab CI/CD</strong> and Jenkins, covering <strong>100% of production repositories</strong> with automated builds and deployments</li>
               <li>Introduced GitOps delivery: GitLab CI builds the image and publishes it to the registry, <strong>ArgoCD</strong> syncs the manifests into the cluster</li>
-              <li>Integrated security scanning (<strong>Trivy, Gitleaks</strong>) into the pipeline — vulnerabilities caught before reaching production</li>
-              <li>Set up SSL/TLS certificates (Let's Encrypt) with automated issuance and renewal</li>
-              <li>Optimized GitLab CI and Jenkins pipelines: caching, stage parallelization, reduced build times</li>
+              <li><strong>Trivy and Gitleaks</strong> security scanning inside the pipeline, automated issuance and renewal of Let’s Encrypt TLS certificates, build optimization through caching and stage parallelization</li>
               <li class="jlist-head">IAC AND AUTOMATION</li>
               <li>Developed <strong>Ansible roles and playbooks</strong> — new server setup in 15 minutes instead of 2–3 hours manually</li>
-              <li>Introduced <strong>Terraform</strong> for infrastructure management: reproducible environments, version-controlled configuration</li>
-              <li>Scripts and utilities in Python, Bash, PowerShell: automating routine tasks, integrations between systems, data collection</li>
+              <li><strong>Terraform</strong> for reproducible environments and configuration version control; utilities in Python, Bash and PowerShell for routine work and system-to-system integrations</li>
               <li class="jlist-head">DATABASES AND STORAGE</li>
               <li>Deployed a fault-tolerant <strong>PostgreSQL + Patroni + etcd</strong> cluster (3 nodes), <strong>99.9%</strong> database uptime</li>
               <li>Deployed and administered <strong>ClickHouse</strong> — a <strong>~4 TB</strong> analytical store on dedicated physical servers holding hotel and tour data: schemas, partitioning, TTL</li>
-              <li>MS SQL Server on Windows Server: a master-slave replication cluster, maintenance, backups, monitoring</li>
-              <li>MySQL and MongoDB — administration</li>
-              <li>Introduced <strong>Redis</strong> for caching and session storage</li>
-              <li>Connected <strong>S3 object storage (Yandex Cloud Object Storage)</strong> for product media — hotel and tour photos, build artifacts, backups and static assets: buckets, service access keys, permissions and object lifecycle rules</li>
+              <li>MS SQL Server on Windows with master-slave replication, MySQL and MongoDB, <strong>Redis</strong> for cache and sessions, S3 object storage in Yandex Cloud for media, build artifacts and backups</li>
               <li class="jlist-head">BROKERS, SERVICE DISCOVERY AND UTILITY SERVICES</li>
-              <li>Deployed and operated <strong>Kafka</strong> for asynchronous service communication: topics, partitions, retention policies, consumer lag monitoring</li>
-              <li>Deployed <strong>RabbitMQ</strong>: queues, exchanges, DLQ, per-vhost access control</li>
-              <li>Configured <strong>Consul</strong>: service discovery, health checks, configuration storage in KV</li>
-              <li>Deployed <strong>Unleash</strong> — a feature-flag server for controlling functionality rollout</li>
-              <li class="jlist-head">SECRETS AND ACCESS</li>
-              <li>HashiCorp <strong>Vault</strong>: storing application and CI secrets, access policies, issuing tokens to services and pipelines</li>
-              <li>Secret Server: centralized credential storage and issuance</li>
-              <li>Deployed <strong>Passbolt</strong> — a shared self-hosted password manager for the team: vault organization, groups and permissions, encryption, credential rotation</li>
-              <li class="jlist-head">ARTIFACT REGISTRIES</li>
-              <li>Deployed and administered <strong>Harbor</strong> as the primary private Docker image registry: projects, retention policies, robot accounts, access control, image vulnerability scanning</li>
-              <li>Used <strong>GitLab Container Registry</strong> for project repository images, configured pull secrets and integration with pipelines and Kubernetes</li>
-              <li>Deployed <strong>Verdaccio</strong> — a private npm registry for internal packages with npmjs proxying and caching, package publishing from CI and developer authentication</li>
+              <li><strong>Kafka</strong> and <strong>RabbitMQ</strong> for asynchronous service interaction — topics and partitions, queues, exchanges and DLQs, vhost separation, consumer lag monitoring; Consul for service discovery and KV; Unleash as a feature-flag server</li>
+              <li>Secrets and credentials: <strong>HashiCorp Vault</strong> with access policies and token issuance to services and pipelines, Secret Server, and self-hosted <strong>Passbolt</strong> for the team — groups, permissions and rotation</li>
+              <li>Artifact registries: <strong>Harbor</strong> as the main private registry with retention policies and robot accounts, GitLab Container Registry with pull secrets for Kubernetes, and <strong>Verdaccio</strong> as a private npm registry proxying npmjs with publishing from CI</li>
               <li class="jlist-head">MONITORING AND LOGGING</li>
               <li>Introduced <strong>Prometheus + Grafana</strong> (metrics and alerting through Alertmanager), the <strong>ELK Stack</strong> — Elasticsearch, Logstash, Kibana — and Graylog (logs), Zabbix (infrastructure and alerts), Sentry (application errors)</li>
-              <li>Set up <strong>Uptime Kuma, LibreNMS + Oxidized and NetBox</strong> for availability monitoring and network documentation</li>
               <li>Cut mean time to detect incidents (<strong>MTTD</strong>) from several hours to ~5 minutes</li>
-              <li class="jlist-head">FAULT TOLERANCE</li>
-              <li><strong>Nginx</strong>: reverse proxy, TLS termination, load balancing, complex configurations</li>
-              <li>Deployed a <strong>Zabbix HA cluster</strong> (2 nodes) backed by fault-tolerant PostgreSQL</li>
-              <li>Deployed <strong>Jira and Confluence</strong> on the PostgreSQL HA cluster — eliminated a single point of failure</li>
+              <li>Removed single points of failure: <strong>Zabbix</strong> in a two-node HA cluster, Jira and Confluence moved onto the fault-tolerant PostgreSQL</li>
               <li class="jlist-head">WINDOWS ENVIRONMENT AND EXTRAS</li>
-              <li>Windows Server: IIS (publishing and maintaining web applications, application pools, bindings and certificates), <strong>Active Directory</strong>, DNS, DHCP, SMTP, PowerShell</li>
-              <li>VMware and Hyper-V virtualization; Veeam Backup &amp; Replication backups</li>
-              <li>Deployed a corporate <strong>Zimbra</strong> mail server from scratch: installation and initial setup, mail domains and accounts, DNS records (MX, SPF, DKIM, DMARC), TLS certificates, antispam/antivirus, backups and mailbox migration</li>
-              <li>Taking part in architecture design and introducing DevOps practices in the development team; an IT infrastructure audit and modernization plan; OCS Inventory instead of manual Excel records</li>
+              <li>Windows estate: IIS with application pools and certificates, <strong>Active Directory</strong>, DNS, DHCP, SMTP, PowerShell; VMware and Hyper-V virtualization, Veeam backup; <strong>Zimbra</strong> from scratch — mail domains, MX/SPF/DKIM/DMARC, TLS, antispam and mailbox migration</li>
             </ul>
           </div>
 
@@ -1152,25 +987,17 @@
             </div>
             <ul class="jlist" data-lang="ru">
               <li>Администрировал доменную инфраструктуру <strong>Active Directory</strong>: групповые политики, права доступа, профили пользователей</li>
-              <li>Настройка и поддержка корпоративной почты и почтовых клиентов: Exchange, Outlook, IMAP/SMTP</li>
-              <li>Резервное копирование и восстановление данных, контроль целостности и доступности информации</li>
-              <li>Мониторинг состояния серверов, сетевого оборудования и рабочих станций</li>
-              <li>Настройка антивирусной защиты, обновлений и политик безопасности</li>
+              <li>Корпоративная почта и клиенты (Exchange, Outlook, IMAP/SMTP), резервное копирование и восстановление данных, мониторинг серверов и сетевого оборудования, антивирусная защита и политики обновлений</li>
               <li>Организовал удалённый доступ пользователей: выделенные виртуальные машины по RDP и терминальные фермы <strong>Remote Desktop Services (RDS)</strong> для массового доступа — публикация приложений, лицензирование, профили и права</li>
               <li>Настроил и перенёс <strong>30+ рабочих станций</strong> и периферийного оборудования при расширении офиса</li>
               <li>Поддержка пользователей через Service Desk (Jira): консультирование по корпоративному ПО, диагностика проблем оборудования и ПО, поддержка удалённых пользователей</li>
-              <li>Ведение технической документации, инвентаризация оборудования и ПО</li>
             </ul>
             <ul class="jlist" data-lang="en">
               <li>Administered the <strong>Active Directory</strong> domain infrastructure: group policies, access rights, user profiles</li>
-              <li>Set up and maintained corporate mail and mail clients: <strong>Exchange, Outlook, IMAP/SMTP</strong></li>
-              <li>Data backup and recovery, monitoring information integrity and availability</li>
-              <li>Monitoring the health of servers, network equipment and workstations</li>
-              <li>Configured antivirus protection, updates and security policies</li>
+              <li>Corporate mail and clients (Exchange, Outlook, IMAP/SMTP), data backup and recovery, monitoring of servers and network equipment, antivirus protection and update policies</li>
               <li>Organized remote user access: dedicated virtual machines over RDP and <strong>Remote Desktop Services (RDS)</strong> terminal farms for access at scale — application publishing, licensing, profiles and permissions</li>
               <li>Set up and relocated <strong>30+ workstations</strong> and peripherals during an office expansion</li>
               <li>User support through Service Desk (Jira): guidance on corporate software, hardware and software diagnostics, support for remote users</li>
-              <li>Maintaining technical documentation, hardware and software inventory</li>
             </ul>
           </div>
         </div>
@@ -1208,7 +1035,6 @@
               <li>Автоматизировал развёртывание ОС Linux, сократив подготовку рабочего места с 3 часов до 40 минут</li>
               <li>Хранил и версионировал скрипты и конфигурации в self-hosted GitLab</li>
               <li>Запускал и обслуживал контейнеризированные сервисы (Docker)</li>
-              <li>Диагностировал и устранял инфраструктурные инциденты, вёл техническую документацию</li>
             </ul>
             <ul class="jlist" data-lang="en">
               <li>Set up and maintained distributed network monitoring in <strong>Zabbix</strong>: retail site network equipment, modem and channel availability tracking, incident alerts</li>
@@ -1216,7 +1042,6 @@
               <li>Automated Linux OS deployment, cutting workstation setup from 3 hours to 40 minutes</li>
               <li>Stored and versioned scripts and configurations in a self-hosted GitLab</li>
               <li>Stored and versioned scripts and configs in <strong>self-hosted GitLab</strong>; ran containerized services (<strong>Docker</strong>)</li>
-              <li>Diagnosed and resolved infrastructure incidents, maintained technical documentation</li>
             </ul>
           </div>
 
@@ -1233,21 +1058,17 @@
             </div>
             <ul class="jlist" data-lang="ru">
               <li>Администрировал серверы Windows Server, Linux и сетевое оборудование (<strong>MikroTik, Cisco</strong>) в розничной сети из <strong>40+ объектов</strong></li>
-              <li>Развёртывал и поддерживал виртуализацию VMware, Hyper-V</li>
+              <li>Виртуализация VMware и Hyper-V, почтовые серверы и СУБД — развёртывание и поддержание доступности</li>
               <li>Настроил VPN-инфраструктуру между объектами (Kerio), маршрутизацию и коммутацию</li>
-              <li>Обслуживал почтовые серверы и СУБД, обеспечивал их доступность</li>
               <li>Настроил и перенёс <strong>10+ рабочих станций</strong> и периферии при расширении офиса</li>
               <li>HelpDesk-поддержка парка <strong>100+ компьютеров</strong> и кассовой техники</li>
-              <li>Инвентаризация IT-оборудования, ведение документации (Jira)</li>
             </ul>
             <ul class="jlist" data-lang="en">
               <li>Administered Windows Server and Linux servers and network equipment (<strong>MikroTik, Cisco</strong>) across a retail network of <strong>40+ sites</strong></li>
-              <li>Deployed and maintained VMware and Hyper-V virtualization</li>
+              <li>VMware and Hyper-V virtualization, mail servers and databases — deployment and availability</li>
               <li>Set up inter-site VPN infrastructure (Kerio), routing and switching</li>
-              <li>Maintained mail servers and databases, ensuring their availability</li>
               <li>Set up and relocated <strong>10+ workstations</strong> and peripherals during an office expansion</li>
               <li>HelpDesk support for a fleet of <strong>100+ computers</strong> and POS equipment</li>
-              <li>IT asset inventory and documentation (Jira)</li>
             </ul>
           </div>
         </div>
@@ -1270,16 +1091,12 @@
             <span data-lang="en">System Administrator</span>
           </div>
             <ul class="jlist" data-lang="ru">
-              <li>Обеспечение бесперебойной работы офисного оборудования и сетевой инфраструктуры</li>
-              <li>Обслуживание и ремонт офисной техники (компьютеры, МФУ, принтеры)</li>
-              <li>Реализация мер информационной безопасности</li>
+              <li>Поддержка офисного оборудования и сетевой инфраструктуры, реализация мер информационной безопасности</li>
               <li>Монтажные работы, подключение абонентов к сети</li>
               <li>Настройка сетевого и телекоммуникационного оборудования</li>
             </ul>
             <ul class="jlist" data-lang="en">
-              <li>Ensuring uninterrupted operation of office equipment and network infrastructure</li>
-              <li>Maintenance and repair of office equipment (computers, MFPs, printers)</li>
-              <li>Implementing information security measures</li>
+              <li>Support of office equipment and network infrastructure, implementation of information security measures</li>
               <li>Installation work, connecting subscribers to the network</li>
               <li>Configuring network and telecommunication equipment</li>
             </ul>
@@ -1871,22 +1688,34 @@
         </div>
         <div class="tl-sep"></div>
 
-        <button class="tl-contact" id="btn-copy-tg" title="Telegram · @ktylhus">
-          <span class="tl-prompt">❯</span>
-          <span class="tl-contact-cmd">ping</span>
-          <span class="tl-contact-val" id="btn-tg-label" aria-live="polite">@ktylhus</span>
-          <span class="tl-contact-icon" id="copy-icon-tg">
-            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-          </span>
-        </button>
-        <button class="tl-contact" id="btn-copy-email" title="E-mail · timir-ivaniv@yandex.ru">
-          <span class="tl-prompt">❯</span>
-          <span class="tl-contact-cmd">mail</span>
-          <span class="tl-contact-val" id="btn-copy-label" aria-live="polite">timir-ivaniv@yandex.ru</span>
-          <span class="tl-contact-icon" id="copy-icon">
-            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-          </span>
-        </button>
+        <div class="tl-contact-row">
+          <a class="tl-contact" href="https://t.me/ktylhus" target="_blank" rel="noopener noreferrer" title="Telegram · @ktylhus">
+            <span class="tl-prompt">❯</span>
+            <span class="tl-contact-cmd">ping</span>
+            <span class="tl-contact-val" id="btn-tg-label" aria-live="polite">@ktylhus</span>
+          </a>
+          <button class="tl-copy" id="btn-copy-tg" type="button">
+            <span class="sr-only" data-lang="ru">Скопировать ник в Telegram</span>
+            <span class="sr-only" data-lang="en">Copy Telegram handle</span>
+            <span class="tl-contact-icon" id="copy-icon-tg" aria-hidden="true">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            </span>
+          </button>
+        </div>
+        <div class="tl-contact-row">
+          <a class="tl-contact" href="mailto:timir-ivaniv@yandex.ru" title="E-mail · timir-ivaniv@yandex.ru">
+            <span class="tl-prompt">❯</span>
+            <span class="tl-contact-cmd">mail</span>
+            <span class="tl-contact-val" id="btn-copy-label" aria-live="polite">timir-ivaniv@yandex.ru</span>
+          </a>
+          <button class="tl-copy" id="btn-copy-email" type="button">
+            <span class="sr-only" data-lang="ru">Скопировать адрес почты</span>
+            <span class="sr-only" data-lang="en">Copy e-mail address</span>
+            <span class="tl-contact-icon" id="copy-icon" aria-hidden="true">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            </span>
+          </button>
+        </div>
 
         <div class="tl-sep term-sep-int"></div>
         <div class="term-int">

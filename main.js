@@ -115,6 +115,25 @@ let lang = (_urlLang === 'en' || _urlLang === 'ru')
   ? _urlLang
   : (localStorage.getItem('lang') || 'ru');
 
+// Заголовок вкладки и описание жили только по-русски: lang="en" и весь текст
+// переключались, а <title> с meta description оставались русскими — в выдаче
+// и при отправке ссылки английская версия выглядела русской.
+const _metaDesc = document.querySelector('meta[name="description"]');
+const _meta = {
+  ru: {
+    title: document.title,
+    desc: _metaDesc ? _metaDesc.content : '',
+  },
+  en: {
+    // Сайт транслитерирует имя как «Ivanov Temir» — заголовок обязан совпадать
+    // с <h1> и og:title, иначе вкладка и выдача разойдутся с самой страницей.
+    title: 'Ivanov Temir — Middle+ DevOps Engineer',
+    desc: 'Middle+ DevOps engineer, Saint Petersburg. Bare-metal Kubernetes, VMware Cloud Director and k3s, ' +
+          'GitLab CI/CD, ArgoCD, Terraform, Ansible, observability. 63 VMs across DEV/INF/PROD environments, ' +
+          '70+ services in operation.',
+  },
+};
+
 function applyLang(l) {
   if (l === 'en') {
     document.body.classList.add('lang-en');
@@ -127,6 +146,11 @@ function applyLang(l) {
     langBtn.textContent = 'EN';
     backBtn.setAttribute('aria-label', 'Наверх');
   }
+
+  const m = _meta[l] || _meta.ru;
+  document.title = m.title;
+  if (_metaDesc) _metaDesc.content = m.desc;
+
   localStorage.setItem('lang', l);
 
   // Русский — версия по умолчанию, её параметр в адресе только мусорит и
@@ -214,7 +238,7 @@ startTypewriter();
 
 // ── Длинные списки опыта: начало видно, остальное по кнопке ──
 (function () {
-  const LIMIT = 8;          // столько пунктов видно сразу
+  const LIMIT = 6;          // столько содержательных пунктов видно сразу
   const MIN_HIDDEN = 4;     // ради двух-трёх строк кнопку не заводим
 
   function plural(n) {
@@ -224,14 +248,36 @@ startTypewriter();
     return 'пунктов';
   }
 
+  // Подзаголовки и названия проектов лимит не тратят: в списке ДЮК их шесть
+  // на 27 пунктов, и при общем счёте читатель до сворачивания видел бы почти
+  // одни заголовки. Считаем только содержательные пункты, а заголовок прячем
+  // тогда, когда скрыта вся его группа.
+  const isHead = li => li.classList.contains('jlist-head') ||
+                       li.classList.contains('jlist-proj');
+
   document.querySelectorAll('.jlist').forEach(list => {
     const items = Array.from(list.children);
-    const hidden = items.slice(LIMIT);
+    let shown = 0;
+    const hidden = items.filter(li => {
+      if (isHead(li)) return false;
+      return ++shown > LIMIT;
+    });
     if (hidden.length < MIN_HIDDEN) return;
+
+    // Заголовок без единого видимого пункта под ним — тоже в скрытую часть.
+    for (let i = 0; i < items.length; i++) {
+      if (!isHead(items[i])) continue;
+      let j = i + 1, empty = true;
+      for (; j < items.length && !isHead(items[j]); j++) {
+        if (!hidden.includes(items[j])) { empty = false; break; }
+      }
+      if (empty && j > i + 1) hidden.push(items[i]);
+    }
 
     hidden.forEach(li => li.classList.add('jl-hide'));
 
-    const n = hidden.length;
+    // В счётчике на кнопке — только содержательные пункты, заголовки не в счёт.
+    const n = hidden.filter(li => !isHead(li)).length;
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'jlist-more';
@@ -437,12 +483,15 @@ function setupCopyCard(btnId, labelId, iconId, text) {
   if (!btn) return;
 
   function flash(msg, ok) {
+    // Подпись живёт в соседней ссылке, а не внутри кнопки: подсветку вешаем
+    // на строку целиком, чтобы значок и значение мигали вместе.
+    const row = btn.closest('.tl-contact-row') || btn;
     label.textContent = msg;
-    if (ok) { icon.innerHTML = checkSvg; btn.classList.add('copied'); }
+    if (ok) { icon.innerHTML = checkSvg; row.classList.add('copied'); }
     setTimeout(() => {
       label.textContent = text;
       icon.innerHTML = copySvg;
-      btn.classList.remove('copied');
+      row.classList.remove('copied');
     }, 2000);
   }
 
