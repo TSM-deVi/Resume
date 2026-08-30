@@ -512,96 +512,205 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
 .stack-tag.s-i, .stack-tag.s-g, .stack-tag.s-y, .stack-tag.s-p { color: var(--moon); }
 .chip-icon { width: 15px; height: 15px; flex-shrink: 0; object-fit: contain; }
 
-/* ── PIPELINE ──
-   Сетка вместо строки: шесть колонок на десктопе, три на планшете, две на
-   узком телефоне. Раньше это была строка с min-width: 380px, которая на
-   360px уезжала под горизонтальную прокрутку, а инструменты каждой стадии
-   лежали в data-tip и открывались только по наведению мышью — то есть на
-   телефоне единственное содержательное в блоке было недоступно. */
-.pipeline-wrap { margin-top: 2.25rem; padding-top: 2rem; border-top: 1px solid var(--edge); }
-.pipeline-hdr {
-  display: flex; align-items: baseline; justify-content: space-between;
-  flex-wrap: wrap; gap: .35rem 1rem; margin-bottom: 1.4rem;
-}
-.pl-title {
-  font-family: var(--font-mono);
-  font-size: 12px; letter-spacing: .10em; text-transform: uppercase;
-  color: var(--fog);
-}
-.pl-note { font-family: var(--font-ui); font-size: 12px; color: var(--fog); }
-
+/* ── PIPELINE: прогон с завершением ──
+   Заливка идёт за волной, узлы загораются по очереди и остаются пройденными
+   до конца цикла. Всё на CSS: задержек в JS нет, синхронизировать нечего. */
 .pipeline {
   display: grid; grid-template-columns: repeat(6, 1fr);
   gap: 1.5rem .625rem; position: relative;
   list-style: none; margin: 0; padding: 0;
 }
-/* Единый рельс от центра первого узла до центра последнего вместо перемычек
-   между ячейками: шесть отрезков читались как пунктир, одна линия читается
-   как конвейер.
-
-   Половина колонки — это не 100%/12: пять зазоров по .625rem съедают ширину
-   до раскладки колонок. Колонка равна (100% − 5×.625rem)/6, значит центр
-   крайнего узла — половина от неё. Первая версия с 100%/12 промахивалась
-   на несколько пикселей, и рельс не доходил до центров. */
+/* Половина колонки — не 100%/12: пять зазоров по .625rem съедают ширину
+   до раскладки колонок, поэтому центр крайнего узла считается от остатка. */
 .pipeline::before, .pipeline::after {
   content: ''; position: absolute; top: 21px;
   left: calc((100% - 3.125rem) / 12); right: calc((100% - 3.125rem) / 12);
   height: 2px; border-radius: 2px; pointer-events: none;
 }
+/* Рельс: серая подложка и бирюзовая заливка поверх неё. */
 .pipeline::before {
-  background: linear-gradient(90deg, var(--edge), var(--edge-lt) 50%, var(--edge));
+  background-color: var(--edge);
+  background-image: linear-gradient(90deg, var(--ok-lt), var(--ok-lt));
+  background-repeat: no-repeat; background-size: 0% 100%;
+  animation: pl-fill 6.0s linear infinite;
 }
-/* Свет идёт по рельсу и не останавливается. Прежняя анимация заливала линию
-   и копила «пройдено» — блок описывает конвейер, а не прогон сборки, и
-   утверждать успех ему нечем. Градиент вместо сдвига элемента: анимируется
-   фон, а не раскладка. */
+@keyframes pl-fill {
+  0%   { background-size: 0% 100%; }
+  46.0% { background-size: 100% 100%; }
+  88.0% { background-size: 100% 100%; }
+  100% { background-size: 0% 100%; }
+}
+/* Свет идёт впереди заливки — им же и объясняется её рост. */
 .pipeline::after {
   background: linear-gradient(90deg, transparent, rgba(182,217,252,.95), transparent);
   background-size: 20% 100%; background-repeat: no-repeat;
-  animation: pl-run 5.5s linear infinite;
+  animation: pl-run 6.0s linear infinite;
 }
 @keyframes pl-run {
-  from { background-position: -20% 0; }
-  to   { background-position: 120% 0; }
+  0%   { background-position: -20% 0; opacity: 1; }
+  46.0% { background-position: 120% 0; opacity: 1; }
+  50.0% { background-position: 120% 0; opacity: 0; }
+  100% { background-position: -20% 0; opacity: 0; }
 }
-@media (prefers-reduced-motion: reduce) { .pipeline::after { animation: none; opacity: 0; } }
 
 .pl-stage {
   display: flex; flex-direction: column; align-items: center; gap: .55rem;
   position: relative; min-width: 0; text-align: center;
 }
-/* Узел — круг на рельсе, а не коробка над ним. Кольцо цвета фона выгрызает
-   разрыв в линии, поэтому она не просвечивает сквозь иконку. */
+/* Узел — круг на рельсе. Кольцо цвета фона выгрызает разрыв в линии, чтобы
+   она не просвечивала сквозь иконку. */
 .pl-circle {
   width: 40px; height: 40px; border-radius: 50%; flex: none; z-index: 1;
-  border: 1px solid var(--edge-lt);
-  background: #0c0e1a;
+  border: 1px solid var(--edge); background: #0c0e1a;
   box-shadow: inset 0 1px 1px rgba(216,236,248,.18), 0 0 0 5px var(--canvas);
   display: flex; align-items: center; justify-content: center;
-  color: var(--blueprint); position: relative;
-  transition: color .3s, box-shadow .3s, border-color .3s;
+  color: var(--fog); position: relative;
 }
-.pl-stage:hover .pl-circle {
-  color: var(--frost); border-color: var(--blueprint);
-  box-shadow: inset 0 1px 1px rgba(216,236,248,.3), 0 0 0 5px var(--canvas), var(--halo);
-}
+/* Подпись не ярче названий инструментов ниже: блок описывает конвейер,
+   а не спорит за внимание с содержательной частью страницы. */
 .pl-label {
   font-family: var(--font-mono);
   font-size: 11px; letter-spacing: .10em; text-transform: uppercase;
-  color: var(--ice); transition: color .3s;
+  color: var(--moon);
 }
-/* Инструменты отдельными элементами: переносятся по названиям, а не рвутся
-   посреди слова в узкой колонке. */
 .pl-tools {
   display: flex; flex-wrap: wrap; justify-content: center; gap: 0 .35rem;
   font-family: var(--font-mono); font-size: 10px; line-height: 1.55;
   color: var(--fog);
 }
 
+.pl-stage:nth-child(1) .pl-circle { animation: pl-n1 6.0s linear infinite; }
+.pl-stage:nth-child(1) .pl-label  { animation: pl-l1 6.0s linear infinite; }
+@keyframes pl-n1 {
+  0%, 1.83% { color: var(--fog); border-color: var(--edge);
+    box-shadow: inset 0 1px 1px rgba(216,236,248,.18), 0 0 0 5px var(--canvas); }
+  3.83% { color: var(--blueprint); border-color: var(--blueprint);
+    box-shadow: inset 0 1px 1px rgba(216,236,248,.3), 0 0 0 5px var(--canvas), var(--halo); }
+  6.83%, 88.0% { color: var(--ok-lt); border-color: var(--ok-lt);
+    background: rgba(38,150,132,.14);
+    box-shadow: inset 0 1px 1px rgba(216,236,248,.24), 0 0 0 5px var(--canvas); }
+  100% { color: var(--fog); border-color: var(--edge);
+    box-shadow: inset 0 1px 1px rgba(216,236,248,.18), 0 0 0 5px var(--canvas); }
+}
+@keyframes pl-l1 {
+  0%, 1.83% { color: var(--moon); }
+  3.83% { color: var(--ice); }
+  6.83%, 88.0% { color: var(--ok-lt); }
+  100% { color: var(--moon); }
+}
+
+.pl-stage:nth-child(2) .pl-circle { animation: pl-n2 6.0s linear infinite; }
+.pl-stage:nth-child(2) .pl-label  { animation: pl-l2 6.0s linear infinite; }
+@keyframes pl-n2 {
+  0%, 9.5% { color: var(--fog); border-color: var(--edge);
+    box-shadow: inset 0 1px 1px rgba(216,236,248,.18), 0 0 0 5px var(--canvas); }
+  11.5% { color: var(--blueprint); border-color: var(--blueprint);
+    box-shadow: inset 0 1px 1px rgba(216,236,248,.3), 0 0 0 5px var(--canvas), var(--halo); }
+  14.5%, 88.0% { color: var(--ok-lt); border-color: var(--ok-lt);
+    background: rgba(38,150,132,.14);
+    box-shadow: inset 0 1px 1px rgba(216,236,248,.24), 0 0 0 5px var(--canvas); }
+  100% { color: var(--fog); border-color: var(--edge);
+    box-shadow: inset 0 1px 1px rgba(216,236,248,.18), 0 0 0 5px var(--canvas); }
+}
+@keyframes pl-l2 {
+  0%, 9.5% { color: var(--moon); }
+  11.5% { color: var(--ice); }
+  14.5%, 88.0% { color: var(--ok-lt); }
+  100% { color: var(--moon); }
+}
+
+.pl-stage:nth-child(3) .pl-circle { animation: pl-n3 6.0s linear infinite; }
+.pl-stage:nth-child(3) .pl-label  { animation: pl-l3 6.0s linear infinite; }
+@keyframes pl-n3 {
+  0%, 17.17% { color: var(--fog); border-color: var(--edge);
+    box-shadow: inset 0 1px 1px rgba(216,236,248,.18), 0 0 0 5px var(--canvas); }
+  19.17% { color: var(--blueprint); border-color: var(--blueprint);
+    box-shadow: inset 0 1px 1px rgba(216,236,248,.3), 0 0 0 5px var(--canvas), var(--halo); }
+  22.17%, 88.0% { color: var(--ok-lt); border-color: var(--ok-lt);
+    background: rgba(38,150,132,.14);
+    box-shadow: inset 0 1px 1px rgba(216,236,248,.24), 0 0 0 5px var(--canvas); }
+  100% { color: var(--fog); border-color: var(--edge);
+    box-shadow: inset 0 1px 1px rgba(216,236,248,.18), 0 0 0 5px var(--canvas); }
+}
+@keyframes pl-l3 {
+  0%, 17.17% { color: var(--moon); }
+  19.17% { color: var(--ice); }
+  22.17%, 88.0% { color: var(--ok-lt); }
+  100% { color: var(--moon); }
+}
+
+.pl-stage:nth-child(4) .pl-circle { animation: pl-n4 6.0s linear infinite; }
+.pl-stage:nth-child(4) .pl-label  { animation: pl-l4 6.0s linear infinite; }
+@keyframes pl-n4 {
+  0%, 24.83% { color: var(--fog); border-color: var(--edge);
+    box-shadow: inset 0 1px 1px rgba(216,236,248,.18), 0 0 0 5px var(--canvas); }
+  26.83% { color: var(--blueprint); border-color: var(--blueprint);
+    box-shadow: inset 0 1px 1px rgba(216,236,248,.3), 0 0 0 5px var(--canvas), var(--halo); }
+  29.83%, 88.0% { color: var(--ok-lt); border-color: var(--ok-lt);
+    background: rgba(38,150,132,.14);
+    box-shadow: inset 0 1px 1px rgba(216,236,248,.24), 0 0 0 5px var(--canvas); }
+  100% { color: var(--fog); border-color: var(--edge);
+    box-shadow: inset 0 1px 1px rgba(216,236,248,.18), 0 0 0 5px var(--canvas); }
+}
+@keyframes pl-l4 {
+  0%, 24.83% { color: var(--moon); }
+  26.83% { color: var(--ice); }
+  29.83%, 88.0% { color: var(--ok-lt); }
+  100% { color: var(--moon); }
+}
+
+.pl-stage:nth-child(5) .pl-circle { animation: pl-n5 6.0s linear infinite; }
+.pl-stage:nth-child(5) .pl-label  { animation: pl-l5 6.0s linear infinite; }
+@keyframes pl-n5 {
+  0%, 32.5% { color: var(--fog); border-color: var(--edge);
+    box-shadow: inset 0 1px 1px rgba(216,236,248,.18), 0 0 0 5px var(--canvas); }
+  34.5% { color: var(--blueprint); border-color: var(--blueprint);
+    box-shadow: inset 0 1px 1px rgba(216,236,248,.3), 0 0 0 5px var(--canvas), var(--halo); }
+  37.5%, 88.0% { color: var(--ok-lt); border-color: var(--ok-lt);
+    background: rgba(38,150,132,.14);
+    box-shadow: inset 0 1px 1px rgba(216,236,248,.24), 0 0 0 5px var(--canvas); }
+  100% { color: var(--fog); border-color: var(--edge);
+    box-shadow: inset 0 1px 1px rgba(216,236,248,.18), 0 0 0 5px var(--canvas); }
+}
+@keyframes pl-l5 {
+  0%, 32.5% { color: var(--moon); }
+  34.5% { color: var(--ice); }
+  37.5%, 88.0% { color: var(--ok-lt); }
+  100% { color: var(--moon); }
+}
+
+.pl-stage:nth-child(6) .pl-circle { animation: pl-n6 6.0s linear infinite; }
+.pl-stage:nth-child(6) .pl-label  { animation: pl-l6 6.0s linear infinite; }
+@keyframes pl-n6 {
+  0%, 40.17% { color: var(--fog); border-color: var(--edge);
+    box-shadow: inset 0 1px 1px rgba(216,236,248,.18), 0 0 0 5px var(--canvas); }
+  42.17% { color: var(--blueprint); border-color: var(--blueprint);
+    box-shadow: inset 0 1px 1px rgba(216,236,248,.3), 0 0 0 5px var(--canvas), var(--halo); }
+  45.17%, 88.0% { color: var(--ok-lt); border-color: var(--ok-lt);
+    background: rgba(38,150,132,.14);
+    box-shadow: inset 0 1px 1px rgba(216,236,248,.24), 0 0 0 5px var(--canvas); }
+  100% { color: var(--fog); border-color: var(--edge);
+    box-shadow: inset 0 1px 1px rgba(216,236,248,.18), 0 0 0 5px var(--canvas); }
+}
+@keyframes pl-l6 {
+  0%, 40.17% { color: var(--moon); }
+  42.17% { color: var(--ice); }
+  45.17%, 88.0% { color: var(--ok-lt); }
+  100% { color: var(--moon); }
+}
+
+/* Движение — украшение: при отключённой анимации конвейер просто стоит
+   пройденным, ничего не мигает и не ползёт. */
+@media (prefers-reduced-motion: reduce) {
+  .pipeline::before { animation: none; background-size: 100% 100%; }
+  .pipeline::after { display: none; }
+  .pl-circle, .pl-label { animation: none !important; }
+}
+
 @media (max-width: 900px) {
   .pipeline { grid-template-columns: repeat(3, 1fr); }
   /* Сетка переносится — сплошной рельс через всю строку стал бы враньём.
-     Возвращаем перемычки между соседями и гасим их в конце каждой строки. */
+     Возвращаются перемычки между соседями, гаснут в конце каждой строки. */
   .pipeline::before, .pipeline::after { display: none; }
   .pl-stage::after {
     content: ''; position: absolute; top: 21px; left: calc(50% + 20px);
@@ -609,8 +718,6 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
   }
   .pl-stage:last-child::after, .pl-stage:nth-child(3n)::after { display: none; }
 }
-/* Три колонки держатся до 330px: в 342px контейнера это по 107px, а самый
-   длинный токен «multi-stage» занимает 66px. Две — только на совсем узких. */
 @media (max-width: 330px) {
   .pipeline { grid-template-columns: repeat(2, 1fr); }
   .pl-stage:nth-child(3n)::after { display: block; }
@@ -1090,7 +1197,9 @@ h1 .accent-name { font-style: normal; font-weight: 700; }
 .tier-t {
   margin: 0; font-family: var(--font-mono);
   font-size: 10.5px; font-weight: 400; letter-spacing: .1em; text-transform: uppercase;
-  color: var(--violet-lt); line-height: 1.5;
+  /* Приглушённый, а не фиолетовый: категория — подпись поля, а не акцент,
+     и фиолетовый спорил с цветными логотипами в той же строке. */
+  color: var(--fog); line-height: 1.5;
 }
 @media (max-width: 720px) {
   .tier { grid-template-columns: 1fr; gap: 10px; }
