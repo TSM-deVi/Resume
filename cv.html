@@ -80,7 +80,7 @@
     h1{font-size:17pt}
     .role-line{font-size:8.6pt}
     .meta{margin-top:.3rem;font-size:8pt}
-    h2{margin:3.4mm 0 1.4mm;font-size:7.4pt;padding-bottom:.9mm}
+    h2{margin:2.9mm 0 1.2mm;font-size:7.4pt;padding-bottom:.9mm}
     .facts{grid-template-columns:repeat(6,1fr);gap:1.4mm}
     .fact{padding:1.6mm 2mm}
     .fact b{font-size:9.6pt}
@@ -91,7 +91,7 @@
     .role{margin-top:1.2mm}
     .role-t{font-size:8.6pt;margin-bottom:.9mm}
     .role li{margin-bottom:.6mm}
-    .srow{margin-bottom:.65mm}
+    .srow{margin-bottom:.42mm}
     .sk{flex-basis:29mm;font-size:7.1pt}
     .sv{font-size:6.9pt;line-height:1.32}
     .erow{margin-bottom:1.2mm}
@@ -170,6 +170,7 @@
         <li><span data-lang="ru">Разворачивал <strong>Kubernetes с нуля в трёх разных средах</strong>: bare-metal на физических серверах, виртуальные машины в приватном облаке VMware и single-node k3s в публичном облаке — etcd, CNI, storage и обновления руками</span><span data-lang="en">Deployed <strong>Kubernetes from scratch in three different environments</strong>: bare metal on physical servers, virtual machines in a private VMware cloud, and single-node k3s in a public cloud — etcd, CNI, storage and upgrades by hand</span></li>
         <li><span data-lang="ru">Покрыл <strong>100% продакшен-репозиториев</strong> автоматической сборкой и деплоем в GitLab CI и Jenkins, внедрил GitOps-доставку через ArgoCD и встроил сканирование <strong>Trivy и Gitleaks</strong> в пайплайн</span><span data-lang="en">Covered <strong>100% of production repositories</strong> with automated build and deploy in GitLab CI and Jenkins, introduced GitOps delivery through ArgoCD and built <strong>Trivy and Gitleaks</strong> scanning into the pipeline</span></li>
         <li><span data-lang="ru">Разработал Ansible-роли и плейбуки — настройка нового сервера занимает <strong>15 минут вместо 2–3 часов</strong>; Terraform под воспроизводимые среды и version control конфигураций</span><span data-lang="en">Wrote Ansible roles and playbooks — a new server is set up in <strong>15 minutes instead of 2–3 hours</strong>; Terraform for reproducible environments and configuration version control</span></li>
+        <li><span data-lang="ru">Внешний периметр и DNS: домен продукта проксировался через <strong>Cloudflare и Qrator</strong> — защита от DDoS и фильтрация трафика на периметре; вёл внешние записи A, CNAME, MX и TXT (SPF, DKIM, DMARC) и маршрутизацию внешнего трафика на origin по цепочке внешний прокси → Nginx</span><span data-lang="en">External perimeter and DNS: the product domain was proxied through <strong>Cloudflare and Qrator</strong> — DDoS protection and edge traffic filtering; I maintained the external A, CNAME, MX and TXT records (SPF, DKIM, DMARC) and the routing of external traffic to origin along the chain external proxy → Nginx</span></li>
         <li><span data-lang="ru">Отказоустойчивый кластер <strong>PostgreSQL + Patroni + etcd</strong> на трёх нодах с uptime СУБД <strong>99.9%</strong>; аналитическое хранилище <strong>ClickHouse ~4 ТБ</strong> на выделенных серверах</span><span data-lang="en">A fault-tolerant <strong>PostgreSQL + Patroni + etcd</strong> cluster on three nodes with <strong>99.9%</strong> database uptime; a <strong>ClickHouse</strong> analytics store of <strong>~4 TB</strong> on dedicated servers</span></li>
         <li><span data-lang="ru">Внедрил Prometheus с Grafana и алертингом через Alertmanager, ELK и Graylog для логов, Zabbix для инфраструктуры — среднее время обнаружения инцидентов упало <strong>с нескольких часов до ~5 минут</strong></span><span data-lang="en">Introduced Prometheus with Grafana and Alertmanager alerting, ELK and Graylog for logs, Zabbix for infrastructure — mean time to detect incidents fell <strong>from several hours to ~5 minutes</strong></span></li>
         </ul>
@@ -219,7 +220,7 @@
   <h2><span data-lang="ru">Стек</span><span data-lang="en">Stack</span></h2>
       <div class="srow"><span class="sk"><span data-lang="ru">ОС и платформы</span><span data-lang="en">OS & platforms</span></span><span class="sv">Linux — Debian, Ubuntu (администрирование, systemd, networking) · Windows Server — IIS, Active Directory, групповые политики, DNS, DHCP, RDS и RDP, PowerShell</span></div>
       <div class="srow"><span class="sk"><span data-lang="ru">Контейнеры и оркестрация</span><span data-lang="en">Containers & orchestration</span></span><span class="sv">Docker · Docker Compose · Kubernetes с нуля в трёх средах — bare-metal, VMware Cloud Director, single-node k3s (etcd, CNI, storage, обновления, Ingress, HPA, RBAC, namespace-изоляция) · ресурсные лимиты · Helm · Longhorn</span></div>
-      <div class="srow"><span class="sk"><span data-lang="ru">CI/CD и GitOps</span><span data-lang="en">CI/CD & GitOps</span></span><span class="sv">GitLab CI/CD — GitLab CE, GitLab Runner · Jenkins · ArgoCD · полный цикл: сборка → тесты → сканирование → деплой на ВМ и в Kubernetes · SSL/TLS Let’s Encrypt и внутренний центр сертификации</span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">CI/CD и GitOps</span><span data-lang="en">CI/CD & GitOps</span></span><span class="sv">GitLab CI/CD — GitLab CE, GitLab Runner · Jenkins · ArgoCD · полный цикл: сборка → тесты → сканирование → деплой на ВМ и в Kubernetes</span></div>
       <div class="srow"><span class="sk"><span data-lang="ru">IaC и автоматизация</span><span data-lang="en">IaC & automation</span></span><span class="sv">Terraform · Ansible — роли, плейбуки, идемпотентность · Python · Bash · PowerShell</span></div>
       <div class="srow"><span class="sk"><span data-lang="ru">Service mesh, доступ, безопасность</span><span data-lang="en">Service mesh, access, security</span></span><span class="sv">Istio + Kiali — Gateway, VirtualService, DestinationRule, ServiceEntry, AuthorizationPolicy, WorkloadGroup · Envoy + OPA/OPAL через ext_authz · Keycloak/OIDC SSO · HashiCorp Vault (секреты, токены, схема External Secrets) · Secret Server · Passbolt · Trivy и Gitleaks — сканирование образов и поиск утечек секретов · bastion и jump host, firewall и NAT, сегментация сетей, UFW, TLS/PKI</span></div>
       <div class="srow"><span class="sk"><span data-lang="ru">Реестры и артефакты</span><span data-lang="en">Registries & artifacts</span></span><span class="sv">Harbor — проекты, retention-политики, робот-аккаунты · GitLab Container Registry с pull secrets · Verdaccio — приватный npm-registry с проксированием npmjs · MinIO · S3 в Yandex Cloud</span></div>
@@ -229,6 +230,7 @@
       <div class="srow"><span class="sk"><span data-lang="ru">Web и балансировка</span><span data-lang="en">Web & load balancing</span></span><span class="sv">Nginx — reverse proxy, TLS-терминация, балансировка, заголовки CSP · HAProxy + Keepalived</span></div>
       <div class="srow"><span class="sk"><span data-lang="ru">Виртуализация и облака</span><span data-lang="en">Virtualization & clouds</span></span><span class="sv">VMware vSphere и Cloud Director — виртуальные ЦОД (vDC), vApp, firewall и NAT · Hyper-V · Veeam Backup &amp; Replication — резервное копирование и восстановление · антивирусная защита · Cloud.ru · Timeweb Cloud · Yandex Cloud</span></div>
       <div class="srow"><span class="sk"><span data-lang="ru">LLM-платформа</span><span data-lang="en">LLM platform</span></span><span class="sv">LiteLLM · Ollama · GigaChat · Langflow · Langfuse · SmartSearch · векторный поиск на Qdrant и Vespa</span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">Внешний периметр и DNS</span><span data-lang="en">External perimeter & DNS</span></span><span class="sv">Cloudflare, Qrator — проксирование внешнего домена, защита от DDoS и фильтрация трафика на периметре · внешние DNS-записи: A, CNAME, MX, TXT (SPF, DKIM, DMARC) · внутренний DNS · Let’s Encrypt и внутренний центр сертификации</span></div>
       <div class="srow"><span class="sk"><span data-lang="ru">Сетевое оборудование и VPN</span><span data-lang="en">Network equipment & VPN</span></span><span class="sv">MikroTik · Cisco · Kerio VPN · маршрутизация и коммутация · VPN между объектами</span></div>
       <div class="srow"><span class="sk"><span data-lang="ru">Управление и инструменты</span><span data-lang="en">Management & tools</span></span><span class="sv">Git · Jira и Jira Service Desk · Confluence — администрирование и развёртывание · Zimbra · Exchange · Outlook · IMAP/SMTP · OCS Inventory</span></div>
 

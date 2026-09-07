@@ -824,6 +824,7 @@
               <li>Разворачивал <strong>Kubernetes с нуля в трёх разных средах</strong>: bare-metal на физических серверах, виртуальные машины в приватном облаке VMware и single-node k3s в публичном облаке — etcd, CNI, storage и обновления руками</li>
               <li>Покрыл <strong>100% продакшен-репозиториев</strong> автоматической сборкой и деплоем в GitLab CI и Jenkins, внедрил GitOps-доставку через ArgoCD и встроил сканирование <strong>Trivy и Gitleaks</strong> в пайплайн</li>
               <li>Разработал Ansible-роли и плейбуки — настройка нового сервера занимает <strong>15 минут вместо 2–3 часов</strong>; Terraform под воспроизводимые среды и version control конфигураций</li>
+              <li>Внешний периметр и DNS: домен продукта проксировался через <strong>Cloudflare и Qrator</strong> — защита от DDoS и фильтрация трафика на периметре; вёл внешние записи A, CNAME, MX и TXT (SPF, DKIM, DMARC) и маршрутизацию внешнего трафика на origin по цепочке внешний прокси → Nginx</li>
               <li>Отказоустойчивый кластер <strong>PostgreSQL + Patroni + etcd</strong> на трёх нодах с uptime СУБД <strong>99.9%</strong>; аналитическое хранилище <strong>ClickHouse ~4 ТБ</strong> на выделенных серверах</li>
               <li>Внедрил Prometheus с Grafana и алертингом через Alertmanager, ELK и Graylog для логов, Zabbix для инфраструктуры — среднее время обнаружения инцидентов упало <strong>с нескольких часов до ~5 минут</strong></li>
             </ul>
@@ -834,6 +835,7 @@
               <li>Deployed <strong>Kubernetes from scratch in three different environments</strong>: bare metal on physical servers, virtual machines in a private VMware cloud, and single-node k3s in a public cloud — etcd, CNI, storage and upgrades by hand</li>
               <li>Covered <strong>100% of production repositories</strong> with automated build and deploy in GitLab CI and Jenkins, introduced GitOps delivery through ArgoCD and built <strong>Trivy and Gitleaks</strong> scanning into the pipeline</li>
               <li>Wrote Ansible roles and playbooks — a new server is set up in <strong>15 minutes instead of 2–3 hours</strong>; Terraform for reproducible environments and configuration version control</li>
+              <li>External perimeter and DNS: the product domain was proxied through <strong>Cloudflare and Qrator</strong> — DDoS protection and edge traffic filtering; I maintained the external A, CNAME, MX and TXT records (SPF, DKIM, DMARC) and the routing of external traffic to origin along the chain external proxy → Nginx</li>
               <li>A fault-tolerant <strong>PostgreSQL + Patroni + etcd</strong> cluster on three nodes with <strong>99.9%</strong> database uptime; a <strong>ClickHouse</strong> analytics store of <strong>~4 TB</strong> on dedicated servers</li>
               <li>Introduced Prometheus with Grafana and Alertmanager alerting, ELK and Graylog for logs, Zabbix for infrastructure — mean time to detect incidents fell <strong>from several hours to ~5 minutes</strong></li>
             </ul>
@@ -1101,6 +1103,14 @@
             <li class="skill-chip"><img src="icons/selfhst-ollama.svg" alt="" width="16" height="16" loading="lazy"><span class="chip-name" translate="no">Ollama</span></li>
             <li class="skill-chip"><img src="icons/selfhst-langflow.svg" alt="" width="16" height="16" loading="lazy"><span class="chip-name" translate="no">Langflow</span></li>
             <li class="skill-chip"><img src="icons/selfhst-langfuse.svg" alt="" width="16" height="16" loading="lazy"><span class="chip-name" translate="no">Langfuse</span></li>
+          </ul>
+      </div>
+      <div class="tier" data-cat="edge">
+        <div class="tier-hd">
+          <h3 class="tier-t"><span data-lang="ru">Внешний периметр и DNS</span><span data-lang="en">External perimeter &amp; DNS</span></h3>
+        </div>
+        <ul class="skill-chips r">
+            <li class="skill-chip"><img src="icons/cloudflare.svg" alt="" width="16" height="16" loading="lazy"><span class="chip-name" translate="no">Cloudflare</span></li>
           </ul>
       </div>
       <div class="tier" data-cat="net">
