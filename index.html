@@ -382,7 +382,7 @@
             <ul class="jlist" data-lang="ru">
               <li>Проектная работа: production-контур мультиагентной low-code платформы для заказчика банковского сектора — спроектирован, развёрнут, сдан и закрыт в июле 2026</li>
               <li>Развернул с нуля три изолированных контура <strong>DEV / INF / PROD</strong> в VMware Cloud Director: отдельные виртуальные ЦОД, группировка по vApp, сетевая сегментация — суммарно <strong>63 виртуальные машины</strong></li>
-              <li>DEV и PROD зеркальны 1:1, каждый — 28 VM / ~90 vCPU / ~191 GB RAM / ~2.7 TB дисков; провёл right-sizing по компонентам и подготовил ресурсный план</li>
+              <li>DEV и PROD зеркальны 1:1, каждый — 28 VM / 90 vCPU / 191 GB RAM / 2.7 TB дисков; провёл right-sizing по компонентам и подготовил ресурсный план</li>
               <li><strong>Kubernetes</strong> на виртуальных машинах (master + 3 worker), Helm-чарты, RBAC и namespace-изоляция; <strong>GitLab CI/CD</strong> с разделением dev/prod и ручными production-джобами; Terraform и Ansible для воспроизводимости окружений</li>
               <li>L3-связности между контурами нет — доступ открывался точечно через firewall и NAT. Вход администратора: <strong>PAM заказчика → jump host контура → целевая ВМ</strong>; для CI/CD отдельный путь — bastion на jump host DEV и PROD, через который раннер с INF ходит в прикладные контуры</li>
               <li>Сквозная наблюдаемость на Prometheus, Grafana, Loki и Promtail; разбирал production-инциденты — TLS SAN mismatch, Redis NOPERM, исчерпание PostgreSQL connections, MinIO mesh timeout, Vault sealed, переполнение диска Docker-логами</li>
@@ -392,7 +392,7 @@
             <ul class="jlist" data-lang="en">
               <li>Project work: the production environment of a multi-agent low-code platform for a banking-sector client — designed, deployed, handed over and closed in July 2026</li>
               <li>Built three isolated <strong>DEV / INF / PROD</strong> environments from scratch in VMware Cloud Director: separate virtual data centres, vApp grouping, network segmentation — <strong>63 virtual machines</strong> in total</li>
-              <li>DEV and PROD mirror each other 1:1, each 28 VMs / ~90 vCPU / ~191 GB RAM / ~2.7 TB of disk; I right-sized the components and prepared the resource plan</li>
+              <li>DEV and PROD mirror each other 1:1, each 28 VMs / 90 vCPU / 191 GB RAM / 2.7 TB of disk; I right-sized the components and prepared the resource plan</li>
               <li><strong>Kubernetes</strong> on virtual machines (master + 3 workers), Helm charts, RBAC and namespace isolation; <strong>GitLab CI/CD</strong> with dev/prod separation and manual production jobs; Terraform and Ansible for reproducible environments</li>
               <li>There is no L3 connectivity between environments — access was opened per service through firewall and NAT. Admin path: <strong>the client’s PAM → the environment’s jump host → the target VM</strong>; CI/CD has its own route through a bastion on the DEV and PROD jump hosts, which the INF runner uses to reach them</li>
               <li>End-to-end observability on Prometheus, Grafana, Loki and Promtail; handled production incidents — TLS SAN mismatch, Redis NOPERM, PostgreSQL connection exhaustion, MinIO mesh timeout, Vault sealed, disks filled by Docker logs</li>

@@ -115,6 +115,24 @@ let lang = (_urlLang === 'en' || _urlLang === 'ru')
   ? _urlLang
   : (localStorage.getItem('lang') || 'ru');
 
+// Заголовок вкладки и описание жили только по-русски: ссылку ?lang=en
+// получатель видел с русским title в закладке и в превью — при lang="en"
+// это ещё и противоречивый сигнал для поисковика и скринридера.
+const META = {
+  ru: {
+    title: 'Иванов Темир — Middle+ DevOps-инженер',
+    desc:  'Middle+ DevOps-инженер, Санкт-Петербург. Kubernetes на bare-metal, ' +
+           'VMware Cloud Director и k3s, GitLab CI/CD, ArgoCD, Terraform, Ansible, ' +
+           'наблюдаемость. 63 VM в контурах DEV/INF/PROD, 70+ сервисов в эксплуатации.'
+  },
+  en: {
+    title: 'Ivanov Temir — Middle+ DevOps Engineer',
+    desc:  'Middle+ DevOps engineer, Saint Petersburg. Kubernetes on bare-metal, ' +
+           'VMware Cloud Director and k3s, GitLab CI/CD, ArgoCD, Terraform, Ansible, ' +
+           'observability. 63 VMs across DEV/INF/PROD, 70+ services in operation.'
+  }
+};
+
 function applyLang(l) {
   if (l === 'en') {
     document.body.classList.add('lang-en');
@@ -127,6 +145,11 @@ function applyLang(l) {
     langBtn.textContent = 'EN';
     backBtn.setAttribute('aria-label', 'Наверх');
   }
+  const meta = META[l] || META.ru;
+  document.title = meta.title;
+  const md = document.querySelector('meta[name="description"]');
+  if (md) md.setAttribute('content', meta.desc);
+
   // Печатная версия открывается на том же языке, что и сайт.
   const cv = document.getElementById('cv-link');
   if (cv) cv.href = l === 'en' ? 'cv.html?lang=en' : 'cv.html';
