@@ -120,14 +120,14 @@ let lang = (_urlLang === 'en' || _urlLang === 'ru')
 // это ещё и противоречивый сигнал для поисковика и скринридера.
 const META = {
   ru: {
-    title: 'Иванов Темир — Middle+ DevOps-инженер',
-    desc:  'Middle+ DevOps-инженер, Санкт-Петербург. Kubernetes на bare-metal, ' +
+    title: 'Иванов Темир — DevOps-инженер',
+    desc:  'DevOps-инженер, Санкт-Петербург. Kubernetes на bare-metal, ' +
            'VMware Cloud Director и k3s, GitLab CI/CD, ArgoCD, Terraform, Ansible, ' +
            'наблюдаемость. 63 VM в контурах DEV/INF/PROD, 70+ сервисов в эксплуатации.'
   },
   en: {
-    title: 'Ivanov Temir — Middle+ DevOps Engineer',
-    desc:  'Middle+ DevOps engineer, Saint Petersburg. Kubernetes on bare-metal, ' +
+    title: 'Ivanov Temir — DevOps Engineer',
+    desc:  'DevOps engineer, Saint Petersburg. Kubernetes on bare-metal, ' +
            'VMware Cloud Director and k3s, GitLab CI/CD, ArgoCD, Terraform, Ansible, ' +
            'observability. 63 VMs across DEV/INF/PROD, 70+ services in operation.'
   }
@@ -295,7 +295,7 @@ try {
   console.log(
     '%c╔══════════════════════════════════════════════╗\n' +
     '║  $ whoami                                    ║\n' +
-    '║  > Ivanov Temir · Middle+ DevOps Engineer    ║\n' +
+    '║  > Ivanov Temir · DevOps Engineer            ║\n' +
     '║                                              ║\n' +
     '║  $ kubectl get contact                       ║\n' +
     '║  > TG:    @ktylhus                           ║\n' +

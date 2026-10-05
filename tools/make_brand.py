@@ -184,7 +184,7 @@ def make_og():
     # ── eyebrow ──
     y = px(74)
     dA.ellipse([PAD, y + px(6), PAD + px(8), y + px(14)], fill=VIOLET_LT + (255,))
-    tracked(d, (PAD + px(20), y), "MIDDLE+ DEVOPS ENGINEER", f_eyebrow, BLUEPRINT, tracking=px(2.6))
+    tracked(d, (PAD + px(20), y), "DEVOPS ENGINEER", f_eyebrow, BLUEPRINT, tracking=px(2.6))
 
     # ── name, stacked like the hero ──
     y = px(112)
