@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ru" id="root">
+<head>
+<meta charset="utf-8">
+<title>Иванов Темир — DevOps-инженер</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<link rel="icon" href="favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --ink:#151716; --mute:#5c625e; --line:#dde1de; --accent:#2e7a4c; --wash:#eef4f0;
+    --ui:'Geist',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --mono:'Geist Mono',ui-monospace,'SFMono-Regular',Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:#eef0ee;color:var(--ink);font-family:var(--ui);
+       font-size:10.2pt;line-height:1.5;-webkit-font-smoothing:antialiased}
+  .sheet{max-width:210mm;margin:0 auto;background:#fff;padding:16mm 15mm 14mm}
+  h1{font-size:24pt;line-height:1.08;margin:0;letter-spacing:-.02em;font-weight:700}
+  .role-line{font-family:var(--mono);font-size:10pt;color:var(--accent);
+             margin:.35rem 0 0;letter-spacing:.01em}
+  .meta{margin-top:.7rem;font-size:9.4pt;color:var(--mute)}
+  .meta a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line)}
+  h2{font-family:var(--mono);font-size:8.6pt;letter-spacing:.14em;text-transform:uppercase;
+     color:var(--mute);margin:9mm 0 3mm;padding-bottom:1.6mm;border-bottom:1px solid var(--line);
+     font-weight:500}
+  .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(38mm,1fr));gap:3mm 4mm}
+  .fact{background:var(--wash);border-radius:5px;padding:3mm 3.5mm}
+  .fact b{display:block;font-size:13pt;font-weight:600;letter-spacing:-.01em}
+  .fact i{display:block;font-style:normal;font-size:8.4pt;color:var(--mute);margin-top:.6mm}
+  .job{margin-bottom:6mm;break-inside:avoid}
+  .job-h{display:flex;justify-content:space-between;align-items:baseline;gap:6mm;
+         border-left:2px solid var(--accent);padding-left:3mm}
+  .job-h h3{margin:0;font-size:11.4pt;font-weight:600}
+  .per{font-family:var(--mono);font-size:8.6pt;color:var(--mute);white-space:nowrap}
+  .role{padding-left:3mm;margin-top:2.4mm}
+  .role-t{font-size:9.6pt;font-weight:500;color:var(--accent);margin-bottom:1.4mm}
+  .role ul{margin:0;padding-left:4.4mm}
+  .role li{margin-bottom:1.5mm}
+  .role li::marker{color:var(--accent)}
+  strong{font-weight:600}
+  .srow{display:flex;gap:4mm;margin-bottom:2mm;break-inside:avoid}
+  .sk{flex:0 0 40mm;font-size:8.8pt;color:var(--mute)}
+  .sv{flex:1;font-family:var(--mono);font-size:8.8pt;line-height:1.55}
+  .erow{display:flex;gap:4mm;margin-bottom:2.6mm;break-inside:avoid}
+  .eyr{flex:0 0 14mm;font-family:var(--mono);font-size:9pt;color:var(--accent)}
+  .ebody{font-size:9.4pt}
+  .ebody i{font-style:normal;color:var(--mute);font-size:8.6pt}
+  .crow{display:flex;gap:4mm;align-items:baseline;margin-bottom:1.8mm;break-inside:avoid}
+  .cbadge{flex:0 0 14mm;font-family:var(--mono);font-size:8.6pt;font-weight:500;
+          color:var(--accent);letter-spacing:.06em}
+  .cbody{font-size:9.4pt}
+  .cissuer{color:var(--mute);font-size:8.6pt}
+  .langs{margin-top:3mm;font-size:9.2pt;color:var(--mute)}
+  .about{margin:4mm 0 0;font-size:9.6pt;max-width:62ch}
+  .goal{margin:5mm 0 0;padding:3mm 3.5mm;background:var(--wash);border-radius:5px;
+        font-size:9.2pt}
+  .foot{margin-top:8mm;padding-top:3mm;border-top:1px solid var(--line);
+        font-size:8.6pt;color:var(--mute)}
+  /* Панель управления на экране; на печати её нет. */
+  .bar{position:sticky;top:0;z-index:5;display:flex;gap:8px;justify-content:center;
+       padding:10px;background:rgba(238,240,244,.92);backdrop-filter:blur(8px)}
+  .bar button,.bar a{font-family:var(--ui);font-size:13px;font-weight:500;
+       padding:9px 16px;min-height:44px;display:inline-flex;align-items:center;
+       border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--ink);
+       cursor:pointer;text-decoration:none}
+  .bar button.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+  html:not(.lang-en) [data-lang="en"]{display:none}
+  html.lang-en [data-lang="ru"]{display:none}
+  /* Цель — два листа A4: интервалы подобраны под это. */
+  @media print{
+    @page{size:A4;margin:11mm}
+    body{background:#fff;font-size:8.5pt;line-height:1.31}
+    .sheet{max-width:none;padding:0;margin:0}
+    .bar{display:none}
+    h1{font-size:17pt}
+    .role-line{font-size:8.6pt}
+    .meta{margin-top:.3rem;font-size:8pt}
+    h2{margin:2.9mm 0 1.2mm;font-size:7.4pt;padding-bottom:.9mm}
+    .facts{grid-template-columns:repeat(4,1fr);gap:1.4mm}
+    .fact{padding:1.6mm 2mm}
+    .fact b{font-size:9.6pt}
+    .fact i{font-size:6.9pt}
+    .job{margin-bottom:2.6mm}
+    .job-h h3{font-size:10pt}
+    .per{font-size:7.8pt}
+    .role{margin-top:1.2mm}
+    .role-t{font-size:8.6pt;margin-bottom:.9mm}
+    .role li{margin-bottom:.4mm}
+    .srow{margin-bottom:.42mm}
+    .sk{flex-basis:29mm;font-size:7.1pt}
+    .sv{font-size:6.9pt;line-height:1.32}
+    .erow{margin-bottom:1.2mm}
+    .crow{margin-bottom:1mm}
+    .cbody{font-size:8.4pt}
+    .cbadge{flex-basis:12mm;font-size:8pt}
+    .cissuer{font-size:7.8pt}
+    .langs{margin-top:1.6mm;font-size:8pt}
+    .ebody{font-size:8.4pt}
+    .about{margin-top:1.7mm;font-size:8.1pt;max-width:none}
+    .goal{margin-top:2mm;padding:1.5mm 2mm;font-size:7.6pt}
+    .foot{margin-top:2.2mm;padding-top:1.5mm;font-size:7.2pt}
+    a{color:inherit}
+  }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <button class="primary" id="print" type="button"><span data-lang="ru">Сохранить в PDF</span><span data-lang="en">Save as PDF</span></button>
+  <button id="lang" type="button">EN</button>
+  <a href="./"><span data-lang="ru">На сайт</span><span data-lang="en">Back to site</span></a>
+</div>
+
+<main class="sheet">
+  <h1><span data-lang="ru">Иванов Темир</span><span data-lang="en">Ivanov Temir</span></h1>
+  <div class="role-line">DevOps / Platform Engineer</div>
+  <div class="meta">
+    <span data-lang="ru">удалённо</span><span data-lang="en">remote</span> &middot; timir-ivaniv@yandex.ru &middot; telegram @ktylhus
+    &middot; <a href="https://tsm-devi.github.io/Resume/">tsm-devi.github.io/Resume</a>
+  </div>
+
+  <p class="about"><span data-lang="ru">Самостоятельно реализую проекты от проектирования до продакшена: разворачиваю контуры с нуля, строю CI/CD и наблюдаемость, отвечаю за эксплуатацию.</span><span data-lang="en">I deliver projects end to end — building environments from scratch, setting up CI/CD and observability, and owning them in production.</span></p>
+
+  <h2><span data-lang="ru">Ключевое</span><span data-lang="en">Key figures</span></h2>
+  <div class="facts">
+      <div class="fact"><b><span data-lang="ru">63</span><span data-lang="en">63</span></b><i data-lang="ru">VM в трёх контурах</i><i data-lang="en">VMs across three environments</i></div>
+      <div class="fact"><b><span data-lang="ru">70+</span><span data-lang="en">70+</span></b><i data-lang="ru">сервисов в эксплуатации</i><i data-lang="en">services in operation</i></div>
+      <div class="fact"><b><span data-lang="ru">40 → 8 мин</span><span data-lang="en">40 → 8 min</span></b><i data-lang="ru">время деплоя</i><i data-lang="en">deploy time</i></div>
+      <div class="fact"><b><span data-lang="ru">часы → 5 мин</span><span data-lang="en">hours → 5 min</span></b><i data-lang="ru">обнаружение инцидентов</i><i data-lang="en">incident detection</i></div>
+  </div>
+
+  <h2><span data-lang="ru">Опыт</span><span data-lang="en">Experience</span></h2>
+    <article class="job">
+      <header class="job-h">
+        <h3><span data-lang="ru">ООО ДЮК Технологии</span><span data-lang="en">DUC Technologies</span></h3>
+        <span class="per"><span data-lang="ru">апр 2026 — июл 2026</span><span data-lang="en">Apr 2026 — Jul 2026</span></span>
+      </header>
+      <div class="role">
+        <div class="role-t"><span data-lang="ru">DevOps-инженер</span><span data-lang="en">DevOps Engineer</span></div>
+        <ul>
+        <li><span data-lang="ru">Проектная работа: production-контур мультиагентной low-code платформы для заказчика банковского сектора — спроектирован, развёрнут, сдан и закрыт в июле 2026</span><span data-lang="en">Project work: the production environment of a multi-agent low-code platform for a banking-sector client — designed, deployed, handed over and closed in July 2026</span></li>
+        <li><span data-lang="ru">Развернул с нуля три изолированных контура <strong>DEV / INF / PROD</strong> в VMware Cloud Director: отдельные виртуальные ЦОД, группировка по vApp, сетевая сегментация — суммарно <strong>63 виртуальные машины</strong></span><span data-lang="en">Built three isolated <strong>DEV / INF / PROD</strong> environments from scratch in VMware Cloud Director: separate virtual data centres, vApp grouping, network segmentation — <strong>63 virtual machines</strong> in total</span></li>
+        <li><span data-lang="ru">DEV и PROD зеркальны 1:1, каждый — 28 VM / 90 vCPU / 191 GB RAM / 2.7 TB дисков; провёл right-sizing по компонентам и подготовил ресурсный план</span><span data-lang="en">DEV and PROD mirror each other 1:1, each 28 VMs / 90 vCPU / 191 GB RAM / 2.7 TB of disk; I right-sized the components and prepared the resource plan</span></li>
+        <li><span data-lang="ru">INF — контур сквозных сервисов на <strong>7 VM</strong> (21 vCPU / 39 GB RAM / 0.9 TB): GitLab, центральный Harbor, Nginx, Prometheus, Grafana и Loki вынесены из прикладных контуров; реестр образов двухуровневый — центральный на INF, локальные на DEV и PROD: меньше внешнего трафика при сохранении изоляции</span><span data-lang="en">INF is the shared-services environment on <strong>7 VMs</strong> (21 vCPU / 39 GB RAM / 0.9 TB): GitLab, the central Harbor, Nginx, Prometheus, Grafana and Loki moved out of the application environments; the image registry is two-tier — central on INF, local ones on DEV and PROD: less external traffic while isolation holds</span></li>
+        <li><span data-lang="ru"><strong>Kubernetes</strong> на виртуальных машинах (master + 3 worker), Helm-чарты, RBAC и namespace-изоляция; <strong>GitLab CI/CD</strong> с разделением dev/prod и ручными production-джобами; Terraform и Ansible для воспроизводимости окружений</span><span data-lang="en"><strong>Kubernetes</strong> on virtual machines (master + 3 workers), Helm charts, RBAC and namespace isolation; <strong>GitLab CI/CD</strong> with dev/prod separation and manual production jobs; Terraform and Ansible for reproducible environments</span></li>
+        <li><span data-lang="ru">Изменения — только через merge request и CI-джобы, по схеме <strong>pre-check → change → verification → rollback</strong> со smoke-тестами на каждом шаге; вёл runbooks, change log и матрицу соответствия, сверял контуры с требованиями ПМИ/КБ/SOC</span><span data-lang="en">Changes went only through merge requests and CI jobs, following <strong>pre-check → change → verification → rollback</strong> with smoke tests at every step; kept runbooks, a change log and a compliance matrix, checking the environments against the client’s acceptance, security and SOC requirements</span></li>
+        <li><span data-lang="ru">L3-связности между контурами нет — доступ открывался точечно через firewall и NAT. Вход администратора: <strong>PAM заказчика → jump host контура → целевая ВМ</strong>; для CI/CD отдельный путь — bastion на jump host DEV и PROD, через который раннер с INF ходит в прикладные контуры</span><span data-lang="en">There is no L3 connectivity between environments — access was opened per service through firewall and NAT. Admin path: <strong>the client’s PAM → the environment’s jump host → the target VM</strong>; CI/CD has its own route through a bastion on the DEV and PROD jump hosts, which the INF runner uses to reach them</span></li>
+        <li><span data-lang="ru">Сквозная наблюдаемость на Prometheus, Grafana, Loki и Promtail; разбирал production-инциденты — TLS SAN mismatch, Redis NOPERM, исчерпание PostgreSQL connections, MinIO mesh timeout, Vault sealed, переполнение диска Docker-логами</span><span data-lang="en">End-to-end observability on Prometheus, Grafana, Loki and Promtail; handled production incidents — TLS SAN mismatch, Redis NOPERM, PostgreSQL connection exhaustion, MinIO mesh timeout, Vault sealed, disks filled by Docker logs</span></li>
+        <li><span data-lang="ru">Сопровождал LLM-слой платформы: LiteLLM, GigaChat, Ollama, векторный поиск на <strong>Qdrant и Vespa</strong>, Langflow, Langfuse и SmartSearch — отделял инфраструктурные отказы от ошибок внешних API и конфигурации</span><span data-lang="en">Operated the platform’s LLM layer: LiteLLM, GigaChat, Ollama, vector search on <strong>Qdrant and Vespa</strong>, Langflow, Langfuse and SmartSearch — separating infrastructure failures from external API and configuration errors</span></li>
+        <li><span data-lang="ru">Отдельно воспроизвёл ту же архитектуру в одном контуре вместо трёх на Timeweb Cloud: уложил платформу с <strong>28 VM в 10 VM</strong> (34 vCPU, 96 GB, 1.8 TB NVMe) — single-node k3s на ВМ вместо кластера, standalone PostgreSQL и ClickHouse, сервисы на общих узлах</span><span data-lang="en">Separately reproduced the same architecture in a single environment instead of three on Timeweb Cloud: fitted a platform of <strong>28 VMs into 10</strong> (34 vCPU, 96 GB, 1.8 TB NVMe) — single-node k3s on a VM instead of a cluster, standalone PostgreSQL and ClickHouse, services sharing nodes</span></li>
+        </ul>
+      </div>
+    </article>
+    <article class="job">
+      <header class="job-h">
+        <h3><span data-lang="ru">Слетать.ру</span><span data-lang="en">Sletat.ru</span></h3>
+        <span class="per"><span data-lang="ru">фев 2024 — апр 2026</span><span data-lang="en">Feb 2024 — Apr 2026</span></span>
+      </header>
+      <div class="role">
+        <div class="role-t"><span data-lang="ru">DevOps-инженер</span><span data-lang="en">DevOps Engineer</span></div>
+        <ul>
+        <li><span data-lang="ru">Инфраструктурная команда из <strong>2 человек</strong> на <strong>50+ разработчиков</strong>: окружения, доступы, сертификаты, CI/CD и мониторинг для <strong>более 70 сервисов</strong> — 12+ микросервисов в Kubernetes, 40+ Node.js под pm2, 20–30 бэкендов на C#/.NET</span><span data-lang="en">An infrastructure team of <strong>2</strong> serving <strong>50+ developers</strong>: environments, access, certificates, CI/CD and monitoring for <strong>70+ services</strong> — 12+ microservices in Kubernetes, 40+ Node.js under pm2, 20–30 C#/.NET backends</span></li>
+        <li><span data-lang="ru">Гетерогенная инфраструктура: legacy .NET Framework под <strong>IIS на Windows Server</strong> и новые .NET-сервисы на Linux под systemd — выстроил CI/CD и сопровождение для обоих, сохранив исторический контур сборки на Jenkins рядом с новым конвейером на GitLab CI</span><span data-lang="en">Heterogeneous infrastructure: legacy .NET Framework under <strong>IIS on Windows Server</strong> and new .NET services on Linux under systemd — built CI/CD and support for both, keeping the historical Jenkins build path alongside the new GitLab CI pipeline</span></li>
+        <li><span data-lang="ru">Развернул <strong>Kubernetes на bare-metal</strong> (мастер и два воркера на физических серверах) и мигрировал <strong>12+ микросервисов</strong> из Docker Compose: время деплоя сократилось <strong>с ~40 до ~8 минут</strong></span><span data-lang="en">Deployed <strong>bare-metal Kubernetes</strong> (a master and two workers on physical servers) and migrated <strong>12+ microservices</strong> off Docker Compose: deploy time dropped <strong>from ~40 to ~8 minutes</strong></span></li>
+        <li><span data-lang="ru">Покрыл <strong>100% продакшен-репозиториев</strong> автоматической сборкой и деплоем в GitLab CI и Jenkins, внедрил GitOps-доставку через ArgoCD и встроил сканирование <strong>Trivy и Gitleaks</strong> в пайплайн</span><span data-lang="en">Covered <strong>100% of production repositories</strong> with automated build and deploy in GitLab CI and Jenkins, introduced GitOps delivery through ArgoCD and built <strong>Trivy and Gitleaks</strong> scanning into the pipeline</span></li>
+        <li><span data-lang="ru">Разработал Ansible-роли и плейбуки — настройка нового сервера занимает <strong>15 минут вместо 2–3 часов</strong>; Terraform под воспроизводимые среды и version control конфигураций</span><span data-lang="en">Wrote Ansible roles and playbooks — a new server is set up in <strong>15 minutes instead of 2–3 hours</strong>; Terraform for reproducible environments and configuration version control</span></li>
+        <li><span data-lang="ru">Внешний периметр и DNS: домен продукта проксировался через <strong>Cloudflare и Qrator</strong> — защита от DDoS и фильтрация трафика на периметре; вёл внешние записи A, CNAME, MX и TXT (SPF, DKIM, DMARC) и маршрутизацию внешнего трафика на origin по цепочке внешний прокси → Nginx</span><span data-lang="en">External perimeter and DNS: the product domain was proxied through <strong>Cloudflare and Qrator</strong> — DDoS protection and edge traffic filtering; I maintained the external A, CNAME, MX and TXT records (SPF, DKIM, DMARC) and the routing of external traffic to origin along the chain external proxy → Nginx</span></li>
+        <li><span data-lang="ru">Отказоустойчивый кластер <strong>PostgreSQL + Patroni + etcd</strong> на трёх нодах с uptime СУБД <strong>99.9%</strong>; аналитическое хранилище <strong>ClickHouse ~4 ТБ</strong> на выделенных серверах</span><span data-lang="en">A fault-tolerant <strong>PostgreSQL + Patroni + etcd</strong> cluster on three nodes with <strong>99.9%</strong> database uptime; a <strong>ClickHouse</strong> analytics store of <strong>~4 TB</strong> on dedicated servers</span></li>
+        <li><span data-lang="ru">Убрал <strong>единые точки отказа</strong> во внутренних сервисах: Zabbix в HA-кластере на двух нодах с базой на отказоустойчивом PostgreSQL, Jira и Confluence — на HA-кластере PostgreSQL</span><span data-lang="en">Removed <strong>single points of failure</strong> in internal services: Zabbix as a two-node HA cluster on fault-tolerant PostgreSQL, Jira and Confluence on the HA PostgreSQL cluster</span></li>
+        <li><span data-lang="ru">Внедрил Prometheus с Grafana и алертингом через Alertmanager, ELK и Graylog для логов, Zabbix для инфраструктуры — среднее время обнаружения инцидентов упало <strong>с нескольких часов до ~5 минут</strong></span><span data-lang="en">Introduced Prometheus with Grafana and Alertmanager alerting, ELK and Graylog for logs, Zabbix for infrastructure — mean time to detect incidents fell <strong>from several hours to ~5 minutes</strong></span></li>
+        </ul>
+      </div>
+      <div class="role">
+        <div class="role-t"><span data-lang="ru">Системный администратор</span><span data-lang="en">System Administrator</span></div>
+        <ul>
+        <li><span data-lang="ru">Администрировал доменную инфраструктуру <strong>Active Directory</strong>: групповые политики, права доступа, профили пользователей</span><span data-lang="en">Administered the <strong>Active Directory</strong> domain: group policies, access rights, user profiles</span></li>
+        <li><span data-lang="ru">Организовал удалённый доступ через терминальные фермы RDS, настроил и перенёс <strong>30+ рабочих станций</strong> при расширении офиса</span><span data-lang="en">Set up remote access through RDS terminal farms, configured and relocated <strong>30+ workstations</strong> during an office expansion</span></li>
+        </ul>
+      </div>
+    </article>
+    <article class="job">
+      <header class="job-h">
+        <h3><span data-lang="ru">РеалЪ ТД, ООО</span><span data-lang="en">Real TD</span></h3>
+        <span class="per"><span data-lang="ru">авг 2022 — фев 2024</span><span data-lang="en">Aug 2022 — Feb 2024</span></span>
+      </header>
+      <div class="role">
+        <div class="role-t"><span data-lang="ru">Системный администратор / DevOps-инженер</span><span data-lang="en">System Administrator / DevOps Engineer</span></div>
+        <ul>
+        <li><span data-lang="ru">Автоматизировал развёртывание ОС Linux, сократив подготовку рабочего места <strong>с 3 часов до 40 минут</strong></span><span data-lang="en">Automated Linux OS provisioning, cutting workstation setup <strong>from 3 hours to 40 minutes</strong></span></li>
+        <li><span data-lang="ru">Настроил мониторинг распределённой сети на <strong>Zabbix</strong>: сетевое оборудование торговых точек, доступность модемов и каналов связи</span><span data-lang="en">Set up monitoring of a distributed network on <strong>Zabbix</strong>: retail-site network equipment, modem and link availability</span></li>
+        <li><span data-lang="ru">Автоматизировал рутину скриптами на Bash и PowerShell, хранил и версионировал конфигурации в self-hosted GitLab</span><span data-lang="en">Automated routine work with Bash and PowerShell scripts, keeping configurations versioned in a self-hosted GitLab</span></li>
+        </ul>
+      </div>
+      <div class="role">
+        <div class="role-t"><span data-lang="ru">Системный администратор / Специалист технической поддержки</span><span data-lang="en">System Administrator / Technical Support Specialist</span></div>
+        <ul>
+        <li><span data-lang="ru">Администрировал серверы Windows Server и Linux и сетевое оборудование <strong>MikroTik, Cisco</strong> в розничной сети из <strong>40+ объектов</strong></span><span data-lang="en">Administered Windows Server and Linux servers and <strong>MikroTik, Cisco</strong> network equipment across a retail network of <strong>40+ sites</strong></span></li>
+        <li><span data-lang="ru">Настроил VPN-инфраструктуру между объектами (Kerio), маршрутизацию и коммутацию; HelpDesk-поддержка парка <strong>100+ компьютеров</strong> и кассовой техники</span><span data-lang="en">Built the site-to-site VPN infrastructure (Kerio), routing and switching; HelpDesk support for a fleet of <strong>100+ computers</strong> and POS equipment</span></li>
+        </ul>
+      </div>
+    </article>
+    <article class="job">
+      <header class="job-h">
+        <h3><span data-lang="ru">ООО «Форум»</span><span data-lang="en">Forum</span></h3>
+        <span class="per"><span data-lang="ru">май 2022 — июл 2022</span><span data-lang="en">May 2022 — Jul 2022</span></span>
+      </header>
+      <div class="role">
+        <div class="role-t"><span data-lang="ru">Системный администратор</span><span data-lang="en">System Administrator</span></div>
+        <ul>
+        <li><span data-lang="ru">Настройка сетевого и телекоммуникационного оборудования, монтажные работы, подключение абонентов к сети</span><span data-lang="en">Configuration of network and telecom equipment, installation work, connecting subscribers to the network</span></li>
+        </ul>
+      </div>
+    </article>
+
+  <h2><span data-lang="ru">Стек</span><span data-lang="en">Stack</span></h2>
+      <div class="srow"><span class="sk"><span data-lang="ru">ОС и платформы</span><span data-lang="en">OS & platforms</span></span><span class="sv"><span data-lang="ru">Linux — Debian, Ubuntu (администрирование, systemd, networking) · Windows Server — IIS, Active Directory, групповые политики, DNS, DHCP, RDS и RDP, PowerShell</span><span data-lang="en">Linux — Debian, Ubuntu (administration, systemd, networking) · Windows Server — IIS, Active Directory, group policies, DNS, DHCP, RDS and RDP, PowerShell</span></span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">Контейнеры и оркестрация</span><span data-lang="en">Containers & orchestration</span></span><span class="sv"><span data-lang="ru">Docker · Docker Compose · Kubernetes с нуля в трёх средах — bare-metal на физических серверах, ВМ в приватном облаке VMware Cloud Director, single-node k3s на ВМ в публичном облаке (etcd, CNI, storage, обновления, Ingress, HPA, RBAC, namespace-изоляция) · ресурсные лимиты · Helm · Longhorn</span><span data-lang="en">Docker · Docker Compose · Kubernetes from scratch in three environments — bare metal on physical servers, VMs in a private VMware Cloud Director cloud, single-node k3s on a VM in a public cloud (etcd, CNI, storage, upgrades, Ingress, HPA, RBAC, namespace isolation) · resource limits · Helm · Longhorn</span></span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">CI/CD и GitOps</span><span data-lang="en">CI/CD & GitOps</span></span><span class="sv"><span data-lang="ru">GitLab CI/CD — GitLab CE, GitLab Runner · Jenkins · ArgoCD · полный цикл: линтинг (hadolint, yamllint) → сборка (Docker, multi-stage) → тесты (pytest, coverage) → сканирование (Trivy, Gitleaks) → публикация образа в Harbor → деплой на ВМ и в Kubernetes</span><span data-lang="en">GitLab CI/CD — GitLab CE, GitLab Runner · Jenkins · ArgoCD · full cycle: linting (hadolint, yamllint) → build (Docker, multi-stage) → tests (pytest, coverage) → scanning (Trivy, Gitleaks) → image publishing to Harbor → deploy to VMs and Kubernetes</span></span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">IaC и автоматизация</span><span data-lang="en">IaC & automation</span></span><span class="sv"><span data-lang="ru">Terraform · Ansible — роли, плейбуки, идемпотентность · Python · Bash · PowerShell</span><span data-lang="en">Terraform · Ansible — roles, playbooks, idempotency · Python · Bash · PowerShell</span></span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">Service mesh, доступ, безопасность</span><span data-lang="en">Service mesh, access, security</span></span><span class="sv"><span data-lang="ru">Istio + Kiali — Gateway, VirtualService, DestinationRule, ServiceEntry, AuthorizationPolicy, WorkloadGroup · Envoy + OPA/OPAL через ext_authz · Keycloak/OIDC SSO · HashiCorp Vault (секреты, токены, схема External Secrets) · Secret Server · Passbolt · Trivy и Gitleaks — сканирование образов и поиск утечек секретов · bastion и jump host, firewall и NAT, сегментация сетей, UFW, TLS/PKI</span><span data-lang="en">Istio + Kiali — Gateway, VirtualService, DestinationRule, ServiceEntry, AuthorizationPolicy, WorkloadGroup · Envoy + OPA/OPAL through ext_authz · Keycloak/OIDC SSO · HashiCorp Vault (secrets, tokens, External Secrets design) · Secret Server · Passbolt · Trivy and Gitleaks — image scanning and secret-leak detection · bastion and jump host, firewall and NAT, network segmentation, UFW, TLS/PKI</span></span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">Реестры и артефакты</span><span data-lang="en">Registries & artifacts</span></span><span class="sv"><span data-lang="ru">Harbor — проекты, retention-политики, робот-аккаунты · GitLab Container Registry с pull secrets · Verdaccio — приватный npm-registry с проксированием npmjs · MinIO · S3 в Yandex Cloud</span><span data-lang="en">Harbor — projects, retention policies, robot accounts · GitLab Container Registry with pull secrets · Verdaccio — a private npm registry proxying npmjs · MinIO · S3 in Yandex Cloud</span></span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">Наблюдаемость</span><span data-lang="en">Observability</span></span><span class="sv"><span data-lang="ru">Prometheus + Grafana · Alertmanager · Loki + Promtail · ELK — Elasticsearch, Logstash, Kibana · Graylog · Sentry · Zabbix в HA-кластере на двух нодах · Uptime Kuma · LibreNMS + Oxidized · NetBox</span><span data-lang="en">Prometheus + Grafana · Alertmanager · Loki + Promtail · ELK — Elasticsearch, Logstash, Kibana · Graylog · Sentry · Zabbix in a two-node HA cluster · Uptime Kuma · LibreNMS + Oxidized · NetBox</span></span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">Базы данных и хранилища</span><span data-lang="en">Databases & storage</span></span><span class="sv"><span data-lang="ru">PostgreSQL + Patroni + etcd — отказоустойчивый кластер на трёх нодах, uptime 99.9% · MS SQL Server с репликацией master-slave · MySQL · MongoDB · ClickHouse — аналитическое хранилище ~4 ТБ · Qdrant · Vespa</span><span data-lang="en">PostgreSQL + Patroni + etcd — a fault-tolerant three-node cluster, 99.9% uptime · MS SQL Server with master-slave replication · MySQL · MongoDB · ClickHouse — a ~4 TB analytics store · Qdrant · Vespa</span></span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">Очереди и служебные сервисы</span><span data-lang="en">Messaging & platform services</span></span><span class="sv"><span data-lang="ru">Kafka — топики, партиции, политики хранения, мониторинг лага консьюмеров · RabbitMQ — очереди, exchange, DLQ, разграничение по vhost · Redis — кэш и сессии · Consul — service discovery, health-checks, KV · Unleash — feature-флаги</span><span data-lang="en">Kafka — topics, partitions, retention policies, consumer lag monitoring · RabbitMQ — queues, exchanges, DLQ, access separation by vhost · Redis — cache and sessions · Consul — service discovery, health checks, KV · Unleash — feature flags</span></span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">Web и балансировка</span><span data-lang="en">Web & load balancing</span></span><span class="sv"><span data-lang="ru">Nginx — reverse proxy, TLS-терминация, балансировка, заголовки CSP · HAProxy + Keepalived</span><span data-lang="en">Nginx — reverse proxy, TLS termination, load balancing, CSP headers · HAProxy + Keepalived</span></span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">Виртуализация и облака</span><span data-lang="en">Virtualization & clouds</span></span><span class="sv"><span data-lang="ru">VMware vSphere и Cloud Director — виртуальные ЦОД (vDC), vApp, firewall и NAT · Hyper-V · Veeam Backup &amp; Replication — резервное копирование и восстановление · антивирусная защита · Cloud.ru · Timeweb Cloud · Yandex Cloud</span><span data-lang="en">VMware vSphere and Cloud Director — virtual data centres (vDC), vApp, firewall and NAT · Hyper-V · Veeam Backup &amp; Replication — backup and restore · antivirus protection · Cloud.ru · Timeweb Cloud · Yandex Cloud</span></span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">LLM-платформа</span><span data-lang="en">LLM platform</span></span><span class="sv"><span data-lang="ru">LiteLLM · Ollama · GigaChat · Langflow · Langfuse · SmartSearch · векторный поиск на Qdrant и Vespa</span><span data-lang="en">LiteLLM · Ollama · GigaChat · Langflow · Langfuse · SmartSearch · vector search on Qdrant and Vespa</span></span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">Внешний периметр и DNS</span><span data-lang="en">External perimeter & DNS</span></span><span class="sv"><span data-lang="ru">Cloudflare, Qrator — проксирование внешнего домена, защита от DDoS и фильтрация трафика на периметре · внешние DNS-записи: A, CNAME, MX, TXT (SPF, DKIM, DMARC) · внутренний DNS · Let’s Encrypt и внутренний центр сертификации</span><span data-lang="en">Cloudflare, Qrator — external domain proxying, DDoS protection and edge traffic filtering · external DNS records: A, CNAME, MX, TXT (SPF, DKIM, DMARC) · internal DNS · Let’s Encrypt and an internal certificate authority</span></span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">Сетевое оборудование и VPN</span><span data-lang="en">Network equipment & VPN</span></span><span class="sv"><span data-lang="ru">MikroTik · Cisco · Kerio VPN · маршрутизация и коммутация · VPN между объектами</span><span data-lang="en">MikroTik · Cisco · Kerio VPN · routing and switching · site-to-site VPN</span></span></div>
+      <div class="srow"><span class="sk"><span data-lang="ru">Управление и инструменты</span><span data-lang="en">Management & tools</span></span><span class="sv"><span data-lang="ru">Git · Jira и Jira Service Desk · Confluence — администрирование и развёртывание · Zimbra · Exchange · Outlook · IMAP/SMTP · OCS Inventory</span><span data-lang="en">Git · Jira and Jira Service Desk · Confluence — administration and deployment · Zimbra · Exchange · Outlook · IMAP/SMTP · OCS Inventory</span></span></div>
+
+  <h2><span data-lang="ru">Образование</span><span data-lang="en">Education</span></h2>
+      <div class="erow">
+        <span class="eyr">2020</span>
+        <span class="ebody"><b><span data-lang="ru">КГУ им. Б.Б. Городовикова</span><span data-lang="en">Kalmyk State University</span></b><br><span data-lang="ru">Информационная безопасность</span><span data-lang="en">Information Security</span><br><i><span data-lang="ru">Неоконченное высшее</span><span data-lang="en">Incomplete higher education</span></i></span>
+      </div>
+      <div class="erow">
+        <span class="eyr">2019</span>
+        <span class="ebody"><b><span data-lang="ru">КГУ им. Б.Б. Городовикова</span><span data-lang="en">Kalmyk State University</span></b><br><span data-lang="ru">Программирование в компьютерных системах — техник-программист</span><span data-lang="en">Computer Systems Programming — programmer technician</span><br><i><span data-lang="ru">Среднее специальное</span><span data-lang="en">Vocational education</span></i></span>
+      </div>
+
+  <h2><span data-lang="ru">Сертификаты</span><span data-lang="en">Certifications</span></h2>
+      <div class="crow">
+        <span class="cbadge">BASE</span>
+        <span class="cbody"><span data-lang="ru">Базовый курс</span><span data-lang="en">Foundational course</span> <span class="cissuer"><span data-lang="ru">Облако VMware · 2026</span><span data-lang="en">VMware Cloud · 2026</span></span></span>
+      </div>
+      <div class="crow">
+        <span class="cbadge">PRO</span>
+        <span class="cbody"><span data-lang="ru">Профессиональный курс</span><span data-lang="en">Professional course</span> <span class="cissuer"><span data-lang="ru">Облако VMware · 2026</span><span data-lang="en">VMware Cloud · 2026</span></span></span>
+      </div>
+      <div class="crow">
+        <span class="cbadge">EXP</span>
+        <span class="cbody"><span data-lang="ru">Экспертный курс</span><span data-lang="en">Expert course</span> <span class="cissuer"><span data-lang="ru">Облако VMware · 2026</span><span data-lang="en">VMware Cloud · 2026</span></span></span>
+      </div>
+  <div class="langs"><span data-lang="ru">Языки</span><span data-lang="en">Languages</span>: <span data-lang="ru">Русский</span><span data-lang="en">Russian</span> — <span data-lang="ru">родной</span><span data-lang="en">native</span> &middot; <span data-lang="ru">Английский</span><span data-lang="en">English</span> — <span data-lang="ru">B1 — средний</span><span data-lang="en">B1 — intermediate</span></div>
+
+  <p class="goal"><span data-lang="ru">Ищу позицию DevOps / Platform Engineer. Интересны Kubernetes, CI/CD, IaC, внутренние платформы и отказоустойчивая инфраструктура; развиваюсь в сторону Platform Engineering и SRE, отдельно интересна эксплуатация инфраструктуры LLM-платформ.</span><span data-lang="en">Looking for a DevOps / Platform Engineer role. Interested in Kubernetes, CI/CD, IaC, internal platforms and fault-tolerant infrastructure; growing towards Platform Engineering and SRE, with a particular interest in running LLM-platform infrastructure.</span></p>
+
+  <div class="foot"><span data-lang="ru">Это выжимка. Развёрнутое резюме со всеми обязанностями — на hh.ru.</span><span data-lang="en">This is a summary. The full resume with every responsibility is on hh.ru.</span></div>
+</main>
+
+<script>
+  // Язык берём из адреса, чтобы ссылка с сайта открывала нужную версию.
+  var root = document.getElementById('root');
+  function setLang(l) {
+    root.classList.toggle('lang-en', l === 'en');
+    root.lang = l;
+    document.getElementById('lang').textContent = l === 'en' ? 'RU' : 'EN';
+    document.title = l === 'en'
+      ? 'Ivanov Temir \u2014 DevOps Engineer'
+      : '\u0418\u0432\u0430\u043d\u043e\u0432 \u0422\u0435\u043c\u0438\u0440 \u2014 DevOps-\u0438\u043d\u0436\u0435\u043d\u0435\u0440';
+  }
+  var q = new URLSearchParams(location.search).get('lang');
+  var cur = q === 'en' ? 'en' : 'ru';
+  setLang(cur);
+  document.getElementById('lang').addEventListener('click', function () {
+    cur = cur === 'ru' ? 'en' : 'ru';
+    setLang(cur);
+    var u = new URL(location.href);
+    if (cur === 'en') u.searchParams.set('lang', 'en'); else u.searchParams.delete('lang');
+    history.replaceState(null, '', u);
+  });
+  document.getElementById('print').addEventListener('click', function () { window.print(); });
+</script>
+</body>
+</html>
